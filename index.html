@@ -54,14 +54,62 @@
     @media(min-width:900px){.music-grid{grid-template-columns:1fr 1fr}}
     .card{background:var(--card);border:1px solid #1f252e;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
     /* Covers */
-    .covers{display:grid;grid-template-columns:1fr;gap:18px}
-    @media(min-width:760px){.covers{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1020px){.covers{grid-template-columns:repeat(4,1fr)}}
-    .cover-card{background:var(--card);border:1px solid #222833;border-radius:14px;overflow:hidden;box-shadow: var(--shadow); transition: transform .12s ease, border-color .12s ease}
-    .cover-card:hover{transform:translateY(-2px);border-color:#2f3743}
-    .cover-link{display:block}
-    .cover-img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#0b0e12}
-    .caption{padding:10px 12px;border-top:1px solid #212732;color:var(--muted);font-weight:600}
+    <!-- Albums -->
+<section id="covers">
+  <h2>Covers & Artwork</h2>
+  <div class="covers">
+    <!-- A Brief Emotional Dragon -->
+    <div class="cover-card">
+      <a class="cover-link"
+         href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon"
+         target="_blank" rel="noopener">
+        <img class="cover-img" src="./cover.png" alt="A Brief Emotional Dragon" />
+        <div class="caption">A Brief Emotional Dragon</div>
+      </a>
+    </div>
+
+    <!-- Blood Thick Silence -->
+    <div class="cover-card">
+      <a class="cover-link"
+         href="https://kidfourteen.bandcamp.com/album/blood-thick-silence"
+         target="_blank" rel="noopener">
+        <img class="cover-img" src="./cover2.jpg" alt="Blood Thick Silence" />
+        <div class="caption">Blood Thick Silence</div>
+      </a>
+    </div>
+
+    <!-- Dream Kids Never Sleep -->
+    <div class="cover-card">
+      <a class="cover-link"
+         href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep"
+         target="_blank" rel="noopener">
+        <img class="cover-img" src="./cover3.jpg" alt="Dream Kids Never Sleep" />
+        <div class="caption">Dream Kids Never Sleep</div>
+      </a>
+    </div>
+
+    <!-- Heart Is a Malady -->
+    <div class="cover-card">
+      <a class="cover-link"
+         href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady"
+         target="_blank" rel="noopener">
+        <img class="cover-img" src="./cover4.jpg" alt="Heart Is a Malady" />
+        <div class="caption">Heart Is a Malady</div>
+      </a>
+    </div>
+
+    <!-- Love -->
+    <div class="cover-card">
+      <a class="cover-link"
+         href="https://kidfourteen.bandcamp.com/album/love"
+         target="_blank" rel="noopener">
+        <img class="cover-img" src="./cover5.png" alt="Love" />
+        <div class="caption">Love</div>
+      </a>
+    </div>
+  </div>
+</section>
+
     /* Shows */
     .tabs{display:flex;gap:10px;margin:10px 0 22px}
     .tab{padding:10px 14px;border-radius:999px;background:var(--pill);border:1px solid var(--pill-border);font-weight:700}
