@@ -8,34 +8,56 @@
 
   <style>
     /* Pull-quote */
-.pullquote{
-  margin: 0 0 18px 0;
-  padding: 16px 18px;
+/* Pull-quote (clean edges + glow accent) */
+.pullquote {
+  margin: 0 0 22px 0;
+  padding: 18px 22px;
   border-left: 3px solid var(--accent);
-  background: linear-gradient(180deg, rgba(26,34,48,.55), rgba(26,34,48,.35));
-  border-radius: 12px;
+  background: rgba(26, 34, 48, 0.35);
+  border-radius: 14px;
   font-size: clamp(18px, 2.2vw, 20px);
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text);
   font-style: italic;
   position: relative;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
 }
-.pullquote::before{
+
+.pullquote::before,
+.pullquote::after {
+  position: absolute;
+  font-size: 38px;
+  opacity: 0.15;
+  color: var(--accent);
+  pointer-events: none;
+  font-family: Georgia, serif;
+}
+.pullquote::before {
   content: "“";
-  position: absolute;
+  top: -12px;
   left: 10px;
-  top: -10px;
-  font-size: 26px;
-  opacity: .25;
 }
-.pullquote::after{
+.pullquote::after {
   content: "”";
-  position: absolute;
-  right: 14px;
-  bottom: -12px;
-  font-size: 22px;
-  opacity: .2;
+  bottom: -20px;
+  right: 12px;
 }
+
+/* Dropcap (smooth background) */
+.prose .dropcap:first-letter {
+  float: left;
+  font-weight: 800;
+  font-family: system-ui, -apple-system, Segoe UI, Inter, sans-serif;
+  font-size: clamp(52px, 8vw, 86px);
+  line-height: .82;
+  padding: 6px 12px 0 2px;
+  margin-right: 8px;
+  color: var(--text);
+  text-shadow: 0 6px 20px rgba(0,0,0,.3);
+  background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border-radius: 4px;
+}
+
 
 /* Drop cap */
 .prose .dropcap:first-letter{
@@ -259,7 +281,7 @@ body.js .reveal.is-visible{
       <h2>Bio</h2>
       <div class="bio-grid">
         <div class="prose">
-          <blockquote class="pullquote reveal">“Experimental pop — noise, rupture, and absolution.”</blockquote>
+          <blockquote class="pullquote reveal">“Experimental pop - noise, rupture, and absolution.”</blockquote>
           <p class="dropcap reveal">
             Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all hanging on the same clothesline that became his own distinct sound.
           </p>
