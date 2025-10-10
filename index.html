@@ -60,13 +60,26 @@
     }
 
     .hero-bg {
-      position: absolute;
-      inset: -10vh -10vw;
-      background: url('hero.jpg') center/cover no-repeat;
-      transform: translateY(var(--parallax, 0px));
-      will-change: transform;
-      transition: transform 0.08s ease-out;
-    }
+  position: absolute;
+  inset: -10vh -10vw;
+  /* keep the image anchored a bit higher than center */
+  background: url('hero.jpg') center 20% / cover no-repeat;
+  transform: translateY(var(--parallax, 0px));
+  will-change: transform;
+  transition: transform 0.08s ease-out;
+}
+
+/* Nudge focal point based on screen shape */
+@media (min-aspect-ratio: 16/9) {
+  .hero-bg { background-position: center 15%; }
+}
+@media (min-aspect-ratio: 21/9) {
+  .hero-bg { background-position: center 10%; }
+}
+@media (max-aspect-ratio: 4/5) { /* very tall phones */
+  .hero-bg { background-position: center 30%; }
+}
+
 
     .hero::after {
       content: "";
