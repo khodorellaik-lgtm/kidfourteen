@@ -1,213 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kid Fourteen — Far Away and Well Adjusted</title>
-  <meta name="description" content="Experimental pop by Khodor Ellaik — discography, music, video, past shows, and contact." />
-  <meta property="og:title" content="Kid Fourteen" />
-  <meta property="og:description" content="Experimental pop — press kit, music, videos, and past shows." />
-  <meta property="og:image" content="/hero.jpg" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#000000" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kid Fourteen — Press Kit</title>
   <style>
-    :root{
-      --bg:#000;--text:#fff;--muted:rgba(255,255,255,.78);--soft:rgba(255,255,255,.12);
-      --accent1:#f0f;--accent2:#0ff;--accent3:#90f
+    body {
+      background-color: #0b0b0b;
+      color: #eaeaea;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-    a{color:var(--text);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border-bottom:1px solid var(--soft)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .nav a{opacity:.9;margin-left:18px;font-size:14px}
-    .hero{
-      position:relative;min-height:68vh;display:grid;place-items:center;text-align:left;isolation:isolate
+    header {
+      padding: 40px 20px 10px;
+      font-size: 1.6em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
-    .hero::before{
-      content:"";position:absolute;inset:0;z-index:-1;background:
-        linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.55)),
-        url('/hero.jpg') center/cover no-repeat, #000;
+    p {
+      color: #aaa;
+      margin-bottom: 40px;
+      font-size: 1em;
     }
-    .kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-    h1{font-size: clamp(32px,6vw,64px);line-height:1.06;margin:10px 0 12px}
-    p.lead{max-width:720px;color:var(--muted)}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:16px;font-weight:600}
-    .btn.primary{background:#fff;color:#000}
-    .btn.ghost{border:1px solid rgba(255,255,255,.3)}
-    .rule{height:1px;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));opacity:.7;margin-top:28px}
-    section{padding:84px 0}
-    h2{font-size:28px;margin:0 0 16px}
-    .grid{display:grid;gap:28px}
-    .grid.two{grid-template-columns:1fr}
-    .grid.three{grid-template-columns:1fr}
-    @media (min-width: 960px){
-      .grid.two{grid-template-columns:1fr 1fr}
-      .grid.three{grid-template-columns:repeat(3,1fr)}
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 0 40px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .card{border:1px solid var(--soft);border-radius:16px;background:rgba(255,255,255,.05);padding:18px}
-    .frame{position:relative;width:100%;padding-top:56.25%;border:1px solid var(--soft);border-radius:16px;overflow:hidden;background:#000}
-    .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .albums{display:grid;gap:22px;grid-template-columns:1fr 1fr}
-    @media (min-width: 800px){.albums{grid-template-columns:repeat(3,1fr)}}
-    .album{display:flex;flex-direction:column;gap:10px}
-    .cover{width:100%;aspect-ratio:1/1;border-radius:14px;border:1px solid var(--soft);background:#111;object-fit:cover}
-    .title{font-weight:600}
-    .meta{color:var(--muted);font-size:14px}
-    .pillrow{display:flex;flex-wrap:wrap;gap:10px}
-    .pill{border:1px solid var(--soft);padding:10px 14px;border-radius:14px;opacity:.9}
-    footer{border-top:1px solid var(--soft);padding:24px 0;text-align:center;color:var(--muted)}
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+    footer {
+      padding: 30px 0;
+      color: #777;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap nav">
-      <strong>KID FOURTEEN</strong>
-      <nav>
-        <a href="#music">Music</a>
-        <a href="#video">Video</a>
-        <a href="#discography">Discography</a>
-        <a href="#press">Press</a>
-        <a href="#past-shows">Past Shows</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+    Kid Fourteen — Press Kit
   </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="kicker">Experimental Pop — Noise, Rupture, Absolution</div>
-        <h1>Far Away and Well Adjusted</h1>
-        <p class="lead">
-          Kid Fourteen is the Paris-based project of Khodor Ellaik — a confessional, synth-driven collision of pop forms,
-          saxophone, and serrated textures.
-        </p>
-        <div class="buttons">
-          <a class="btn primary" href="#music">Listen →</a>
-          <a class="btn ghost" href="https://drive.google.com/drive/folders/18sHgTtx_MRgxxDy2vyV5t24FEe7H2e4l?usp=sharing">Press Photos / EPK</a>
-        </div>
-        <div class="rule"></div>
-      </div>
-    </section>
-
-    <!-- MUSIC -->
-    <section id="music">
-      <div class="wrap">
-        <h2>Music</h2>
-        <div class="grid two">
-          <div class="frame">
-            <!-- Spotify artist embed -->
-            <iframe
-              title="Spotify — Kid Fourteen"
-              src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-            </iframe>
-          </div>
-          <div class="card">
-            <p class="kicker" style="margin-bottom:6px;">Latest release</p>
-            <h3 style="margin:0 0 8px">Far Away and Well Adjusted</h3>
-            <p class="muted">Stream or purchase on Bandcamp, or explore the discography.</p>
-            <div class="buttons" style="margin-top:12px">
-              <a class="btn primary" href="https://kidfourteen.bandcamp.com/">Bandcamp →</a>
-              <a class="btn ghost" href="https://soundcloud.com/kidfourteen">SoundCloud</a>
-              <a class="btn ghost" href="https://music.apple.com/us/artist/kid-fourteen/1120897022">Apple Music</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- VIDEO -->
-    <section id="video">
-      <div class="wrap">
-        <h2>Video</h2>
-        <div class="grid two">
-          <div class="frame">
-            <iframe
-              title="Kid Fourteen — Official Video"
-              src="https://www.youtube.com/embed/oMM0ygCcLv8"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-          <div class="frame">
-            <iframe
-              title="Kid Fourteen — Live"
-              src="https://www.youtube.com/embed/-jTtAfME750?start=1"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DISCOGRAPHY (exact items from press kit) -->
-    <section id="discography">
-      <div class="wrap">
-        <h2>Discography</h2>
-        <div class="albums">
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
-            <img class="cover" src="covers/heart-is-a-malady.jpg" alt="Heart is a Malady cover" />
-            <div class="title">Heart is a Malady</div>
-            <div class="meta">Album · 2024</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
-            <img class="cover" src="covers/a-brief-emotional-dragon.jpg" alt="A Brief Emotional Dragon cover" />
-            <div class="title">A Brief Emotional Dragon</div>
-            <div class="meta">Album · 2023</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
-            <img class="cover" src="covers/love.jpg" alt="Love cover" />
-            <div class="title">Love</div>
-            <div class="meta">Album · 2020</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
-            <img class="cover" src="covers/blood-thick-silence.jpg" alt="Blood Thick Silence cover" />
-            <div class="title">Blood-thick Silence</div>
-            <div class="meta">Album · 2018</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
-            <img class="cover" src="covers/dream-kids-never-sleep.jpg" alt="Dream Kids Never Sleep cover" />
-            <div class="title">Dream Kids Never Sleep</div>
-            <div class="meta">Album · 2016</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/kinc" target="_blank" rel="noopener">
-            <img class="cover" src="covers/kinc.jpg" alt="KINC cover" />
-            <div class="title">KINC</div>
-            <div class="meta">Album</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/album/cairo-jazz" target="_blank" rel="noopener">
-            <img class="cover" src="covers/cairo-jazz-ep.jpg" alt="Cairo Jazz EP cover" />
-            <div class="title">Cairo Jazz</div>
-            <div class="meta">EP · 2020</div>
-          </a>
-          <a class="album" href="https://kidfourteen.bandcamp.com/track/everybody-wants-a-strong-man" target="_blank" rel="noopener">
-            <img class="cover" src="covers/everybody-wants-a-strong-man.jpg" alt="Everybody Wants a Strong Man cover" />
-            <div class="title">Everybody Wants a Strong Man</div>
-            <div class="meta">Single · 2018</div>
-          </a>
-        </div>
-        <p style="margin-top:10px;color:var(--muted);font-size:14px">
-          Full discography on Bandcamp: <a href="https://kidfourteen.bandcamp.com/" target="_blank" rel="noopener">kidfourteen.bandcamp.com</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- PRESS (quotes from the press kit) -->
-    <section id="press">
-      <div class="wrap">
-        <h2>Press</h2>
-        <div class="grid three">
-          <div class="card">
-            <p class="kicker">Bandcamp Daily</p>
-            <p class="muted">“Balances confessional pop and serrated noise into songs that rupture and glow.”</p>
-          </div>
-          <div class="card">
-            <p class="kicker">Tiny Mix Tapes</p>
-            <p class="muted">“Pop structures haunted by feedback and desire; exquisite volat
+  <p>Selected covers and artwork</p>
+  <div class="gallery">
+    <img src="cover1.png" alt="Kid Fourteen Cover 1" />
+    <img src="cover2.jpg" alt="Kid Fourteen Cover 2" />
+    <img src="cover3.jpg" alt="Kid Fourteen Cover 3" />
+    <img src="cover4.jpg" alt="Kid Fourteen Cover 4" />
+    <img src="cover5.png" alt="Kid Fourteen Cover 5" />
+  </div>
+  <footer>
+    © Kid Fourteen — 2025
+  </footer>
+</body>
+</html>
