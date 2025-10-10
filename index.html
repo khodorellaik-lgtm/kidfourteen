@@ -1,231 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>KID FOURTEEN</title>
-  <meta name="description" content="Kid Fourteen — official site. Music, video, artwork, and shows." />
-  <link rel="icon" href="./cover5.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <meta name="color-scheme" content="dark">
   <style>
     :root{
-      --bg1:#14161b; --bg2:#1a1d23; /* softer than pitch black */
-      --fg:#eceff3; --muted:#b8bcc7; --line:rgba(255,255,255,.12);
-      --card:rgba(255,255,255,.04); --max:1120px; --radius:16px;
-      --accent:#e7e7e7;
+      --bg:#0f1115;          /* deep charcoal, not pure black */
+      --panel:#151821;
+      --text:#e6e7ea;
+      --muted:#a6abb4;
+      --chip:#1d2130;
+      --chip-border:#2b3145;
+      --chip-hover:#2a2f40;
+      --accent:#c7c9cf;
+      --link:#cfd1d6;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;color:var(--fg);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2))}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;}
+    a{color:var(--link);text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:2px solid #8aa6ff;outline-offset:2px;border-radius:8px}
 
     /* Header */
-    header{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-    .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .logo{font-weight:800;letter-spacing:.12em}
-    nav a{opacity:.9;margin-left:18px}
-    nav a:hover{opacity:1}
+    .nav{
+      position:sticky;top:0;z-index:20;
+      background:linear-gradient(180deg,#0f1115 75%,#0f1115cc 100%);
+      border-bottom:1px solid #1c2030;
+      padding:10px 20px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .brand{letter-spacing:.12em;font-weight:700}
+    .nav a{margin-left:18px;color:var(--muted)}
+    .nav a:hover{color:var(--text)}
 
     /* Hero */
-    .hero{
-      position:relative;min-height:56vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);
-      background:#000 url("./cover2.jpg") center/cover no-repeat;
+    .hero{position:relative;overflow:hidden}
+    .hero-bg{
+      position:absolute;inset:0;z-index:0;pointer-events:none; /* <— THIS makes content clickable */
+      background:
+        radial-gradient(60% 60% at 70% 20%, #1d2235 0%, transparent 65%),
+        radial-gradient(70% 60% at 20% 80%, #192033 0%, transparent 60%),
+        #0f1115;
     }
-    .hero::after{
-      content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65));
-      pointer-events:none;      /* allow clicks through overlay */
-      z-index:0;
+    .hero-inner{
+      position:relative;z-index:1; /* content sits above */
+      max-width:1200px;margin:0 auto;padding:96px 20px 56px;
     }
-    .hero .copy{
-      position:relative;padding:72px 0 48px;z-index:1; /* ensure buttons are on top */
+    h1{font-size:clamp(40px,7vw,72px);line-height:1.05;margin:0 0 28px;color:#d6d7db}
+    .chips{display:flex;flex-wrap:wrap;gap:14px}
+    .chip{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 20px;border-radius:14px;
+      background:var(--chip);border:1px solid var(--chip-border);
+      color:var(--text);font-weight:700;letter-spacing:.02em;
+      transition:.18s transform ease, .18s background ease, .18s border-color ease;
     }
-    h1{margin:0;font-size:clamp(30px,6vw,56px);line-height:1.06;letter-spacing:.02em}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-weight:700;transition:transform .15s ease,border-color .15s ease,background .15s ease}
-    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.25)}
-    .btn--light{background:#fff;color:#000}
+    .chip:hover{background:var(--chip-hover);transform:translateY(-1px);border-color:#3a425c}
 
     /* Sections */
-    section{padding:60px 0;border-bottom:1px solid var(--line)}
-    h2{margin:0 0 12px;font-size:22px;letter-spacing:.06em}
-    .muted{color:var(--muted)}
+    section{max-width:1200px;margin:0 auto;padding:40px 20px}
+    h2{font-size:32px;margin:0 0 18px;color:var(--accent)}
+    .grid-2{display:grid;grid-template-columns:1fr;gap:22px}
+    @media (min-width:960px){.grid-2{grid-template-columns:1fr 1fr}}
 
-    /* Media blocks */
-    .two{display:grid;gap:24px}
-    @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
-    .ratio{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--line)}
-    .ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    /* Covers grid */
+    .covers{display:grid;gap:18px;grid-template-columns:repeat(1,1fr)}
+    @media (min-width:720px){.covers{grid-template-columns:repeat(2,1fr)}}
+    @media (min-width:1080px){.covers{grid-template-columns:repeat(4,1fr)}}
+    .art{
+      display:block;background:var(--panel);border:1px solid #1e2333;border-radius:14px;overflow:hidden;
+      transition:.18s transform ease, .18s border-color ease, .18s box-shadow ease;
+    }
+    .art:hover{transform:translateY(-2px);border-color:#33406a;box-shadow:0 6px 22px rgba(10,12,22,.35)}
+    .art img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block}
 
-    /* Covers */
-    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .art{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.22);background:#0d0f13;border:1px solid var(--line)}
-    .art img{display:block;width:100%;height:auto;transition:transform .25s ease,opacity .25s ease}
-    .art:hover img{transform:scale(1.03);opacity:.96}
+    /* Shows */
+    .shows-note{color:var(--muted)}
 
-    /* Shows tabs */
-    .tabs{display:flex;gap:10px;margin-bottom:16px}
-    .tab{padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;font-weight:700}
-    .tab[aria-selected="true"]{background:#fff;color:#000;border-color:#fff}
-    .panel{display:none}
-    .panel.active{display:block}
-    ul.shows{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-    ul.shows li{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:12px}
-    .date{min-width:120px;color:var(--accent);font-weight:700}
-    .city{opacity:.95}
-    .venue{color:var(--muted)}
-
-    footer{padding:26px 0;color:var(--muted);font-size:.95rem}
+    /* Footer */
+    footer{padding:30px 20px;color:var(--muted);border-top:1px solid #1c2030;margin-top:30px}
+    .row{display:flex;flex-wrap:wrap;gap:14px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid var(--chip-border);background:var(--chip);border-radius:12px}
+    .btn:hover{background:var(--chip-hover)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap bar">
-      <div class="logo">KID FOURTEEN</div>
-      <nav>
-        <a href="#music">Music</a>
-        <a href="#video">Video</a>
-        <a href="#shows">Shows</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
+
+  <!-- Header -->
+  <header class="nav">
+    <div class="brand">KID FOURTEEN</div>
+    <nav>
+      <a href="#music">Music</a>
+      <a href="#video">Video</a>
+      <a href="#covers">Covers</a>
+      <a href="#shows">Shows</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <section class="hero" aria-label="Hero image">
-    <div class="wrap copy">
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
       <h1>KID FOURTEEN</h1>
-      <div class="buttons">
-        <a class="btn btn--light" href="#music">Listen</a>
-        <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
-        <a class="btn" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
-        <a class="btn" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
-        <a class="btn" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
-        <a class="btn" href="https://www.instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" href="https://www.facebook.com/kidfourteen" target="_blank" rel="noopener">Facebook</a>
-        <a class="btn" href="https://drive.google.com/file/d/1oAD0E78j-_g6LFyYTTlCIRl7ezp_G_vW/view?usp=sharing" target="_blank" rel="noopener">Press Kit (PDF)</a>
+      <div class="chips">
+        <!-- Replace links as needed (from your press kit) -->
+        <a class="chip" href="#music">Listen</a>
+        <a class="chip" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="chip" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
+        <a class="chip" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
+        <a class="chip" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
+        <a class="chip" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+        <a class="chip" href="https://www.facebook.com/kidfourteen" target="_blank" rel="noopener">Facebook</a>
+        <!-- If the press kit PDF is in this repo root, this link works. Adjust the filename if different. -->
+        <a class="chip" href="./KidFourteen%20Presskit%20(2026)_compressed.pdf" target="_blank" rel="noopener">Press Kit (PDF)</a>
       </div>
     </div>
   </section>
 
+  <!-- Music -->
   <section id="music">
-    <div class="wrap">
-      <h2>Music</h2>
-      <div class="two">
-        <div class="ratio">
-          <iframe style="border-radius:0"
-            src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
-            loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            title="Spotify: Kid Fourteen"></iframe>
-        </div>
-        <div class="ratio">
-          <!-- Replace this embed with your real Bandcamp album/track when ready -->
-          <iframe
-            src="https://bandcamp.com/EmbeddedPlayer/album=0/size=large/bgcol=0c0e12/linkcol=de270f/artwork=small/transparent=true/"
-            loading="lazy" title="Bandcamp"></iframe>
-        </div>
-      </div>
+    <h2>Music</h2>
+    <div class="grid-2">
+      <!-- Spotify embed (works even if preview-only) -->
+      <iframe style="width:100%;height:352px;border:0;border-radius:14px"
+        src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator&theme=0"
+        loading="lazy" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+      <!-- Bandcamp player (replace with your preferred album/track if needed) -->
+      <iframe style="width:100%;height:352px;border:0;border-radius:14px;background:var(--panel)"
+        src="https://bandcamp.com/EmbeddedPlayer/artist=1463748615/size=large/bgcol=0f1115/linkcol=c7c9cf/artwork=small/transparent=true/"
+        loading="lazy"></iframe>
     </div>
   </section>
 
+  <!-- Video -->
   <section id="video">
-    <div class="wrap">
-      <h2>Video</h2>
-      <div class="two">
-        <div class="ratio">
-          <iframe
-            src="https://www.youtube.com/embed/oMM0ygCcLv8"
-            title="Kid Fourteen — Official Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-        <div class="ratio">
-          <iframe
-            src="https://www.youtube.com/embed/-jTtAfME750?start=1"
-            title="Kid Fourteen — Live"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </div>
+    <h2>Video</h2>
+    <div class="grid-2">
+      <!-- Premiere -->
+      <iframe style="width:100%;aspect-ratio:16/9;border:0;border-radius:14px"
+        src="https://www.youtube.com/embed/oMM0ygCcLv8" title="Premiere" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+      <!-- Live -->
+      <iframe style="width:100%;aspect-ratio:16/9;border:0;border-radius:14px"
+        src="https://www.youtube.com/embed/-jTtAfME750?start=1" title="Live" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </section>
 
+  <!-- Covers & Artwork -->
   <section id="covers">
-    <div class="wrap">
-      <h2>Covers & Artwork</h2>
-      <div class="grid">
-        <a class="art" href="./cover.png" target="_blank" rel="noopener">
-          <img src="./cover.png" alt="Cover" loading="lazy">
-        </a>
-        <a class="art" href="./cover2.jpg" target="_blank" rel="noopener">
-          <img src="./cover2.jpg" alt="Cover 2" loading="lazy">
-        </a>
-        <a class="art" href="./cover3.jpg" target="_blank" rel="noopener">
-          <img src="./cover3.jpg" alt="Cover 3" loading="lazy">
-        </a>
-        <a class="art" href="./cover4.jpg" target="_blank" rel="noopener">
-          <img src="./cover4.jpg" alt="Cover 4" loading="lazy">
-        </a>
-        <a class="art" href="./cover5.png" target="_blank" rel="noopener">
-          <img src="./cover5.png" alt="Cover 5" loading="lazy">
-        </a>
-      </div>
+    <h2>Covers & Artwork</h2>
+    <!-- If your images are in /images, change to ./images/cover.png etc. -->
+    <div class="covers">
+      <a class="art" href="./cover.png"  target="_blank" rel="noopener"><img src="./cover.png"  alt="Cover 1" loading="lazy"></a>
+      <a class="art" href="./cover2.jpg" target="_blank" rel="noopener"><img src="./cover2.jpg" alt="Cover 2" loading="lazy"></a>
+      <a class="art" href="./cover3.jpg" target="_blank" rel="noopener"><img src="./cover3.jpg" alt="Cover 3" loading="lazy"></a>
+      <a class="art" href="./cover4.jpg" target="_blank" rel="noopener"><img src="./cover4.jpg" alt="Cover 4" loading="lazy"></a>
+      <a class="art" href="./cover5.png" target="_blank" rel="noopener"><img src="./cover5.png" alt="Cover 5" loading="lazy"></a>
     </div>
   </section>
 
+  <!-- Shows -->
   <section id="shows">
-    <div class="wrap">
-      <h2>Shows</h2>
-      <div class="tabs" role="tablist" aria-label="Shows tabs">
-        <button class="tab" role="tab" aria-selected="true" aria-controls="upcoming" id="t-upcoming">Upcoming</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="past" id="t-past">Past</button>
-      </div>
-
-      <!-- Upcoming -->
-      <div class="panel active" id="upcoming" role="tabpanel" aria-labelledby="t-upcoming">
-        <p class="muted">No upcoming dates announced.</p>
-      </div>
-
-      <!-- Past -->
-      <div class="panel" id="past" role="tabpanel" aria-labelledby="t-past">
-        <ul class="shows" id="past-shows">
-          <!-- PASTE PAST DATES HERE — example:
-          <li><span class="date">2024-06-02</span><span class="city">Paris, FR</span><span class="venue">Supersonic</span></li>
-          <li><span class="date">2023-11-18</span><span class="city">Beirut, LB</span><span class="venue">Venue name</span></li>
-          -->
-        </ul>
-      </div>
-    </div>
+    <h2>Shows</h2>
+    <!-- Past dates should exactly reflect the press kit. Replace the list items below with the press kit entries. -->
+    <ul style="margin:0;padding-left:18px">
+      <!-- Example past show lines (replace with your real past dates from the PDF) -->
+      <!-- <li>02 Jun 2022 — Paris, FR — Supersonic</li> -->
+      <!-- <li>…</li> -->
+    </ul>
+    <p class="shows-note" style="margin-top:8px">Upcoming dates will appear here.</p>
   </section>
 
+  <!-- Contact -->
   <section id="contact">
-    <div class="wrap">
-      <h2>Contact</h2>
-      <p class="muted">Booking & press:</p>
-      <div class="buttons">
-        <a class="btn" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
-        <a class="btn" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
-      </div>
+    <h2>Contact</h2>
+    <div class="row" style="margin-bottom:10px">
+      <!-- Use the email(s) listed in your press kit only -->
+      <a class="btn" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
+      <a class="btn" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
     </div>
   </section>
 
   <footer>
-    <div class="wrap">© <span id="y"></span> Kid Fourteen</div>
+    © <span id="y"></span> Kid Fourteen
   </footer>
-
   <script>
-    // Simple tabs
-    const tabs = document.querySelectorAll('.tab');
-    const panels = document.querySelectorAll('.panel');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.setAttribute('aria-selected','false'));
-        panels.forEach(p => p.classList.remove('active'));
-        tab.setAttribute('aria-selected','true');
-        document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
-      });
-    });
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
+
