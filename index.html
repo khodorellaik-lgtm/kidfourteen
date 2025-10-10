@@ -124,27 +124,26 @@ body.js .reveal.is-visible{
     footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:center; color:var(--muted)}
 
     /* Bio layout */
-    .bio-grid{display:grid; gap:28px; align-items:center}
-    @media (min-width:900px){ .bio-grid{grid-template-columns:1.2fr .8fr} }
-    .bio-photo{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:12px; overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.04), 0 0 40px rgba(127,234,209,.08)}
-    .bio-photo::after{content:""; position:absolute; inset:0;
-      background:radial-gradient(60% 40% at 70% 20%, rgba(127,234,209,.06), transparent 60%); pointer-events:none}
-    .bio-photo img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:4/5}
+    <!-- Pull-quote first -->
+<blockquote class="pullquote reveal" style="--d: .00s;">
+  “Experimental pop — noise, rupture, and absolution.”
+</blockquote>
 
-    /* Pull-quote + dropcap */
-    .pullquote{
-      margin:0 0 18px 0; padding:14px 18px;
-      border-left:3px solid var(--accent);
-      background:rgba(26,34,48,.45);
-      border-radius:10px;
-      font-size:clamp(18px,2.2vw,20px);
-      line-height:1.6; color:var(--text); font-style:italic;
-    }
-    .prose .dropcap:first-letter{
-      float:left; font-weight:800; font-family:system-ui,-apple-system,Segoe UI,Inter,sans-serif;
-      font-size:clamp(52px,8vw,86px); line-height:.82; padding:4px 10px 0 2px; margin-right:6px;
-      color:var(--text); text-shadow:0 8px 24px rgba(0,0,0,.35);
+<!-- First paragraph second -->
+<p class="dropcap reveal" style="--d: .12s;">
+  Kid Fourteen AKA Khodor Ellaik has been jumping trains…
+</p>
+
+<!-- Second paragraph third -->
+<p class="reveal" style="--d: .20s;">
+  His debut album <em>Dream Kids Never Sleep</em>…
+</p>
+
+<!-- Photo last -->
+<figure class="bio-photo reveal" style="--d: .28s;">
+  <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
+</figure>
+
     }
 
     /* Reveal — progressive enhancement:
