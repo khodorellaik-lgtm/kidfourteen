@@ -1,68 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kid Fourteen — Press Kit</title>
+  <meta name="description" content="Kid Fourteen — experimental pop. Music, videos, press, and contact." />
   <style>
-    body {
-      background-color: #0b0b0b;
-      color: #eaeaea;
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+    :root{
+      --bg:#000;--fg:#f5f5f5;--soft:rgba(255,255,255,.12);--muted:rgba(255,255,255,.7);
+      --accent:linear-gradient(90deg,#f0f,#0ff,#90f);
+      --max:1120px;
     }
-    header {
-      padding: 40px 20px 10px;
-      font-size: 1.6em;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--fg);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:40;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);border-bottom:1px solid var(--soft)}
+    header .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+    nav a{opacity:.8;margin-left:16px}
+    nav a:hover{opacity:1}
+    .hero{
+      position:relative;min-height:64vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--soft);
+      background:#000 url("cover2.jpg") center/cover no-repeat;
     }
-    p {
-      color: #aaa;
-      margin-bottom: 40px;
-      font-size: 1em;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 0 40px 60px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-    footer {
-      padding: 30px 0;
-      color: #777;
-      font-size: 0.9em;
-    }
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent 60%)}
+    .hero .copy{position:relative;padding:56px 0 40px}
+    h1{margin:0 0 8px;font-size:clamp(28px,6vw,56px);line-height:1.1}
+    .tag{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border:1px solid var(--soft);border-radius:999px;background:rgba(255,255,255,.06);font-size:.9rem}
+    section{padding:64px 0;border-bottom:1px solid var(--soft)}
+    h2{margin:0 0 20px;font-size:24px;letter-spacing:.4px}
+    .hr{height:1px;background:var(--accent);opacity:.5;margin:16px 0}
+    /* gallery */
+    .grid{display:grid;gap:20px}
+    .grid.covers{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{border:1px solid var(--soft);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04)}
+    .card img{width:100%;display:block}
+    /* responsive 16:9 iframes */
+    .ratio{position:relative;width:100%;padding-top:56.25%;border:1px solid var(--soft);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.04)}
+    .ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .two{display:grid;gap:24px}
+    @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
+    footer{padding:28px 0;color:var(--muted);font-size:.9rem}
+    .btnrow{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:12px;border:1px solid var(--soft);background:rgba(255,255,255,.06);font-weight:600}
+    .btn--light{background:#fff;color:#000}
+    .muted{color:var(--muted)}
   </style>
 </head>
 <body>
   <header>
-    Kid Fourteen — Press Kit
+    <div class="wrap bar">
+      <div style="font-weight:700;letter-spacing:.6px">KID FOURTEEN</div>
+      <nav>
+        <a href="#music">Music</a>
+        <a href="#video">Video</a>
+        <a href="#covers">Covers</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
-  <p>Selected covers and artwork</p>
-  <div class="gallery">
-    <img src="cover1.png" alt="Kid Fourteen Cover 1" />
-    <img src="cover2.jpg" alt="Kid Fourteen Cover 2" />
-    <img src="cover3.jpg" alt="Kid Fourteen Cover 3" />
-    <img src="cover4.jpg" alt="Kid Fourteen Cover 4" />
-    <img src="cover5.png" alt="Kid Fourteen Cover 5" />
-  </div>
+
+  <section class="hero">
+    <div class="wrap copy">
+      <span class="tag">Experimental Pop — Noise / Sax / Confession</span>
+      <h1>Far Away and Well Adjusted</h1>
+      <p class="muted" style="max-width:760px">
+        Kid Fourteen is the project of Khodor Ellaik — a Paris-based collision of pop forms, serrated textures, and saxophone.
+      </p>
+      <div class="btnrow">
+        <a class="btn btn--light" href="#music">Listen</a>
+        <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="btn" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="music">
+    <div class="wrap">
+      <h2>Music</h2>
+      <div class="two">
+        <div class="ratio">
+          <!-- Spotify Artist embed -->
+          <iframe style="border-radius:0"
+            src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
+            loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        </div>
+        <div class="ratio">
+          <!-- Bandcamp — landing page -->
+          <iframe
+            src="https://bandcamp.com/EmbeddedPlayer/album=0/size=large/bgcol=000000/linkcol=de270f/artwork=small/transparent=true/"
+            title="Bandcamp" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <p class="muted">For premieres, press downloads, and private streams, get in touch below.</p>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="wrap">
+      <h2>Video</h2>
+      <div class="two">
+        <div class="ratio">
+          <iframe
+            src="https://www.youtube.com/embed/oMM0ygCcLv8"
+            title="Kid Fourteen — Official Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <div class="ratio">
+          <iframe
+            src="https://www.youtube.com/embed/-jTtAfME750?start=1"
+            title="Kid Fourteen — Live"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="covers">
+    <div class="wrap">
+      <h2>Covers & Artwork</h2>
+      <div class="grid covers">
+        <div class="card"><img src="cover1.png" alt="Cover 1"></div>
+        <div class="card"><img src="cover2.jpg" alt="Cover 2"></div>
+        <div class="card"><img src="cover3.jpg" alt="Cover 3"></div>
+        <div class="card"><img src="cover4.jpg" alt="Cover 4"></div>
+        <div class="card"><img src="cover5.png" alt="Cover 5"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="muted">Booking, press & general inquiries:</p>
+      <div class="btnrow">
+        <a class="btn" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
+        <a class="btn" href="mailto:hello@kidfourteen.com">hello@kidfourteen.com</a>
+        <a class="btn" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    © Kid Fourteen — 2025
+    <div class="wrap">© <span id="y"></span> Kid Fourteen</div>
   </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
