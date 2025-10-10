@@ -8,107 +8,78 @@
   <link rel="preload" href="./hero.jpeg" as="image" />
   <style>
     :root{
-      --bg: #0f1114;
-      --bg-soft:#15191f;
-      --text:#e8eaed;
-      --muted:#aab3c0;
-      --pill:#1f242c;
-      --pill-border:#2b313a;
-      --accent:#f4f4f5;
-      --accent-soft:#22262e;
-      --card:#13171c;
-      --shadow: 0 10px 40px rgba(0,0,0,.35);
-      --radius: 16px;
+      --bg:#101318; --bg2:#151a21;
+      --text:#eceff3; --muted:#aeb6c2;
+      --chip:#1d2230; --chip-border:#2a3144; --chip-hover:#242a3b;
+      --card:#13171d; --line:#1f2533; --shadow:0 10px 32px rgba(0,0,0,.35);
+      --radius:16px; --max:1200px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; line-height:1.4}
+    html,body{margin:0;height:100%;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1200px;margin:auto;padding:24px}
+    .wrap{max-width:var(--max);margin:auto;padding:24px}
+
+    /* Top nav */
+    nav{position:sticky;top:0;z-index:50;background:rgba(16,19,24,.75);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;gap:24px;height:56px}
+    .brand{font-weight:800;letter-spacing:.1em}
+    .links{margin-left:auto;display:flex;gap:20px}
+    .links a{opacity:.9}
+    .links a:hover{opacity:1}
+
+    /* Hero */
     header{
-      position:relative;min-height:48vh;display:flex;align-items:flex-end;
+      position:relative;min-height:48vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.75) 100%),
-        url('./hero.jpeg') center/cover no-repeat fixed;
-      border-bottom:1px solid #1d232c;
+        linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.30) 70%, rgba(0,0,0,.38) 100%),
+        url('./hero.jpeg') center/cover no-repeat;
     }
-    .title{font-weight:900;letter-spacing:.02em;font-size:clamp(38px,6.2vw,72px);margin:0 0 16px}
-    .pills{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 38px}
+    header::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0}
+    .title{position:relative;z-index:1;font-weight:900;letter-spacing:.02em;font-size:clamp(38px,6.2vw,72px);margin:0 0 16px}
+    .pills{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px;margin:0 0 32px}
     .pill{
       display:inline-flex;align-items:center;gap:10px;
-      padding:14px 18px;border-radius:999px;background:var(--pill);
-      border:1px solid var(--pill-border);box-shadow: var(--shadow);
+      padding:12px 16px;border-radius:999px;background:var(--chip);
+      border:1px solid var(--chip-border);box-shadow:var(--shadow);
       transition:transform .12s ease, background .12s ease, border-color .12s ease;
       font-weight:700;color:#d6dae0
     }
-    .pill:hover{transform:translateY(-1px);background:#222832;border-color:#3a4350}
-    nav{position:sticky;top:0;z-index:50;background:rgba(15,17,20,.7);backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid #1c2129}
-    nav .nav-inner{display:flex;align-items:center;gap:24px;height:56px}
-    nav .brand{font-weight:800;letter-spacing:.08em}
-    nav .links{margin-left:auto;display:flex;gap:22px}
-    nav .links a{opacity:.9}
-    nav .links a:hover{opacity:1}
-    section{padding:48px 0;border-bottom:1px solid #1b2027}
-    h2{font-size:clamp(22px,3.6vw,36px);margin:0 0 22px}
-    /* Music */
-    .music-grid{display:grid;grid-template-columns:1fr;gap:20px}
-    @media(min-width:900px){.music-grid{grid-template-columns:1fr 1fr}}
-    .card{background:var(--card);border:1px solid #1f252e;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
-    /* Covers */
-   /* Covers */
-.covers {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 22px;
-  justify-items: center;
-  padding: 0;
-}
+    .pill:hover{transform:translateY(-1px);background:var(--chip-hover);border-color:#3a435a}
 
-.cover-card {
-  background: var(--card);
-  border: 1px solid #222833;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform .12s ease, border-color .12s ease;
-  max-width: 300px; /* ✅ prevents them from becoming huge */
-  width: 100%;
-}
+    section{padding:48px 0;border-bottom:1px solid var(--line)}
+    h2{font-size:clamp(22px,3.2vw,34px);margin:0 0 18px}
 
-.cover-card:hover {
-  transform: translateY(-2px);
-  border-color: #2f3743;
-}
+    /* Music / Video layout */
+    .grid-2{display:grid;grid-template-columns:1fr;gap:22px}
+    @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
 
-.cover-link {
-  display: block;
-}
+    /* Albums grid (fixed sizes) */
+    .covers{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:22px;
+      justify-items:center;
+    }
+    .cover-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:transform .12s ease,border-color .12s ease;
+      width:100%;
+      max-width:280px;   /* prevents huge covers on wide screens */
+    }
+    .cover-card:hover{transform:translateY(-2px);border-color:#2f374a}
+    .cover-link{display:block}
+    .cover-img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#0b0e12;display:block}
+    .caption{padding:10px 12px;border-top:1px solid #202635;color:#c7ceda;font-weight:600;text-align:center}
 
-.cover-img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  background: #0b0e12;
-}
-
-.caption {
-  padding: 10px 12px;
-  border-top: 1px solid #212732;
-  color: var(--muted);
-  font-weight: 600;
-  text-align: center;
-}
-
-
-    /* Shows */
-    .tabs{display:flex;gap:10px;margin:10px 0 22px}
-    .tab{padding:10px 14px;border-radius:999px;background:var(--pill);border:1px solid var(--pill-border);font-weight:700}
-    .tab.active{background:#e9eef5;color:#121418;border-color:transparent}
-    .show{display:flex;gap:14px;align-items:center;padding:12px 14px;border:1px solid #232a34;border-radius:12px;background:var(--card)}
-    .date{font-feature-settings:"tnum" 1; font-variant-numeric: tabular-nums; color:#cdd5df}
-    /* Footer */
-    footer{padding:50px 0;color:#9aa4b2}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--pill);border:1px solid var(--pill-border);font-weight:700}
-    .btn:hover{background:#222832}
+    /* Footer / contact */
+    footer{padding:40px 0;color:#96a1b1}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--chip);border:1px solid var(--chip-border);font-weight:700}
+    .btn:hover{background:var(--chip-hover)}
   </style>
 </head>
 <body>
@@ -119,8 +90,7 @@
       <div class="links">
         <a href="#music">Music</a>
         <a href="#video">Video</a>
-        <a href="#covers">Covers</a>
-        <a href="#shows">Shows</a>
+        <a href="#albums">Albums</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -130,14 +100,12 @@
     <div class="wrap">
       <h1 class="title">KID FOURTEEN</h1>
       <div class="pills">
-        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Listen</a>
         <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
         <a class="pill" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
         <a class="pill" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
         <a class="pill" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
         <a class="pill" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
         <a class="pill" href="https://facebook.com/kidfourteen" target="_blank" rel="noopener">Facebook</a>
-        <a class="pill" href="https://khodorellaik-lgtm.github.io/kidfourteen/KidFourteen%20Presskit%20(2026)_compressed.pdf" target="_blank" rel="noopener">Press Kit (PDF)</a>
       </div>
     </div>
   </header>
@@ -146,16 +114,13 @@
     <!-- MUSIC -->
     <section id="music">
       <h2>Music</h2>
-      <div class="music-grid">
+      <div class="grid-2">
         <div class="card">
-          <!-- Spotify artist top tracks -->
           <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
                   width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
         <div class="card">
-          <!-- Bandcamp featured (replace with album/track player if you like) -->
-          <iframe style="border:0;width:100%;height:352px;" src="https://bandcamp.com/EmbeddedPlayer/artist=1428239714/size=large/bgcol=050608/linkcol=ffffff/artwork=small/transparent=true/"
-                  seamless><a href="https://kidfourteen.bandcamp.com">Kid Fourteen on Bandcamp</a></iframe>
+          <iframe style="border:0;width:100%;height:352px;" src="https://bandcamp.com/EmbeddedPlayer/artist=1428239714/size=large/bgcol=050608/linkcol=ffffff/artwork=small/transparent=true/" loading="lazy"></iframe>
         </div>
       </div>
     </section>
@@ -163,63 +128,55 @@
     <!-- VIDEO -->
     <section id="video">
       <h2>Video</h2>
-      <div class="music-grid">
+      <div class="grid-2">
         <div class="card">
-          <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8" title="Premiere: Kid Fourteen - The Mind" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8" title="Premiere: Kid Fourteen - The Mind" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="card">
-          <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750" title="Kid Fourteen Live at Supersonic, Paris" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750" title="Kid Fourteen Live at Supersonic, Paris" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </section>
 
-    <!-- COVERS -->
-    <section id="covers">
-      <h2>Covers & Artwork</h2>
+    <!-- ALBUMS (your exact links) -->
+    <section id="albums">
+      <h2>Albums</h2>
       <div class="covers">
-        <!-- Replace each href with the exact Bandcamp album link from your press kit -->
+        <!-- "cover" → A Brief Emotional Dragon -->
+        <div class="cover-card">
+          <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
+            <img class="cover-img" src="./cover.png" alt="A Brief Emotional Dragon" />
+            <div class="caption">A Brief Emotional Dragon</div>
+          </a>
+        </div>
+        <!-- "cover 2" → Blood Thick Silence -->
+        <div class="cover-card">
+          <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
+            <img class="cover-img" src="./cover2.jpg" alt="Blood Thick Silence" />
+            <div class="caption">Blood Thick Silence</div>
+          </a>
+        </div>
+        <!-- "cover 3" → Dream Kids Never Sleep -->
+        <div class="cover-card">
+          <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
+            <img class="cover-img" src="./cover3.jpg" alt="Dream Kids Never Sleep" />
+            <div class="caption">Dream Kids Never Sleep</div>
+          </a>
+        </div>
+        <!-- "cover 4" → Heart Is a Malady -->
         <div class="cover-card">
           <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
-            <img class="cover-img" src="./cover.png" alt="Heart Is a Malady" />
+            <img class="cover-img" src="./cover4.jpg" alt="Heart Is a Malady" />
             <div class="caption">Heart Is a Malady</div>
           </a>
         </div>
+        <!-- "cover 5" → Love -->
         <div class="cover-card">
           <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
-            <img class="cover-img" src="./cover2.jpg" alt="Love" />
+            <img class="cover-img" src="./cover5.png" alt="Love" />
             <div class="caption">Love</div>
           </a>
         </div>
-        <div class="cover-card">
-          <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/track-collection-or-ep-name" target="_blank" rel="noopener">
-            <img class="cover-img" src="./cover3.jpg" alt="Release 3" />
-            <div class="caption">Release 3</div>
-          </a>
-        </div>
-        <div class="cover-card">
-          <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/another-release" target="_blank" rel="noopener">
-            <img class="cover-img" src="./cover4.jpg" alt="Release 4" />
-            <div class="caption">Release 4</div>
-          </a>
-        </div>
-        <div class="cover-card">
-          <a class="cover-link" href="https://kidfourteen.bandcamp.com/album/extra-or-single" target="_blank" rel="noopener">
-            <img class="cover-img" src="./cover5.png" alt="Release 5" />
-            <div class="caption">Release 5</div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SHOWS -->
-    <section id="shows">
-      <h2>Shows</h2>
-      <div class="tabs">
-        <span class="tab active">Upcoming</span>
-        <span class="tab">Past</span>
-      </div>
-      <div class="card">
-        <p style="color:#b1bac7;margin:0">No upcoming dates announced.</p>
       </div>
     </section>
 
@@ -227,7 +184,6 @@
     <section id="contact">
       <h2>Contact</h2>
       <div class="card" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-        <!-- Using the email from the press kit -->
         <a class="btn" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
         <a class="btn" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
         <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
