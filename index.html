@@ -16,6 +16,76 @@
 
 .press-card {
   background: var(--bg-soft);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.press-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+  border-color: var(--accent);
+}
+
+.press-badge {
+  display: inline-block;
+  background: rgba(127,234,209,0.12);
+  border: 1px solid rgba(127,234,209,0.25);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.press-card:hover .press-badge {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.press-card blockquote {
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.6;
+  position: relative;
+}
+
+.press-card blockquote::before {
+  content: "“";
+  font-size: 42px;
+  line-height: 0;
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  color: var(--accent);
+  opacity: .25;
+}
+
+.press-card .source {
+  text-align: right;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+    .press-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  margin-top: 40px;
+}
+
+.press-card {
+  background: var(--bg-soft);
   border: 1px solid var(--chip-border);
   border-radius: 14px;
   padding: 24px 28px;
@@ -306,52 +376,54 @@
   </section>
 
   <!-- PRESS -->
-  <section id="press" class="section">
-    <div class="wrap">
-      <h2>Press</h2>
-     <div class="press-grid">
-  <article class="press-card reveal">
-    <img src="logos/bandcamp.png" alt="Bandcamp Daily" class="press-logo">
-    <blockquote>“Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats, pulsing synth arpeggiators, and metallic guitar squall.”</blockquote>
-    <p class="source">— Bandcamp Daily</p>
-  </article>
+ <section id="press" class="wrap section reveal">
+  <h2>Press</h2>
 
-  <article class="press-card reveal">
-    <img src="logos/tinymixtapes.png" alt="Tiny Mix Tapes" class="press-logo">
-    <blockquote>“It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor — Kid Fourteen is the last man dancing to an illusory tune in his head.”</blockquote>
-    <p class="source">— Tiny Mix Tapes</p>
-  </article>
+  <div class="press-grid">
+    <article class="press-card reveal">
+      <div class="press-badge">Bandcamp Daily</div>
+      <blockquote>“Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats, pulsing synth arpeggiators, and metallic guitar squall.”</blockquote>
+      <p class="source">— Bandcamp Daily</p>
+    </article>
 
-  <article class="press-card reveal">
-    <img src="logos/arabnews.png" alt="Arab News" class="press-logo">
-    <blockquote>“The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”</blockquote>
-    <p class="source">— Arab News</p>
-  </article>
+    <article class="press-card reveal">
+      <div class="press-badge">Tiny Mix Tapes</div>
+      <blockquote>“It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor — Kid Fourteen is the last man dancing to an illusory tune in his head.”</blockquote>
+      <p class="source">— Tiny Mix Tapes</p>
+    </article>
 
-  <article class="press-card reveal">
-    <img src="logos/scenenoise.png" alt="Scene Noise" class="press-logo">
-    <blockquote>“The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”</blockquote>
-    <p class="source">— Scene Noise</p>
-  </article>
+    <article class="press-card reveal">
+      <div class="press-badge">Arab News</div>
+      <blockquote>“The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”</blockquote>
+      <p class="source">— Arab News</p>
+    </article>
 
-  <article class="press-card reveal">
-    <img src="logos/rockcult.png" alt="Rock Cult" class="press-logo">
-    <blockquote>“Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together become many times stronger.”</blockquote>
-    <p class="source">— Rock Cult</p>
-  </article>
+    <article class="press-card reveal">
+      <div class="press-badge">Scene Noise</div>
+      <blockquote>“The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”</blockquote>
+      <p class="source">— Scene Noise</p>
+    </article>
 
-  <article class="press-card reveal">
-    <img src="logos/obscuresound.png" alt="Obscure Sound" class="press-logo">
-    <blockquote>“Khodor Ellaik, aka Kid Fourteen, is a Paris-based Lebanese musician and songwriter who has been intriguing listeners for over a decade with his unique style of mixing Pop, Post-Punk, Noise, experimental Jazz and Electronic Music. The 12-track project is the artist’s personal declaration of survival and autobiography, in all its abstraction.”</blockquote>
-    <p class="source">— Obscure Sound</p>
-  </article>
+    <article class="press-card reveal">
+      <div class="press-badge">Rock Cult</div>
+      <blockquote>“Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together become many times stronger.”</blockquote>
+      <p class="source">— Rock Cult</p>
+    </article>
 
-  <article class="press-card reveal">
-    <img src="logos/obscuresound.png" alt="Obscure Sound" class="press-logo">
-    <blockquote>“The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure. The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”</blockquote>
-    <p class="source">— Obscure Sound</p>
-  </article>
-</div>
+    <article class="press-card reveal">
+      <div class="press-badge">Obscure Sound</div>
+      <blockquote>“Khodor Ellaik, aka Kid Fourteen, is a Paris-based Lebanese musician and songwriter who has been intriguing listeners for over a decade with his unique style of mixing Pop, Post-Punk, Noise, experimental Jazz and Electronic Music. The 12-track project is the artist’s personal declaration of survival and autobiography, in all its abstraction.”</blockquote>
+      <p class="source">— Obscure Sound</p>
+    </article>
+
+    <article class="press-card reveal">
+      <div class="press-badge">Obscure Sound</div>
+      <blockquote>“The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure. The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”</blockquote>
+      <p class="source">— Obscure Sound</p>
+    </article>
+  </div>
+</section>
+
 
   <script>
     document.body.classList.add('js');
