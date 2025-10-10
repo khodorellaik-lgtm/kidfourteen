@@ -7,15 +7,65 @@
   <meta name="color-scheme" content="dark">
 
   <style>
-    /* Typographic helpers */
-    .prose p { margin: 0 0 14px 0; }
-    .prose em { font-style: italic; }
+    /* Pull-quote */
+.pullquote{
+  margin: 0 0 18px 0;
+  padding: 16px 18px;
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(180deg, rgba(26,34,48,.55), rgba(26,34,48,.35));
+  border-radius: 12px;
+  font-size: clamp(18px, 2.2vw, 20px);
+  line-height: 1.6;
+  color: var(--text);
+  font-style: italic;
+  position: relative;
+}
+.pullquote::before{
+  content: "“";
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  font-size: 26px;
+  opacity: .25;
+}
+.pullquote::after{
+  content: "”";
+  position: absolute;
+  right: 14px;
+  bottom: -12px;
+  font-size: 22px;
+  opacity: .2;
+}
 
-    :root{
-      --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
-      --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#b8c6ff;
-      --nav-h:64px;
-    }
+/* Drop cap */
+.prose .dropcap:first-letter{
+  float: left;
+  font-weight: 800;
+  font-family: system-ui, -apple-system, Segoe UI, Inter, sans-serif;
+  font-size: clamp(48px, 7vw, 80px);
+  line-height: .82;
+  padding: 4px 10px 0 2px;
+  margin-right: 8px;
+  color: var(--text);
+  text-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+@media (max-width: 520px){
+  .prose .dropcap:first-letter{ margin-right: 6px; font-size: clamp(42px, 10vw, 56px); }
+}
+
+/* Reveal — progressive enhancement with stagger support */
+.reveal{opacity:1; transform:none}
+body.js .reveal{
+  opacity:0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: var(--d, 0s); /* ← per-element delay */
+  will-change: opacity, transform;
+}
+body.js .reveal.is-visible{
+  opacity:1; transform:none;
+}
+
 
     *{box-sizing:border-box}
     html,body{margin:0; background:var(--bg); color:var(--text);
