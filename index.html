@@ -3,66 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kid Fourteen</title>
-  <meta name="description" content="Kid Fourteen — music, videos, artwork, contact." />
+  <title>KID FOURTEEN</title>
+  <meta name="description" content="Kid Fourteen — Experimental Pop · Noise Pop · Song." />
   <link rel="icon" href="./cover5.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg1:#0f1115;        /* softer than pitch black */
-      --bg2:#15171d;
-      --fg:#ececec;
-      --muted:#b9bcc6;
-      --line:rgba(255,255,255,.12);
-      --card:rgba(255,255,255,.04);
-      --max:1120px;
-      --radius:16px;
+      --bg1:#14161b; --bg2:#1a1d23; /* softer than pitch black */
+      --fg:#eceff3; --muted:#b8bcc7; --line:rgba(255,255,255,.12);
+      --card:rgba(255,255,255,.04); --max:1120px; --radius:16px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--fg);
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:linear-gradient(180deg,var(--bg1),var(--bg2));
-    }
+    body{margin:0;color:var(--fg);font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2))}
     a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-    /* header */
+
     header{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
     .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
     .logo{font-weight:800;letter-spacing:.12em}
-    nav a{opacity:.85;margin-left:18px}
+    nav a{opacity:.9;margin-left:18px}
     nav a:hover{opacity:1}
-    /* hero */
-    .hero{
-      position:relative;min-height:58vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);
-      background:#000 url("./cover2.jpg") center/cover no-repeat;
-    }
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.65))}
+
+    .hero{position:relative;min-height:56vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);
+      background:#000 url("./cover2.jpg") center/cover no-repeat;}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65))}
     .hero .copy{position:relative;padding:72px 0 48px}
-    h1{margin:0 0 8px;font-size:clamp(30px,6vw,56px);line-height:1.06}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
-      background:var(--card);font-weight:700;transition:transform .15s ease,border-color .15s ease,background .15s ease;
-    }
-    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.25)}
-    .btn--light{background:#fff;color:#000}
-    /* sections */
+    h1{margin:0;font-size:clamp(30px,6vw,56px);line-height:1.06;letter-spacing:.02em}
+    .tag{margin-top:10px;color:var(--muted);font-weight:600;letter-spacing:.08em}
+
     section{padding:60px 0;border-bottom:1px solid var(--line)}
     h2{margin:0 0 14px;font-size:22px;letter-spacing:.06em}
     .muted{color:var(--muted)}
-    /* media blocks */
+    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+      background:var(--card);font-weight:700;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.25)}
+    .btn--light{background:#fff;color:#000}
+
     .two{display:grid;gap:24px}
     @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
     .ratio{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--line)}
     .ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    /* covers grid – simple, no borders or pills */
+
     .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
     .art{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.22);background:#0d0f13}
     .art img{display:block;width:100%;height:auto;transition:transform .25s ease,opacity .25s ease}
     .art:hover img{transform:scale(1.03);opacity:.96}
+
     footer{padding:26px 0;color:var(--muted);font-size:.95rem}
   </style>
 </head>
@@ -79,15 +67,19 @@
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero" aria-label="Hero image">
     <div class="wrap copy">
-      <h1>Kid Fourteen</h1>
-      <p class="muted" style="max-width:760px">Official site. Music, videos, artwork, and bookings.</p>
+      <h1>KID FOURTEEN</h1>
+      <div class="tag">EXPERIMENTAL POP · NOISE POP · SONG</div>
       <div class="buttons">
         <a class="btn btn--light" href="#music">Listen</a>
         <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
         <a class="btn" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
         <a class="btn" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
+        <a class="btn" href="https://www.instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.facebook.com/kidfourteen" target="_blank" rel="noopener">Facebook</a>
+        <a class="btn" href="https://drive.google.com/file/d/1oAD0E78j-_g6LFyYTTlCIRl7ezp_G_vW/view?usp=sharing" target="_blank" rel="noopener">Press Kit (PDF)</a>
       </div>
     </div>
   </section>
@@ -137,7 +129,7 @@
     <div class="wrap">
       <h2>Covers & Artwork</h2>
       <div class="grid">
-        <figure class="art"><img src="./cover1.png" alt="Cover 1"></figure>
+        <figure class="art"><img src="./cover.png" alt="Cover"></figure>
         <figure class="art"><img src="./cover2.jpg" alt="Cover 2"></figure>
         <figure class="art"><img src="./cover3.jpg" alt="Cover 3"></figure>
         <figure class="art"><img src="./cover4.jpg" alt="Cover 4"></figure>
@@ -152,9 +144,8 @@
       <p class="muted">Booking & press:</p>
       <div class="buttons">
         <a class="btn" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
-        <a class="btn" href="mailto:hello@kidfourteen.com">hello@kidfourteen.com</a>
-        <a class="btn" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
         <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="btn" href="https://www.instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
   </section>
