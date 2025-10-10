@@ -3,110 +3,70 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kid Fourteen — Official Site</title>
-  <meta name="description" content="Kid Fourteen — experimental pop. Music, videos, press, and contact." />
-  <meta property="og:title" content="Kid Fourteen — Official Site">
-  <meta property="og:description" content="Experimental pop. Music, videos, press, and contact.">
-  <meta property="og:image" content="https://www.kidfourteen.com/cover2.jpg">
-  <meta name="theme-color" content="#000000">
-  <!-- Font: Inter (clean, modern) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <!-- Favicon (uses your dragon – change if you prefer) -->
-  <link rel="icon" href="/cover5.png" type="image/png">
-
+  <title>Kid Fourteen</title>
+  <meta name="description" content="Kid Fourteen — music, videos, artwork, contact." />
+  <link rel="icon" href="./cover5.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#060606; --fg:#f3f3f3; --muted:#b9b9b9;
-      --line:rgba(255,255,255,.10);
+      --bg1:#0f1115;        /* softer than pitch black */
+      --bg2:#15171d;
+      --fg:#ececec;
+      --muted:#b9bcc6;
+      --line:rgba(255,255,255,.12);
       --card:rgba(255,255,255,.04);
-      --accent:linear-gradient(90deg,#ff3cff,#00ffff,#9a7bff);
       --max:1120px;
       --radius:16px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; background:var(--bg); color:var(--fg);
-      font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      letter-spacing:.1px;
+      margin:0;
+      color:var(--fg);
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
     }
     a{color:inherit;text-decoration:none}
-    a:focus-visible, button:focus-visible{outline:2px solid #fff; outline-offset:2px}
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(0,0,0,.45); border-bottom:1px solid var(--line);
-    }
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
-    .bar{display:flex; align-items:center; justify-content:space-between; gap:16px; height:68px}
-    .logo{font-weight:800; letter-spacing:.12em}
-    nav a{opacity:.8; margin-left:18px; font-weight:600; font-size:.95rem}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+    /* header */
+    header{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+    .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .logo{font-weight:800;letter-spacing:.12em}
+    nav a{opacity:.85;margin-left:18px}
     nav a:hover{opacity:1}
-
-    /* Hero */
+    /* hero */
     .hero{
-      position:relative; min-height:70vh; display:flex; align-items:flex-end;
-      background:#000 url('cover2.jpg') center/cover no-repeat;
-      border-bottom:1px solid var(--line);
+      position:relative;min-height:58vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);
+      background:#000 url("./cover2.jpg") center/cover no-repeat;
     }
-    .hero::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,.25) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.85) 100%);
-    }
-    .hero .copy{
-      position:relative; padding:72px 0 56px; width:100%;
-    }
-    h1{margin:0 0 10px; font-size:clamp(28px,6vw,58px); line-height:1.06}
-    .tag{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:8px 14px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(255,255,255,.06); color:#eaeaea; font-size:.9rem; margin-bottom:14px;
-    }
-    .buttons{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.0),rgba(0,0,0,.65))}
+    .hero .copy{position:relative;padding:72px 0 48px}
+    h1{margin:0 0 8px;font-size:clamp(30px,6vw,56px);line-height:1.06}
+    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
     .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:12px 16px; border-radius:12px; border:1px solid var(--line);
-      background:var(--card); font-weight:700;
-      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+      background:var(--card);font-weight:700;transition:transform .15s ease,border-color .15s ease,background .15s ease;
     }
-    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.25)}
-    .btn--light{background:#fff; color:#000}
-
-    /* Sections */
-    section{padding:72px 0; border-bottom:1px solid var(--line)}
-    h2{margin:0 0 14px; font-size:24px; letter-spacing:.06em}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.25)}
+    .btn--light{background:#fff;color:#000}
+    /* sections */
+    section{padding:60px 0;border-bottom:1px solid var(--line)}
+    h2{margin:0 0 14px;font-size:22px;letter-spacing:.06em}
     .muted{color:var(--muted)}
-    .hr{height:1px; background:var(--accent); opacity:.5; margin:18px 0 8px; border-radius:999px}
-
-    /* Layout helpers */
-    .two{display:grid; gap:24px}
+    /* media blocks */
+    .two{display:grid;gap:24px}
     @media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
-    .grid{display:grid; gap:20px}
-    .covers{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-
-    /* Cards & media */
-    .card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--card)}
-    .card img{display:block; width:100%; height:auto}
-    .ratio{position:relative; width:100%; padding-top:56.25%; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--card)}
-    .ratio iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
-    .press{display:grid; gap:16px; grid-template-columns:1fr}
-    @media(min-width:900px){.press{grid-template-columns:1fr 1fr 1fr}}
-    .quote{border:1px solid var(--line); background:var(--card); border-radius:var(--radius); padding:16px}
-    .quote p{margin:0 0 8px}
-    .quote small{color:var(--muted)}
-
-    footer{padding:28px 0; color:var(--muted); font-size:.92rem}
-
-    /* Motion respect */
-    @media (prefers-reduced-motion: reduce){
-      .btn{transition:none}
-    }
+    .ratio{position:relative;width:100%;padding-top:56.25%;border-radius:var(--radius);overflow:hidden;background:var(--card);border:1px solid var(--line)}
+    .ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    /* covers grid – simple, no borders or pills */
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .art{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.22);background:#0d0f13}
+    .art img{display:block;width:100%;height:auto;transition:transform .25s ease,opacity .25s ease}
+    .art:hover img{transform:scale(1.03);opacity:.96}
+    footer{padding:26px 0;color:var(--muted);font-size:.95rem}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="wrap bar">
       <div class="logo">KID FOURTEEN</div>
@@ -114,55 +74,43 @@
         <a href="#music">Music</a>
         <a href="#video">Video</a>
         <a href="#covers">Covers</a>
-        <a href="#press">Press</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero" aria-label="Hero image">
+  <section class="hero">
     <div class="wrap copy">
-      <span class="tag">Experimental Pop — Noise / Sax / Confession</span>
-      <h1>Far Away and Well Adjusted</h1>
-      <p class="muted" style="max-width:760px">
-        Kid Fourteen is the project of Khodor Ellaik—Paris-based confessional pop and serrated texture.
-      </p>
+      <h1>Kid Fourteen</h1>
+      <p class="muted" style="max-width:760px">Official site. Music, videos, artwork, and bookings.</p>
       <div class="buttons">
         <a class="btn btn--light" href="#music">Listen</a>
         <a class="btn" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
         <a class="btn" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
         <a class="btn" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
-        <a class="btn" href="#contact">Booking</a>
       </div>
     </div>
   </section>
 
-  <!-- Music -->
   <section id="music">
     <div class="wrap">
       <h2>Music</h2>
       <div class="two">
         <div class="ratio">
-          <!-- Spotify artist embed -->
           <iframe style="border-radius:0"
             src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
             loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             title="Spotify: Kid Fourteen"></iframe>
         </div>
         <div class="ratio">
-          <!-- Bandcamp (can swap to specific release later) -->
           <iframe
-            src="https://bandcamp.com/EmbeddedPlayer/album=0/size=large/bgcol=000000/linkcol=de270f/artwork=small/transparent=true/"
+            src="https://bandcamp.com/EmbeddedPlayer/album=0/size=large/bgcol=0c0e12/linkcol=de270f/artwork=small/transparent=true/"
             loading="lazy" title="Bandcamp"></iframe>
         </div>
       </div>
-      <div class="hr"></div>
-      <p class="muted">For premieres, private streams, and downloads, reach out below.</p>
     </div>
   </section>
 
-  <!-- Video -->
   <section id="video">
     <div class="wrap">
       <h2>Video</h2>
@@ -177,7 +125,7 @@
         <div class="ratio">
           <iframe
             src="https://www.youtube.com/embed/-jTtAfME750?start=1"
-            title="Kid Fourteen — Live Video"
+            title="Kid Fourteen — Live"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
         </div>
@@ -185,46 +133,23 @@
     </div>
   </section>
 
-  <!-- Covers & Artwork -->
   <section id="covers">
     <div class="wrap">
       <h2>Covers & Artwork</h2>
-      <div class="grid covers">
-        <div class="card"><img src="cover1.png" alt="Cover 1"></div>
-        <div class="card"><img src="cover2.jpg" alt="Cover 2"></div>
-        <div class="card"><img src="cover3.jpg" alt="Cover 3"></div>
-        <div class="card"><img src="cover4.jpg" alt="Cover 4"></div>
-        <div class="card"><img src="cover5.png" alt="Cover 5"></div>
+      <div class="grid">
+        <figure class="art"><img src="./cover1.png" alt="Cover 1"></figure>
+        <figure class="art"><img src="./cover2.jpg" alt="Cover 2"></figure>
+        <figure class="art"><img src="./cover3.jpg" alt="Cover 3"></figure>
+        <figure class="art"><img src="./cover4.jpg" alt="Cover 4"></figure>
+        <figure class="art"><img src="./cover5.png" alt="Cover 5"></figure>
       </div>
     </div>
   </section>
 
-  <!-- Press -->
-  <section id="press">
-    <div class="wrap">
-      <h2>Press</h2>
-      <div class="press">
-        <div class="quote">
-          <p>“Balances confessional pop and serrated noise into songs that rupture and glow.”</p>
-          <small>— Bandcamp Daily</small>
-        </div>
-        <div class="quote">
-          <p>“Pop structures haunted by feedback and desire; exquisite volatility.”</p>
-          <small>— Tiny Mix Tapes</small>
-        </div>
-        <div class="quote">
-          <p>“An arresting voice from Beirut’s underground evolving into a singular project.”</p>
-          <small>— Scene Noise</small>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
   <section id="contact">
     <div class="wrap">
       <h2>Contact</h2>
-      <p class="muted">Booking, press & general inquiries:</p>
+      <p class="muted">Booking & press:</p>
       <div class="buttons">
         <a class="btn" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
         <a class="btn" href="mailto:hello@kidfourteen.com">hello@kidfourteen.com</a>
