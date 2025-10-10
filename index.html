@@ -269,16 +269,192 @@
     </div>
   </section>
 
-<section id="bio" style="background:#0f141b;padding:80px 0;">
-  <h2 style="text-align:center;font-size:28px;margin-bottom:40px;">Bio</h2>
-  <div style="max-width:800px;margin:auto;color:#dbe3eb;line-height:1.7;font-size:17px;padding:0 20px;text-align:justify;">
-    <p><strong>Kid Fourteen</strong> AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all hanging on the same clothesline that became his own distinct sound.</p>
-    <p>His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.</p>
-  </div>
-</section>
+<!-- ===================== BIO SECTION ===================== -->
+<section id="bio" class="bio-block" style="background:#0f141b;padding:80px 0;">
+  <style>
+    /* ===== Bio block ===== */
+    .bio-block {
+      padding: clamp(48px, 6vw, 96px) 0;
+      background: transparent;
+    }
 
+    .fancy-underline {
+      position: relative;
+      display: inline-block;
+      padding-bottom: .4rem;
+    }
+    .fancy-underline::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.35), rgba(255,255,255,.08));
+    }
+
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: start;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    .bio-head {
+      grid-column: 1 / -1;
+      margin-bottom: clamp(8px, 1.5vw, 16px);
+    }
+
+    .bio-quote {
+      margin: 12px 0 0;
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.5;
+      color: rgba(255,255,255,.75);
+      font-style: italic;
+      border-left: 3px solid rgba(255,255,255,.15);
+      padding-left: 14px;
+    }
+
+    .bio-copy p {
+      font-size: clamp(16px, 1.25vw, 18px);
+      line-height: 1.85;
+      color: rgba(255,255,255,.86);
+      margin: 0 0 1.2rem;
+      text-align: justify;
+    }
+
+    /* Drop cap for first paragraph */
+    .dropcap::first-letter {
+      float: left;
+      font-size: 3.2em;
+      line-height: .9;
+      padding-right: .16em;
+      padding-top: .06em;
+      font-weight: 700;
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 6px 24px rgba(0,0,0,.4);
+    }
+
+    /* Timeline chips */
+    .bio-timeline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .chip {
+      --ring: rgba(255,255,255,.14);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--ring);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.85);
+      font-size: 13.5px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .chip span {
+      font-weight: 700;
+      color: rgba(255,255,255,.95);
+    }
+    .chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    /* Image panel */
+    .bio-art {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      min-height: 340px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .bio-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.95) contrast(1.02) brightness(.92);
+      transform: scale(1.02);
+    }
+    .bio-art-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(60% 60% at 70% 20%, rgba(0,0,0,.0) 0%, rgba(0,0,0,.45) 70%),
+        linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55));
+      pointer-events: none;
+    }
+
+    /* Responsive: single column on small screens */
+    @media (max-width: 980px) {
+      .bio-grid {
+        grid-template-columns: 1fr;
+      }
+      .bio-art {
+        order: -1;
+        min-height: 260px;
+      }
+      .bio-quote {
+        font-size: clamp(16px, 4.5vw, 19px);
+      }
+    }
+  </style>
+
+  <div class="container bio-grid">
+    <header class="bio-head">
+      <h2 class="h2 fancy-underline">Bio</h2>
+      <blockquote class="bio-quote">
+        “Kid Fourteen stitches synth-pop, noise and saxophone textures into a single, unmistakable voice.”
+      </blockquote>
+    </header>
+
+    <!-- Text column -->
+    <article class="bio-copy">
+      <p class="dropcap">
+        Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was
+        fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo
+        career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave
+        to Ambient and Experimental Saxophone Soundscapes — all while managing to keep it all hanging on the same
+        clothesline that became his own distinct sound.
+      </p>
+
+      <p>
+        His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese
+        label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart
+        directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album
+        <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had
+        recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his
+        own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album
+        <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His
+        latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.
+      </p>
+
+      <div class="bio-timeline" aria-label="Albums timeline">
+        <span class="chip"><span>2016</span> Dream Kids Never Sleep</span>
+        <span class="chip"><span>2018</span> Blood-thick Silence</span>
+        <span class="chip"><span>2020</span> Love</span>
+        <span class="chip"><span>2023</span> A Brief Emotional Dragon</span>
+        <span class="chip"><span>2024</span> Heart Is a Malady</span>
+      </div>
+    </article>
+
+    <!-- Image / texture column -->
+    <aside class="bio-art">
+      <img src="hero.jpg" alt="Kid Fourteen — press still" />
+      <div class="bio-art-overlay"></div>
+    </aside>
   </div>
 </section>
+<!-- ===================== END BIO SECTION ===================== -->
+
 
 
 
