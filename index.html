@@ -88,6 +88,62 @@
     @media (min-width:900px){ .bio-grid{grid-template-columns:1.2fr .8fr} }
     .bio-photo{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:12px; overflow:hidden}
     .bio-photo img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:4/5}
+/* ===== Enhancements ===== */
+
+/* Fade-in on scroll */
+.reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
+.reveal.is-visible{opacity:1; transform:none}
+
+/* Bio photo polish */
+.bio-photo{
+  position:relative;
+  background:var(--bg-soft);
+  border:1px solid var(--chip-border);
+  border-radius:12px;
+  overflow:hidden;
+  /* subtle depth + glow */
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.04),
+    0 0 40px rgba(127,234,209,.08);
+}
+.bio-photo::after{
+  /* very soft inner gradient so dark images blend with bg */
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(60% 40% at 70% 20%, rgba(127,234,209,.06), transparent 60%);
+  pointer-events:none;
+}
+
+/* Mobile stacking rhythm */
+@media (max-width: 899px){
+  .bio-grid{gap:22px}
+}
+
+/* Pull-quote (magazine style) */
+.pullquote{
+  margin: 0 0 18px 0; padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  background: rgba(26,34,48,.45);
+  border-radius: 10px;
+  font-size: clamp(18px, 2.2vw, 20px);
+  line-height: 1.6;
+  color: var(--text);
+  font-style: italic;
+}
+
+/* Drop cap on first paragraph */
+.prose .dropcap:first-letter{
+  float:left;
+  font-weight: 800;
+  font-family: system-ui, -apple-system, Segoe UI, Inter, sans-serif;
+  font-size: clamp(52px, 8vw, 86px);
+  line-height: .82;
+  padding: 4px 10px 0 2px;
+  margin-right: 6px;
+  color: var(--text);
+  text-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
   </style>
 </head>
 
@@ -196,21 +252,45 @@
     </div>
   </section>
 
-  <!-- BIO (split: text left, photo right using bio.jpg) -->
-  <section id="bio" class="section">
-    <div class="wrap">
-      <h2>Bio</h2>
-      <div class="bio-grid">
-        <div class="prose">
-          <p>Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all hanging on the same clothesline that became his own distinct sound.</p>
-          <p>His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.</p>
-        </div>
-        <figure class="bio-photo">
-<img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="800" height="1000">
-        </figure>
+  <!-- BIO (split: text left, photo right) -->
+<section id="bio" class="section">
+  <div class="wrap">
+    <h2>Bio</h2>
+    <div class="bio-grid">
+      <div class="prose">
+        <!-- Pull-quote -->
+        <blockquote class="pullquote reveal">
+          “Experimental pop — noise, rupture, and absolution.”
+        </blockquote>
+
+        <!-- First paragraph gets drop cap -->
+        <p class="dropcap reveal">
+          Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was
+          fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting
+          his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop
+          and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all
+          hanging on the same clothesline that became his own distinct sound.
+        </p>
+
+        <p class="reveal">
+          His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the
+          Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with
+          Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock
+          album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020
+          he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released
+          on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album
+          <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music.
+          His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.
+        </p>
       </div>
+
+      <figure class="bio-photo reveal">
+        <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
+      </figure>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- PRESS -->
   <section id="press" class="section">
@@ -250,6 +330,23 @@
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
+    <script>
+  // existing parallax code is above — keeping it.
+  // Reveal on scroll
+  (() => {
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || !els.length) {
+      // graceful fallback: show immediately
+      els.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    els.forEach(el => io.observe(el));
+  })();
+</script>
+
   </script>
 </body>
 </html>
