@@ -4,236 +4,260 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kid Fourteen</title>
-  <meta name="description" content="Kid Fourteen — official site" />
-  <!-- Preload the hero for faster paint -->
-  <link rel="preload" as="image" href="hero.jpg" imagesrcset="hero.jpg" />
+  <meta name="color-scheme" content="dark">
   <style>
-    :root{
-      --bg:#0f1216;       /* not pure black */
-      --panel:#151a20;
-      --muted:#8892a6;
-      --text:#e6e9ef;
-      --brand:#c7cad3;
-      --chip:#1b222a;
-      --chip-border:#232c36;
-      --chip-hover:#25303c;
-      --ring:rgba(255,255,255,.12);
-      --card:#11161c;
+    :root {
+      --bg: #0f141b;
+      --bg-soft: #121821;
+      --text: #e6eaef;
+      --muted: #9fb0c3;
+      --chip: #1a2230;
+      --chip-border: #243040;
+      --accent: #7fead1;
+      --link: #b8c6ff;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;z-index:50;background:linear-gradient(to bottom, rgba(15,18,22,.9), rgba(15,18,22,.6) 70%, transparent);backdrop-filter:blur(6px)}
-    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .brand{letter-spacing:.12em;font-weight:800}
-    .links a{margin-left:24px;color:var(--muted)}
-    .links a:hover{color:var(--text)}
-    /* HERO */
-    .hero{
-      position:relative;
-      min-height:68vh;
-      display:flex;
-      align-items:center;
-      overflow:hidden;
-      border-bottom:1px solid var(--chip-border);
-      background:
-        linear-gradient(to bottom, rgba(15,18,22,.35), rgba(15,18,22,.75)),
-        url('hero.jpg') center/cover no-repeat fixed; /* <— uses hero.jpg */
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
     }
-    .hero .title{font-size:clamp(36px,8vw,84px);line-height:1.05;margin:0 0 28px 0;letter-spacing:.02em}
-    .chips{display:flex;flex-wrap:wrap;gap:14px}
-    .chip{
-      background:var(--chip);
-      border:1px solid var(--chip-border);
-      padding:12px 18px;border-radius:14px;color:var(--brand);
-      transition:.2s ease;
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { opacity: 0.9; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 64px 0; }
+    h1,h2,h3 { margin: 0 0 .6em; }
+    h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.05; }
+    h2 { font-size: clamp(26px, 3vw, 36px); }
+    h3 { font-size: clamp(18px, 2.2vw, 22px); }
+
+    /* Navigation */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: linear-gradient(180deg, rgba(10,14,20,.78), rgba(10,14,20,.3));
+      border-bottom: 1px solid rgba(255,255,255,.05);
     }
-    .chip:hover{background:var(--chip-hover);transform:translateY(-1px);box-shadow:0 0 0 4px var(--ring)}
-    section{padding:56px 0}
-    h2{margin:0 0 22px 0;font-size:28px}
-    /* GRID (albums, videos) */
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
-    .col-6{grid-column:span 12}
-    .card{
-      background:var(--card);
-      border:1px solid var(--chip-border);
-      border-radius:14px;
-      overflow:hidden;
-      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    .nav .inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-weight: 800; letter-spacing: .12em; }
+    .links { display: flex; gap: 22px; }
+    .links a { color: var(--text); opacity: .85; }
+    .links a:hover { opacity: 1; }
+
+    /* Hero */
+    .hero {
+      position: relative; min-height: 60vh;
+      background: #0c1219 url('hero.jpg') center/cover no-repeat;
+      display: grid; place-items: center; text-align: center;
     }
-    .card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.35);border-color:#2b3642}
-    .card img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#0b0f13}
-    .card .label{padding:14px 16px;background:#121821;border-top:1px solid var(--chip-border);text-align:center;font-weight:700}
-    @media(min-width:720px){
-      .col-6{grid-column:span 6}
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(12,18,25,.6) 0%, rgba(12,18,25,.9) 80%);
     }
-    /* Music embeds */
-    .music-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
-    .music-item{grid-column:span 12}
-    @media(min-width:980px){
-      .music-item{grid-column:span 6}
+    .hero .content { position: relative; z-index: 1; }
+    .pills {
+      display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 22px;
     }
-    iframe{border:0}
-    /* Contact */
-    .contact-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      background:var(--chip);border:1px solid var(--chip-border);
-      padding:12px 16px;border-radius:12px;color:var(--brand)
+    .pill {
+      background: var(--chip); border: 1px solid var(--chip-border);
+      padding: 12px 16px; border-radius: 18px; color: var(--text); font-weight: 600;
+      transition: transform .16s ease, background .16s ease;
     }
-    .pill:hover{background:var(--chip-hover)}
-    footer{padding:40px 0 60px 0;color:var(--muted);text-align:center}
+    .pill:hover { transform: translateY(-2px) scale(1.05); background: #1e293b; }
+
+    /* Albums Grid */
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      justify-items: center;
+    }
+
+    .album-card {
+      background: var(--chip);
+      border: 1px solid var(--chip-border);
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 220px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .album-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,.45);
+    }
+
+    .album-card img {
+      width: 100%; height: auto; aspect-ratio: 1/1;
+      object-fit: cover; display: block;
+      transition: transform .3s ease;
+    }
+
+    .album-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .album-card .label {
+      padding: 12px;
+      background: #121821;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      border-top: 1px solid var(--chip-border);
+    }
+
+    /* Other sections */
+    .cols { display: grid; gap: 28px; }
+    @media(min-width: 900px) { .cols { grid-template-columns: 1.4fr 1fr; } }
+    .panel {
+      background: var(--bg-soft);
+      border: 1px solid var(--chip-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+      text-align: center;
+      color: var(--muted);
+    }
   </style>
-  /* Music layout — single column */
-#music .wrap { max-width: 1200px; margin: 0 auto; }
-.music-card { margin-bottom: 24px; }
-.music-card iframe {
-  width: 100%;
-  height: 420px;
-  border: 0;
-  border-radius: 18px;
-}
-
-/* If you still have a .music-grid from earlier, neutralize it */
-.music-grid { display: block; grid-template-columns: 1fr !important; gap: 0 !important; }
-
 </head>
+
 <body>
 
-  <header>
-    <div class="wrap nav">
+  <header class="nav">
+    <div class="wrap inner">
       <div class="brand">KID FOURTEEN</div>
       <nav class="links">
         <a href="#music">Music</a>
         <a href="#video">Video</a>
         <a href="#albums">Albums</a>
+        <a href="#shows">Shows</a>
+        <a href="#bio">Bio</a>
+        <a href="#press">Press</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO with hero.jpg -->
   <section class="hero">
-    <div class="wrap">
-      <h1 class="title">KID FOURTEEN</h1>
-      <div class="chips">
-        <a class="chip" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
-        <a class="chip" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
-        <a class="chip" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
-        <a class="chip" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
-        <a class="chip" href="https://www.instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="chip" href="https://www.facebook.com/kidfourteen" target="_blank" rel="noopener">Facebook</a>
+    <div class="content wrap">
+      <h1>KID FOURTEEN</h1>
+      <div class="pills">
+        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank">Bandcamp</a>
+        <a class="pill" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank">Spotify</a>
+        <a class="pill" href="https://www.youtube.com/@kidfourteen" target="_blank">YouTube</a>
+        <a class="pill" href="https://soundcloud.com/kidfourteen" target="_blank">SoundCloud</a>
+        <a class="pill" href="https://instagram.com/kidfourteen" target="_blank">Instagram</a>
+        <a class="pill" href="https://facebook.com/kidfourteen" target="_blank">Facebook</a>
       </div>
     </div>
   </section>
 
-  <!-- Music -->
-<section id="music">
-  <div class="wrap">
-    <h2>Music</h2>
-
-    <div class="music-card">
-      <!-- Spotify: Kid Fourteen artist embed -->
-      <iframe
-        style="border-radius:18px"
-        src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator&theme=0"
-        width="100%"
-        height="420"
-        frameborder="0"
+  <section id="music" class="section">
+    <div class="wrap">
+      <h2>Music</h2>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
+        width="100%" height="352" frameborder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-      </iframe>
+        loading="lazy"></iframe>
     </div>
+  </section>
 
-    <!-- If you want to add a second embed later, put it here.
-    <div class="music-card">
-      <iframe
-        src="https://bandcamp.com/EmbeddedPlayer/album=ALBUM_ID/size=large/bgcol=333333/linkcol=ffffff/tracklist=false/artwork=small/transparent=true/"
-        style="border:0; width:100%; height:420px;"
-        seamless>
-      </iframe>
-    </div>
-    -->
-  </div>
-</section>
-  <!-- VIDEO -->
-  <section id="video">
+  <section id="video" class="section">
     <div class="wrap">
       <h2>Video</h2>
-      <div class="grid">
-        <div class="col-6 card">
-          <iframe loading="lazy" width="100%" height="340"
-            src="https://www.youtube.com/embed/oMM0ygCcLv8"
-            title="Kid Fourteen — The Mind (Premiere)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <div class="col-6 card">
-          <iframe loading="lazy" width="100%" height="340"
-            src="https://www.youtube.com/embed/-jTtAfME750?start=1"
-            title="Kid Fourteen — Live at Supersonic, Paris" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+      <div class="cols">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8"
+          frameborder="0" allowfullscreen loading="lazy"></iframe>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750"
+          frameborder="0" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ALBUMS -->
-  <section id="albums">
+  <section id="albums" class="section">
     <div class="wrap">
       <h2>Albums</h2>
-      <div class="grid">
-        <!-- cover.png -> A Brief Emotional Dragon -->
-        <div class="col-6 card">
-          <a href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
-            <img src="cover.png" alt="A Brief Emotional Dragon" loading="lazy" />
-            <div class="label">A Brief Emotional Dragon</div>
-          </a>
-        </div>
-        <!-- cover2.jpg -> Blood Thick Silence -->
-        <div class="col-6 card">
-          <a href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
-            <img src="cover2.jpg" alt="Blood Thick Silence" loading="lazy" />
-            <div class="label">Blood Thick Silence</div>
-          </a>
-        </div>
-        <!-- cover3.jpg -> Dream Kids Never Sleep -->
-        <div class="col-6 card">
-          <a href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
-            <img src="cover3.jpg" alt="Dream Kids Never Sleep" loading="lazy" />
-            <div class="label">Dream Kids Never Sleep</div>
-          </a>
-        </div>
-        <!-- cover4.jpg -> Heart Is a Malady -->
-        <div class="col-6 card">
-          <a href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
-            <img src="cover4.jpg" alt="Heart Is a Malady" loading="lazy" />
-            <div class="label">Heart Is a Malady</div>
-          </a>
-        </div>
-        <!-- cover5.png -> Love -->
-        <div class="col-6 card">
-          <a href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
-            <img src="cover5.png" alt="Love" loading="lazy" />
-            <div class="label">Love</div>
-          </a>
-        </div>
+      <div class="album-grid">
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank">
+          <img src="cover.png" alt="A Brief Emotional Dragon">
+          <div class="label">A Brief Emotional Dragon</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank">
+          <img src="cover2.jpg" alt="Blood Thick Silence">
+          <div class="label">Blood Thick Silence</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank">
+          <img src="cover3.jpg" alt="Dream Kids Never Sleep">
+          <div class="label">Dream Kids Never Sleep</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank">
+          <img src="cover4.jpg" alt="Heart Is a Malady">
+          <div class="label">Heart Is a Malady</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/love" target="_blank">
+          <img src="cover5.png" alt="Love">
+          <div class="label">Love</div>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
+  <section id="shows" class="section">
+    <div class="wrap">
+      <h2>Shows</h2>
+      <div class="panel">
+        <h3>Upcoming</h3>
+        <p class="muted">No upcoming shows announced.</p>
+        <h3 style="margin-top:24px">Past Shows</h3>
+        <ul>
+          <li>Supersonic, Paris — 2022</li>
+          <li>Mutek Montréal — 2021</li>
+          <li>Beirut, Station — 2019</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="bio" class="section">
+    <div class="wrap">
+      <h2>Bio</h2>
+      <p>Kid Fourteen is the musical alias of Khodor Ellaik — a Lebanese musician, composer, and sound artist based in Paris. His work blends experimental pop, noise, and emotional songwriting, bridging tenderness and rupture. Over the years, he has released multiple albums exploring love, trauma, and absolution.</p>
+    </div>
+  </section>
+
+  <section id="press" class="section">
+    <div class="wrap">
+      <h2>Press</h2>
+      <div class="panel">
+        <p>Featured by Scene Noise, Tiny Mix Tapes, and Bandcamp Daily.</p>
+        <p><a href="KidFourteen Presskit (2026)_compressed.pdf" download>Download full Press Kit (PDF)</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
     <div class="wrap">
       <h2>Contact</h2>
-      <div class="contact-row">
-        <a class="pill" href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
-        <a class="pill" href="https://www.instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+      <p>For booking, press, and general inquiries:</p>
+      <p><strong>Email:</strong> kidfourteen14@gmail.com</p>
+      <div class="pills">
+        <a class="pill" href="https://instagram.com/kidfourteen" target="_blank">Instagram</a>
+        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank">Bandcamp</a>
       </div>
     </div>
   </section>
 
   <footer>
-    © <script>document.write(new Date().getFullYear())</script> Kid Fourteen
+    <div class="wrap">
+      © 2025 Kid Fourteen
+    </div>
   </footer>
 </body>
 </html>
