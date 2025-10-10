@@ -28,9 +28,18 @@
     nav a:hover{opacity:1}
 
     /* Hero */
-    .hero{position:relative;min-height:56vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);background:#000 url("./cover2.jpg") center/cover no-repeat}
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65))}
-    .hero .copy{position:relative;padding:72px 0 48px}
+    .hero{
+      position:relative;min-height:56vh;display:flex;align-items:flex-end;border-bottom:1px solid var(--line);
+      background:#000 url("./cover2.jpg") center/cover no-repeat;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65));
+      pointer-events:none;      /* allow clicks through overlay */
+      z-index:0;
+    }
+    .hero .copy{
+      position:relative;padding:72px 0 48px;z-index:1; /* ensure buttons are on top */
+    }
     h1{margin:0;font-size:clamp(30px,6vw,56px);line-height:1.06;letter-spacing:.02em}
     .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-weight:700;transition:transform .15s ease,border-color .15s ease,background .15s ease}
@@ -50,7 +59,7 @@
 
     /* Covers */
     .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .art{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.22);background:#0d0f13}
+    .art{border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.22);background:#0d0f13;border:1px solid var(--line)}
     .art img{display:block;width:100%;height:auto;transition:transform .25s ease,opacity .25s ease}
     .art:hover img{transform:scale(1.03);opacity:.96}
 
@@ -110,6 +119,7 @@
             title="Spotify: Kid Fourteen"></iframe>
         </div>
         <div class="ratio">
+          <!-- Replace this embed with your real Bandcamp album/track when ready -->
           <iframe
             src="https://bandcamp.com/EmbeddedPlayer/album=0/size=large/bgcol=0c0e12/linkcol=de270f/artwork=small/transparent=true/"
             loading="lazy" title="Bandcamp"></iframe>
@@ -144,11 +154,21 @@
     <div class="wrap">
       <h2>Covers & Artwork</h2>
       <div class="grid">
-        <figure class="art"><img src="./cover.png" alt="Cover"></figure>
-        <figure class="art"><img src="./cover2.jpg" alt="Cover 2"></figure>
-        <figure class="art"><img src="./cover3.jpg" alt="Cover 3"></figure>
-        <figure class="art"><img src="./cover4.jpg" alt="Cover 4"></figure>
-        <figure class="art"><img src="./cover5.png" alt="Cover 5"></figure>
+        <a class="art" href="./cover.png" target="_blank" rel="noopener">
+          <img src="./cover.png" alt="Cover" loading="lazy">
+        </a>
+        <a class="art" href="./cover2.jpg" target="_blank" rel="noopener">
+          <img src="./cover2.jpg" alt="Cover 2" loading="lazy">
+        </a>
+        <a class="art" href="./cover3.jpg" target="_blank" rel="noopener">
+          <img src="./cover3.jpg" alt="Cover 3" loading="lazy">
+        </a>
+        <a class="art" href="./cover4.jpg" target="_blank" rel="noopener">
+          <img src="./cover4.jpg" alt="Cover 4" loading="lazy">
+        </a>
+        <a class="art" href="./cover5.png" target="_blank" rel="noopener">
+          <img src="./cover5.png" alt="Cover 5" loading="lazy">
+        </a>
       </div>
     </div>
   </section>
@@ -169,8 +189,8 @@
       <!-- Past -->
       <div class="panel" id="past" role="tabpanel" aria-labelledby="t-past">
         <ul class="shows" id="past-shows">
-          <!-- PASTE PAST DATES HERE  — example format:
-          <li><span class="date">2024-06-02</span><span class="city">Paris, FR</span><span class="venue">Venue name</span></li>
+          <!-- PASTE PAST DATES HERE — example:
+          <li><span class="date">2024-06-02</span><span class="city">Paris, FR</span><span class="venue">Supersonic</span></li>
           <li><span class="date">2023-11-18</span><span class="city">Beirut, LB</span><span class="venue">Venue name</span></li>
           -->
         </ul>
