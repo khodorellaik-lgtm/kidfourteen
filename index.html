@@ -7,121 +7,6 @@
   <meta name="color-scheme" content="dark" />
 
   <style>
-/* grid */
-.press-grid {
-  display: grid;
-  gap: 32px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  margin-top: 40px;
-}
-
-/* glass cards with ambient shimmer */
-.press-card {
-  position: relative;
-  background: rgba(18, 24, 33, 0.45);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px) saturate(160%);
-  -webkit-backdrop-filter: blur(10px) saturate(160%);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
-  overflow: hidden;
-}
-
-.press-card::after {
-  content: "";
-  position: absolute;
-  top: -150%;
-  left: -150%;
-  width: 400%;
-  height: 400%;
-  background: linear-gradient(120deg, transparent 0%, rgba(127,234,209,0.1) 50%, transparent 100%);
-  opacity: 0;
-  transform: rotate(0deg);
-  animation: shimmerMove 14s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes shimmerMove {
-  0%, 100% { opacity: 0; transform: translate(-100%, -100%) rotate(15deg); }
-  25% { opacity: 0.08; transform: translate(30%, 30%) rotate(15deg); }
-  50% { opacity: 0.05; transform: translate(100%, 100%) rotate(15deg); }
-  75% { opacity: 0.08; transform: translate(30%, 30%) rotate(15deg); }
-}
-
-.press-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(127,234,209,0.25);
-  border-color: var(--accent);
-  background: rgba(18, 24, 33, 0.65);
-}
-
-
-/* glowing glass badges */
-.press-badge {
-  display: inline-block;
-  background: rgba(127,234,209,0.1);
-  border: 1px solid rgba(127,234,209,0.25);
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 14px;
-  backdrop-filter: blur(6px) saturate(180%);
-  -webkit-backdrop-filter: blur(6px) saturate(180%);
-  box-shadow: 0 0 8px rgba(127,234,209,0.1);
-  transition: background .4s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease, transform .25s ease;
-}
-.press-badge:hover,
-.press-badge:focus {
-  background: rgba(127,234,209,0.3);
-  color: var(--bg);
-  border-color: var(--accent);
-  box-shadow: 0 0 14px rgba(127,234,209,0.4);
-  transform: translateY(-1px);
-  outline: none;
-}
-
-/* quotes */
-.press-card blockquote {
-  font-style: italic;
-  font-size: 15px;
-  color: var(--text);
-  margin: 0;
-  line-height: 1.6;
-  position: relative;
-}
-.press-card blockquote::before {
-  content: "“";
-  font-size: 42px;
-  line-height: 0;
-  position: absolute;
-  left: -8px;
-  top: -8px;
-  color: var(--accent);
-  opacity: .25;
-}
-
-/* source line */
-.press-card .source {
-  text-align: right;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 16px;
-}
-.press-card .source a {
-  color: var(--muted);
-  transition: color .3s ease;
-}
-.press-card .source a:hover {
-  color: var(--accent);
-
-}
-
     :root{
       --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
       --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
@@ -201,7 +86,6 @@
 
     .bio-card{background:var(--bg-soft);border:1px solid var(--chip-border);border-radius:16px;padding:24px 26px;
       box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04);backdrop-filter:blur(6px)}
-
     .prose p{margin:0 0 14px 0}
     .prose em{font-style:italic}
 
@@ -226,6 +110,80 @@
     .reveal{opacity:1;transform:none}
     body.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;transition-delay:var(--d,0s)}
     body.js .reveal.is-visible{opacity:1;transform:none}
+
+    /* ===================== PRESS (glass + shimmer + tools) ===================== */
+    .press-seen{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px;margin-bottom:14px;color:var(--muted);font-size:13px}
+    .press-seen .seen-badge{
+      display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(127,234,209,.1);
+      border:1px solid rgba(127,234,209,.25);color:var(--accent);text-transform:uppercase;font-weight:700;letter-spacing:.02em;
+      backdrop-filter:blur(6px) saturate(180%);-webkit-backdrop-filter:blur(6px) saturate(180%);
+      transition:background .3s ease,color .3s ease,border-color .3s ease,transform .2s ease
+    }
+    .press-seen .seen-badge:hover{background:var(--accent);color:var(--bg);border-color:var(--accent);transform:translateY(-1px)}
+
+    .press-toolbar{display:flex;gap:10px;margin:18px 0 6px 0}
+    .press-toggle{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);
+      padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;transition:background .25s,border-color .25s,transform .2s}
+    .press-toggle:hover{background:rgba(255,255,255,.08);border-color:var(--accent);transform:translateY(-1px)}
+    .press-toggle.active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
+
+    .press-grid{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:16px}
+    .press-grid.compact{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .press-grid.compact .press-card{padding:22px}
+
+    /* Masonry */
+    .press-grid.masonry{display:block;column-count:3;column-gap:24px}
+    @media (max-width:900px){.press-grid.masonry{column-count:2}}
+    @media (max-width:600px){.press-grid.masonry{column-count:1}}
+    .press-grid.masonry .press-card{display:inline-block;width:100%;break-inside:avoid;margin:0 0 24px}
+
+    /* Featured */
+    .press-card.featured{grid-column:1 / -1}
+    @media (min-width:1024px){
+      .press-card.featured{display:grid;grid-template-columns:1.2fr .8fr;align-items:start;gap:24px}
+      .press-card.featured blockquote{font-size:16px}
+    }
+
+    /* Glass cards + shimmer */
+    .press-card{position:relative;background:rgba(18,24,33,.45);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;
+      box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.05);
+      backdrop-filter:blur(10px) saturate(160%);-webkit-backdrop-filter:blur(10px) saturate(160%);
+      transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;overflow:hidden}
+    .press-card::after{content:"";position:absolute;top:-150%;left:-150%;width:400%;height:400%;
+      background:linear-gradient(120deg,transparent 0%,rgba(127,234,209,.1) 50%,transparent 100%);
+      opacity:0;animation:shimmerMove 14s linear infinite;pointer-events:none}
+    @keyframes shimmerMove{
+      0%,100%{opacity:0;transform:translate(-100%,-100%) rotate(15deg)}
+      25%{opacity:.08;transform:translate(30%,30%) rotate(15deg)}
+      50%{opacity:.05;transform:translate(100%,100%) rotate(15deg)}
+      75%{opacity:.08;transform:translate(30%,30%) rotate(15deg)}
+    }
+    .press-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.55),0 0 0 1px rgba(127,234,209,.25);
+      border-color:var(--accent);background:rgba(18,24,33,.65)}
+
+    /* Badges (links) */
+    .press-badge{display:inline-block;background:rgba(127,234,209,.1);border:1px solid rgba(127,234,209,.25);color:var(--accent);
+      font-size:13px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px;
+      backdrop-filter:blur(6px) saturate(180%);-webkit-backdrop-filter:blur(6px) saturate(180%);
+      box-shadow:0 0 8px rgba(127,234,209,.1);
+      transition:background .4s,color .3s,border-color .3s,box-shadow .3s,transform .25s}
+    .press-badge:hover,.press-badge:focus{background:rgba(127,234,209,.3);color:var(--bg);border-color:var(--accent);box-shadow:0 0 14px rgba(127,234,209,.4);transform:translateY(-1px);outline:none}
+
+    /* Quotes */
+    .press-card blockquote{font-style:italic;font-size:15px;color:var(--text);margin:0;line-height:1.6;position:relative}
+    .press-card blockquote::before{content:"“";font-size:42px;line-height:0;position:absolute;left:-8px;top:-8px;color:var(--accent);opacity:.25}
+
+    /* Source line */
+    .press-card .source{text-align:right;font-size:13px;color:var(--muted);margin-top:16px}
+    .press-card .source a{color:var(--muted);transition:color .3s}
+    .press-card .source a:hover{color:var(--accent)}
+
+    /* Clamp + toggle */
+    .press-card blockquote.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;max-height:calc(1.6em*4 + 6px)}
+    .press-card.expanded blockquote.clamp{-webkit-line-clamp:unset;max-height:none}
+    .quote-more{margin-top:12px;background:none;border:0;color:var(--link);font-weight:700;cursor:pointer;padding:0;text-decoration:none}
+    .quote-more:hover{opacity:.85}
+    /* ===================== /PRESS ===================== */
   </style>
 </head>
 
@@ -365,54 +323,122 @@
   </section>
 
   <!-- PRESS -->
- <section id="press" class="wrap section reveal">
-  <h2>Press</h2>
+  <section id="press" class="section">
+    <div class="wrap">
+      <h2>Press</h2>
 
-  <div class="press-grid">
-    <article class="press-card reveal">
-      <div class="press-badge">Bandcamp Daily</div>
-      <blockquote>“Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats, pulsing synth arpeggiators, and metallic guitar squall.”</blockquote>
-      <p class="source">— Bandcamp Daily</p>
-    </article>
+      <!-- As-Seen-In strip -->
+      <div class="press-seen reveal" style="--d:.02s;">
+        <span>As seen in:</span>
+        <a href="YOUR_BANDCAMP_DAILY_URL" target="_blank" rel="noopener" class="seen-badge">Bandcamp Daily</a>
+        <a href="YOUR_TINY_MIX_TAPES_URL" target="_blank" rel="noopener" class="seen-badge">Tiny Mix Tapes</a>
+        <a href="YOUR_ARAB_NEWS_URL" target="_blank" rel="noopener" class="seen-badge">Arab News</a>
+        <a href="YOUR_SCENE_NOISE_URL" target="_blank" rel="noopener" class="seen-badge">Scene Noise</a>
+        <a href="YOUR_ROCK_CULT_URL" target="_blank" rel="noopener" class="seen-badge">Rock Cult</a>
+        <a href="YOUR_OBSCURE_SOUND_URL_1" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
+      </div>
 
-    <article class="press-card reveal">
-      <div class="press-badge">Tiny Mix Tapes</div>
-      <blockquote>“It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor — Kid Fourteen is the last man dancing to an illusory tune in his head.”</blockquote>
-      <p class="source">— Tiny Mix Tapes</p>
-    </article>
+      <!-- controls -->
+      <div class="press-toolbar reveal" style="--d:.05s;">
+        <button type="button" class="press-toggle" data-action="compact">Compact view</button>
+        <button type="button" class="press-toggle" data-action="masonry">Masonry layout</button>
+      </div>
 
-    <article class="press-card reveal">
-      <div class="press-badge">Arab News</div>
-      <blockquote>“The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”</blockquote>
-      <p class="source">— Arab News</p>
-    </article>
+      <!-- grid -->
+      <div class="press-grid reveal" id="pressGrid" style="--d:.08s;">
 
-    <article class="press-card reveal">
-      <div class="press-badge">Scene Noise</div>
-      <blockquote>“The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”</blockquote>
-      <p class="source">— Scene Noise</p>
-    </article>
+        <!-- Featured -->
+        <article class="press-card featured">
+          <a class="press-badge" href="YOUR_BANDCAMP_DAILY_URL" target="_blank" rel="noopener">Bandcamp Daily</a>
+          <blockquote class="clamp">
+            “Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own
+            and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats,
+            pulsing synth arpeggiators, and metallic guitar squall.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_BANDCAMP_DAILY_URL" target="_blank" rel="noopener">Bandcamp Daily</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
 
-    <article class="press-card reveal">
-      <div class="press-badge">Rock Cult</div>
-      <blockquote>“Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together become many times stronger.”</blockquote>
-      <p class="source">— Rock Cult</p>
-    </article>
+        <article class="press-card">
+          <a class="press-badge" href="YOUR_TINY_MIX_TAPES_URL" target="_blank" rel="noopener">Tiny Mix Tapes</a>
+          <blockquote class="clamp">
+            “It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor —
+            Kid Fourteen is the last man dancing to an illusory tune in his head.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_TINY_MIX_TAPES_URL" target="_blank" rel="noopener">Tiny Mix Tapes</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
 
-    <article class="press-card reveal">
-      <div class="press-badge">Obscure Sound</div>
-      <blockquote>“Khodor Ellaik, aka Kid Fourteen, is a Paris-based Lebanese musician and songwriter who has been intriguing listeners for over a decade with his unique style of mixing Pop, Post-Punk, Noise, experimental Jazz and Electronic Music. The 12-track project is the artist’s personal declaration of survival and autobiography, in all its abstraction.”</blockquote>
-      <p class="source">— Obscure Sound</p>
-    </article>
+        <article class="press-card">
+          <a class="press-badge" href="YOUR_ARAB_NEWS_URL" target="_blank" rel="noopener">Arab News</a>
+          <blockquote class="clamp">
+            “The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_ARAB_NEWS_URL" target="_blank" rel="noopener">Arab News</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
 
-    <article class="press-card reveal">
-      <div class="press-badge">Obscure Sound</div>
-      <blockquote>“The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure. The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”</blockquote>
-      <p class="source">— Obscure Sound</p>
-    </article>
-  </div>
-</section>
+        <article class="press-card">
+          <a class="press-badge" href="YOUR_SCENE_NOISE_URL" target="_blank" rel="noopener">Scene Noise</a>
+          <blockquote class="clamp">
+            “The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting
+            aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_SCENE_NOISE_URL" target="_blank" rel="noopener">Scene Noise</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
 
+        <article class="press-card">
+          <a class="press-badge" href="YOUR_ROCK_CULT_URL" target="_blank" rel="noopener">Rock Cult</a>
+          <blockquote class="clamp">
+            “Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together
+            become many times stronger.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_ROCK_CULT_URL" target="_blank" rel="noopener">Rock Cult</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="YOUR_OBSCURE_SOUND_URL_1" target="_blank" rel="noopener">Obscure Sound</a>
+          <blockquote class="clamp">
+            “Khodor Ellaik, aka Kid Fourteen, is a Paris-based Lebanese musician and songwriter who has been intriguing listeners for over a decade
+            with his unique style of mixing Pop, Post-Punk, Noise, experimental Jazz and Electronic Music. The 12-track project is the artist’s
+            personal declaration of survival and autobiography, in all its abstraction.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_OBSCURE_SOUND_URL_1" target="_blank" rel="noopener">Obscure Sound</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="YOUR_OBSCURE_SOUND_URL_2" target="_blank" rel="noopener">Obscure Sound</a>
+          <blockquote class="clamp">
+            “The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure.
+            The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”
+          </blockquote>
+          <p class="source">— <a href="YOUR_OBSCURE_SOUND_URL_2" target="_blank" rel="noopener">Obscure Sound</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>For booking, press, and general inquiries:</p>
+      <p><strong>Email:</strong> <a href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a></p>
+      <div class="pills">
+        <a class="pill" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2025 Kid Fourteen</div>
+  </footer>
 
   <script>
     document.body.classList.add('js');
@@ -438,6 +464,40 @@
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
       }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
       els.forEach(el => io.observe(el));
+    })();
+
+    // Press controls: compact + masonry + more/less
+    (() => {
+      const grid = document.getElementById('pressGrid');
+      if (!grid) return;
+
+      document.querySelectorAll('.press-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const action = btn.dataset.action;
+          if (action === 'compact') {
+            grid.classList.toggle('compact');
+            btn.classList.toggle('active');
+          }
+          if (action === 'masonry') {
+            grid.classList.toggle('masonry');
+            btn.classList.toggle('active');
+          }
+        });
+      });
+
+      grid.querySelectorAll('.press-card').forEach(card => {
+        const btn = card.querySelector('.quote-more');
+        const quote = card.querySelector('blockquote');
+        if (!btn || !quote) return;
+
+        const needsClamp = quote.textContent.trim().length > 180;
+        if (!needsClamp) { btn.style.display = 'none'; return; }
+
+        btn.addEventListener('click', () => {
+          card.classList.toggle('expanded');
+          btn.textContent = card.classList.contains('expanded') ? 'Less' : 'More';
+        });
+      });
     })();
   </script>
 </body>
