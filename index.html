@@ -776,30 +776,42 @@
         });
       });
     })();
+    
+// Shows tabs
+(() => {
+  const toolbar = document.querySelector('#shows .press-toolbar');
+  if(!toolbar) return;
 
-    // Shows tabs
-    (() => {
-      const toolbar = document.querySelector('#shows .press-toolbar');
-      if(!toolbar) return;
-      const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
-      const btns = Array.from(toolbar.querySelectorAll('.press-toggle'));
+  const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
+  const btns  = Array.from(toolbar.querySelectorAll('.press-toggle'));
 
-      function setTab(name){
-        panes.forEach(p => p.hidden = p.dataset.pane !== name);
-        btns.forEach(b => {
-          const active = b.dataset.tab === name;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-selected', String(active));
-        });
-        // Update hash to allow deep-linking
-        if (history.replaceState) {
-          history.replaceState(null, '', name === 'past' ? '#shows/past' : '#shows');
-        }
+  function setTab(name, { updateHash = false } = {}) {
+    panes.forEach(p => p.hidden = p.dataset.pane !== name);
+    btns.forEach(b => {
+      const active = b.dataset.tab === name;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', String(active));
+    });
+
+    // Update URL only when you click — not when you load the page
+    if (updateHash && history.replaceState) {
+      if (name === 'past') {
+        history.replaceState(null, '', '#shows/past');
+      } else {
+        history.replaceState(null, '', location.pathname + location.search);
       }
+    }
+  }
 
-      btns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
-      setTab(location.hash && /#shows\/past/i.test(location.hash) ? 'past' : 'upcoming');
-    })();
+  // Clicking buttons updates the tab + URL
+  btns.forEach(b => b.addEventListener('click', () =>
+    setTab(b.dataset.tab, { updateHash: true })
+  ));
+
+  // When page loads, show correct tab but don't add "#shows"
+  const initial = (location.hash && /#shows\/past/i.test(location.hash)) ? 'past' : 'upcoming';
+  setTab(initial, { updateHash: false });
+})();
 
     // Full Show History toggle
     (() => {
