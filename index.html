@@ -709,6 +709,13 @@
 
   <script>
     document.body.classList.add('js');
+    // Guard: if someone (or cached JS) forces "#shows" on load, clear it
+(() => {
+  if (location.hash === '#shows' && history.replaceState) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+})();
+
 
     // Reveal-on-scroll: make .reveal visible when in view (fixes hidden Bio/Press)
     (() => {
