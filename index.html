@@ -8,23 +8,34 @@
 
   <style>
     :root{
-      --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
-      --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
-      --nav-h:64px;
-    }
+  --bg:#0f141b;
+  --bg-soft:#121821;
+  --text:#e6eaef; --muted:#9fb0c3;
+  --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
+  --nav-h:64px;
+}
 
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  background:var(--bg);           /* back to flat black */
+  color:var(--text);
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+}
+
+
+
     a{color:var(--link);text-decoration:none}
     a:hover{opacity:.9}
+    :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:.25rem}
     ::selection{background:rgba(127,234,209,.22)}
-    section[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
+
     .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-    .section{padding:64px 0}
+    .section{padding:64px 0; content-visibility:auto; contain-intrinsic-size:800px}
     h1,h2,h3{margin:0 0 .6em}
     h1{font-size:clamp(40px,6vw,72px);line-height:1.05}
     h2{font-size:clamp(26px,3vw,36px)}
+    section[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 
     /* Nav */
     .nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(8px);
@@ -32,24 +43,31 @@
       border-bottom:1px solid rgba(255,255,255,.05)}
     .nav .inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
     .brand{font-weight:800;letter-spacing:.12em}
-    .links{display:flex;gap:22px}
+    .links{display:flex;gap:22px;flex-wrap:wrap}
     .links a{color:var(--text);opacity:.85}
     .links a:hover{opacity:1}
 
     /* Hero */
-    .hero{position:relative;min-height:75vh;display:grid;place-items:center;text-align:center;overflow:hidden;background:#0c1219;isolation:isolate}
-    .hero-bg{position:absolute;inset:-10vh -10vw;background:#0c1219 url('hero.jpg') center/cover no-repeat;
-      transform:translate3d(0,var(--parallax,0px),0);will-change:transform;transition:transform .08s ease-out;z-index:-1}
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9));z-index:0;pointer-events:none}
-    .hero .content{position:relative;z-index:2}
-    .hero h1{font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-      text-shadow:0 0 14px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
-      animation:glowFade 3s ease-in-out infinite alternate}
-    @keyframes glowFade{
-      0%{text-shadow:0 0 10px rgba(127,234,209,.28),0 0 24px rgba(127,234,209,.18),0 0 48px rgba(127,234,209,.10);opacity:.98}
-      100%{text-shadow:0 0 20px rgba(127,234,209,.62),0 0 44px rgba(127,234,209,.34),0 0 84px rgba(127,234,209,.16);opacity:1}
+.hero{
+  position:relative;min-height:75vh;display:grid;place-items:center;
+  text-align:center;overflow:hidden;background:#0c1219;   /* back to solid */
+}
+.hero-bg{
+  position:absolute;inset:-10vh -10vw;
+  background:#0c1219 url('hero.jpg') center/cover no-repeat;
+  transform:translate3d(0,var(--parallax,0px),0);
+  will-change:transform;
+  transition:transform .08s ease-out;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9));
+}
+
+
+    @media (prefers-reduced-motion:reduce){
+      .hero h1{animation:none}
     }
-    @media (prefers-reduced-motion:reduce){.hero h1{animation:none}}
 
     .pills{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:22px}
     .pill{background:var(--chip);border:1px solid var(--chip-border);padding:12px 16px;border-radius:18px;font-weight:600;
@@ -91,6 +109,7 @@
     .prose p{margin:0 0 14px 0}
     .prose em{font-style:italic}
 
+    /* Big K (refined) */
     .bio-card .prose .dropcap:first-letter{
       float:left;font-weight:800;font-family:Georgia,"Times New Roman",serif;
       font-size:clamp(60px,9vw,95px);line-height:.85;padding:6px 10px 0 0;margin-right:12px;
@@ -100,22 +119,24 @@
       text-shadow:0 0 18px rgba(127,234,209,.25);letter-spacing:-0.02em;
     }
 
+    /* Album bubbles in bio */
     .bio-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
     .bio-chips .chip{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-border);
       font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;color:var(--text);
       transition:transform .16s ease,background .16s ease,border-color .16s ease,color .16s ease}
     .bio-chips .chip:hover{transform:translateY(-2px);background:#1e293b;border-color:var(--accent);color:var(--accent)}
 
+    /* Reveal */
     .reveal{opacity:1;transform:none}
     body.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;transition-delay:var(--d,0s)}
     body.js .reveal.is-visible{opacity:1;transform:none}
 
-    /* ===================== PRESS ===================== */
+    /* ===================== PRESS (glass + shimmer + tools) ===================== */
     .press-seen{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px;margin-bottom:14px;color:var(--muted);font-size:13px}
     .press-seen .seen-badge{
       display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(127,234,209,.1);
       border:1px solid rgba(127,234,209,.25);color:var(--accent);text-transform:uppercase;font-weight:700;letter-spacing:.02em;
-      backdrop-filter:blur(6px) saturate(180%);
+      backdrop-filter:blur(6px) saturate(180%);-webkit-backdrop-filter:blur(6px) saturate(180%);
       transition:background .3s ease,color .3s ease,border-color .3s ease,transform .2s ease
     }
     .press-seen .seen-badge:hover{background:var(--accent);color:var(--bg);border-color:var(--accent);transform:translateY(-1px)}
@@ -124,26 +145,29 @@
     .press-toggle{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);
       padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;transition:background .25s,border-color .25s,transform .2s}
     .press-toggle:hover{background:rgba(255,255,255,.08);border-color:var(--accent);transform:translateY(-1px)}
-    .press-toggle.active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
+    .press-toggle[aria-pressed="true"], .press-toggle.active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
 
     .press-grid{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:16px}
     .press-grid.compact{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
     .press-grid.compact .press-card{padding:22px}
 
+    /* Masonry */
     .press-grid.masonry{display:block;column-count:3;column-gap:24px}
     @media (max-width:900px){.press-grid.masonry{column-count:2}}
     @media (max-width:600px){.press-grid.masonry{column-count:1}}
     .press-grid.masonry .press-card{display:inline-block;width:100%;break-inside:avoid;margin:0 0 24px}
 
+    /* Featured */
     .press-card.featured{grid-column:1 / -1}
     @media (min-width:1024px){
       .press-card.featured{display:grid;grid-template-columns:1.2fr .8fr;align-items:start;gap:24px}
       .press-card.featured blockquote{font-size:16px}
     }
 
+    /* Glass cards + shimmer */
     .press-card{position:relative;background:rgba(18,24,33,.45);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;
       box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.05);
-      backdrop-filter:blur(10px) saturate(160%);
+      backdrop-filter:blur(10px) saturate(160%);-webkit-backdrop-filter:blur(10px) saturate(160%);
       transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;overflow:hidden}
     .press-card::after{content:"";position:absolute;top:-150%;left:-150%;width:400%;height:400%;
       background:linear-gradient(120deg,transparent 0%,rgba(127,234,209,.1) 50%,transparent 100%);
@@ -157,26 +181,32 @@
     .press-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.55),0 0 0 1px rgba(127,234,209,.25);
       border-color:var(--accent);background:rgba(18,24,33,.65)}
 
+    /* Badges (links) */
     .press-badge{display:inline-block;background:rgba(127,234,209,.1);border:1px solid rgba(127,234,209,.25);color:var(--accent);
       font-size:13px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px;
-      backdrop-filter:blur(6px) saturate(180%);
+      backdrop-filter:blur(6px) saturate(180%);-webkit-backdrop-filter:blur(6px) saturate(180%);
       box-shadow:0 0 8px rgba(127,234,209,.1);
       transition:background .4s,color .3s,border-color .3s,box-shadow .3s,transform .25s}
     .press-badge:hover,.press-badge:focus{background:rgba(127,234,209,.3);color:var(--bg);border-color:var(--accent);box-shadow:0 0 14px rgba(127,234,209,.4);transform:translateY(-1px);outline:none}
 
+    /* Quotes */
     .press-card blockquote{font-style:italic;font-size:15px;color:var(--text);margin:0;line-height:1.6;position:relative}
     .press-card blockquote::before{content:"“";font-size:42px;line-height:0;position:absolute;left:-8px;top:-8px;color:var(--accent);opacity:.25}
 
+    /* Source line */
     .press-card .source{text-align:right;font-size:13px;color:var(--muted);margin-top:16px}
     .press-card .source a{color:var(--muted);transition:color .3s}
     .press-card .source a:hover{color:var(--accent)}
 
+    /* Clamp + toggle */
     .press-card blockquote.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;max-height:calc(1.6em*4 + 6px)}
     .press-card.expanded blockquote.clamp{-webkit-line-clamp:unset;max-height:none}
     .quote-more{margin-top:12px;background:none;border:0;color:var(--link);font-weight:700;cursor:pointer;padding:0;text-decoration:none}
     .quote-more:hover{opacity:.85}
 
+    /* Iframe polish */
     iframe[loading="lazy"]{border:0;background:rgba(255,255,255,.03);border-radius:14px}
+  
 
     /* ===================== CUSTOM PLAYER ===================== */
     .music-switch{display:inline-flex;gap:10px;margin:10px 0 18px}
@@ -210,6 +240,7 @@
       .player-shell{grid-template-columns:1fr;}
       .vol{width:100px}
     }
+    /* ===================== /CUSTOM PLAYER ===================== */
   </style>
 </head>
 
@@ -246,6 +277,7 @@
   </section>
 
   <!-- MUSIC -->
+    <!-- MUSIC -->
   <section id="music" class="section">
     <div class="wrap">
       <h2>Music</h2>
@@ -278,37 +310,41 @@
           </div>
         </div>
 
-        <ul class="playlist" id="playlist" aria-label="Track list">
-          <li class="track is-active"
-              data-src="audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3"
-              data-title="Whirlwind Blues"
-              data-cover="cover3.jpg">Whirlwind Blues</li>
+     <ul class="playlist" id="playlist" aria-label="Track list">
+       
+ <ul class="playlist" id="playlist" aria-label="Track list">
+  <li class="track is-active"
+      data-src="audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3"
+      data-title="Whirlwind Blues"
+      data-cover="cover3.jpg">Whirlwind Blues</li>
 
-          <li class="track"
-              data-src="audio/Kid Fourteen - A Brief Emotional Dragon - 05 Learning How to Die.mp3"
-              data-title="Learning How to Die"
-              data-cover="cover.png">Learning How to Die</li>
+  <li class="track"
+      data-src="audio/Kid Fourteen - A Brief Emotional Dragon - 05 Learning How to Die.mp3"
+      data-title="Learning How to Die"
+      data-cover="cover.png">Learning How to Die</li>
 
-          <li class="track"
-              data-src="audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3"
-              data-title="Latifa"
-              data-cover="cover2.jpg">Latifa</li>
+  <li class="track"
+      data-src="audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3"
+      data-title="Latifa"
+      data-cover="cover2.jpg">Latifa</li>
 
-          <li class="track"
-              data-src="audio/Kid Fourteen - Heart is a Malady 07 - الحب داء (Between Light and Fragrance) عليق.mp3"
-              data-title="Between Light and Fragrance"
-              data-cover="cover4.jpg">Between Light and Fragrance</li>
+  <li class="track"
+      data-src="audio/Kid Fourteen - Heart is a Malady القلب داء - 07 (Between Light and Fragrance) ستعيش بين النور والعطر وتفر من صدر إلى صدر.mp3"
+      data-title="Between Light and Fragrance"
+      data-cover="cover4.jpg">Between Light and Fragrance</li>
 
-          <li class="track"
-              data-src="audio/Kid Fourteen - Love (B Side) - 04 Love and the City Pt. 3.mp3"
-              data-title="Love and the City Pt. 3"
-              data-cover="cover5.png">Love and the City Pt. 3</li>
-        </ul>
+  <li class="track"
+      data-src="audio/Kid Fourteen - Love (B Side) - 04 Love and the City Pt. 3.mp3"
+      data-title="Love and the City Pt. 3"
+      data-cover="cover5.png">Love and the City Pt. 3</li>
+</ul>
+
+
 
         <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
       </div>
 
-      <!-- Spotify embed -->
+      <!-- Fallback: Spotify embed (toggle via tabs above) -->
       <div class="music-embed" id="spotifyEmbed" hidden>
         <iframe style="border-radius:12px"
           src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
