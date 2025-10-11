@@ -263,6 +263,50 @@ html,body{
       .vol{width:100px}
     }
     /* ===================== /CUSTOM PLAYER ===================== */
+    /* Make sure the title sits above the overlay */
+.hero .content{
+  position: relative;
+  z-index: 2;          /* content above overlay */
+}
+.hero::after{
+  z-index: 1;          /* overlay below content, above photo */
+}
+
+/* Strong, smooth neon glow for the big title */
+.hero h1{
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  /* brighter, layered glow */
+  text-shadow:
+    0 0 14px rgba(127,234,209,.35),
+    0 0 36px rgba(127,234,209,.25),
+    0 0 64px rgba(127,234,209,.12);
+  animation: glowFade 3s ease-in-out infinite alternate;
+}
+
+@keyframes glowFade{
+  0%{
+    text-shadow:
+      0 0 10px rgba(127,234,209,.28),
+      0 0 24px rgba(127,234,209,.18),
+      0 0 48px rgba(127,234,209,.10);
+    opacity:.98;
+  }
+  100%{
+    text-shadow:
+      0 0 20px rgba(127,234,209,.62),
+      0 0 44px rgba(127,234,209,.34),
+      0 0 84px rgba(127,234,209,.16);
+    opacity:1;
+  }
+}
+
+/* Accessibility: no motion for those who prefer it */
+@media (prefers-reduced-motion: reduce){
+  .hero h1{ animation:none }
+}
+
   </style>
 </head>
 
