@@ -7,6 +7,28 @@
   <meta name="color-scheme" content="dark" />
 
   <style>
+    /* --- Fix hero stacking so title + links are visible --- */
+.hero{
+  position:relative;
+  isolation:isolate;          /* creates its own stacking context */
+}
+.hero .content{
+  position:relative;
+  z-index:1;                  /* ensure text/buttons sit on top */
+}
+.hero-bg{
+  position:absolute;
+  inset:-10vh -10vw;
+  z-index:-1;                 /* push the photo behind everything */
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;                  /* overlay below the content, above bg */
+  pointer-events:none;        /* never block clicks on the pills */
+}
+
     :root{
   --bg:#0f141b;
   --bg-soft:#121821;
