@@ -1,4 +1,4 @@
-<!doctype html>
+f<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -270,6 +270,37 @@
       .player-shell{grid-template-columns:1fr;}
       .vol{width:100px}
     }
+    // Shows tabs (already added earlier)
+(() => {
+  const grid = document.querySelector('#shows');
+  if (!grid) return;
+  const panes = Array.from(grid.querySelectorAll('.shows-pane'));
+  const btns = Array.from(grid.querySelectorAll('.press-toggle[role="tab"]'));
+  const setTab = (name)=>{
+    panes.forEach(p => p.hidden = p.dataset.pane !== name);
+    btns.forEach(b => {
+      const active = b.dataset.tab === name;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', String(active));
+    });
+  };
+  btns.forEach(b => b.addEventListener('click', ()=> setTab(b.dataset.tab)));
+  setTab(location.hash && /#shows\/past/i.test(location.hash) ? 'past' : 'upcoming');
+})();
+
+// Full Show History toggle
+(() => {
+  const btn = document.getElementById('toggleFullHistory');
+  const box = document.getElementById('fullShowHistory');
+  if(!btn || !box) return;
+  btn.addEventListener('click', () => {
+    const open = box.hidden;
+    box.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+  });
+})();
+
   </style>
 </head>
 
@@ -427,6 +458,7 @@
   <div class="wrap">
     <h2>Shows</h2>
 
+    <!-- Tabs -->
     <div class="press-toolbar" role="tablist" aria-label="Shows tabs" style="margin:14px 0 18px">
       <button type="button" class="press-toggle is-active" role="tab" aria-selected="true" data-tab="upcoming">Upcoming</button>
       <button type="button" class="press-toggle" role="tab" aria-selected="false" data-tab="past">Past</button>
@@ -436,26 +468,104 @@
       <!-- UPCOMING -->
       <div class="shows-pane" data-pane="upcoming">
         <p class="muted">No upcoming shows announced.</p>
-        <!-- If you have dates, use this structure:
-        <ul class="shows-list">
-          <li><strong>Paris, FR</strong> — Supersonic — <time datetime="2025-11-12">12 Nov 2025</time></li>
-        </ul>
-        -->
       </div>
 
       <!-- PAST -->
       <div class="shows-pane" data-pane="past" hidden>
-        <ul class="shows-list" id="pastShowsList">
-          <!-- ✅ PASTE your “Memorable Shows” here (one <li> per line).
-               Use the pattern: City/Country — Venue — Year (or exact date) -->
-          <li>Supersonic, Paris — 2022</li>
-          <li>Mutek Montréal — 2021</li>
-          <li>Station, Beirut — 2019</li>
+        <h3 style="margin-top:0">Memorable Shows</h3>
+        <ul class="shows-list" id="pastShowsMemorable">
+          <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
+          <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
+          <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
+          <li>Oct 2024 — Read The Room Festival (KIAA Theatre) — Brussels, Belgium</li>
         </ul>
+
+        <button class="press-toggle" id="toggleFullHistory" type="button" aria-expanded="false" style="margin-top:14px">
+          View Full Show History
+        </button>
+
+        <div id="fullShowHistory" hidden>
+          <!-- Grouped newest → oldest -->
+          <h4>2025</h4>
+          <ul class="shows-list">
+            <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
+            <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
+            <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
+          </ul>
+
+          <h4>2024</h4>
+          <ul class="shows-list">
+            <li>Oct 2024 — De Centrale — Gent, Belgium</li>
+            <li>Oct 2024 — Read The Room Festival — Brussels, Belgium</li>
+            <li>Oct 2024 — Stigberget Live Festival — Gothenburg, Sweden</li>
+            <li>Aug 2024 — S.M.A.K. Museum — Gent, Belgium</li>
+            <li>Jun 2024 — Institut Suédois — Paris, France</li>
+            <li>Jun 2024 — Live in Marseille — Marseille, France</li>
+            <li>Jun 2024 — DOC! — Paris, France</li>
+            <li>Feb 2024 — Platon Party Paradis — Nantes, France</li>
+          </ul>
+
+          <h4>2023</h4>
+          <ul class="shows-list">
+            <li>Jul 2023 — Le Tony — Paris, France</li>
+            <li>Jun 2023 — Petit Bain — Paris, France</li>
+            <li>Mar 2023 — Le Consulat — Paris, France</li>
+            <li>Feb 2023 — Kiosk — Gent, Belgium</li>
+            <li>Jan 2023 — Hærverk — Oslo, Norway</li>
+            <li>Jan 2023 — Yaki-Da — Gothenburg, Sweden</li>
+          </ul>
+
+          <h4>2022</h4>
+          <ul class="shows-list">
+            <li>Nov 2022 — Oslo World — Oslo, Norway</li>
+            <li>Oct 2022 — La Makhno — Geneva, Switzerland</li>
+            <li>Sep 2022 — Fri-Son — Fribourg, Switzerland</li>
+            <li>Aug 2022 — Petit Bain — Paris, France</li>
+            <li>Jun 2022 — Supersonic — Paris, France</li>
+            <li>Apr 2022 — La Station — Paris, France</li>
+            <li>Apr 2022 — Beirut Electro Parade — Paris, France</li>
+          </ul>
+
+          <h4>2020</h4>
+          <ul class="shows-list">
+            <li>Jan 2020 — Cairo Jazz Club — Cairo, Egypt</li>
+          </ul>
+
+          <h4>2019</h4>
+          <ul class="shows-list">
+            <li>May 2019 — Live electronics w/ LSD & Bohemnots — Radio Poligraf, Yerevan, Armenia</li>
+            <li>May 2019 — Barkett — Berlin, Germany</li>
+            <li>Apr 2019 — Klub Dom — Łódź, Poland</li>
+            <li>Apr 2019 — Klubb DÖD @ Landet — Stockholm, Sweden</li>
+            <li>Apr 2019 — Truckstop Alaska — Gothenburg, Sweden</li>
+            <li>Apr 2019 — Molchat Doma & Kid Fourteen @ Inkonst — Malmö, Sweden</li>
+            <li>Apr 2019 — Le Salopard — Biel, Switzerland</li>
+            <li>Apr 2019 — Mouton Noir — Fribourg, Switzerland</li>
+            <li>Apr 2019 — Beirut Electro Parade @ La Bellevilloise — Paris, France</li>
+          </ul>
+
+          <h4>2018</h4>
+          <ul class="shows-list">
+            <li>Nov 2018 — Mourn (ES) + Joyfultalk (CA) + Kid Fourteen — Praha, Czech Republic</li>
+            <li>Oct 2018 — Greenhouse Kantine — Berlin, Germany</li>
+            <li>Oct 2018 — Studio HPKSM — Gothenburg, Sweden</li>
+            <li>Mar 2018 — IndieCity Festival @ Salon — Istanbul, Turkey</li>
+          </ul>
+
+          <h4>2017</h4>
+          <ul class="shows-list">
+            <li>Nov 2017 — with Dubais @ Loophole — Berlin, Germany</li>
+            <li>Oct 2017 — Café Central — Brussels, Belgium</li>
+            <li>Oct 2017 — La Station — Paris, France</li>
+            <li>Oct 2017 — Alimentation Générale — Paris, France</li>
+            <li>Oct 2017 — Barlok — Brussels, Belgium</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
   <!-- BIO -->
@@ -695,6 +805,36 @@
       });
     })();
   
+// Shows tabs (already added earlier)
+(() => {
+  const grid = document.querySelector('#shows');
+  if (!grid) return;
+  const panes = Array.from(grid.querySelectorAll('.shows-pane'));
+  const btns = Array.from(grid.querySelectorAll('.press-toggle[role="tab"]'));
+  const setTab = (name)=>{
+    panes.forEach(p => p.hidden = p.dataset.pane !== name);
+    btns.forEach(b => {
+      const active = b.dataset.tab === name;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', String(active));
+    });
+  };
+  btns.forEach(b => b.addEventListener('click', ()=> setTab(b.dataset.tab)));
+  setTab(location.hash && /#shows\/past/i.test(location.hash) ? 'past' : 'upcoming');
+})();
+
+// Full Show History toggle
+(() => {
+  const btn = document.getElementById('toggleFullHistory');
+  const box = document.getElementById('fullShowHistory');
+  if(!btn || !box) return;
+  btn.addEventListener('click', () => {
+    const open = box.hidden;
+    box.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+  });
+})();
 
     // ===================== CUSTOM PLAYER LOGIC =====================
     (() => {
