@@ -533,6 +533,26 @@
   <script>
     document.body.classList.add('js');
 
+    // Reveal-on-scroll: make .reveal visible when in view (fixes hidden Bio/Press)
+    (() => {
+      const els = Array.from(document.querySelectorAll('.reveal'));
+      if (!els.length) return;
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+        els.forEach(el => io.observe(el));
+      } else {
+        // Fallback: if IO unsupported, show all immediately
+        els.forEach(el => el.classList.add('is-visible'));
+      }
+    })();
+
     // Parallax background (rAF throttled — original)
     (() => {
       const bg = document.querySelector('.hero-bg');
