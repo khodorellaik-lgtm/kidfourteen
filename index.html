@@ -1,4 +1,4 @@
-f<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -7,52 +7,53 @@ f<!doctype html>
   <meta name="color-scheme" content="dark" />
 
   <style>
+    /* SHOWS styling */
     .shows-list{margin:0; padding-left:18px}
-.shows-list li{margin:6px 0}
-.press-toggle.is-active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
+    .shows-list li{margin:6px 0}
+    .press-toggle.is-active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
+
     /* 1) Kill accidental horizontal scroll site-wide */
-html, body { max-width:100%; overflow-x:hidden; }
+    html, body { max-width:100%; overflow-x:hidden; }
 
-/* 2) Make the giant hero text friendlier on phones */
-@media (max-width:520px){
-  .wrap{ padding:0 16px; }
-  .nav .inner{ padding:0 12px; }
+    /* 2) Make the giant hero text friendlier on phones */
+    @media (max-width:520px){
+      .wrap{ padding:0 16px; }
+      .nav .inner{ padding:0 12px; }
 
-  /* Nav links: allow side-scroll instead of wrapping/breaking layout */
-  .nav .links{
-    overflow-x:auto;
-    white-space:nowrap;
-    gap:16px;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .nav .links::-webkit-scrollbar{ display:none; }
+      /* Nav links: allow side-scroll instead of wrapping/breaking layout */
+      .nav .links{
+        overflow-x:auto;
+        white-space:nowrap;
+        gap:16px;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .nav .links::-webkit-scrollbar{ display:none; }
 
-  /* Big title sizing + spacing */
-  .hero-display{
-    font-size:clamp(36px, 12vw, 96px);
-    letter-spacing:.04em;
-    line-height:1.03;
-  }
+      /* Big title sizing + spacing */
+      .hero-display{
+        font-size:clamp(36px, 12vw, 96px);
+        letter-spacing:.04em;
+        line-height:1.03;
+      }
 
-  /* Smaller pills so they don’t push width */
-  .pills{ gap:10px; }
-  .pill{ padding:10px 12px; }
-}
+      /* Smaller pills so they don’t push width */
+      .pills{ gap:10px; }
+      .pill{ padding:10px 12px; }
+    }
 
-/* 3) Extra guard: hero already has overflow:hidden, but keep it explicit */
-.hero{ overflow:hidden; }
-
+    /* 3) Extra guard: hero already has overflow:hidden, but keep it explicit */
+    .hero{ overflow:hidden; }
 
     /* Hide visually but keep for screen readers */
-.sr-only {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap; border: 0;
-}
+    .sr-only {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap; border: 0;
+    }
 
     :root{
       --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
@@ -84,7 +85,6 @@ html, body { max-width:100%; overflow-x:hidden; }
     .links a{color:var(--text);opacity:.92;position:relative;text-shadow:0 0 6px rgba(127,234,209,.18);
       animation:linkBreath 9s ease-in-out infinite;}
     .links a:hover{opacity:1;text-shadow:0 0 10px rgba(127,234,209,.35),0 0 22px rgba(127,234,209,.25);}
-    .links a:hover{opacity:1}
 
     /* Hero */
     .hero{position:relative;min-height:75vh;display:grid;place-items:center;text-align:center;overflow:hidden;background:#0c1219;isolation:isolate}
@@ -96,24 +96,22 @@ html, body { max-width:100%; overflow-x:hidden; }
       50%{background-position:48% 52%}
       100%{background-position:52% 48%}
       .tagline {
-  text-align: center;
-  font-weight: 500;
-  margin-bottom: 20px;
-  font-size: clamp(14px, 1.6vw, 18px);
-  letter-spacing: 0.08em;
-  color: rgba(230, 234, 239, 0.8);
-  text-transform: uppercase;
-  text-shadow:
-    0 0 8px rgba(127,234,209,0.25),
-    0 0 18px rgba(127,234,209,0.15);
-  animation: taglineGlow 8s ease-in-out infinite alternate;
-}
-
-@keyframes taglineGlow {
-  0%   { text-shadow: 0 0 8px rgba(127,234,209,0.15), 0 0 18px rgba(127,234,209,0.1); opacity: 0.9; }
-  100% { text-shadow: 0 0 16px rgba(127,234,209,0.4), 0 0 28px rgba(127,234,209,0.25); opacity: 1; }
-}
-
+        text-align: center;
+        font-weight: 500;
+        margin-bottom: 20px;
+        font-size: clamp(14px, 1.6vw, 18px);
+        letter-spacing: 0.08em;
+        color: rgba(230, 234, 239, 0.8);
+        text-transform: uppercase;
+        text-shadow:
+          0 0 8px rgba(127,234,209,0.25),
+          0 0 18px rgba(127,234,209,0.15);
+        animation: taglineGlow 8s ease-in-out infinite alternate;
+      }
+      @keyframes taglineGlow {
+        0%   { text-shadow: 0 0 8px rgba(127,234,209,0.15), 0 0 18px rgba(127,234,209,0.1); opacity: 0.9; }
+        100% { text-shadow: 0 0 16px rgba(127,234,209,0.4), 0 0 28px rgba(127,234,209,0.25); opacity: 1; }
+      }
     }
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,25,.65),rgba(12,18,25,.92));z-index:0;pointer-events:none}
     .hero .content{position:relative;z-index:2}
@@ -124,23 +122,21 @@ html, body { max-width:100%; overflow-x:hidden; }
       text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
       animation:neonPulse 4.2s ease-in-out infinite;}
     .hero-display{
-  font-weight:800;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  font-size:clamp(64px,10vw,140px);
-  text-align:center;
-  text-shadow:
-    0 0 12px rgba(127,234,209,.35),
-    0 0 36px rgba(127,234,209,.25),
-    0 0 64px rgba(127,234,209,.12);
-  animation:neonPulse 4.2s ease-in-out infinite;
-}
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      font-size:clamp(64px,10vw,140px);
+      text-align:center;
+      text-shadow:
+        0 0 12px rgba(127,234,209,.35),
+        0 0 36px rgba(127,234,209,.25),
+        0 0 64px rgba(127,234,209,.12);
+      animation:neonPulse 4.2s ease-in-out infinite;
+    }
 
     @keyframes neonPulse{
       0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
       50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
-    }
-      100%{text-shadow:0 0 20px rgba(127,234,209,.62),0 0 44px rgba(127,234,209,.34),0 0 84px rgba(127,234,209,.16);opacity:1}
     }
     @media (prefers-reduced-motion:reduce){.hero h1{animation:none}.links a{animation:none}.hero-bg{animation:none}}
 
@@ -303,37 +299,6 @@ html, body { max-width:100%; overflow-x:hidden; }
       .player-shell{grid-template-columns:1fr;}
       .vol{width:100px}
     }
-    // Shows tabs (already added earlier)
-(() => {
-  const grid = document.querySelector('#shows');
-  if (!grid) return;
-  const panes = Array.from(grid.querySelectorAll('.shows-pane'));
-  const btns = Array.from(grid.querySelectorAll('.press-toggle[role="tab"]'));
-  const setTab = (name)=>{
-    panes.forEach(p => p.hidden = p.dataset.pane !== name);
-    btns.forEach(b => {
-      const active = b.dataset.tab === name;
-      b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', String(active));
-    });
-  };
-  btns.forEach(b => b.addEventListener('click', ()=> setTab(b.dataset.tab)));
-  setTab(location.hash && /#shows\/past/i.test(location.hash) ? 'past' : 'upcoming');
-})();
-
-// Full Show History toggle
-(() => {
-  const btn = document.getElementById('toggleFullHistory');
-  const box = document.getElementById('fullShowHistory');
-  if(!btn || !box) return;
-  btn.addEventListener('click', () => {
-    const open = box.hidden;
-    box.hidden = !open;
-    btn.setAttribute('aria-expanded', String(open));
-    btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
-  });
-})();
-
   </style>
 </head>
 
@@ -342,12 +307,13 @@ html, body { max-width:100%; overflow-x:hidden; }
     <div class="wrap inner">
       <div class="brand">KID FOURTEEN</div>
       <nav class="links">
+        <!-- Reordered to match section priority -->
         <a href="#music">Music</a>
-        <a href="#video">Video</a>
-        <a href="#albums">Albums</a>
-        <a href="#shows">Shows</a>
         <a href="#bio">Bio</a>
         <a href="#press">Press</a>
+        <a href="#albums">Albums</a>
+        <a href="#shows">Shows</a>
+        <a href="#video">Video</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -357,12 +323,11 @@ html, body { max-width:100%; overflow-x:hidden; }
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="content wrap">
-<h1 class="sr-only">Kid Fourteen</h1>
-
-<div aria-hidden="true" class="hero-display">
-  KID FOURTEEN<br>
-  EXPERIMENTAL POP — NOISE POP — SONG
-</div>
+      <h1 class="sr-only">Kid Fourteen</h1>
+      <div aria-hidden="true" class="hero-display">
+        KID FOURTEEN<br>
+        EXPERIMENTAL POP — NOISE POP — SONG
+      </div>
       <div class="pills">
         <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
         <a class="pill" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
@@ -449,158 +414,6 @@ html, body { max-width:100%; overflow-x:hidden; }
     </div>
   </section>
 
-  <!-- VIDEO -->
-  <section id="video" class="section">
-    <div class="wrap">
-      <h2>Video</h2>
-      <div class="cols">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8"
-          frameborder="0" title="Kid Fourteen - Video 1" allowfullscreen loading="lazy"></iframe>
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750"
-          frameborder="0" title="Kid Fourteen - Video 2" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ALBUMS -->
-  <section id="albums" class="section">
-    <div class="wrap">
-      <h2>Albums</h2>
-      <div class="album-grid">
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
-          <img src="cover.png" alt="A Brief Emotional Dragon"><div class="label">A Brief Emotional Dragon</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
-          <img src="cover2.jpg" alt="Blood Thick Silence"><div class="label">Blood Thick Silence</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
-          <img src="cover3.jpg" alt="Dream Kids Never Sleep"><div class="label">Dream Kids Never Sleep</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
-          <img src="cover4.jpg" alt="Heart Is a Malady"><div class="label">Heart Is a Malady</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
-          <img src="cover5.png" alt="Love"><div class="label">Love</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-<!-- SHOWS (tabs) -->
-<section id="shows" class="section">
-  <div class="wrap">
-    <h2>Shows</h2>
-
-    <!-- Tabs -->
-    <div class="press-toolbar" role="tablist" aria-label="Shows tabs" style="margin:14px 0 18px">
-      <button type="button" class="press-toggle is-active" role="tab" aria-selected="true" data-tab="upcoming">Upcoming</button>
-      <button type="button" class="press-toggle" role="tab" aria-selected="false" data-tab="past">Past</button>
-    </div>
-
-    <div class="panel" id="showsPanels">
-      <!-- UPCOMING -->
-      <div class="shows-pane" data-pane="upcoming">
-        <p class="muted">No upcoming shows announced.</p>
-      </div>
-
-      <!-- PAST -->
-      <div class="shows-pane" data-pane="past" hidden>
-        <h3 style="margin-top:0">Memorable Shows</h3>
-        <ul class="shows-list" id="pastShowsMemorable">
-          <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
-          <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
-          <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
-          <li>Oct 2024 — Read The Room Festival (KIAA Theatre) — Brussels, Belgium</li>
-        </ul>
-
-        <button class="press-toggle" id="toggleFullHistory" type="button" aria-expanded="false" style="margin-top:14px">
-          View Full Show History
-        </button>
-
-        <div id="fullShowHistory" hidden>
-          <!-- Grouped newest → oldest -->
-          <h4>2025</h4>
-          <ul class="shows-list">
-            <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
-            <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
-            <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
-          </ul>
-
-          <h4>2024</h4>
-          <ul class="shows-list">
-            <li>Oct 2024 — De Centrale — Gent, Belgium</li>
-            <li>Oct 2024 — Read The Room Festival — Brussels, Belgium</li>
-            <li>Oct 2024 — Stigberget Live Festival — Gothenburg, Sweden</li>
-            <li>Aug 2024 — S.M.A.K. Museum — Gent, Belgium</li>
-            <li>Jun 2024 — Institut Suédois — Paris, France</li>
-            <li>Jun 2024 — Live in Marseille — Marseille, France</li>
-            <li>Jun 2024 — DOC! — Paris, France</li>
-            <li>Feb 2024 — Platon Party Paradis — Nantes, France</li>
-          </ul>
-
-          <h4>2023</h4>
-          <ul class="shows-list">
-            <li>Jul 2023 — Le Tony — Paris, France</li>
-            <li>Jun 2023 — Petit Bain — Paris, France</li>
-            <li>Mar 2023 — Le Consulat — Paris, France</li>
-            <li>Feb 2023 — Kiosk — Gent, Belgium</li>
-            <li>Jan 2023 — Hærverk — Oslo, Norway</li>
-            <li>Jan 2023 — Yaki-Da — Gothenburg, Sweden</li>
-          </ul>
-
-          <h4>2022</h4>
-          <ul class="shows-list">
-            <li>Nov 2022 — Oslo World — Oslo, Norway</li>
-            <li>Oct 2022 — La Makhno — Geneva, Switzerland</li>
-            <li>Sep 2022 — Fri-Son — Fribourg, Switzerland</li>
-            <li>Aug 2022 — Petit Bain — Paris, France</li>
-            <li>Jun 2022 — Supersonic — Paris, France</li>
-            <li>Apr 2022 — La Station — Paris, France</li>
-            <li>Apr 2022 — Beirut Electro Parade — Paris, France</li>
-          </ul>
-
-          <h4>2020</h4>
-          <ul class="shows-list">
-            <li>Jan 2020 — Cairo Jazz Club — Cairo, Egypt</li>
-          </ul>
-
-          <h4>2019</h4>
-          <ul class="shows-list">
-            <li>May 2019 — Live electronics w/ LSD & Bohemnots — Radio Poligraf, Yerevan, Armenia</li>
-            <li>May 2019 — Barkett — Berlin, Germany</li>
-            <li>Apr 2019 — Klub Dom — Łódź, Poland</li>
-            <li>Apr 2019 — Klubb DÖD @ Landet — Stockholm, Sweden</li>
-            <li>Apr 2019 — Truckstop Alaska — Gothenburg, Sweden</li>
-            <li>Apr 2019 — Molchat Doma & Kid Fourteen @ Inkonst — Malmö, Sweden</li>
-            <li>Apr 2019 — Le Salopard — Biel, Switzerland</li>
-            <li>Apr 2019 — Mouton Noir — Fribourg, Switzerland</li>
-            <li>Apr 2019 — Beirut Electro Parade @ La Bellevilloise — Paris, France</li>
-          </ul>
-
-          <h4>2018</h4>
-          <ul class="shows-list">
-            <li>Nov 2018 — Mourn (ES) + Joyfultalk (CA) + Kid Fourteen — Praha, Czech Republic</li>
-            <li>Oct 2018 — Greenhouse Kantine — Berlin, Germany</li>
-            <li>Oct 2018 — Studio HPKSM — Gothenburg, Sweden</li>
-            <li>Mar 2018 — IndieCity Festival @ Salon — Istanbul, Turkey</li>
-          </ul>
-
-          <h4>2017</h4>
-          <ul class="shows-list">
-            <li>Nov 2017 — with Dubais @ Loophole — Berlin, Germany</li>
-            <li>Oct 2017 — Café Central — Brussels, Belgium</li>
-            <li>Oct 2017 — La Station — Paris, France</li>
-            <li>Oct 2017 — Alimentation Générale — Paris, France</li>
-            <li>Oct 2017 — Barlok — Brussels, Belgium</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
   <!-- BIO -->
   <section id="bio" class="section">
     <div class="wrap">
@@ -638,97 +451,244 @@ html, body { max-width:100%; overflow-x:hidden; }
   </section>
 
   <!-- PRESS -->
-<section id="press" class="section">
-  <div class="wrap">
-    <h2>Press</h2>
+  <section id="press" class="section">
+    <div class="wrap">
+      <h2>Press</h2>
 
-    <!-- As-Seen-In strip -->
-    <div class="press-seen reveal" style="--d:.02s;">
-      <span>As seen in:</span>
-      <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener" class="seen-badge">Bandcamp Daily</a>
-      <a href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener" class="seen-badge">Tiny Mix Tapes</a>
-      <a href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener" class="seen-badge">Arab News</a>
-      <a href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener" class="seen-badge">Scene Noise</a>
-      <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener" class="seen-badge">Rock Cult</a>
-      <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
+      <!-- As-Seen-In strip -->
+      <div class="press-seen reveal" style="--d:.02s;">
+        <span>As seen in:</span>
+        <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener" class="seen-badge">Bandcamp Daily</a>
+        <a href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener" class="seen-badge">Tiny Mix Tapes</a>
+        <a href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener" class="seen-badge">Arab News</a>
+        <a href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener" class="seen-badge">Scene Noise</a>
+        <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener" class="seen-badge">Rock Cult</a>
+        <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
+      </div>
+
+      <!-- controls: ONLY Masonry toggle (Compact removed per your request) -->
+      <div class="press-toolbar reveal" style="--d:.05s;">
+        <button type="button" class="press-toggle" data-action="masonry" aria-pressed="false">Masonry layout</button>
+      </div>
+
+      <!-- grid (default compact) -->
+      <div class="press-grid compact reveal" id="pressGrid" style="--d:.08s;">
+
+        <!-- Featured -->
+        <article class="press-card featured">
+          <a class="press-badge" href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener">Bandcamp Daily</a>
+          <blockquote class="clamp">
+            “Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own
+            and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats,
+            pulsing synth arpeggiators, and metallic guitar squall.”
+          </blockquote>
+          <p class="source">— <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener">Bandcamp Daily</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener">Tiny Mix Tapes</a>
+          <blockquote class="clamp">
+            “It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor —
+            Kid Fourteen is the last man dancing to an illusory tune in his head.”
+          </blockquote>
+          <p class="source">— <a href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener">Tiny Mix Tapes</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener">Arab News</a>
+          <blockquote class="clamp">
+            “The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”
+          </blockquote>
+          <p class="source">— <a href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener">Arab News</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener">Scene Noise</a>
+          <blockquote class="clamp">
+            “The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting
+            aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”
+          </blockquote>
+          <p class="source">— <a href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener">Scene Noise</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener">Rock Cult</a>
+          <blockquote class="clamp">
+            “Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together
+            become many times stronger.”
+          </blockquote>
+          <p class="source">— <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener">Rock Cult</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <!-- Final kept Obscure Sound quote -->
+        <article class="press-card">
+          <a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a>
+          <blockquote class="clamp">
+            “The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure.
+            The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”
+          </blockquote>
+          <p class="source">— <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+      </div>
     </div>
+  </section>
 
-    <!-- controls -->
-    <div class="press-toolbar reveal" style="--d:.05s;">
-      <button type="button" class="press-toggle" data-action="compact" aria-pressed="true">Compact view</button>
-      <button type="button" class="press-toggle" data-action="masonry" aria-pressed="false">Masonry layout</button>
+  <!-- ALBUMS (reordered newest → oldest) -->
+  <section id="albums" class="section">
+    <div class="wrap">
+      <h2>Albums</h2>
+      <div class="album-grid">
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
+          <img src="cover4.jpg" alt="Heart Is a Malady"><div class="label">Heart Is a Malady</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
+          <img src="cover.png" alt="A Brief Emotional Dragon"><div class="label">A Brief Emotional Dragon</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
+          <img src="cover5.png" alt="Love"><div class="label">Love</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
+          <img src="cover2.jpg" alt="Blood Thick Silence"><div class="label">Blood Thick Silence</div>
+        </a>
+        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
+          <img src="cover3.jpg" alt="Dream Kids Never Sleep"><div class="label">Dream Kids Never Sleep</div>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <!-- grid -->
-    <div class="press-grid compact reveal" id="pressGrid" style="--d:.08s;">
+  <!-- SHOWS (tabs) -->
+  <section id="shows" class="section">
+    <div class="wrap">
+      <h2>Shows</h2>
 
-      <!-- Featured -->
-      <article class="press-card featured">
-        <a class="press-badge" href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener">Bandcamp Daily</a>
-        <blockquote class="clamp">
-          “Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own
-          and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats,
-          pulsing synth arpeggiators, and metallic guitar squall.”
-        </blockquote>
-        <p class="source">— <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener">Bandcamp Daily</a></p>
-        <button class="quote-more" type="button">More</button>
-      </article>
+      <!-- Tabs -->
+      <div class="press-toolbar" role="tablist" aria-label="Shows tabs" style="margin:14px 0 18px">
+        <button type="button" class="press-toggle is-active" role="tab" aria-selected="true" data-tab="upcoming">Upcoming</button>
+        <button type="button" class="press-toggle" role="tab" aria-selected="false" data-tab="past">Past</button>
+      </div>
 
-      <article class="press-card">
-        <a class="press-badge" href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener">Tiny Mix Tapes</a>
-        <blockquote class="clamp">
-          “It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor —
-          Kid Fourteen is the last man dancing to an illusory tune in his head.”
-        </blockquote>
-        <p class="source">— <a href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener">Tiny Mix Tapes</a></p>
-        <button class="quote-more" type="button">More</button>
-      </article>
+      <div class="panel" id="showsPanels">
+        <!-- UPCOMING -->
+        <div class="shows-pane" data-pane="upcoming">
+          <p class="muted">No upcoming shows announced.</p>
+        </div>
 
-      <article class="press-card">
-        <a class="press-badge" href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener">Arab News</a>
-        <blockquote class="clamp">
-          “The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”
-        </blockquote>
-        <p class="source">— <a href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener">Arab News</a></p>
-        <button class="quote-more" type="button">More</button>
-      </article>
+        <!-- PAST -->
+        <div class="shows-pane" data-pane="past" hidden>
+          <h3 style="margin-top:0">Memorable Shows</h3>
+          <ul class="shows-list" id="pastShowsMemorable">
+            <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
+            <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
+            <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
+            <li>Oct 2024 — Read The Room Festival (KIAA Theatre) — Brussels, Belgium</li>
+          </ul>
 
-      <article class="press-card">
-        <a class="press-badge" href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener">Scene Noise</a>
-        <blockquote class="clamp">
-          “The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting
-          aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”
-        </blockquote>
-        <p class="source">— <a href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener">Scene Noise</a></p>
-        <button class="quote-more" type="button">More</button>
-      </article>
+          <button class="press-toggle" id="toggleFullHistory" type="button" aria-expanded="false" style="margin-top:14px">
+            View Full Show History
+          </button>
 
-      <article class="press-card">
-        <a class="press-badge" href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener">Rock Cult</a>
-        <blockquote class="clamp">
-          “Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together
-          become many times stronger.”
-        </blockquote>
-        <p class="source">— <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener">Rock Cult</a></p>
-        <button class="quote-more" type="button">More</button>
-      </article>
+          <div id="fullShowHistory" hidden>
+            <!-- Grouped newest → oldest -->
+            <h4>2025</h4>
+            <ul class="shows-list">
+              <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
+              <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
+              <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
+            </ul>
 
-      <!-- Final kept Obscure Sound quote -->
-      <article class="press-card">
-        <a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a>
-        <blockquote class="clamp">
-          “The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure.
-          The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”
-        </blockquote>
-        <p class="source">— <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a></p>
-        <button class="quote-more" type="button">More</button>
-      </article>
+            <h4>2024</h4>
+            <ul class="shows-list">
+              <li>Oct 2024 — De Centrale — Gent, Belgium</li>
+              <li>Oct 2024 — Read The Room Festival — Brussels, Belgium</li>
+              <li>Oct 2024 — Stigberget Live Festival — Gothenburg, Sweden</li>
+              <li>Aug 2024 — S.M.A.K. Museum — Gent, Belgium</li>
+              <li>Jun 2024 — Institut Suédois — Paris, France</li>
+              <li>Jun 2024 — Live in Marseille — Marseille, France</li>
+              <li>Jun 2024 — DOC! — Paris, France</li>
+              <li>Feb 2024 — Platon Party Paradis — Nantes, France</li>
+            </ul>
 
+            <h4>2023</h4>
+            <ul class="shows-list">
+              <li>Jul 2023 — Le Tony — Paris, France</li>
+              <li>Jun 2023 — Petit Bain — Paris, France</li>
+              <li>Mar 2023 — Le Consulat — Paris, France</li>
+              <li>Feb 2023 — Kiosk — Gent, Belgium</li>
+              <li>Jan 2023 — Hærverk — Oslo, Norway</li>
+              <li>Jan 2023 — Yaki-Da — Gothenburg, Sweden</li>
+            </ul>
+
+            <h4>2022</h4>
+            <ul class="shows-list">
+              <li>Nov 2022 — Oslo World — Oslo, Norway</li>
+              <li>Oct 2022 — La Makhno — Geneva, Switzerland</li>
+              <li>Sep 2022 — Fri-Son — Fribourg, Switzerland</li>
+              <li>Aug 2022 — Petit Bain — Paris, France</li>
+              <li>Jun 2022 — Supersonic — Paris, France</li>
+              <li>Apr 2022 — La Station — Paris, France</li>
+              <li>Apr 2022 — Beirut Electro Parade — Paris, France</li>
+            </ul>
+
+            <h4>2020</h4>
+            <ul class="shows-list">
+              <li>Jan 2020 — Cairo Jazz Club — Cairo, Egypt</li>
+            </ul>
+
+            <h4>2019</h4>
+            <ul class="shows-list">
+              <li>May 2019 — Live electronics w/ LSD & Bohemnots — Radio Poligraf, Yerevan, Armenia</li>
+              <li>May 2019 — Barkett — Berlin, Germany</li>
+              <li>Apr 2019 — Klub Dom — Łódź, Poland</li>
+              <li>Apr 2019 — Klubb DÖD @ Landet — Stockholm, Sweden</li>
+              <li>Apr 2019 — Truckstop Alaska — Gothenburg, Sweden</li>
+              <li>Apr 2019 — Molchat Doma & Kid Fourteen @ Inkonst — Malmö, Sweden</li>
+              <li>Apr 2019 — Le Salopard — Biel, Switzerland</li>
+              <li>Apr 2019 — Mouton Noir — Fribourg, Switzerland</li>
+              <li>Apr 2019 — Beirut Electro Parade @ La Bellevilloise — Paris, France</li>
+            </ul>
+
+            <h4>2018</h4>
+            <ul class="shows-list">
+              <li>Nov 2018 — Mourn (ES) + Joyfultalk (CA) + Kid Fourteen — Praha, Czech Republic</li>
+              <li>Oct 2018 — Greenhouse Kantine — Berlin, Germany</li>
+              <li>Oct 2018 — Studio HPKSM — Gothenburg, Sweden</li>
+              <li>Mar 2018 — IndieCity Festival @ Salon — Istanbul, Turkey</li>
+            </ul>
+
+            <h4>2017</h4>
+            <ul class="shows-list">
+              <li>Nov 2017 — with Dubais @ Loophole — Berlin, Germany</li>
+              <li>Oct 2017 — Café Central — Brussels, Belgium</li>
+              <li>Oct 2017 — La Station — Paris, France</li>
+              <li>Oct 2017 — Alimentation Générale — Paris, France</li>
+              <li>Oct 2017 — Barlok — Brussels, Belgium</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
+  <!-- VIDEO -->
+  <section id="video" class="section">
+    <div class="wrap">
+      <h2>Video</h2>
+      <div class="cols">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8"
+          frameborder="0" title="Kid Fourteen - Video 1" allowfullscreen loading="lazy"></iframe>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750"
+          frameborder="0" title="Kid Fourteen - Video 2" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACT -->
   <section id="contact" class="section">
@@ -778,7 +738,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
       let ticking = false;
       const update = () => {
-        bg.style.setProperty('--parallax', (window.scrollY * 0.25) + 'px'); // original factor
+        bg.style.setProperty('--parallax', (window.scrollY * 0.25) + 'px');
         ticking = false;
       };
       const onScroll = () => {
@@ -788,86 +748,71 @@ html, body { max-width:100%; overflow-x:hidden; }
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    // Press controls: exclusive compact/masonry + more/less
+    // Press controls: single Masonry toggle
     (() => {
       const grid = document.getElementById('pressGrid');
       if (!grid) return;
 
-      const btns = Array.from(document.querySelectorAll('.press-toggle'));
-      const setMode = (mode) => {
-        grid.classList.toggle('compact', mode === 'compact');
-        grid.classList.toggle('masonry', mode === 'masonry');
-        btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.action === mode)));
+      const btn = document.querySelector('#press .press-toolbar .press-toggle[data-action="masonry"]');
+      const setMode = (masonryOn) => {
+        grid.classList.toggle('compact', !masonryOn);
+        grid.classList.toggle('masonry', masonryOn);
+        btn?.setAttribute('aria-pressed', String(masonryOn));
+        btn?.classList.toggle('is-active', masonryOn);
       };
-// Shows tabs
-(() => {
-  const toolbar = document.querySelector('#shows .press-toolbar');
-  if(!toolbar) return;
-  const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
-  const btns = Array.from(toolbar.querySelectorAll('.press-toggle'));
 
-  function setTab(name){
-    panes.forEach(p => p.hidden = p.dataset.pane !== name);
-    btns.forEach(b => {
-      const active = b.dataset.tab === name;
-      b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', String(active));
-    });
-  }
-
-  btns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
-  setTab('upcoming'); // default tab
-
-  // If URL hash includes #shows/past, open Past automatically
-  if (location.hash && /#shows\/past/i.test(location.hash)) setTab('past');
-})();
-
-      btns.forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.action)));
-      setMode('compact'); // default
+      btn?.addEventListener('click', () => setMode(!grid.classList.contains('masonry')));
+      setMode(false); // default to compact
 
       grid.querySelectorAll('.press-card').forEach(card => {
-        const btn = card.querySelector('.quote-more');
+        const more = card.querySelector('.quote-more');
         const quote = card.querySelector('blockquote');
-        if (!btn || !quote) return;
+        if (!more || !quote) return;
         const needsClamp = quote.textContent.trim().length > 180;
-        if (!needsClamp) { btn.style.display = 'none'; return; }
-        btn.addEventListener('click', () => {
+        if (!needsClamp) { more.style.display = 'none'; return; }
+        more.addEventListener('click', () => {
           card.classList.toggle('expanded');
-          btn.textContent = card.classList.contains('expanded') ? 'Less' : 'More';
+          more.textContent = card.classList.contains('expanded') ? 'Less' : 'More';
         });
       });
     })();
-  
-// Shows tabs (already added earlier)
-(() => {
-  const grid = document.querySelector('#shows');
-  if (!grid) return;
-  const panes = Array.from(grid.querySelectorAll('.shows-pane'));
-  const btns = Array.from(grid.querySelectorAll('.press-toggle[role="tab"]'));
-  const setTab = (name)=>{
-    panes.forEach(p => p.hidden = p.dataset.pane !== name);
-    btns.forEach(b => {
-      const active = b.dataset.tab === name;
-      b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', String(active));
-    });
-  };
-  btns.forEach(b => b.addEventListener('click', ()=> setTab(b.dataset.tab)));
-  setTab(location.hash && /#shows\/past/i.test(location.hash) ? 'past' : 'upcoming');
-})();
 
-// Full Show History toggle
-(() => {
-  const btn = document.getElementById('toggleFullHistory');
-  const box = document.getElementById('fullShowHistory');
-  if(!btn || !box) return;
-  btn.addEventListener('click', () => {
-    const open = box.hidden;
-    box.hidden = !open;
-    btn.setAttribute('aria-expanded', String(open));
-    btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
-  });
-})();
+    // Shows tabs
+    (() => {
+      const toolbar = document.querySelector('#shows .press-toolbar');
+      if(!toolbar) return;
+      const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
+      const btns = Array.from(toolbar.querySelectorAll('.press-toggle'));
+
+      function setTab(name){
+        panes.forEach(p => p.hidden = p.dataset.pane !== name);
+        btns.forEach(b => {
+          const active = b.dataset.tab === name;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-selected', String(active));
+        });
+        // Update hash to allow deep-linking
+        if (history.replaceState) {
+          history.replaceState(null, '', name === 'past' ? '#shows/past' : '#shows');
+        }
+      }
+
+      btns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+      setTab(location.hash && /#shows\/past/i.test(location.hash) ? 'past' : 'upcoming');
+    })();
+
+    // Full Show History toggle
+    (() => {
+      const btn = document.getElementById('toggleFullHistory');
+      const box = document.getElementById('fullShowHistory');
+      if(!btn || !box) return;
+      btn.addEventListener('click', () => {
+        const open = box.hidden;
+        box.hidden = !open;
+        btn.setAttribute('aria-expanded', String(open));
+        btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+      });
+    })();
 
     // ===================== CUSTOM PLAYER LOGIC =====================
     (() => {
@@ -889,8 +834,8 @@ html, body { max-width:100%; overflow-x:hidden; }
       const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
 
       function encodeSrc(src){
-        // Safely handle spaces/arabic chars in filenames
-        try { return src.split('/').map((seg,i,arr)=> i===arr.length-1? encodeURIComponent(seg) : seg).join('/'); } catch(e){ return src.replace(/ /g,'%20'); }
+        try { return src.split('/').map((seg,i,arr)=> i===arr.length-1? encodeURIComponent(seg) : seg).join('/'); }
+        catch(e){ return src.replace(/ /g,'%20'); }
       }
 
       function load(i){
