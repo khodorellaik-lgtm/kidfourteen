@@ -8,14 +8,21 @@
 
   <style>
     :root{
-      --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
+       --bg:#0f141b;
+    --bg-soft:#121821;
+    --text:#e6eaef; --muted:#9fb0c3;
       --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
       --nav-h:64px;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    html,body {
+  margin:0;
+  background:radial-gradient(circle at 40% 20%, #1a2433 0%, #0e131b 80%);
+  color:var(--text);
+  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+}
+
 
     a{color:var(--link);text-decoration:none}
     a:hover{opacity:.9}
