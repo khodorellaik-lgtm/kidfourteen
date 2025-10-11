@@ -192,6 +192,41 @@
 
     /* Iframe polish */
     iframe[loading="lazy"]{border:0;background:rgba(255,255,255,.03);border-radius:14px}
+  
+
+    /* ===================== CUSTOM PLAYER ===================== */
+    .music-switch{display:inline-flex;gap:10px;margin:10px 0 18px}
+    .music-tab{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);
+      padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+    .music-tab.is-active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
+
+    .k14-player{background:var(--bg-soft);border:1px solid var(--chip-border);border-radius:16px;padding:14px 14px 6px;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+    .player-shell{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
+    .art{border-radius:12px;overflow:hidden;border:1px solid var(--chip-border);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    .art img{display:block;width:100%;height:auto;object-fit:cover;aspect-ratio:1/1}
+    .meta{min-width:0}
+    .title{font-weight:800;letter-spacing:.01em}
+    .subtitle{color:var(--muted);font-size:.95rem;margin-top:2px}
+    .bar{margin:10px 0 2px}
+    .seek{width:100%}
+    .controls{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
+    .btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:800}
+    .btn.small{padding:8px 10px;font-weight:700}
+    .btn:hover{border-color:var(--accent);color:var(--accent)}
+    .time{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.92rem}
+    .vol-wrap{display:flex;align-items:center;gap:8px;margin-left:auto}
+    .vol{width:120px}
+
+    .playlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:12px 0 2px;padding:0;list-style:none}
+    .track{padding:10px 12px;border:1px solid var(--chip-border);border-radius:10px;background:rgba(255,255,255,.03);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .track:hover{border-color:var(--accent);color:var(--accent)}
+    .track.is-active{background:rgba(127,234,209,.12);border-color:var(--accent)}
+
+    @media (max-width:640px){
+      .player-shell{grid-template-columns:1fr;}
+      .vol{width:100px}
+    }
+    /* ===================== /CUSTOM PLAYER ===================== */
   </style>
 </head>
 
@@ -228,15 +263,57 @@
   </section>
 
   <!-- MUSIC -->
+    <!-- MUSIC -->
   <section id="music" class="section">
     <div class="wrap">
       <h2>Music</h2>
-      <iframe style="border-radius:12px"
-        src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
-        width="100%" height="352" frameborder="0"
-        title="Kid Fourteen on Spotify"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"></iframe>
+
+      <div class="music-switch" role="tablist" aria-label="Music player mode">
+        <button class="music-tab is-active" role="tab" aria-selected="true" data-mode="player">Player</button>
+        <button class="music-tab" role="tab" aria-selected="false" data-mode="spotify">Spotify</button>
+      </div>
+
+      <!-- Custom Player -->
+      <div class="k14-player" id="k14Player" data-mode="player">
+        <div class="player-shell">
+          <div class="art"><img src="cover.png" alt="Current cover" loading="lazy"></div>
+          <div class="meta">
+            <div class="title" id="playerTitle">Select a track</div>
+            <div class="subtitle" id="playerSubtitle">Kid Fourteen</div>
+            <div class="bar">
+              <input id="seek" class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek" />
+            </div>
+            <div class="time"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+            <div class="controls">
+              <button class="btn small" id="prev" aria-label="Previous">⟲</button>
+              <button class="btn" id="play" aria-label="Play/Pause">▶</button>
+              <button class="btn small" id="next" aria-label="Next">⟳</button>
+              <div class="vol-wrap" title="Volume">
+                <span>🔊</span>
+                <input id="vol" class="vol" type="range" min="0" max="1" step="0.01" value="0.9" aria-label="Volume" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="playlist" id="playlist" aria-label="Track list">
+          <!-- Replace data-src with your .mp3/.wav paths in the repo -->
+          <li class="track is-active" data-src="audio/learning-how-to-die.mp3" data-title="Learning How to Die" data-cover="cover.png">Learning How to Die</li>
+          <li class="track" data-src="audio/a-brief-emotional-dragon.mp3" data-title="A Brief Emotional Dragon" data-cover="cover.png">A Brief Emotional Dragon</li>
+          <li class="track" data-src="audio/heart-is-a-malady.mp3" data-title="Heart is a Malady" data-cover="cover4.jpg">Heart is a Malady</li>
+        </ul>
+        <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
+      </div>
+
+      <!-- Fallback: Spotify embed (toggle via tabs above) -->
+      <div class="music-embed" id="spotifyEmbed" hidden>
+        <iframe style="border-radius:12px"
+          src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
+          width="100%" height="352" frameborder="0"
+          title="Kid Fourteen on Spotify"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"></iframe>
+      </div>
     </div>
   </section>
 
@@ -409,6 +486,17 @@
         <article class="press-card">
           <a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a>
           <blockquote class="clamp">
+            “Khodor Ellaik, aka Kid Fourteen, is a Paris-based Lebanese musician and songwriter who has been intriguing listeners for over a decade
+            with his unique style of mixing Pop, Post-Punk, Noise, experimental Jazz and Electronic Music. The 12-track project is the artist’s
+            personal declaration of survival and autobiography, in all its abstraction.”
+          </blockquote>
+          <p class="source">— <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a></p>
+          <button class="quote-more" type="button">More</button>
+        </article>
+
+        <article class="press-card">
+          <a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a>
+          <blockquote class="clamp">
             “The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure.
             The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”
           </blockquote>
@@ -493,6 +581,71 @@
         });
       });
     })();
+  
+
+    // ===================== CUSTOM PLAYER LOGIC =====================
+    (() => {
+      const root = document.getElementById('k14Player');
+      const audio = document.getElementById('audio');
+      const playlist = document.getElementById('playlist');
+      const playBtn = document.getElementById('play');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      const seek = document.getElementById('seek');
+      const vol = document.getElementById('vol');
+      const cur = document.getElementById('cur');
+      const dur = document.getElementById('dur');
+      const title = document.getElementById('playerTitle');
+      const art = root.querySelector('.art img');
+
+      let index = 0;
+      const items = Array.from(playlist.querySelectorAll('.track'));
+      const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
+
+      function load(i){
+        index = (i+items.length)%items.length;
+        const li = items[index];
+        items.forEach(n=>n.classList.remove('is-active'));
+        li.classList.add('is-active');
+        const src = li.dataset.src; const t = li.dataset.title || li.textContent.trim();
+        const cover = li.dataset.cover || art.getAttribute('src');
+        audio.src = src; title.textContent = t; art.src = cover; seek.value = 0; cur.textContent = '0:00'; dur.textContent = '0:00';
+        audio.load();
+      }
+
+      // Autoload first track
+      if(items.length){ load( items.findIndex(el=>el.classList.contains('is-active')) || 0 ); }
+
+      // Controls
+      playBtn.addEventListener('click', ()=>{ if(audio.paused){ audio.play(); } else { audio.pause(); } });
+      prevBtn.addEventListener('click', ()=>{ load(index-1); audio.play(); });
+      nextBtn.addEventListener('click', ()=>{ load(index+1); audio.play(); });
+      vol.addEventListener('input', ()=> audio.volume = +vol.value);
+      seek.addEventListener('input', ()=>{ if(audio.duration) audio.currentTime = (seek.value/100)*audio.duration; });
+
+      items.forEach((li, i)=> li.addEventListener('click', ()=>{ load(i); audio.play(); }));
+
+      audio.addEventListener('timeupdate', ()=>{
+        if(!audio.duration) return; seek.value = (audio.currentTime / audio.duration) * 100; cur.textContent = fmt(audio.currentTime); dur.textContent = fmt(audio.duration);
+      });
+      audio.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
+      audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
+      audio.addEventListener('ended', ()=>{ load(index+1); audio.play(); });
+
+      // Tabs: Player <-> Spotify
+      const tabs = Array.from(document.querySelectorAll('.music-tab'));
+      const embed = document.getElementById('spotifyEmbed');
+      const setMode = (mode)=>{
+        const isPlayer = mode==='player';
+        root.hidden = !isPlayer; embed.hidden = isPlayer; root.parentElement.parentElement.querySelector('.music-switch .music-tab.is-active')?.classList.remove('is-active');
+        tabs.find(t=>t.dataset.mode===mode)?.classList.add('is-active');
+        tabs.forEach(t=>t.setAttribute('aria-selected', String(t.dataset.mode===mode)));
+        if(!isPlayer && !audio.paused) audio.pause();
+      };
+      tabs.forEach(t=> t.addEventListener('click', ()=> setMode(t.dataset.mode)) );
+      setMode('player');
+    })();
+    // ===================== /CUSTOM PLAYER LOGIC =====================
   </script>
 </body>
 </html>
