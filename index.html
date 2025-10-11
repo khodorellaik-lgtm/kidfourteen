@@ -7,6 +7,10 @@
   <meta name="color-scheme" content="dark" />
 
   <style>
+    .shows-list{margin:0; padding-left:18px}
+.shows-list li{margin:6px 0}
+.press-toggle.is-active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
+
     /* Hide visually but keep for screen readers */
 .sr-only {
   position: absolute !important;
@@ -418,22 +422,41 @@
     </div>
   </section>
 
-  <!-- SHOWS -->
-  <section id="shows" class="section">
-    <div class="wrap">
-      <h2>Shows</h2>
-      <div class="panel">
-        <h3>Upcoming</h3>
+<!-- SHOWS (tabs) -->
+<section id="shows" class="section">
+  <div class="wrap">
+    <h2>Shows</h2>
+
+    <div class="press-toolbar" role="tablist" aria-label="Shows tabs" style="margin:14px 0 18px">
+      <button type="button" class="press-toggle is-active" role="tab" aria-selected="true" data-tab="upcoming">Upcoming</button>
+      <button type="button" class="press-toggle" role="tab" aria-selected="false" data-tab="past">Past</button>
+    </div>
+
+    <div class="panel" id="showsPanels">
+      <!-- UPCOMING -->
+      <div class="shows-pane" data-pane="upcoming">
         <p class="muted">No upcoming shows announced.</p>
-        <h3 style="margin-top:24px">Past Shows</h3>
-        <ul>
+        <!-- If you have dates, use this structure:
+        <ul class="shows-list">
+          <li><strong>Paris, FR</strong> — Supersonic — <time datetime="2025-11-12">12 Nov 2025</time></li>
+        </ul>
+        -->
+      </div>
+
+      <!-- PAST -->
+      <div class="shows-pane" data-pane="past" hidden>
+        <ul class="shows-list" id="pastShowsList">
+          <!-- ✅ PASTE your “Memorable Shows” here (one <li> per line).
+               Use the pattern: City/Country — Venue — Year (or exact date) -->
           <li>Supersonic, Paris — 2022</li>
           <li>Mutek Montréal — 2021</li>
-          <li>Beirut, Station — 2019</li>
+          <li>Station, Beirut — 2019</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- BIO -->
   <section id="bio" class="section">
@@ -633,6 +656,28 @@
         grid.classList.toggle('masonry', mode === 'masonry');
         btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.action === mode)));
       };
+// Shows tabs
+(() => {
+  const toolbar = document.querySelector('#shows .press-toolbar');
+  if(!toolbar) return;
+  const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
+  const btns = Array.from(toolbar.querySelectorAll('.press-toggle'));
+
+  function setTab(name){
+    panes.forEach(p => p.hidden = p.dataset.pane !== name);
+    btns.forEach(b => {
+      const active = b.dataset.tab === name;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', String(active));
+    });
+  }
+
+  btns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  setTab('upcoming'); // default tab
+
+  // If URL hash includes #shows/past, open Past automatically
+  if (location.hash && /#shows\/past/i.test(location.hash)) setTab('past');
+})();
 
       btns.forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.action)));
       setMode('compact'); // default
