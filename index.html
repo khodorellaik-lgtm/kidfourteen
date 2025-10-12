@@ -304,6 +304,21 @@
       .pill{padding:9px 11px;font-size:14px}
     }
     @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
+    /* --- NAV overlap micro-fix (append-only) --- */
+.nav .inner{ flex-wrap:nowrap !important; min-width:0 !important; }
+.links{ white-space:nowrap !important; overflow-x:auto !important; -webkit-overflow-scrolling:touch; }
+.links::-webkit-scrollbar{ display:none; }  /* hide tiny scrollbar on macOS */
+
+/* collapse to mobile menu a bit earlier so brand+links never collide */
+@media (max-width:1024px){
+  .links{ display:none !important; }
+  .menu-btn{ display:inline-flex !important; }
+}
+
+/* ensure stacking order so nothing bleeds under the bar */
+.nav{ z-index:1000 !important; }
+.menu-panel{ z-index:999 !important; }
+
   </style>
 </head>
 
@@ -847,6 +862,21 @@
   qn.addEventListener('mouseenter', function(){ qn.classList.add('is-on'); });
 })();
 </script>
+  <!-- nav micro-fix -->
+  <script>
+  (function(){
+    const menuBtn = document.getElementById('menuToggle');
+    const menu = document.getElementById('menuPanel');
+    const BP = 1024;
+    if(menu && menuBtn){
+      window.addEventListener('resize', ()=>{
+        if(window.innerWidth > BP && menu.classList.contains('open')){
+          menu.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded','false');
+        }
+      });
+    }
+  })();
 
 </body>
 </html>
