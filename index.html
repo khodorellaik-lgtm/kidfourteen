@@ -31,11 +31,42 @@
       .nav .links::-webkit-scrollbar{ display:none; }
 
       /* Big title sizing + spacing */
-      .hero-display{
-        font-size:clamp(36px, 12vw, 96px);
-        letter-spacing:.04em;
-        line-height:1.03;
-      }
+  .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+
+  font-size: clamp(28px, 8vh, 120px);
+  line-height: 1.1;
+
+  text-shadow:
+    0 0 10px rgba(127, 234, 209, 0.35),
+    0 0 25px rgba(127, 234, 209, 0.25),
+    0 0 40px rgba(127, 234, 209, 0.15);
+}
+
+@media (max-width: 520px) {
+  .hero-display {
+    font-size: clamp(24px, 7vh, 72px);
+    line-height: 1.05;
+    padding: 0 10px;
+  }
+}
+
 
       /* Smaller pills so they don’t push width */
       .pills{ gap:10px; }
