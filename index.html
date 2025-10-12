@@ -866,5 +866,25 @@ const setMode = (mode)=>{
   }
 })();
 </script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Scope strictly to the Shows section
+  const shows = document.getElementById('shows');
+  if (!shows) return;
+
+  const upcomingPane = shows.querySelector('#showsPanels .shows-pane[data-pane="upcoming"]');
+  const pastTab      = shows.querySelector('[aria-label="Shows view"] .music-tab[data-target="past"]');
+  if (!upcomingPane || !pastTab) return;
+
+  // "Upcoming" is considered non-empty ONLY if it has a real item:
+  // any <li>, or an element with .show or [data-show]
+  const hasUpcoming = !!upcomingPane.querySelector('li, .show, [data-show]');
+
+  // Defer a tick so any other scripts finish their own defaulting
+  setTimeout(() => {
+    if (!hasUpcoming) pastTab.click(); // reuse your existing tab logic
+  }, 0);
+});
+</script>
 </body>
 </html>
