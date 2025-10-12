@@ -1,10 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#0f141b"/>
-  <!-- stem (split) -->
-  <rect x="26" y="8" width="6" height="20" fill="#7fead1"/>
-  <rect x="26" y="36" width="6" height="20" fill="#7fead1"/>
-  <!-- upper arm (not touching stem) -->
-  <polygon fill="#7fead1" points="36,30 44,30 58,16 50,16"/>
-  <!-- lower arm (not touching stem) -->
-  <polygon fill="#7fead1" points="36,34 44,34 58,48 50,48"/>
+  <!-- Black circle background; outside is transparent -->
+  <circle cx="32" cy="32" r="30" fill="#0f141b"/>
+
+  <!-- Clip to circle (GitHub-style) -->
+  <defs>
+    <clipPath id="clipCircle">
+      <circle cx="32" cy="32" r="30"/>
+    </clipPath>
+  </defs>
+
+  <!-- BIG K with arms same thickness as the stem (~12px) -->
+  <g clip-path="url(#clipCircle)" fill="#7fead1">
+    <!-- Stem (12px wide) -->
+    <rect x="20" y="6" width="12" height="56"/>
+
+    <!-- Upper arm (parallel edges 12px apart) -->
+    <polygon points="32,28 44,28 76,-4 64,-4"/>
+
+    <!-- Lower arm (parallel edges 12px apart) -->
+    <polygon points="32,36 44,36 76,68 64,68"/>
+  </g>
 </svg>
