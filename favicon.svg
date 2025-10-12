@@ -1,23 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Black circle background; outside is transparent -->
   <circle cx="32" cy="32" r="30" fill="#0f141b"/>
-
-  <!-- Clip to circle (GitHub-style) -->
-  <defs>
-    <clipPath id="clipCircle">
-      <circle cx="32" cy="32" r="30"/>
-    </clipPath>
-  </defs>
-
-  <!-- BIG K with arms same thickness as the stem (~12px) -->
-  <g clip-path="url(#clipCircle)" fill="#7fead1">
-    <!-- Stem (12px wide) -->
-    <rect x="20" y="6" width="12" height="56"/>
-
-    <!-- Upper arm (parallel edges 12px apart) -->
-    <polygon points="32,28 44,28 76,-4 64,-4"/>
-
-    <!-- Lower arm (parallel edges 12px apart) -->
-    <polygon points="32,36 44,36 76,68 64,68"/>
+  <g fill="none" stroke="#7fead1" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter">
+    <line x1="22" y1="14" x2="22" y2="50"/>
+    <line x1="22" y1="32" x2="42" y2="20"/>
+    <line x1="22" y1="32" x2="42" y2="44"/>
   </g>
 </svg>
