@@ -51,12 +51,38 @@
       background:linear-gradient(180deg, rgba(15,20,27,.92), rgba(15,20,27,.78));
       border-bottom:1px solid rgba(36,48,64,.7);
     }
-    .nav .inner{height:100%; display:flex; align-items:center; justify-content:space-between}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.6px}
-    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
-    .links{display:flex; align-items:center; gap:8px}
-    .links a{padding:8px 12px;border-radius:10px;white-space:nowrap}
-    .links a.active, .links a:hover{background:rgba(127,234,209,.14); color:var(--accent)}
+  .nav .inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:nowrap;     /* keep a single line */
+  gap:12px;
+  min-width:0;          /* allow children to shrink */
+}
+
+/* Desktop links: never wrap; side-scroll if tight */
+.links{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;   /* stop wrapping (prevents overlap) */
+  overflow-x:auto;      /* allow horizontal scroll */
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.links::-webkit-scrollbar{ display:none }
+.links a{
+  padding:8px 12px;
+  border-radius:10px;
+  white-space:nowrap;
+  flex:0 0 auto;        /* keep natural width */
+}
+.links a.active,
+.links a:hover{
+  background:rgba(127,234,209,.14);
+  color:var(--accent);
+}
 
     /* Quick menu (mobile) */
     .menu-btn{display:none}
@@ -111,12 +137,12 @@
     .footer{padding:28px 0 48px; color:var(--muted); border-top:1px solid var(--chip-border)}
 
     /* Responsive nav breakpoints */
-    @media (max-width:860px){
-      .links{display:none}
-      .menu-btn{display:inline-flex}
-      .hero{padding-bottom:44px}
-      .wrap{padding:0 16px}
-      .nav .inner{padding:0 12px}
+   @media (max-width:1024px){
+  .links{ display:none; }
+  .menu-btn{ display:inline-flex; }
+  .hero{ padding-bottom:44px; }
+  .wrap{ padding:0 16px; }
+  .nav .inner{ padding:0 12px; }
     }
 
     /* Motion safety */
