@@ -31,13 +31,14 @@
       .nav .links::-webkit-scrollbar{ display:none; }
 
       /* Big title sizing + spacing */
-  .hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  overflow: hidden;
+ .hero{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:calc(100vh - var(--nav-h));
+  overflow:hidden;
 }
+
 
 .hero-display {
   display: flex;
