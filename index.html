@@ -245,6 +245,22 @@ section[id]{ scroll-margin-top: calc(var(--nav-h) + 12px) !important; }
 .nav .inner{ flex-wrap:nowrap !important; min-width:0 !important; }
 .links{ white-space:nowrap !important; overflow-x:auto !important; -webkit-overflow-scrolling:touch; }
 .links::-webkit-scrollbar{ display:none; }
+/* --- appear-after-first-scroll (no design change) --- */
+.nav {
+  transition: transform .28s ease, opacity .28s ease;
+}
+.nav.at-top {                 /* hidden only at very top */
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+body.nav-locked .nav {        /* once revealed, stay fixed forever */
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+/* keep anchors clear once bar is shown */
+body.nav-locked section[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }
 
   </style>
 </head>
@@ -662,5 +678,32 @@ section[id]{ scroll-margin-top: calc(var(--nav-h) + 12px) !important; }
       setMode('player');
     })();
   </script>
+  <script>
+/* Show the glass nav after the first scroll, then keep it on. */
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  // If we land mid-page (hash or already scrolled), show immediately.
+  const landedAtTop = !location.hash && window.scrollY <= 10;
+  if (!landedAtTop) {
+    document.body.classList.add('nav-locked');
+    return;
+  }
+
+  // Start hidden only at the very top.
+  nav.classList.add('at-top');
+
+  function onScrollOnce() {
+    if (window.scrollY > 10) {
+      nav.classList.remove('at-top');        // reveal
+      document.body.classList.add('nav-locked'); // lock on forever
+      window.removeEventListener('scroll', onScrollOnce, { passive: true });
+    }
+  }
+  window.addEventListener('scroll', onScrollOnce, { passive: true });
+})();
+</script>
+
 </body>
 </html>
