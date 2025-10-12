@@ -746,29 +746,34 @@
       setMode('player');
     })();
   </script>
-    <script>
-// Shows: Tabs (Upcoming / Past)
-(() => {
-  const tabs = Array.from(document.querySelectorAll('[role="tab"][data-target]'));
+   <script>
+// Shows: Tabs (Upcoming / Past) — hard default to Upcoming
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs  = Array.from(document.querySelectorAll('[role="tab"][data-target]'));
   const panes = Array.from(document.querySelectorAll('.shows-pane[data-pane]'));
   if (!tabs.length || !panes.length) return;
 
   const setTab = (target) => {
+    // reset all tabs
     tabs.forEach(t => {
       const on = t.dataset.target === target;
       t.classList.toggle('is-active', on);
       t.setAttribute('aria-selected', String(on));
     });
-    panes.forEach(p => p.hidden = (p.dataset.pane !== target));
+    // reset all panes
+    panes.forEach(p => {
+      p.hidden = (p.dataset.pane !== target);
+    });
   };
 
+  // click to switch
   tabs.forEach(t => t.addEventListener('click', () => setTab(t.dataset.target)));
-const upcomingEmpty = document.querySelector('.shows-pane[data-pane="upcoming"] .muted');
-if (upcomingEmpty) setTab('past'); else setTab('upcoming');
 
-})();
+  // HARD default to Upcoming on every load
+  setTab('upcoming');
+});
 
-// Shows: Full history toggle
+// Shows: Full history toggle (unchanged)
 (() => {
   const btn = document.getElementById('toggleFullHistory');
   const box = document.getElementById('fullShowHistory');
