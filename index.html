@@ -85,6 +85,10 @@
     .links a{color:var(--text);opacity:.92;position:relative;text-shadow:0 0 6px rgba(127,234,209,.18);
       animation:linkBreath 9s ease-in-out infinite;}
     .links a:hover{opacity:1;text-shadow:0 0 10px rgba(127,234,209,.35),0 0 22px rgba(127,234,209,.25);}
+    @keyframes linkBreath{
+      0%,100%{text-shadow:0 0 6px rgba(127,234,209,.18)}
+      50%{text-shadow:0 0 10px rgba(127,234,209,.35)}
+    }
 
     /* Hero */
     .hero{position:relative;min-height:75vh;display:grid;place-items:center;text-align:center;overflow:hidden;background:#0c1219;isolation:isolate}
@@ -95,28 +99,29 @@
       0%{background-position:center center}
       50%{background-position:48% 52%}
       100%{background-position:52% 48%}
-      .tagline {
-        text-align: center;
-        font-weight: 500;
-        margin-bottom: 20px;
-        font-size: clamp(14px, 1.6vw, 18px);
-        letter-spacing: 0.08em;
-        color: rgba(230, 234, 239, 0.8);
-        text-transform: uppercase;
-        text-shadow:
-          0 0 8px rgba(127,234,209,0.25),
-          0 0 18px rgba(127,234,209,0.15);
-        animation: taglineGlow 8s ease-in-out infinite alternate;
-      }
-      @keyframes taglineGlow {
-        0%   { text-shadow: 0 0 8px rgba(127,234,209,0.15), 0 0 18px rgba(127,234,209,0.1); opacity: 0.9; }
-        100% { text-shadow: 0 0 16px rgba(127,234,209,0.4), 0 0 28px rgba(127,234,209,0.25); opacity: 1; }
-      }
     }
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,25,.65),rgba(12,18,25,.92));z-index:0;pointer-events:none}
-    .hero .content{position:relative;z-index:2}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9));z-index:0;pointer-events:none}
     .hero .content{position:relative;z-index:2}
+
+    /* Tagline (restored outside @keyframes) */
+    .tagline {
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 20px;
+      font-size: clamp(14px, 1.6vw, 18px);
+      letter-spacing: 0.08em;
+      color: rgba(230, 234, 239, 0.8);
+      text-transform: uppercase;
+      text-shadow:
+        0 0 8px rgba(127,234,209,0.25),
+        0 0 18px rgba(127,234,209,0.15);
+      animation: taglineGlow 8s ease-in-out infinite alternate;
+    }
+    @keyframes taglineGlow {
+      0%   { text-shadow: 0 0 8px rgba(127,234,209,0.15), 0 0 18px rgba(127,234,209,0.1); opacity: 0.9; }
+      100% { text-shadow: 0 0 16px rgba(127,234,209,0.4), 0 0 28px rgba(127,234,209,0.25); opacity: 1; }
+    }
+
     .hero h1{font-weight:800;letter-spacing:.1em;text-transform:uppercase;
       font-size:clamp(64px,10vw,140px);
       text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
@@ -133,7 +138,6 @@
         0 0 64px rgba(127,234,209,.12);
       animation:neonPulse 4.2s ease-in-out infinite;
     }
-
     @keyframes neonPulse{
       0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
       50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
@@ -213,7 +217,6 @@
     .press-toggle{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);
       padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;transition:background .25s,border-color .25s,transform .2s}
     .press-toggle:hover{background:rgba(255,255,255,.08);border-color:var(--accent);transform:translateY(-1px)}
-    .press-toggle.active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
 
     .press-grid{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:16px}
     .press-grid.compact{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
@@ -299,63 +302,61 @@
       .player-shell{grid-template-columns:1fr;}
       .vol{width:100px}
     }
+
     /* ===== MOBILE POLISH PACK ===== */
-@media (max-width:520px){
-  html,body{max-width:100%;overflow-x:hidden}
+    @media (max-width:520px){
+      html,body{max-width:100%;overflow-x:hidden}
 
-  /* Nav */
-  .nav .inner{padding:0 10px}
-  .nav .links{
-    overflow-x:auto; white-space:nowrap; gap:14px;
-    -webkit-overflow-scrolling:touch; scrollbar-width:none;
-  }
-  .nav .links::-webkit-scrollbar{display:none}
+      /* Nav */
+      .nav .inner{padding:0 10px}
+      .nav .links{
+        overflow-x:auto; white-space:nowrap; gap:14px;
+        -webkit-overflow-scrolling:touch; scrollbar-width:none;
+      }
+      .nav .links::-webkit-scrollbar{display:none}
 
-  /* Hero */
-  .hero{min-height:66vh}
-  .hero .content{padding:0 8px}
-  .hero-display{
-    font-size:clamp(32px, 10.5vw, 84px);
-    letter-spacing:.03em; line-height:1.06;
-    /* slightly softer glow on small screens */
-    text-shadow:
-      0 0 10px rgba(127,234,209,.28),
-      0 0 28px rgba(127,234,209,.2);
-  }
-  .pills{gap:10px;margin-top:14px}
-  .pill{padding:10px 12px;font-size:15px}
+      /* Hero */
+      .hero{min-height:66vh}
+      .hero .content{padding:0 8px}
+      .hero-display{
+        font-size:clamp(32px, 10.5vw, 84px);
+        letter-spacing:.03em; line-height:1.06;
+        text-shadow:
+          0 0 10px rgba(127,234,209,.28),
+          0 0 28px rgba(127,234,209,.2);
+      }
+      .pills{gap:10px;margin-top:14px}
+      .pill{padding:10px 12px;font-size:15px}
 
-  /* Sections */
-  .wrap{padding:0 16px}
-  .section{padding:48px 0}
+      /* Sections */
+      .wrap{padding:0 16px}
+      .section{padding:48px 0}
 
-  /* Albums grid cards size down a touch */
-  .album-grid{gap:16px}
-  .album-card{max-width:180px}
+      /* Albums grid cards size down a touch */
+      .album-grid{gap:16px}
+      .album-card{max-width:180px}
 
-  /* Press & Shows panels */
-  .press-toolbar{gap:8px}
-  .press-card{padding:20px}
-  .panel{padding:14px}
+      /* Press & Shows panels */
+      .press-toolbar{gap:8px}
+      .press-card{padding:20px}
+      .panel{padding:14px}
 
-  /* Video iframes stay 16:9 and scale */
-  .cols{display:block}
-  iframe[loading="lazy"]{
-    width:100%; height:auto; aspect-ratio:16/9;
-  }
-}
+      /* Video iframes stay 16:9 and scale */
+      .cols{display:block}
+      iframe[loading="lazy"]{
+        width:100%; height:auto; aspect-ratio:16/9;
+      }
+    }
 
-/* On very small devices, reduce hero more */
-@media (max-width:380px){
-  .hero-display{font-size:clamp(28px, 9.8vw, 72px)}
-  .pill{padding:9px 11px;font-size:14px}
-}
+    @media (max-width:380px){
+      .hero-display{font-size:clamp(28px, 9.8vw, 72px)}
+      .pill{padding:9px 11px;font-size:14px}
+    }
 
-/* Disable parallax on touch to avoid jank */
-@media (pointer:coarse){
-  .hero-bg{transition:none; animation:none}
-}
-
+    /* Disable parallax on touch to avoid jank */
+    @media (pointer:coarse){
+      .hero-bg{transition:none; animation:none}
+    }
   </style>
 </head>
 
@@ -364,7 +365,6 @@
     <div class="wrap inner">
       <div class="brand">KID FOURTEEN</div>
       <nav class="links">
-        <!-- Reordered to match section priority -->
         <a href="#music">Music</a>
         <a href="#bio">Bio</a>
         <a href="#press">Press</a>
@@ -385,6 +385,7 @@
         KID FOURTEEN<br>
         EXPERIMENTAL POP — NOISE POP — SONG
       </div>
+      <p class="tagline" aria-hidden="true">New work, live shows, and records.</p>
       <div class="pills">
         <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
         <a class="pill" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
@@ -523,7 +524,7 @@
         <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
       </div>
 
-      <!-- controls: ONLY Masonry toggle (Compact removed per your request) -->
+      <!-- controls: Masonry toggle -->
       <div class="press-toolbar reveal" style="--d:.05s;">
         <button type="button" class="press-toggle" data-action="masonry" aria-pressed="false">Masonry layout</button>
       </div>
@@ -582,7 +583,6 @@
           <button class="quote-more" type="button">More</button>
         </article>
 
-        <!-- Final kept Obscure Sound quote -->
         <article class="press-card">
           <a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a>
           <blockquote class="clamp">
@@ -766,15 +766,15 @@
 
   <script>
     document.body.classList.add('js');
+
     // Guard: if someone (or cached JS) forces "#shows" on load, clear it
-(() => {
-  if (location.hash === '#shows' && history.replaceState) {
-    history.replaceState(null, '', location.pathname + location.search);
-  }
-})();
+    (() => {
+      if (location.hash === '#shows' && history.replaceState) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    })();
 
-
-    // Reveal-on-scroll: make .reveal visible when in view (fixes hidden Bio/Press)
+    // Reveal-on-scroll
     (() => {
       const els = Array.from(document.querySelectorAll('.reveal'));
       if (!els.length) return;
@@ -789,12 +789,11 @@
         }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
         els.forEach(el => io.observe(el));
       } else {
-        // Fallback: if IO unsupported, show all immediately
         els.forEach(el => el.classList.add('is-visible'));
       }
     })();
 
-    // Parallax background (rAF throttled — original)
+    // Parallax background (rAF throttled)
     (() => {
       const bg = document.querySelector('.hero-bg');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -812,7 +811,7 @@
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    // Press controls: single Masonry toggle
+    // Press controls: Masonry toggle + "More" expanders
     (() => {
       const grid = document.getElementById('pressGrid');
       if (!grid) return;
@@ -840,42 +839,39 @@
         });
       });
     })();
-    
-// Shows tabs
-(() => {
-  const toolbar = document.querySelector('#shows .press-toolbar');
-  if(!toolbar) return;
 
-  const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
-  const btns  = Array.from(toolbar.querySelectorAll('.press-toggle'));
+    // Shows tabs
+    (() => {
+      const toolbar = document.querySelector('#shows .press-toolbar');
+      if(!toolbar) return;
 
-  function setTab(name, { updateHash = false } = {}) {
-    panes.forEach(p => p.hidden = p.dataset.pane !== name);
-    btns.forEach(b => {
-      const active = b.dataset.tab === name;
-      b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', String(active));
-    });
+      const panes = Array.from(document.querySelectorAll('#shows .shows-pane'));
+      const btns  = Array.from(toolbar.querySelectorAll('.press-toggle'));
 
-    // Update URL only when you click — not when you load the page
-    if (updateHash && history.replaceState) {
-      if (name === 'past') {
-        history.replaceState(null, '', '#shows/past');
-      } else {
-        history.replaceState(null, '', location.pathname + location.search);
+      function setTab(name, { updateHash = false } = {}) {
+        panes.forEach(p => p.hidden = p.dataset.pane !== name);
+        btns.forEach(b => {
+          const active = b.dataset.tab === name;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-selected', String(active));
+        });
+
+        if (updateHash && history.replaceState) {
+          if (name === 'past') {
+            history.replaceState(null, '', '#shows/past');
+          } else {
+            history.replaceState(null, '', location.pathname + location.search);
+          }
+        }
       }
-    }
-  }
 
-  // Clicking buttons updates the tab + URL
-  btns.forEach(b => b.addEventListener('click', () =>
-    setTab(b.dataset.tab, { updateHash: true })
-  ));
+      btns.forEach(b => b.addEventListener('click', () =>
+        setTab(b.dataset.tab, { updateHash: true })
+      ));
 
-  // When page loads, show correct tab but don't add "#shows"
-  const initial = (location.hash && /#shows\/past/i.test(location.hash)) ? 'past' : 'upcoming';
-  setTab(initial, { updateHash: false });
-})();
+      const initial = (location.hash && /#shows\/past/i.test(location.hash)) ? 'past' : 'upcoming';
+      setTab(initial, { updateHash: false });
+    })();
 
     // Full Show History toggle
     (() => {
@@ -928,6 +924,9 @@
 
       // Autoload first track
       if(items.length){ const first = items.findIndex(el=>el.classList.contains('is-active')); load(first>-1?first:0); }
+
+      // Apply initial volume
+      audio.volume = Number(vol.value || 0.9);
 
       // Controls
       playBtn.addEventListener('click', ()=>{ if(audio.paused){ audio.play(); } else { audio.pause(); } });
