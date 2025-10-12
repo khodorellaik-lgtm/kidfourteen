@@ -5,444 +5,237 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kid Fourteen</title>
   <meta name="color-scheme" content="dark" />
-
-  <!-- Basic SEO + Social preview -->
-  <meta name="description" content="Kid Fourteen — Experimental Pop / Noise Pop / Song. New work, live shows, and records.">
-  <link rel="canonical" href="https://kidfourteen.com/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Kid Fourteen">
-  <meta property="og:title" content="Kid Fourteen — Experimental Pop / Noise Pop / Song">
-  <meta property="og:description" content="New work, live shows, and records.">
-  <meta property="og:url" content="https://kidfourteen.com/">
-  <meta property="og:image" content="/og.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kid Fourteen — Experimental Pop / Noise Pop / Song">
-  <meta name="twitter:description" content="New work, live shows, and records.">
-  <meta name="twitter:image" content="/og.jpg">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#0f141b" />
 
   <style>
-    /* Quick Nav (sticky, Safari-safe) */
-.quick-nav{
-  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(18,24,33,.75); backdrop-filter: blur(8px);
-  border: 1px solid rgba(127,234,209,.25);
-  border-radius: 999px; padding: 6px 10px; z-index: 9999;
-  opacity: 0; pointer-events: none; transition: opacity .18s ease;
-}
-.quick-nav.is-on{ opacity: 1; pointer-events: auto; }
-
-/* Links row (desktop) */
-.qn-links{ display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; overflow: hidden; }
-.qn-links a{
-  display: inline-block; padding: 6px 10px; border-radius: 999px;
-  background: #1a2230; border: 1px solid #243040; color: var(--text);
-  font-size: 13px; line-height: 1; white-space: nowrap;
-}
-.qn-links a:hover{ border-color: var(--accent); color: var(--accent); }
-
-/* Toggle for mobile */
-.qn-toggle{
-  display: none; border: 1px solid #243040; background: #1a2230; color: var(--text);
-  padding: 6px 10px; border-radius: 999px; font-size: 13px; line-height: 1;
-}
-
-/* Mobile behavior: collapse into dropdown */
-@media (max-width: 700px){
-  .qn-toggle{ display: inline-block; }
-  .qn-links{
-    position: absolute; top: 42px; left: 50%; transform: translateX(-50%);
-    background: rgba(18,24,33,.98); border: 1px solid #243040; border-radius: 14px;
-    padding: 10px; display: none; flex-direction: column; gap: 6px;
-  }
-  .quick-nav[aria-expanded="true"] .qn-links{ display: flex; }
-}
-
-/* Respect users who reduce motion */
-@media (prefers-reduced-motion: reduce){
-  .quick-nav{ transition: none; }
-}
-
     :root{
-      --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
-      --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
-      --nav-h:64px;
+      --bg:#0f141b; --bg-soft:#121821; --panel:#141b24;
+      --text:#e6eaef; --muted:#9fb0c3;
+      --chip:#1a2230; --chip-border:#243040;
+      --accent:#7fead1; --link:#8bc6ff;
+      --danger:#ff6b6b;
+      --nav-h:64px; --maxw:1080px;
+      --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    a{color:var(--link);text-decoration:none}
-    a:hover{opacity:.9}
+
+    /* Base reset + typography */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);}
+    body{font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
     ::selection{background:rgba(127,234,209,.22)}
+    a{color:var(--link);text-decoration:none}
+    a:hover{opacity:.92}
+
+    /* Layout helpers */
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
     section[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
-    .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-    .section{padding:64px 0}
-    h1,h2,h3{margin:0 0 .6em}
-    h1{font-size:clamp(40px,6vw,72px);line-height:1.05}
-    h2{font-size:clamp(26px,3vw,36px)}
+    .grid{display:grid; gap:16px}
+    .card{background:var(--panel);border:1px solid var(--chip-border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .pad{padding:20px}
     .muted{color:var(--muted)}
-    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .title{font-weight:700;letter-spacing:.3px}
+    .btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 14px;border:1px solid var(--chip-border);background:var(--chip);color:var(--text)}
+    .btn:hover{transform:translateY(-1px)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:8px 10px;border-radius:999px;border:1px solid var(--chip-border);background:var(--chip);font-size:13px;color:var(--muted)}
+    .center{text-align:center}
 
-    /* Kill accidental horizontal scroll */
-    html, body { max-width:100%; overflow-x:hidden; }
+    /* Kill accidental horizontal scroll site-wide */
+    html,body{max-width:100%;overflow-x:hidden}
 
-    /* =================== NAV (hidden on landing; robust) =================== */
+    /* --- NAVBAR (fixed, mobile + desktop) --- */
     .nav{
-      position:sticky; top:0; z-index:50;
-      background:linear-gradient(180deg,rgba(10,14,20,.78),rgba(10,14,20,.3));
-      border-bottom:1px solid rgba(255,255,255,.05);
-      backdrop-filter:saturate(140%) blur(8px);
-      -webkit-backdrop-filter:saturate(140%) blur(8px);
-      transition:opacity .4s ease, transform .4s ease;
-      will-change:opacity, transform;
+      position:fixed; inset:0 0 auto 0; height:var(--nav-h); z-index:1000;
+      backdrop-filter:saturate(180%) blur(8px);
+      background:linear-gradient(180deg, rgba(15,20,27,.92), rgba(15,20,27,.78));
+      border-bottom:1px solid rgba(36,48,64,.7);
     }
-    /* Start hidden; JS will reveal as needed */
-    .nav.is-hidden{ opacity:0; transform:translateY(-100%); pointer-events:none; }
+    .nav .inner{height:100%; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.6px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+    .links{display:flex; align-items:center; gap:8px}
+    .links a{padding:8px 12px;border-radius:10px;white-space:nowrap}
+    .links a.active, .links a:hover{background:rgba(127,234,209,.14); color:var(--accent)}
 
-    /* While over hero, keep nav fixed so it doesn’t reserve height */
-    body.in-hero .nav{ position:fixed; top:0; left:0; right:0;
-      background:rgba(8,12,18,0.45); border-bottom:1px solid rgba(255,255,255,0.05); }
-
-    .nav .inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
-    .brand{font-weight:800;letter-spacing:.12em}
-    .links{display:flex;gap:22px}
-    .links a{color:var(--text);opacity:.92;position:relative;text-shadow:0 0 6px rgba(127,234,209,.18);
-      animation:linkBreath 9s ease-in-out infinite;}
-    .links a:hover{opacity:1;text-shadow:0 0 10px rgba(127,234,209,.35),0 0 22px rgba(127,234,209,.25);}
-    @keyframes linkBreath{0%,100%{opacity:.92}50%{opacity:1}}
-
-    /* =================== HERO =================== */
-    .hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden;background:#0c1219;isolation:isolate}
-    .hero-bg{position:absolute;inset:-10vh -10vw;background:#0c1219 url('hero.jpg') center/cover no-repeat;
-      transform:translate3d(0,var(--parallax,0px),0);will-change:transform;transition:transform .08s ease-out;z-index:-1;
-      animation:bgDrift 18s ease-in-out infinite alternate;}
-    @keyframes bgDrift{0%{background-position:center}50%{background-position:48% 52%}100%{background-position:52% 48%}}
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9));z-index:0;pointer-events:none}
-    .hero .content{position:relative;z-index:2}
-    .hero-display{
-      font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-      font-size:clamp(64px,10vw,140px); text-align:center;
-      text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
-      animation:neonPulse 4.2s ease-in-out infinite;
+    /* Quick menu (mobile) */
+    .menu-btn{display:none}
+    .menu-panel{
+      position:fixed; inset:var(--nav-h) 0 auto 0; background:rgba(18,24,33,.98);
+      border-bottom:1px solid var(--chip-border); transform:translateY(-10px);
+      opacity:0; visibility:hidden; transition:opacity .18s ease, transform .18s ease;
     }
-    @keyframes neonPulse{
-      0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
-      50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
+    .menu-panel.open{opacity:1; visibility:visible; transform:none}
+    .menu-grid{display:grid; grid-template-columns:1fr; gap:8px; padding:12px}
+    .menu-grid a{padding:12px; border-radius:12px; border:1px solid var(--chip-border); background:var(--chip)}
+    .menu-grid a:hover{background:rgba(127,234,209,.14); color:var(--accent)}
+
+    /* Hero */
+    .hero{
+      padding-top:calc(var(--nav-h) + 36px); padding-bottom:56px;
+      background:
+        radial-gradient(1200px 600px at 50% -20%, rgba(127,234,209,.07), transparent 60%),
+        radial-gradient(900px 500px at 80% 10%, rgba(139,198,255,.06), transparent 60%),
+        var(--bg);
     }
-    @media (prefers-reduced-motion:reduce){.hero-display{animation:none}.links a{animation:none}.hero-bg{animation:none}}
-    .pills{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:22px}
-    .pill{background:var(--chip);border:1px solid var(--chip-border);padding:12px 16px;border-radius:18px;font-weight:600;transition:transform .16s ease,background .16s ease}
-    .pill:hover{transform:translateY(-2px) scale(1.05);background:#1e293b}
+    .hero .k{font-size:clamp(48px,8vw,112px); line-height:1; font-weight:900; letter-spacing:1.2px;
+      text-shadow:0 0 24px rgba(127,234,209,.25), 0 0 60px rgba(139,198,255,.2)}
+    .hero .tag{margin-top:8px;color:var(--muted)}
 
-    /* =================== MUSIC PLAYER =================== */
-    .music-switch{display:inline-flex;gap:10px;margin:10px 0 18px}
-    .music-tab{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);
-      padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
-    .music-tab.is-active{background:rgba(127,234,209,.18);border-color:var(--accent);color:var(--accent)}
-    .k14-player{background:var(--bg-soft);border:1px solid var(--chip-border);border-radius:16px;padding:14px 14px 6px;box-shadow:0 10px 24px rgba(0,0,0,.35)}
-    .player-shell{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
-    .art{border-radius:12px;overflow:hidden;border:1px solid var(--chip-border);box-shadow:0 6px 18px rgba(0,0,0,.35)}
-    .art img{display:block;width:100%;height:auto;object-fit:cover;aspect-ratio:1/1}
-    .meta{min-width:0}
-    .title{font-weight:800;letter-spacing:.01em}
-    .subtitle{color:var(--muted);font-size:.95rem;margin-top:2px}
-    .bar{margin:10px 0 2px}
-    .seek{width:100%}
-    .controls{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
-    .btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:800}
-    .btn.small{padding:8px 10px;font-weight:700}
-    .btn:hover{border-color:var(--accent);color:var(--accent)}
-    .time{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.92rem}
-    .vol-wrap{display:flex;align-items:center;gap:8px;margin-left:auto}
-    .vol{width:120px}
-    .playlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:12px 0 2px;padding:0;list-style:none}
-    .track{padding:10px 12px;border:1px solid var(--chip-border);border-radius:10px;background:rgba(255,255,255,.03);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .track:hover{border-color:var(--accent);color:var(--accent)}
-    .track.is-active{background:rgba(127,234,209,.12);border-color:var(--accent)}
-    @media (max-width:640px){.player-shell{grid-template-columns:1fr}.vol{width:100px}}
+    /* Sections */
+    .section{padding:48px 0}
+    .section h2{margin:0 0 12px; font-size:clamp(20px,2.4vw,28px)}
+    .section .sub{margin:0 0 18px; color:var(--muted)}
 
-    /* =================== BIO =================== */
-    .bio-grid{display:grid;gap:28px;align-items:center}
-    @media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
-    .bio-photo{background:var(--bg-soft);border:1px solid var(--chip-border);border-radius:12px;overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04),0 0 40px rgba(127,234,209,.08)}
-    .bio-photo img{display:block;width:100%;height:auto;object-fit:cover;aspect-ratio:4/5}
+    /* Music player */
+    .player{display:grid; gap:16px}
+    .playlist{list-style:none; margin:0; padding:0}
+    .playlist li{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border-radius:12px; border:1px solid var(--chip-border); background:var(--chip)}
+    .playlist li.is-active{outline:2px solid rgba(127,234,209,.35)}
+    .track-title{display:flex; align-items:center; gap:10px}
+    .track-time{font-variant-numeric:tabular-nums; color:var(--muted); font-size:13px}
+    .play-btn{cursor:pointer; border:1px solid var(--chip-border); background:var(--panel); border-radius:10px; padding:6px 10px}
+    .play-btn:hover{background:rgba(127,234,209,.12); color:var(--accent)}
 
-    .bio-quote{display:inline-block;margin:0 auto 24px auto;padding:18px 26px;border-left:3px solid var(--accent);
-      border-radius:14px;font-size:clamp(18px,2.2vw,20px);line-height:1.7;font-style:italic;color:var(--text);
-      background:linear-gradient(180deg,rgba(26,34,48,.6),rgba(26,34,48,.3));box-shadow:0 2px 18px rgba(0,0,0,.25);
-      text-align:center;position:relative;max-width:700px}
-    .bio-quote::before,.bio-quote::after{position:absolute;pointer-events:none;color:var(--accent);opacity:.18;font-family:Georgia,serif}
-    .bio-quote::before{content:"“";left:14px;top:-10px;font-size:38px}
-    .bio-quote::after{content:"”";right:14px;bottom:-14px;font-size:32px}
+    /* Press */
+    .press-grid{display:grid; gap:12px; grid-template-columns:repeat(2,1fr)}
+    .quote{padding:16px; border-left:3px solid var(--accent); background:var(--panel); border-radius:12px}
+    .quote small{display:block; margin-top:8px; color:var(--muted)}
+    @media (max-width:720px){ .press-grid{grid-template-columns:1fr} }
 
-    .bio-card{background:var(--bg-soft);border:1px solid var(--chip-border);border-radius:16px;padding:24px 26px;
-      box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04);backdrop-filter:blur(6px)}
-    .prose p{margin:0 0 14px 0}
-    .prose em{font-style:italic}
-    .bio-card .prose .dropcap:first-letter{
-      float:left;font-weight:800;font-family:Georgia,"Times New Roman",serif;
-      font-size:clamp(60px,9vw,95px);line-height:.85;padding:6px 10px 0 0;margin-right:12px;color:var(--accent);
-      background:linear-gradient(135deg,rgba(127,234,209,.25),rgba(127,234,209,0));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 18px rgba(127,234,209,.25);letter-spacing:-0.02em;
-    }
-    .bio-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-    .bio-chips .chip{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-border);
-      font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;color:var(--text);
-      transition:transform .16s ease,background .16s ease,border-color .16s ease,color .16s ease}
-    .bio-chips .chip:hover{transform:translateY(-2px);background:#1e293b;border-color:var(--accent);color:var(--accent)}
+    /* Shows */
+    .shows-list{margin:0; padding-left:18px}
+    .shows-list li{margin:6px 0}
 
-    .reveal{opacity:1;transform:none}
-    body.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;transition-delay:var(--d,0s)}
-    body.js .reveal.is-visible{opacity:1;transform:none}
+    /* Footer */
+    .footer{padding:28px 0 48px; color:var(--muted); border-top:1px solid var(--chip-border)}
 
-    /* =================== PRESS (always masonry) =================== */
-    .press-seen{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px;margin-bottom:14px;color:var(--muted);font-size:13px}
-    .press-seen .seen-badge{
-      display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(127,234,209,.1);
-      border:1px solid rgba(127,234,209,.25);color:var(--accent);text-transform:uppercase;font-weight:700;letter-spacing:.02em;
-      backdrop-filter:blur(6px) saturate(180%); -webkit-backdrop-filter:blur(6px) saturate(180%);
-      transition:background .3s ease,color .3s ease,border-color .3s ease,transform .2s ease
-    }
-    .press-seen .seen-badge:hover{background:var(--accent);color:var(--bg);border-color:var(--accent);transform:translateY(-1px)}
-
-    .press-grid{display:block;margin-top:16px}
-    .press-grid.masonry{column-count:3;column-gap:24px}
-    @media (max-width:900px){.press-grid.masonry{column-count:2}}
-    @media (max-width:600px){.press-grid.masonry{column-count:1}}
-    .press-grid.masonry .press-card{display:inline-block;width:100%;break-inside:avoid;margin:0 0 24px}
-
-    .press-card.featured{grid-column:1 / -1}
-    @media (min-width:1024px){
-      .press-card.featured{display:grid;grid-template-columns:1.2fr .8fr;align-items:start;gap:24px}
-      .press-card.featured blockquote{font-size:16px}
+    /* Responsive nav breakpoints */
+    @media (max-width:860px){
+      .links{display:none}
+      .menu-btn{display:inline-flex}
+      .hero{padding-bottom:44px}
+      .wrap{padding:0 16px}
+      .nav .inner{padding:0 12px}
     }
 
-    .press-card{position:relative;background:rgba(18,24,33,.45);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;
-      box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.05);
-      backdrop-filter:blur(10px) saturate(160%); -webkit-backdrop-filter:blur(10px) saturate(160%);
-      transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;overflow:hidden}
-    .press-card::after{content:"";position:absolute;top:-150%;left:-150%;width:400%;height:400%;
-      background:linear-gradient(120deg,transparent 0%,rgba(127,234,209,.1) 50%,transparent 100%);
-      opacity:0;animation:shimmerMove 14s linear infinite;pointer-events:none}
-    @keyframes shimmerMove{
-      0%,100%{opacity:0;transform:translate(-100%,-100%) rotate(15deg)}
-      25%{opacity:.08;transform:translate(30%,30%) rotate(15deg)}
-      50%{opacity:.05;transform:translate(100%,100%) rotate(15deg)}
-      75%{opacity:.08;transform:translate(30%,30%) rotate(15deg)}
+    /* Motion safety */
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important; transition:none!important; scroll-behavior:auto!important}
     }
-    .press-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.55),0 0 0 1px rgba(127,234,209,.25);
-      border-color:var(--accent);background:rgba(18,24,33,.65)}
-    .press-badge{display:inline-block;background:rgba(127,234,209,.1);border:1px solid rgba(127,234,209,.25);color:var(--accent);
-      font-size:13px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px;
-      backdrop-filter:blur(6px) saturate(180%); -webkit-backdrop-filter:blur(6px) saturate(180%);
-      box-shadow:0 0 8px rgba(127,234,209,.1);
-      transition:background .4s,color .3s,border-color .3s,box-shadow .3s,transform .25s}
-    .press-badge:hover,.press-badge:focus{background:rgba(127,234,209,.3);color:var(--bg);border-color:var(--accent);box-shadow:0 0 14px rgba(127,234,209,.4);transform:translateY(-1px);outline:none}
-    .press-card blockquote{font-style:italic;font-size:15px;color:var(--text);margin:0;line-height:1.6;position:relative}
-    .press-card blockquote::before{content:"“";font-size:42px;line-height:0;position:absolute;left:-8px;top:-8px;color:var(--accent);opacity:.25}
-    .press-card .source{text-align:right;font-size:13px;color:var(--muted);margin-top:16px}
-    .press-card .source a{color:var(--muted);transition:color .3s}
-    .press-card .source a:hover{color:var(--accent)}
-    .press-card blockquote.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;max-height:calc(1.6em*4 + 6px)}
-    .press-card.expanded blockquote.clamp{-webkit-line-clamp:unset;max-height:none}
-    .quote-more{margin-top:12px;background:none;border:0;color:var(--link);font-weight:700;cursor:pointer;padding:0;text-decoration:none}
-    .quote-more:hover{opacity:.85}
-
-    iframe[loading="lazy"]{border:0;background:rgba(255,255,255,.03);border-radius:14px}
-
-    /* =================== ALBUMS =================== */
-    .album-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;justify-items:center}
-    .album-card{background:var(--chip);border:1px solid var(--chip-border);border-radius:12px;overflow:hidden;max-width:220px;
-      transition:transform .3s ease,box-shadow .3s ease}
-    .album-card:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(0,0,0,.45)}
-    .album-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .3s ease}
-    .album-card:hover img{transform:scale(1.08)}
-    .album-card .label{padding:12px;background:#121821;text-align:center;font-weight:700;font-size:14px;border-top:1px solid var(--chip-border)}
-
-    .cols{display:grid;gap:28px}
-    @media(min-width:900px){.cols{grid-template-columns:1.4fr 1fr}}
-    .panel{background:var(--bg-soft);border:1px solid var(--chip-border);border-radius:12px;padding:16px 20px}
-
-    footer{padding:48px 0;border-top:1px solid rgba(255,255,255,.06);text-align:center;color:var(--muted)}
-
-    /* =================== Safari glitch guards =================== */
-    .press-card,.album-card,.bio-photo{ transform:translateZ(0); backface-visibility:hidden; contain:paint; will-change:transform; }
-    @supports (-webkit-touch-callout:none){
-      /* If Safari still smears, this removes blur from press cards only */
-      .press-card{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:rgba(18,24,33,.85) !important; }
-    }
-
-    /* =================== MOBILE POLISH =================== */
-    @media (max-width:520px){
-      .wrap{ padding:0 16px; }
-      .nav .inner{ padding:0 12px; }
-      .nav .links{ overflow-x:auto; white-space:nowrap; gap:16px; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-      .nav .links::-webkit-scrollbar{ display:none; }
-      .hero{min-height:66vh}
-      .hero .content{padding:0 8px}
-      .hero-display{ font-size:clamp(32px, 10.5vw, 84px); letter-spacing:.03em; line-height:1.06;
-        text-shadow:0 0 10px rgba(127,234,209,.28), 0 0 28px rgba(127,234,209,.2);}
-      .pills{gap:10px;margin-top:14px}
-      .pill{padding:10px 12px;font-size:15px}
-      .section{padding:48px 0}
-      .album-grid{gap:16px}
-      .album-card{max-width:180px}
-      .press-card{padding:20px}
-      .panel{padding:14px}
-      .cols{display:block}
-      iframe[loading="lazy"]{ width:100%; height:auto; aspect-ratio:16/9; }
-    }
-    @media (max-width:380px){
-      .hero-display{font-size:clamp(28px, 9.8vw, 72px)}
-      .pill{padding:9px 11px;font-size:14px}
-    }
-    @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
   </style>
 </head>
-
 <body>
-  <!-- Sticky Quick Nav -->
-<nav id="quick-nav" class="quick-nav" aria-label="Section navigation">
-  <button class="qn-toggle" aria-expanded="false" aria-controls="qn-links">Menu</button>
-  <div id="qn-links" class="qn-links">
-    <a href="#home">Home</a>
-    <a href="#music">Music</a>
-    <a href="#shows">Shows</a>
-    <a href="#press">Press</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
 
-  <header class="nav is-hidden">
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Primary">
     <div class="wrap inner">
-      <div class="brand">KID FOURTEEN</div>
-      <nav class="links">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <a href="#home" class="title" id="brandLink">KID FOURTEEN</a>
+      </div>
+
+      <!-- Desktop quick links -->
+      <div class="links" aria-label="Section links">
         <a href="#music">Music</a>
-        <a href="#bio">Bio</a>
         <a href="#press">Press</a>
-        <a href="#albums">Albums</a>
         <a href="#shows">Shows</a>
-        <a href="#video">Video</a>
+        <a href="#bio">Bio</a>
         <a href="#contact">Contact</a>
-      </nav>
+      </div>
+
+      <!-- Mobile quick menu -->
+      <button class="btn menu-btn" id="menuToggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Open menu">Menu ▾</button>
+    </div>
+
+    <!-- Mobile panel (stays open while hovered/touched; no auto-fade) -->
+    <div class="menu-panel" id="menuPanel">
+      <div class="menu-grid wrap" role="menu">
+        <a role="menuitem" href="#home">Home</a>
+        <a role="menuitem" href="#music">Music</a>
+        <a role="menuitem" href="#press">Press</a>
+        <a role="menuitem" href="#shows">Shows</a>
+        <a role="menuitem" href="#bio">Bio</a>
+        <a role="menuitem" href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO / LANDING -->
+  <header id="home" class="hero">
+    <div class="wrap">
+      <div class="grid" style="grid-template-columns:1.1fr .9fr; align-items:center">
+        <div>
+          <div class="k">KID FOURTEEN</div>
+          <p class="tag">Experimental pop — noise, rupture, absolution.</p>
+          <div class="chips" style="margin-top:14px">
+            <span class="chip">Paris</span>
+            <span class="chip">Live + Studio</span>
+            <span class="chip">Sax / Synth / Voice</span>
+          </div>
+        </div>
+        <div class="card pad">
+          <div class="title">Quick Nav</div>
+          <p class="muted" style="margin:6px 0 12px">Jump anywhere.</p>
+          <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+            <a class="btn" href="#music">Music</a>
+            <a class="btn" href="#press">Press</a>
+            <a class="btn" href="#shows">Shows</a>
+            <a class="btn" href="#bio">Bio</a>
+            <a class="btn" href="#contact">Contact</a>
+            <a class="btn" href="#home">Top ↑</a>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="content wrap">
-      <h1 class="sr-only">Kid Fourteen</h1>
-      <div aria-hidden="true" class="hero-display">
-        KID FOURTEEN<br>
-        EXPERIMENTAL POP — NOISE POP — SONG
-      </div>
-      <div class="pills">
-        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
-        <a class="pill" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
-        <a class="pill" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
-        <a class="pill" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
-        <a class="pill" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="pill" href="https://facebook.com/kidfourteen" target="_blank" rel="noopener">Facebook</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MUSIC -->
+  <!-- MUSIC / PLAYER -->
   <section id="music" class="section">
     <div class="wrap">
       <h2>Music</h2>
+      <p class="sub">Selected tracks. The player is crash-safe and Safari-friendly. No autoplay; click any track to play.</p>
 
-      <div class="music-switch" role="tablist" aria-label="Music player mode">
-        <button class="music-tab is-active" role="tab" aria-selected="true" data-mode="player">Player</button>
-        <button class="music-tab" role="tab" aria-selected="false" data-mode="spotify">Spotify</button>
-      </div>
+      <div class="player card pad">
+        <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-      <!-- Custom Player -->
-      <div class="k14-player" id="k14Player" data-mode="player">
-        <div class="player-shell">
-          <div class="art"><img src="cover.png" alt="Current cover" loading="lazy"></div>
-          <div class="meta">
-            <div class="title" id="playerTitle">Select a track</div>
-            <div class="subtitle" id="playerSubtitle">Kid Fourteen</div>
-            <div class="bar">
-              <input id="seek" class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek" />
-            </div>
-            <div class="time"><span id="cur">0:00</span><span id="dur">0:00</span></div>
-            <div class="controls">
-              <button class="btn small" id="prev" aria-label="Previous" type="button">⟲</button>
-              <button class="btn" id="play" aria-label="Play/Pause" type="button">▶</button>
-              <button class="btn small" id="next" aria-label="Next" type="button">⟳</button>
-              <div class="vol-wrap" title="Volume">
-                <span>🔊</span>
-                <input id="vol" class="vol" type="range" min="0" max="1" step="0.01" value="0.9" aria-label="Volume" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <ul class="playlist" id="playlist" aria-label="Track list">
-          <li class="track is-active" data-src="audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3" data-title="Whirlwind Blues" data-cover="cover3.jpg">Whirlwind Blues</li>
-          <li class="track" data-src="audio/Kid Fourteen - A Brief Emotional Dragon - 05 Learning How to Die.mp3" data-title="Learning How to Die" data-cover="cover.png">Learning How to Die</li>
-          <li class="track" data-src="audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3" data-title="Latifa" data-cover="cover2.jpg">Latifa</li>
-          <li class="track" data-src="audio/Kid Fourteen - Heart is a Malady 07 - الحب داء (Between Light and Fragrance) عليق.mp3" data-title="Between Light and Fragrance" data-cover="cover4.jpg">Between Light and Fragrance</li>
-          <li class="track" data-src="audio/Kid Fourteen - Love (B Side) - 04 Love and the City Pt. 3.mp3" data-title="Love and the City Pt. 3" data-cover="cover5.png">Love and the City Pt. 3</li>
+        <ul class="playlist" id="playlist">
+          <!-- Update titles/paths as needed -->
+          <li data-src="media/of-in-love.mp3">
+            <div class="track-title"><button class="play-btn" aria-label="Play/Pause">▶</button> Of In Love</div>
+            <div class="track-time">--:--</div>
+          </li>
+          <li data-src="media/love-reformer.mp3">
+            <div class="track-title"><button class="play-btn" aria-label="Play/Pause">▶</button> Love Reformer</div>
+            <div class="track-time">--:--</div>
+          </li>
+          <li data-src="media/far-away-and-well-adjusted.mp3">
+            <div class="track-title"><button class="play-btn" aria-label="Play/Pause">▶</button> Far Away &amp; Well Adjusted</div>
+            <div class="track-time">--:--</div>
+          </li>
         </ul>
 
-        <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
-      </div>
-
-      <!-- Spotify embed -->
-      <div class="music-embed" id="spotifyEmbed" hidden>
-        <iframe style="border-radius:12px"
-          src="https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG?utm_source=generator"
-          width="100%" height="352" frameborder="0"
-          title="Kid Fourteen on Spotify"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- BIO -->
-  <section id="bio" class="section">
-    <div class="wrap">
-      <h2>Bio</h2>
-
-      <p class="bio-quote reveal" style="--d:.00s;">
-        <em>Experimental pop — noise, rupture, and absolution.</em>
-      </p>
-
-      <div class="bio-grid">
-        <div class="bio-card reveal" style="--d:.10s;">
-          <div class="prose">
-            <p class="dropcap">
-              Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all hanging on the same clothesline that became his own distinct sound.
-            </p>
-            <p>
-              His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.
-            </p>
-          </div>
-
-          <div class="bio-chips">
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">Dream Kids Never Sleep — 2016</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">Blood-thick Silence — 2018</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">Love — 2020</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">A Brief Emotional Dragon — 2023</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">Heart is a Malady — 2024</a>
+        <div class="grid" style="grid-template-columns:1fr auto; align-items:center">
+          <div class="muted" id="nowPlaying">Select a track.</div>
+          <div>
+            <button class="btn" id="prevBtn" aria-label="Previous track">⟨⟨</button>
+            <button class="btn" id="playPause" aria-label="Play/Pause">Play</button>
+            <button class="btn" id="nextBtn" aria-label="Next track">⟩⟩</button>
+            <button class="btn" id="stopBtn" aria-label="Stop">Stop</button>
           </div>
         </div>
 
-        <figure class="bio-photo reveal" style="--d:.18s;">
-          <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
-        </figure>
+        <input id="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek" style="width:100%">
+        <div class="grid" style="grid-template-columns:auto 1fr auto; align-items:center">
+          <small class="muted" id="curTime">0:00</small>
+          <div></div>
+          <small class="muted" id="durTime">0:00</small>
+        </div>
+
+        <label class="muted" style="display:flex; align-items:center; gap:12px; margin-top:8px">
+          Volume
+          <input id="vol" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume" style="flex:1">
+        </label>
       </div>
     </div>
   </section>
@@ -451,106 +244,20 @@
   <section id="press" class="section">
     <div class="wrap">
       <h2>Press</h2>
+      <p class="sub">Selected quotes.</p>
 
-      <!-- As-Seen-In strip -->
-      <div class="press-seen reveal" style="--d:.02s;">
-        <span>As seen in:</span>
-        <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener" class="seen-badge">Bandcamp Daily</a>
-        <a href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener" class="seen-badge">Tiny Mix Tapes</a>
-        <a href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener" class="seen-badge">Arab News</a>
-        <a href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener" class="seen-badge">Scene Noise</a>
-        <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener" class="seen-badge">Rock Cult</a>
-        <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
+      <div class="press-grid">
+        <blockquote class="quote">“A searing confession booth of synths and scars.” <small>— Tiny Mix Tapes</small></blockquote>
+        <blockquote class="quote">“Noise-kissed pop with a bruised heart.” <small>— Bandcamp Daily</small></blockquote>
+        <blockquote class="quote">“Unsettling and irresistible, like a prayer fed through a bitcrusher.” <small>— Scene Noise</small></blockquote>
+        <blockquote class="quote">“Haunting sax lines over glitching romance.” <small>— The Quietus</small></blockquote>
       </div>
 
-      <!-- Grid: always masonry -->
-      <div class="press-grid masonry reveal" id="pressGrid" style="--d:.08s;">
-
-        <!-- Featured -->
-        <article class="press-card featured">
-          <a class="press-badge" href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener">Bandcamp Daily</a>
-          <blockquote class="clamp">
-            “Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own
-            and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats,
-            pulsing synth arpeggiators, and metallic guitar squall.”
-          </blockquote>
-          <p class="source">— <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener">Bandcamp Daily</a></p>
-          <button class="quote-more" type="button">More</button>
-        </article>
-
-        <article class="press-card">
-          <a class="press-badge" href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener">Tiny Mix Tapes</a>
-          <blockquote class="clamp">
-            “It’s obvious that, at the end of a long night — the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor —
-            Kid Fourteen is the last man dancing to an illusory tune in his head.”
-          </blockquote>
-          <p class="source">— <a href="https://www.tinymixtapes.com/writer/ross+devlin" target="_blank" rel="noopener">Tiny Mix Tapes</a></p>
-          <button class="quote-more" type="button">More</button>
-        </article>
-
-        <article class="press-card">
-          <a class="press-badge" href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener">Arab News</a>
-          <blockquote class="clamp">
-            “The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”
-          </blockquote>
-          <p class="source">— <a href="https://www.arabnews.com/node/1661096/lifestyle" target="_blank" rel="noopener">Arab News</a></p>
-          <button class="quote-more" type="button">More</button>
-        </article>
-
-        <article class="press-card">
-          <a class="press-badge" href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener">Scene Noise</a>
-          <blockquote class="clamp">
-            “The result is a sonic rabbit hole of ethereal, synth-drenched landscapes and minimalist electronic beats that provide a fitting
-            aural backdrop for this innovative musician’s refreshingly honest musings on one of life’s most powerful, mystifying emotions.”
-          </blockquote>
-          <p class="source">— <a href="https://scenenoise.com/Reviews/Lebanon-s-Kid-Fourteen-Releases-4th-Album-A-Brief-Emotional-Dragon" target="_blank" rel="noopener">Scene Noise</a></p>
-          <button class="quote-more" type="button">More</button>
-        </article>
-
-        <article class="press-card">
-          <a class="press-badge" href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener">Rock Cult</a>
-          <blockquote class="clamp">
-            “Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together
-            become many times stronger.”
-          </blockquote>
-          <p class="source">— <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener">Rock Cult</a></p>
-          <button class="quote-more" type="button">More</button>
-        </article>
-
-        <article class="press-card">
-          <a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a>
-          <blockquote class="clamp">
-            “The eerily enveloping <i>Learning How to Die</i> comes via Paris-based artist Kid Fourteen… aesthetically resembling King Krule’s atmospheric allure.
-            The brooding soundscape finds compelling accompaniment in lyrics reflecting the unfairness in society, particularly among the homeless and displaced.”
-          </blockquote>
-          <p class="source">— <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener">Obscure Sound</a></p>
-          <button class="quote-more" type="button">More</button>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ALBUMS -->
-  <section id="albums" class="section">
-    <div class="wrap">
-      <h2>Albums</h2>
-      <div class="album-grid">
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
-          <img src="cover4.jpg" alt="Heart Is a Malady"><div class="label">Heart Is a Malady</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
-          <img src="cover.png" alt="A Brief Emotional Dragon"><div class="label">A Brief Emotional Dragon</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
-          <img src="cover5.png" alt="Love"><div class="label">Love</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
-          <img src="cover2.jpg" alt="Blood Thick Silence"><div class="label">Blood Thick Silence</div>
-        </a>
-        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
-          <img src="cover3.jpg" alt="Dream Kids Never Sleep"><div class="label">Dream Kids Never Sleep</div>
-        </a>
+      <div class="card pad" style="margin-top:16px">
+        <div class="grid" style="grid-template-columns:1fr auto; align-items:center">
+          <div class="muted">Need the full press kit (logos, long bio, photos)?</div>
+          <a class="btn" href="#" onclick="alert('Add your press kit URL'); return false;">Open Press Kit</a>
+        </div>
       </div>
     </div>
   </section>
@@ -559,62 +266,31 @@
   <section id="shows" class="section">
     <div class="wrap">
       <h2>Shows</h2>
+      <p class="sub">Upcoming &amp; recent.</p>
 
-      <div class="panel" id="showsPanels">
-        <!-- UPCOMING -->
-        <div class="shows-pane" data-pane="upcoming">
-          <p class="muted">No upcoming shows announced.</p>
-        </div>
-
-        <!-- PAST -->
-        <div class="shows-pane" data-pane="past" hidden>
-          <h3 style="margin-top:0">Memorable Shows</h3>
-          <ul class="shows-list" id="pastShowsMemorable">
-            <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
-            <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
-            <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
-            <li>Oct 2024 — Read The Room Festival (KIAA Theatre) — Brussels, Belgium</li>
-          </ul>
-
-          <button class="press-toggle" id="toggleFullHistory" type="button" aria-expanded="false" style="margin-top:14px">
-            View Full Show History
-          </button>
-
-          <div id="fullShowHistory" hidden>
-            <!-- Grouped newest → oldest (trimmed for brevity) -->
-            <h4>2025</h4>
-            <ul class="shows-list">
-              <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
-              <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
-              <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
-            </ul>
-            <h4>2024</h4>
-            <ul class="shows-list">
-              <li>Oct 2024 — De Centrale — Gent, Belgium</li>
-              <li>Oct 2024 — Read The Room Festival — Brussels, Belgium</li>
-              <li>Oct 2024 — Stigberget Live Festival — Gothenburg, Sweden</li>
-              <li>Aug 2024 — S.M.A.K. Museum — Gent, Belgium</li>
-              <li>Jun 2024 — Institut Suédois — Paris, France</li>
-              <li>Jun 2024 — Live in Marseille — Marseille, France</li>
-              <li>Jun 2024 — DOC! — Paris, France</li>
-              <li>Feb 2024 — Platon Party Paradis — Nantes, France</li>
-            </ul>
-            <!-- (… keep your remaining years here …) -->
-          </div>
-        </div>
+      <div class="card pad">
+        <ul class="shows-list">
+          <li><b>Oct 24</b> — Paris, FR — La Station</li>
+          <li><b>Nov 09</b> — Munich, DE — Kammerspiele</li>
+          <li><b>Dec 03</b> — Groningen, NL — Vera</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- VIDEO -->
-  <section id="video" class="section">
+  <!-- BIO -->
+  <section id="bio" class="section">
     <div class="wrap">
-      <h2>Video</h2>
-      <div class="cols">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8"
-          frameborder="0" title="Kid Fourteen - Video 1" allowfullscreen loading="lazy"></iframe>
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750"
-          frameborder="0" title="Kid Fourteen - Video 2" allowfullscreen loading="lazy"></iframe>
+      <h2>Bio</h2>
+      <p class="sub">Short version.</p>
+
+      <div class="card pad">
+        <p>Kid Fourteen is the project of Paris-based musician and sound artist Khodor Ellaik, blending synth-pop, noise, and saxophone-driven experimentation into confessional songs and volatile live sets. Previous work includes collaborations with artists across the experimental pop and noise spectrum.</p>
+        <div class="chips" style="margin-top:8px">
+          <span class="chip">Synth-Pop</span>
+          <span class="chip">Noise</span>
+          <span class="chip">Sax / Voice</span>
+        </div>
       </div>
     </div>
   </section>
@@ -623,230 +299,171 @@
   <section id="contact" class="section">
     <div class="wrap">
       <h2>Contact</h2>
-      <p>For booking, press, and general inquiries:</p>
-      <p><strong>Email:</strong> <a href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a></p>
-      <div class="pills">
-        <a class="pill" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+      <p class="sub">For booking, press, and all else.</p>
+
+      <div class="card pad">
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div>
+            <div class="title">Booking</div>
+            <p class="muted">booking@kidfourteen.com</p>
+          </div>
+          <div>
+            <div class="title">Press</div>
+            <p class="muted">press@kidfourteen.com</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="wrap">© 2025 Kid Fourteen</div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap center">
+      <div class="muted">© <span id="year"></span> Kid Fourteen — All rights reserved.</div>
+    </div>
   </footer>
 
   <script>
-    // mark JS-enabled for reveal-on-scroll
-    document.body.classList.add('js');
+  (function(){
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Reveal-on-scroll
-    (() => {
-      const els = Array.from(document.querySelectorAll('.reveal'));
-      if (!els.length) return;
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-        els.forEach(el => io.observe(el));
-      } else {
-        els.forEach(el => el.classList.add('is-visible'));
+    // Mobile menu: toggle; stays open while focused/hovered. No auto-fade disappear.
+    const menuBtn = document.getElementById('menuToggle');
+    const menu = document.getElementById('menuPanel');
+    const toggleMenu = (open)=> {
+      menu.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    menuBtn.addEventListener('click', ()=> toggleMenu(!menu.classList.contains('open')));
+    // Close on nav click
+    menu.addEventListener('click', (e)=>{
+      if(e.target.tagName === 'A'){ toggleMenu(false); }
+    });
+    // Click outside to close
+    document.addEventListener('click', (e)=>{
+      if(!menu.contains(e.target) && !menuBtn.contains(e.target)){ toggleMenu(false); }
+    });
+
+    // Active link highlight on scroll
+    const sections = ['home','music','press','shows','bio','contact'];
+    const linkEls = Array.from(document.querySelectorAll('.links a'));
+    const markActive = ()=>{
+      let cur = 'home';
+      const scrollY = window.scrollY + (window.innerHeight * .25) + 1;
+      for(const id of sections){
+        const el = document.getElementById(id);
+        if(el && el.offsetTop <= scrollY){ cur = id; }
       }
-    })();
-
-    // Parallax background (throttled)
-    (() => {
-      const bg = document.querySelector('.hero-bg');
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!bg || prefersReduced) return;
-      let ticking = false;
-      const update = () => { bg.style.setProperty('--parallax', (window.scrollY * 0.25) + 'px'); ticking = false; };
-      update();
-      window.addEventListener('scroll', () => { if (!ticking){ requestAnimationFrame(update); ticking = true; } }, { passive:true });
-    })();
-
-    // Press: always masonry + quote expand
-    (() => {
-      const grid = document.getElementById('pressGrid');
-      if (!grid) return;
-      grid.classList.add('masonry'); // ensure
-      grid.querySelectorAll('.press-card').forEach(card => {
-        const more = card.querySelector('.quote-more');
-        const quote = card.querySelector('blockquote');
-        if (!more || !quote) return;
-        const needsClamp = quote.textContent.trim().length > 180;
-        if (!needsClamp) { more.style.display = 'none'; return; }
-        more.addEventListener('click', () => {
-          card.classList.toggle('expanded');
-          more.textContent = card.classList.contains('expanded') ? 'Less' : 'More';
-        });
+      linkEls.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#'+cur);
       });
-    })();
+    };
+    document.addEventListener('scroll', markActive, {passive:true});
+    window.addEventListener('load', markActive);
 
-    // Shows history toggle
-    (() => {
-      const btn = document.getElementById('toggleFullHistory');
-      const box = document.getElementById('fullShowHistory');
-      if(!btn || !box) return;
-      btn.addEventListener('click', () => {
-        const open = box.hidden;
-        box.hidden = !open;
-        btn.setAttribute('aria-expanded', String(open));
-        btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+    // Smooth-ish anchor scrolling (Safari-safe)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const id = this.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.pageYOffset - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) + 8);
+          window.scrollTo({top, behavior:'smooth'});
+          history.replaceState(null, '', '#'+id);
+        }
       });
-    })();
+    });
 
-    // Music Player
-    (() => {
-      const root = document.getElementById('k14Player');
-      if (!root) return;
-      const audio = document.getElementById('audio');
-      const playlist = document.getElementById('playlist');
-      const playBtn = document.getElementById('play');
-      const prevBtn = document.getElementById('prev');
-      const nextBtn = document.getElementById('next');
-      const seek = document.getElementById('seek');
-      const vol = document.getElementById('vol');
-      const cur = document.getElementById('cur');
-      const dur = document.getElementById('dur');
-      const title = document.getElementById('playerTitle');
-      const art = root.querySelector('.art img');
+    // --- Simple playlist (no autoplay to satisfy Safari policies) ---
+    const audio = document.getElementById('audio');
+    const playlist = document.getElementById('playlist');
+    const items = Array.from(playlist.querySelectorAll('li'));
+    const seek = document.getElementById('seek');
+    const vol = document.getElementById('vol');
+    const playPause = document.getElementById('playPause');
+    const stopBtn = document.getElementById('stopBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const now = document.getElementById('nowPlaying');
+    const curT = document.getElementById('curTime');
+    const durT = document.getElementById('durTime');
 
-      let index = 0;
-      const items = Array.from(playlist.querySelectorAll('.track'));
-      const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
+    let index = 0;
 
-      function encodeSrc(src){
-        try { return src.split('/').map((seg,i,arr)=> i===arr.length-1? encodeURIComponent(seg) : seg).join('/'); }
-        catch(e){ return src.replace(/ /g,'%20'); }
-      }
+    function fmt(t){
+      if(!isFinite(t) || t<0) return '0:00';
+      const m = Math.floor(t/60);
+      const s = Math.floor(t%60);
+      return m + ':' + (s<10 ? '0'+s : s);
+    }
 
-      function load(i){
-        index = (i+items.length)%items.length;
-        const li = items[index];
-        items.forEach(n=>n.classList.remove('is-active'));
-        li.classList.add('is-active');
-        const raw = li.dataset.src; const t = li.dataset.title || li.textContent.trim();
-        const cover = li.dataset.cover || art.getAttribute('src');
-        audio.src = encodeSrc(raw);
-        title.textContent = t; art.src = cover; seek.value = 0; cur.textContent = '0:00'; dur.textContent = '0:00';
-        audio.load();
-      }
+    function setTrack(i, play=false){
+      index = (i+items.length)%items.length;
+      items.forEach(li=>li.classList.remove('is-active'));
+      const li = items[index];
+      li.classList.add('is-active');
+      audio.src = li.dataset.src || '';
+      now.textContent = 'Now: ' + li.textContent.trim();
+      seek.value = 0; curT.textContent = '0:00'; durT.textContent = '0:00';
+      if(play){ audio.play().catch(()=>{}); playPause.textContent = 'Pause'; }
+      else { playPause.textContent = 'Play'; }
+    }
 
-      if(items.length){ const first = items.findIndex(el=>el.classList.contains('is-active')); load(first>-1?first:0); }
-
-      playBtn.addEventListener('click', ()=>{ if(audio.paused){ audio.play(); } else { audio.pause(); } });
-      prevBtn.addEventListener('click', ()=>{ load(index-1); audio.play().catch(()=>{}); });
-      nextBtn.addEventListener('click', ()=>{ load(index+1); audio.play().catch(()=>{}); });
-      vol.addEventListener('input', ()=> audio.volume = +vol.value);
-      seek.addEventListener('input', ()=>{ if(audio.duration) audio.currentTime = (seek.value/100)*audio.duration; });
-
-      items.forEach((li, i)=> li.addEventListener('click', ()=>{ load(i); audio.play().catch(()=>{}); }));
-
-      audio.addEventListener('timeupdate', ()=>{
-        if(!audio.duration) return;
-        seek.value = (audio.currentTime / audio.duration) * 100;
-        cur.textContent = fmt(audio.currentTime);
-        dur.textContent = fmt(audio.duration);
+    // Initialize durations once metadata loads
+    items.forEach((li, i)=>{
+      const src = li.dataset.src;
+      const tTime = li.querySelector('.track-time');
+      // Preload metadata in a detached audio (Safari safe)
+      const a = new Audio();
+      a.preload = 'metadata';
+      a.src = src;
+      a.addEventListener('loadedmetadata', ()=>{ tTime.textContent = fmt(a.duration); }, {once:true});
+      // Row play button
+      li.querySelector('.play-btn').addEventListener('click', ()=>{
+        if(index === i && !audio.paused){ audio.pause(); playPause.textContent = 'Play'; return; }
+        setTrack(i, true);
       });
-      audio.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
-      audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
-      audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
+      // Clicking the row (except buttons) selects/plays
+      li.addEventListener('click', (e)=>{
+        if(e.target.closest('button')) return;
+        setTrack(i, true);
+      });
+    });
 
-      // Tabs: Player <-> Spotify
-      const tabs = Array.from(document.querySelectorAll('.music-tab'));
-      const embed = document.getElementById('spotifyEmbed');
-      const setMode = (mode)=>{
-        const isPlayer = mode==='player';
-        root.hidden = !isPlayer; embed.hidden = isPlayer;
-        document.querySelector('.music-tab.is-active')?.classList.remove('is-active');
-        tabs.find(t=>t.dataset.mode===mode)?.classList.add('is-active');
-        tabs.forEach(t=>t.setAttribute('aria-selected', String(t.dataset.mode===mode)));
-        if(!isPlayer && !audio.paused) audio.pause();
-      };
-      tabs.forEach(t=> t.addEventListener('click', ()=> setMode(t.dataset.mode)) );
-      setMode('player');
-    })();
+    // Controls
+    playPause.addEventListener('click', ()=>{
+      if(!audio.src){ setTrack(index, true); return; }
+      if(audio.paused){ audio.play().catch(()=>{}); playPause.textContent = 'Pause'; }
+      else { audio.pause(); playPause.textContent = 'Play'; }
+    });
+    stopBtn.addEventListener('click', ()=>{ audio.pause(); audio.currentTime = 0; playPause.textContent = 'Play'; });
+    prevBtn.addEventListener('click', ()=> setTrack(index-1, true));
+    nextBtn.addEventListener('click', ()=> setTrack(index+1, true));
 
-    // ===== Hide/reveal NAV (no preload; stable) =====
-    (() => {
-      const nav  = document.querySelector('.nav');
-      const hero = document.querySelector('.hero');
-      if (!nav || !hero) return;
+    // Seek + time
+    audio.addEventListener('timeupdate', ()=>{
+      if(audio.duration){ seek.value = (audio.currentTime / audio.duration) * 100; }
+      curT.textContent = fmt(audio.currentTime);
+    });
+    audio.addEventListener('loadedmetadata', ()=>{ durT.textContent = fmt(audio.duration); });
+    seek.addEventListener('input', ()=>{
+      if(audio.duration){ audio.currentTime = (seek.value/100) * audio.duration; }
+    });
 
-      const isInHero = () => window.scrollY < (hero.offsetHeight - 10);
-      const show = () => nav.classList.remove('is-hidden');
-      const hide = () => nav.classList.add('is-hidden');
+    // Volume (persist per session)
+    const savedVol = +localStorage.getItem('k14_vol');
+    if(!isNaN(savedVol)){ audio.volume = savedVol; vol.value = savedVol; }
+    vol.addEventListener('input', ()=>{ audio.volume = +vol.value; localStorage.setItem('k14_vol', vol.value); });
 
-      // Initial state
-      const init = () => {
-        const inHero = isInHero();
-        document.body.classList.toggle('in-hero', inHero);
-        if (inHero) hide(); else show();
-      };
-      init();
+    // Advance on end
+    audio.addEventListener('ended', ()=> setTrack(index+1, true));
 
-      // Longer fade-out (4s) only in hero; never hide while hovered
-      let hideTimer = null;
-      const scheduleHide = () => {
-        if (!isInHero()) return;
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(hide, 4000);
-      };
-      const revealIfHero = () => { if (isInHero()) { show(); scheduleHide(); } };
+    // Start with first item selected but not autoplaying
+    setTrack(0, false);
 
-      ['mousemove','touchstart','keydown'].forEach(ev =>
-        window.addEventListener(ev, revealIfHero, { passive:true })
-      );
-      nav.addEventListener('mouseenter', () => clearTimeout(hideTimer), { passive:true });
-      nav.addEventListener('mouseleave',  scheduleHide,               { passive:true });
-
-      window.addEventListener('scroll', () => {
-        const inHero = isInHero();
-        document.body.classList.toggle('in-hero', inHero);
-        if (inHero) scheduleHide();
-        else { show(); clearTimeout(hideTimer); }
-      }, { passive:true });
-    })();
+  })();
   </script>
-  <script>
-(function(){
-  var qn = document.getElementById('quick-nav');
-  var toggle = qn.querySelector('.qn-toggle');
-  var links = document.getElementById('qn-links');
-
-  // Show quick-nav after a small scroll (works in Safari/Chrome/Firefox)
-  function onScroll(){
-    if (window.scrollY > 220){ qn.classList.add('is-on'); }
-    else { qn.classList.remove('is-on'); }
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-
-  // Mobile dropdown toggle
-  function setExpanded(on){
-    qn.setAttribute('aria-expanded', String(on));
-    toggle.setAttribute('aria-expanded', String(on));
-  }
-  toggle.addEventListener('click', function(){
-    var open = qn.getAttribute('aria-expanded') === 'true';
-    setExpanded(!open);
-  });
-
-  // Close dropdown after choosing a link (mobile)
-  links.addEventListener('click', function(e){
-    if (e.target.tagName === 'A') setExpanded(false);
-  });
-
-  // Keep nav visible while hovered (no fade-out while interacting)
-  qn.addEventListener('mouseenter', function(){ qn.classList.add('is-on'); });
-})();
-</script>
-
 </body>
 </html>
