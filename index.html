@@ -310,6 +310,47 @@
   pointer-events:auto !important;
   position:sticky !important;  /* keep the glass nav stuck to top */
 }
+    /* === FINAL NAV FIX: always-glass, never hide, sticky at top (append-only) === */
+
+/* one consistent glass style, always */
+.nav{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: linear-gradient(180deg, rgba(10,14,20,.78), rgba(10,14,20,.3)) !important;
+  border-bottom: 1px solid rgba(255,255,255,.05) !important;
+  backdrop-filter: saturate(140%) blur(8px) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(8px) !important;
+}
+
+/* kill the hero-specific override that was switching behavior */
+body.in-hero .nav{
+  position: sticky !important;
+  top: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  background: linear-gradient(180deg, rgba(10,14,20,.78), rgba(10,14,20,.3)) !important;
+  border-bottom: 1px solid rgba(255,255,255,.05) !important;
+  backdrop-filter: saturate(140%) blur(8px) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(8px) !important;
+}
+
+/* disable the fade-out/hide class entirely */
+.nav.is-hidden{
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+/* guard: if any code adds .is-solid, keep glass instead of black */
+.nav.is-solid{
+  background: linear-gradient(180deg, rgba(10,14,20,.78), rgba(10,14,20,.3)) !important;
+  box-shadow: none !important;
+  border-bottom-color: rgba(255,255,255,.05) !important;
+  backdrop-filter: saturate(140%) blur(8px) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(8px) !important;
+}
+
 
   </style>
 </head>
@@ -833,26 +874,6 @@
       qn.addEventListener('mouseenter', function(){ qn.classList.add('is-on'); });
     })();
   </script>
-  <script>
-/* show nav after the first scroll, then keep it on */
-(function(){
-  const nav = document.querySelector('.nav');
-  if(!nav) return;
-
-  function activate(){
-    nav.classList.remove('is-hidden');   // reveal it
-    nav.classList.add('nav-locked');     // and lock it visible forever
-    window.removeEventListener('scroll', onScroll);
-  }
-  function onScroll(){
-    if (window.scrollY > 10) activate();
-  }
-
-  // if we land on an anchor below the fold, activate immediately
-  if (window.scrollY > 10) activate();
-  else window.addEventListener('scroll', onScroll, { passive:true });
-})();
-</script>
-
+ 
 </body>
 </html>
