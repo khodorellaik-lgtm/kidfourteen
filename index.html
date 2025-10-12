@@ -1018,6 +1018,7 @@ body.in-hero .nav{
       setMode('player');
     })();
     // ===================== /CUSTOM PLAYER LOGIC =====================
+    
     // ===== Landing: hide nav in hero, reveal on mouse move/scroll/keyboard =====
 (() => {
   const nav  = document.querySelector('.nav');
@@ -1113,6 +1114,24 @@ document.body.classList.remove('preload');
     } else hideNav();
   }, { passive:true });
 })();
+// --- NAV hover reveal with auto-hide ---
+
+const REVEAL_ZONE = 80; // pixels from top of screen
+let hideTimer;
+
+window.addEventListener('mousemove', (e) => {
+  if (!isInHero()) return; // only apply on hero section
+
+  if (e.clientY <= REVEAL_ZONE) {
+    nav.classList.remove('is-hidden');
+    clearTimeout(hideTimer);
+  } else {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      nav.classList.add('is-hidden');
+    }, 2000); // auto-hide after 2 seconds
+  }
+}, { passive: true });
 
 
   </script>
