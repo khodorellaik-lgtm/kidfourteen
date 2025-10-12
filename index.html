@@ -27,6 +27,13 @@
 
 
   <style>
+    /* Hide/show the sticky nav by sliding it off the top */
+.nav{ transition: transform .28s ease; will-change: transform; }
+.nav.is-hidden{ transform: translateY(-100%); }
+
+/* optional: slightly softer nav while over the hero */
+body.in-hero .nav{ background: linear-gradient(180deg, rgba(10,14,20,.55), rgba(10,14,20,.25)); }
+
     /* SHOWS styling */
     .shows-list{margin:0; padding-left:18px}
     .shows-list li{margin:6px 0}
@@ -956,6 +963,59 @@
       setMode('player');
     })();
     // ===================== /CUSTOM PLAYER LOGIC =====================
+    // ===== Landing: hide nav in hero, reveal on mouse move/scroll/keyboard =====
+(() => {
+  const nav  = document.querySelector('.nav');
+  const hero = document.querySelector('.hero');
+  if(!nav || !hero) return;
+
+  const H = () => hero.getBoundingClientRect().height;
+  const inHero = () => window.scrollY < (H() - 10);
+
+  let hideTimer = null;
+  function hideSoon(){
+    if(!inHero()) return;               // never auto-hide outside hero
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => nav.classList.add('is-hidden'), 1500);
+  }
+  function reveal(){
+    nav.classList.remove('is-hidden');
+    hideSoon();
+  }
+
+  // Start hidden if we load at the top (in hero)
+  if (inHero()) nav.classList.add('is-hidden');
+  document.body.classList.toggle('in-hero', inHero());
+
+  // Reveal on mouse move / touch / keyboard (Tab/Esc) while in hero
+  let lastMove = 0;
+  window.addEventListener('mousemove', e => {
+    const now = Date.now();
+    if (now - lastMove < 120) return;   // light throttle
+    lastMove = now;
+    if (inHero()) reveal();
+  }, { passive:true });
+
+  window.addEventListener('touchstart', () => { if (inHero()) reveal(); }, { passive:true });
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Tab' || e.key === 'Escape' || e.key === 'Alt') reveal();
+  });
+
+  // On scroll: always show nav once you leave hero; auto-hide again if you go back to top
+  window.addEventListener('scroll', () => {
+    const top = inHero();
+    document.body.classList.toggle('in-hero', top);
+    if (top){
+      // in hero -> hide after a moment of inactivity
+      hideSoon();
+    } else {
+      // below hero -> keep nav visible
+      nav.classList.remove('is-hidden');
+      clearTimeout(hideTimer);
+    }
+  }, { passive:true });
+})();
+
   </script>
 </body>
 </html>
