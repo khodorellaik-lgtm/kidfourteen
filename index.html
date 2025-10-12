@@ -217,34 +217,7 @@
       .hero-display{font-size:clamp(28px, 9.8vw, 72px)}
       .pill{padding:9px 11px;font-size:14px}
     }
-    /* === SINGLE GLASS NAV, ALWAYS VISIBLE (works even if other rules exist) === */
-.nav,
-body.in-hero .nav,
-.nav.is-hidden,
-.nav.is-solid{
-  position: fixed !important;
-  top: 0 !important; left: 0 !important; right: 0 !important;
-  z-index: 1000 !important;
 
-  /* glass look */
-  background: linear-gradient(180deg, rgba(10,14,20,.78), rgba(10,14,20,.30)) !important;
-  border-bottom: 1px solid rgba(255,255,255,.05) !important;
-  backdrop-filter: saturate(140%) blur(8px) !important;
-  -webkit-backdrop-filter: saturate(140%) blur(8px) !important;
-
-  /* never fade/slide away */
-  opacity: 1 !important;
-  transform: none !important;
-  pointer-events: auto !important;
-}
-
-/* make sure anchors don’t sit under the fixed bar */
-section[id]{ scroll-margin-top: calc(var(--nav-h) + 12px) !important; }
-
-/* keep links from wrapping/overlapping */
-.nav .inner{ flex-wrap:nowrap !important; min-width:0 !important; }
-.links{ white-space:nowrap !important; overflow-x:auto !important; -webkit-overflow-scrolling:touch; }
-.links::-webkit-scrollbar{ display:none; }
 /* --- appear-after-first-scroll (no design change) --- */
 .nav {
   transition: transform .28s ease, opacity .28s ease;
@@ -261,6 +234,14 @@ body.nav-locked .nav {        /* once revealed, stay fixed forever */
 }
 /* keep anchors clear once bar is shown */
 body.nav-locked section[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }
+    /* appear after first scroll, then stay on */
+.nav{ transition: transform .28s ease, opacity .28s ease; }
+.nav.at-top{ transform: translateY(-100%); opacity:0; pointer-events:none; }
+body.nav-locked .nav{ transform:none; opacity:1; pointer-events:auto; }
+
+/* once locked, anchor spacing below bar */
+body.nav-locked section[id]{ scroll-margin-top: calc(var(--nav-h) + 12px); }
+
 
   </style>
 </head>
@@ -730,7 +711,26 @@ body.nav-locked section[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }
 
   // Default: if there are no upcoming shows, open Past; otherwise Upcoming.
   const hasUpcoming = !!document.querySelector('[data-pane="upcoming"] :not(.muted)');
-  show(hasUpcoming ? 'upcoming' : 'past');
+show('upcoming');
+})();
+</script>
+<script>
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  const atTop = !location.hash && window.scrollY <= 10;
+  if (!atTop) { document.body.classList.add('nav-locked'); return; }
+
+  nav.classList.add('at-top');
+  function onScrollOnce(){
+    if (window.scrollY > 10){
+      nav.classList.remove('at-top');
+      document.body.classList.add('nav-locked');
+      window.removeEventListener('scroll', onScrollOnce, {passive:true});
+    }
+  }
+  window.addEventListener('scroll', onScrollOnce, {passive:true});
 })();
 </script>
 
