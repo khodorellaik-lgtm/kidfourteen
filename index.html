@@ -544,13 +544,10 @@
         <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
       </div>
 
-      <!-- controls: Masonry toggle -->
-      <div class="press-toolbar reveal" style="--d:.05s;">
-        <button type="button" class="press-toggle" data-action="masonry" aria-pressed="false">Masonry layout</button>
-      </div>
+   
 
       <!-- grid (default compact) -->
-      <div class="press-grid compact reveal" id="pressGrid" style="--d:.08s;">
+<div class="press-grid masonry reveal" id="pressGrid" style="--d:.08s;">
 
         <!-- Featured -->
         <article class="press-card featured">
@@ -831,34 +828,14 @@
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    // Press controls: Masonry toggle + "More" expanders
-    (() => {
-      const grid = document.getElementById('pressGrid');
-      if (!grid) return;
+    // Press: always masonry
+(() => {
+  const grid = document.getElementById('pressGrid');
+  if (!grid) return;
+  grid.classList.remove('compact');
+  grid.classList.add('masonry');
+})();
 
-      const btn = document.querySelector('#press .press-toolbar .press-toggle[data-action="masonry"]');
-      const setMode = (masonryOn) => {
-        grid.classList.toggle('compact', !masonryOn);
-        grid.classList.toggle('masonry', masonryOn);
-        btn?.setAttribute('aria-pressed', String(masonryOn));
-        btn?.classList.toggle('is-active', masonryOn);
-      };
-
-      btn?.addEventListener('click', () => setMode(!grid.classList.contains('masonry')));
-      setMode(false); // default to compact
-
-      grid.querySelectorAll('.press-card').forEach(card => {
-        const more = card.querySelector('.quote-more');
-        const quote = card.querySelector('blockquote');
-        if (!more || !quote) return;
-        const needsClamp = quote.textContent.trim().length > 180;
-        if (!needsClamp) { more.style.display = 'none'; return; }
-        more.addEventListener('click', () => {
-          card.classList.toggle('expanded');
-          more.textContent = card.classList.contains('expanded') ? 'Less' : 'More';
-        });
-      });
-    })();
 
     // Shows tabs
     (() => {
