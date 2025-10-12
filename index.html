@@ -501,6 +501,12 @@ body.nav-locked section[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }
   <section id="shows" class="section">
     <div class="wrap">
       <h2>Shows</h2>
+      <!-- Shows tabs -->
+<div class="music-switch shows-switch" role="tablist" aria-label="Shows tabs">
+  <button class="music-tab is-active" role="tab" aria-selected="true" data-tab="upcoming">Upcoming</button>
+  <button class="music-tab" role="tab" aria-selected="false" data-tab="past">Past</button>
+</div>
+
 
       <div class="panel" id="showsPanels">
         <div class="shows-pane" data-pane="upcoming">
@@ -702,6 +708,29 @@ body.nav-locked section[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }
     }
   }
   window.addEventListener('scroll', onScrollOnce, { passive: true });
+})();
+</script>
+<script>
+/* Shows: tabs switch between Upcoming and Past */
+(function () {
+  const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
+  const panes = Array.from(document.querySelectorAll('#showsPanels .shows-pane'));
+  if (!tabs.length || !panes.length) return;
+
+  const show = (key) => {
+    panes.forEach(p => p.hidden = p.dataset.pane !== key);
+    tabs.forEach(t => {
+      const on = t.dataset.tab === key;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+  };
+
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+
+  // Default: if there are no upcoming shows, open Past; otherwise Upcoming.
+  const hasUpcoming = !!document.querySelector('[data-pane="upcoming"] :not(.muted)');
+  show(hasUpcoming ? 'upcoming' : 'past');
 })();
 </script>
 
