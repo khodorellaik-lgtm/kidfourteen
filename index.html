@@ -55,18 +55,7 @@
     .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     /* =================== SINGLE FIXED GLASS NAV =================== */
-    .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: var(--nav-h);
-  background: linear-gradient(180deg, rgba(10,14,20,0.55), rgba(10,14,20,0.15));
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-}
+   
    .nav {
   position: fixed;
   top: 0;
@@ -78,6 +67,22 @@
   border-bottom: 1px solid rgba(255,255,255,0.06);
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
+}
+/* lay out brand (left) + links (right) in one row */
+.nav .inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:100%;
+  padding:0 24px;
+}
+
+/* keep links in a single row on desktop */
+.links{
+  display:flex;
+  gap:22px;
+  align-items:center;
+  white-space:nowrap;
 }
 
     /* =================== HERO =================== */
