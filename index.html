@@ -318,6 +318,17 @@
 /* ensure stacking order so nothing bleeds under the bar */
 .nav{ z-index:1000 !important; }
 .menu-panel{ z-index:999 !important; }
+    /* --- NAV clarity on scroll (append-only) --- */
+.nav{
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.nav.is-solid{
+  background:#0f141b !important;            /* solid, no bleed-through */
+  border-bottom-color:rgba(36,48,64,.9) !important;
+  backdrop-filter:none !important;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
 
   </style>
 </head>
@@ -877,6 +888,20 @@
       });
     }
   })();
+    <script>
+/* make navbar solid after a tiny scroll (prevents "overlap" look) */
+(function(){
+  const nav = document.querySelector('.nav');
+  if(!nav) return;
+  const toggle = ()=>{
+    if (window.scrollY > 10) nav.classList.add('is-solid');
+    else nav.classList.remove('is-solid');
+  };
+  window.addEventListener('scroll', toggle, {passive:true});
+  window.addEventListener('load', toggle);
+})();
+</script>
+
 
 </body>
 </html>
