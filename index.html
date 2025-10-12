@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -623,42 +624,8 @@
     </div>
   </div>
 </section>
-  <script>
-// Fix "View Full Show History" toggle
-document.addEventListener('click', function(e){
-  if (!e.target.matches('#toggleFullHistory')) return;
-  const box = document.getElementById('fullShowHistory');
-  if (!box) return;
-  const open = box.hidden;
-  box.hidden = !open;
-  e.target.setAttribute('aria-expanded', String(open));
-  e.target.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
-});
-</script>
-<script>
-(function () {
-  const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
-  const panes = Array.from(document.querySelectorAll('#showsPanels .shows-pane'));
-  if (!tabs.length || !panes.length) return;
 
-  const show = (key) => {
-    panes.forEach(p => p.hidden = p.dataset.pane !== key);
-    tabs.forEach(t => {
-      const on = t.dataset.tab === key;
-      t.classList.toggle('is-active', on);
-      t.setAttribute('aria-selected', String(on));
-    });
-  };
 
-  // click to switch
-  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
-
-  // default: Upcoming if it actually has items, else Past
-  const upcomingPane = document.querySelector('#showsPanels [data-pane="upcoming"]');
-  const hasUpcoming  = !!(upcomingPane && upcomingPane.querySelector('li, .show, [data-show]'));
-  show(hasUpcoming ? 'upcoming' : 'past');
-})();
-</script>
 
   <!-- VIDEO -->
   <section id="video" class="section">
@@ -831,30 +798,21 @@ document.addEventListener('click', function(e){
       audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
       audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
 
-  <script>
-// Tabs: Player <-> Spotify  (scoped to #music only)
-(() => {
-  const root  = document.getElementById('k14Player');
-  const audio = document.getElementById('audio');
-  const tabs  = Array.from(document.querySelectorAll('.music-switch[aria-label="Music player mode"] .music-tab'));
-  const embed = document.getElementById('spotifyEmbed');
-  if (!tabs.length || !root || !embed) return;
-
-  const setMode = (mode)=>{
-    const isPlayer = mode === 'player';
-    root.hidden = !isPlayer;
-    embed.hidden = isPlayer;
-    document.querySelector('.music-tab.is-active')?.classList.remove('is-active');
-    tabs.find(t => t.dataset.mode === mode)?.classList.add('is-active');
-    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === mode)));
-    if (!isPlayer && audio && !audio.paused) audio.pause();
-  };
-
-  tabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
-  setMode('player');
-})();
-</script>
-
+      // Tabs: Player <-> Spotify
+      const tabs = Array.from(document.querySelectorAll('.music-tab'));
+      const embed = document.getElementById('spotifyEmbed');
+      const setMode = (mode)=>{
+        const isPlayer = mode==='player';
+        root.hidden = !isPlayer; embed.hidden = isPlayer;
+        document.querySelector('.music-tab.is-active')?.classList.remove('is-active');
+        tabs.find(t=>t.dataset.mode===mode)?.classList.add('is-active');
+        tabs.forEach(t=>t.setAttribute('aria-selected', String(t.dataset.mode===mode)));
+        if(!isPlayer && !audio.paused) audio.pause();
+      };
+      tabs.forEach(t=> t.addEventListener('click', ()=> setMode(t.dataset.mode)) );
+      setMode('player');
+    })();
+  </script>
   <script>
 (function () {
   const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
@@ -874,30 +832,6 @@ document.addEventListener('click', function(e){
   tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
 
   // Default: Upcoming if it has shows, otherwise Past
-  const upcomingPane = document.querySelector('#showsPanels [data-pane="upcoming"]');
-  const hasUpcoming  = !!(upcomingPane && upcomingPane.querySelector('li, .show, [data-show]'));
-  show(hasUpcoming ? 'upcoming' : 'past');
-})();
-</script>
-  <script>
-(function () {
-  const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
-  const panes = Array.from(document.querySelectorAll('#showsPanels .shows-pane'));
-  if (!tabs.length || !panes.length) return;
-
-  const show = (key) => {
-    panes.forEach(p => p.hidden = p.dataset.pane !== key);
-    tabs.forEach(t => {
-      const on = t.dataset.tab === key;
-      t.classList.toggle('is-active', on);
-      t.setAttribute('aria-selected', String(on));
-    });
-  };
-
-  // Click handling
-  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
-
-  // Default: Upcoming if there are items, else Past
   const upcomingPane = document.querySelector('#showsPanels [data-pane="upcoming"]');
   const hasUpcoming  = !!(upcomingPane && upcomingPane.querySelector('li, .show, [data-show]'));
   show(hasUpcoming ? 'upcoming' : 'past');
