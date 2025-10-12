@@ -328,6 +328,15 @@
   backdrop-filter:none !important;
   box-shadow:0 6px 20px rgba(0,0,0,.25);
 }
+/* --- Navbar sticky-on-scroll (append-only, keeps glass look) --- */
+.nav{
+  position: sticky !important;   /* becomes fixed once it reaches the top */
+  top: 0 !important;
+  z-index: 1000 !important;      /* stay above content */
+}
+
+/* ensure anchor jumps don’t go under the nav */
+section[id]{ scroll-margin-top: calc(var(--nav-h) + 12px) !important; }
 
 
   </style>
