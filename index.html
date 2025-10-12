@@ -27,6 +27,48 @@
   <meta name="twitter:image" content="/og.jpg">
 
   <style>
+    /* Quick Nav (sticky, Safari-safe) */
+.quick-nav{
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(18,24,33,.75); backdrop-filter: blur(8px);
+  border: 1px solid rgba(127,234,209,.25);
+  border-radius: 999px; padding: 6px 10px; z-index: 9999;
+  opacity: 0; pointer-events: none; transition: opacity .18s ease;
+}
+.quick-nav.is-on{ opacity: 1; pointer-events: auto; }
+
+/* Links row (desktop) */
+.qn-links{ display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; overflow: hidden; }
+.qn-links a{
+  display: inline-block; padding: 6px 10px; border-radius: 999px;
+  background: #1a2230; border: 1px solid #243040; color: var(--text);
+  font-size: 13px; line-height: 1; white-space: nowrap;
+}
+.qn-links a:hover{ border-color: var(--accent); color: var(--accent); }
+
+/* Toggle for mobile */
+.qn-toggle{
+  display: none; border: 1px solid #243040; background: #1a2230; color: var(--text);
+  padding: 6px 10px; border-radius: 999px; font-size: 13px; line-height: 1;
+}
+
+/* Mobile behavior: collapse into dropdown */
+@media (max-width: 700px){
+  .qn-toggle{ display: inline-block; }
+  .qn-links{
+    position: absolute; top: 42px; left: 50%; transform: translateX(-50%);
+    background: rgba(18,24,33,.98); border: 1px solid #243040; border-radius: 14px;
+    padding: 10px; display: none; flex-direction: column; gap: 6px;
+  }
+  .quick-nav[aria-expanded="true"] .qn-links{ display: flex; }
+}
+
+/* Respect users who reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .quick-nav{ transition: none; }
+}
+
     :root{
       --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
       --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
@@ -266,6 +308,18 @@
 </head>
 
 <body>
+  <!-- Sticky Quick Nav -->
+<nav id="quick-nav" class="quick-nav" aria-label="Section navigation">
+  <button class="qn-toggle" aria-expanded="false" aria-controls="qn-links">Menu</button>
+  <div id="qn-links" class="qn-links">
+    <a href="#home">Home</a>
+    <a href="#music">Music</a>
+    <a href="#shows">Shows</a>
+    <a href="#press">Press</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
   <header class="nav is-hidden">
     <div class="wrap inner">
       <div class="brand">KID FOURTEEN</div>
@@ -760,5 +814,39 @@
       }, { passive:true });
     })();
   </script>
+  <script>
+(function(){
+  var qn = document.getElementById('quick-nav');
+  var toggle = qn.querySelector('.qn-toggle');
+  var links = document.getElementById('qn-links');
+
+  // Show quick-nav after a small scroll (works in Safari/Chrome/Firefox)
+  function onScroll(){
+    if (window.scrollY > 220){ qn.classList.add('is-on'); }
+    else { qn.classList.remove('is-on'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Mobile dropdown toggle
+  function setExpanded(on){
+    qn.setAttribute('aria-expanded', String(on));
+    toggle.setAttribute('aria-expanded', String(on));
+  }
+  toggle.addEventListener('click', function(){
+    var open = qn.getAttribute('aria-expanded') === 'true';
+    setExpanded(!open);
+  });
+
+  // Close dropdown after choosing a link (mobile)
+  links.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') setExpanded(false);
+  });
+
+  // Keep nav visible while hovered (no fade-out while interacting)
+  qn.addEventListener('mouseenter', function(){ qn.classList.add('is-on'); });
+})();
+</script>
+
 </body>
 </html>
