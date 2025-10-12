@@ -27,56 +27,19 @@
   <meta name="twitter:image" content="/og.jpg">
 
   <style>
-    /* Quick Nav (sticky, Safari-safe) */
-.quick-nav{
-  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(18,24,33,.75); backdrop-filter: blur(8px);
-  border: 1px solid rgba(127,234,209,.25);
-  border-radius: 999px; padding: 6px 10px; z-index: 9999;
-  opacity: 0; pointer-events: none; transition: opacity .18s ease;
-}
-.quick-nav.is-on{ opacity: 1; pointer-events: auto; }
-
-/* Links row (desktop) */
-.qn-links{ display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; overflow: hidden; }
-.qn-links a{
-  display: inline-block; padding: 6px 10px; border-radius: 999px;
-  background: #1a2230; border: 1px solid #243040; color: var(--text);
-  font-size: 13px; line-height: 1; white-space: nowrap;
-}
-.qn-links a:hover{ border-color: var(--accent); color: var(--accent); }
-
-/* Toggle for mobile */
-.qn-toggle{
-  display: none; border: 1px solid #243040; background: #1a2230; color: var(--text);
-  padding: 6px 10px; border-radius: 999px; font-size: 13px; line-height: 1;
-}
-
-/* Mobile behavior: collapse into dropdown */
-@media (max-width: 700px){
-  .qn-toggle{ display: inline-block; }
-  .qn-links{
-    position: absolute; top: 42px; left: 50%; transform: translateX(-50%);
-    background: rgba(18,24,33,.98); border: 1px solid #243040; border-radius: 14px;
-    padding: 10px; display: none; flex-direction: column; gap: 6px;
-  }
-  .quick-nav[aria-expanded="true"] .qn-links{ display: flex; }
-}
-
-/* Respect users who reduce motion */
-@media (prefers-reduced-motion: reduce){
-  .quick-nav{ transition: none; }
-}
-
     :root{
       --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
       --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
       --nav-h:64px;
     }
+
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      /* Reserve space for the fixed header */
+      padding-top:var(--nav-h);
+      max-width:100%; overflow-x:hidden;
+    }
     a{color:var(--link);text-decoration:none}
     a:hover{opacity:.9}
     ::selection{background:rgba(127,234,209,.22)}
@@ -89,27 +52,17 @@
     .muted{color:var(--muted)}
     .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* Kill accidental horizontal scroll */
-    html, body { max-width:100%; overflow-x:hidden; }
-
-    /* =================== NAV (hidden on landing; robust) =================== */
+    /* =================== SINGLE FIXED GLASS NAV =================== */
     .nav{
-      position:sticky; top:0; z-index:50;
-      background:linear-gradient(180deg,rgba(10,14,20,.78),rgba(10,14,20,.3));
-      border-bottom:1px solid rgba(255,255,255,.05);
-      backdrop-filter:saturate(140%) blur(8px);
-      -webkit-backdrop-filter:saturate(140%) blur(8px);
-      transition:opacity .4s ease, transform .4s ease;
-      will-change:opacity, transform;
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      height:var(--nav-h);
+      display:block;
+      background:linear-gradient(180deg, rgba(10,14,20,.7), rgba(10,14,20,.35));
+      border-bottom:1px solid rgba(255,255,255,.06);
+      backdrop-filter:saturate(140%) blur(10px);
+      -webkit-backdrop-filter:saturate(140%) blur(10px);
     }
-    /* Start hidden; JS will reveal as needed */
-    .nav.is-hidden{ opacity:0; transform:translateY(-100%); pointer-events:none; }
-
-    /* While over hero, keep nav fixed so it doesn’t reserve height */
-    body.in-hero .nav{ position:fixed; top:0; left:0; right:0;
-      background:rgba(8,12,18,0.45); border-bottom:1px solid rgba(255,255,255,0.05); }
-
-    .nav .inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
+    .nav .inner{display:flex;align-items:center;justify-content:space-between;height:100%}
     .brand{font-weight:800;letter-spacing:.12em}
     .links{display:flex;gap:22px}
     .links a{color:var(--text);opacity:.92;position:relative;text-shadow:0 0 6px rgba(127,234,209,.18);
@@ -275,7 +228,6 @@
     /* =================== Safari glitch guards =================== */
     .press-card,.album-card,.bio-photo{ transform:translateZ(0); backface-visibility:hidden; contain:paint; will-change:transform; }
     @supports (-webkit-touch-callout:none){
-      /* If Safari still smears, this removes blur from press cards only */
       .press-card{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:rgba(18,24,33,.85) !important; }
     }
 
@@ -283,8 +235,10 @@
     @media (max-width:520px){
       .wrap{ padding:0 16px; }
       .nav .inner{ padding:0 12px; }
+      /* Keep links accessible on small screens via side-scroll */
       .nav .links{ overflow-x:auto; white-space:nowrap; gap:16px; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
       .nav .links::-webkit-scrollbar{ display:none; }
+
       .hero{min-height:66vh}
       .hero .content{padding:0 8px}
       .hero-display{ font-size:clamp(32px, 10.5vw, 84px); letter-spacing:.03em; line-height:1.06;
@@ -308,22 +262,11 @@
 </head>
 
 <body>
-  <!-- Sticky Quick Nav -->
-<nav id="quick-nav" class="quick-nav" aria-label="Section navigation">
-  <button class="qn-toggle" aria-expanded="false" aria-controls="qn-links">Menu</button>
-  <div id="qn-links" class="qn-links">
-    <a href="#home">Home</a>
-    <a href="#music">Music</a>
-    <a href="#shows">Shows</a>
-    <a href="#press">Press</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-  <header class="nav is-hidden">
+  <!-- SINGLE FIXED GLASS NAV -->
+  <header class="nav">
     <div class="wrap inner">
       <div class="brand">KID FOURTEEN</div>
-      <nav class="links">
+      <nav class="links" aria-label="Primary">
         <a href="#music">Music</a>
         <a href="#bio">Bio</a>
         <a href="#press">Press</a>
@@ -336,7 +279,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
+  <section id="home" class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="content wrap">
       <h1 class="sr-only">Kid Fourteen</h1>
@@ -637,7 +580,7 @@
   </footer>
 
   <script>
-    // mark JS-enabled for reveal-on-scroll
+    // Mark JS-enabled for reveal-on-scroll
     document.body.classList.add('js');
 
     // Reveal-on-scroll
@@ -772,81 +715,6 @@
       tabs.forEach(t=> t.addEventListener('click', ()=> setMode(t.dataset.mode)) );
       setMode('player');
     })();
-
-    // ===== Hide/reveal NAV (no preload; stable) =====
-    (() => {
-      const nav  = document.querySelector('.nav');
-      const hero = document.querySelector('.hero');
-      if (!nav || !hero) return;
-
-      const isInHero = () => window.scrollY < (hero.offsetHeight - 10);
-      const show = () => nav.classList.remove('is-hidden');
-      const hide = () => nav.classList.add('is-hidden');
-
-      // Initial state
-      const init = () => {
-        const inHero = isInHero();
-        document.body.classList.toggle('in-hero', inHero);
-        if (inHero) hide(); else show();
-      };
-      init();
-
-      // Longer fade-out (4s) only in hero; never hide while hovered
-      let hideTimer = null;
-      const scheduleHide = () => {
-        if (!isInHero()) return;
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(hide, 4000);
-      };
-      const revealIfHero = () => { if (isInHero()) { show(); scheduleHide(); } };
-
-      ['mousemove','touchstart','keydown'].forEach(ev =>
-        window.addEventListener(ev, revealIfHero, { passive:true })
-      );
-      nav.addEventListener('mouseenter', () => clearTimeout(hideTimer), { passive:true });
-      nav.addEventListener('mouseleave',  scheduleHide,               { passive:true });
-
-      window.addEventListener('scroll', () => {
-        const inHero = isInHero();
-        document.body.classList.toggle('in-hero', inHero);
-        if (inHero) scheduleHide();
-        else { show(); clearTimeout(hideTimer); }
-      }, { passive:true });
-    })();
   </script>
-  <script>
-(function(){
-  var qn = document.getElementById('quick-nav');
-  var toggle = qn.querySelector('.qn-toggle');
-  var links = document.getElementById('qn-links');
-
-  // Show quick-nav after a small scroll (works in Safari/Chrome/Firefox)
-  function onScroll(){
-    if (window.scrollY > 220){ qn.classList.add('is-on'); }
-    else { qn.classList.remove('is-on'); }
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-
-  // Mobile dropdown toggle
-  function setExpanded(on){
-    qn.setAttribute('aria-expanded', String(on));
-    toggle.setAttribute('aria-expanded', String(on));
-  }
-  toggle.addEventListener('click', function(){
-    var open = qn.getAttribute('aria-expanded') === 'true';
-    setExpanded(!open);
-  });
-
-  // Close dropdown after choosing a link (mobile)
-  links.addEventListener('click', function(e){
-    if (e.target.tagName === 'A') setExpanded(false);
-  });
-
-  // Keep nav visible while hovered (no fade-out while interacting)
-  qn.addEventListener('mouseenter', function(){ qn.classList.add('is-on'); });
-})();
-</script>
-
 </body>
 </html>
