@@ -623,6 +623,43 @@
     </div>
   </div>
 </section>
+  <script>
+// Fix "View Full Show History" toggle
+document.addEventListener('click', function(e){
+  if (!e.target.matches('#toggleFullHistory')) return;
+  const box = document.getElementById('fullShowHistory');
+  if (!box) return;
+  const open = box.hidden;
+  box.hidden = !open;
+  e.target.setAttribute('aria-expanded', String(open));
+  e.target.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+});
+</script>
+<script>
+(function () {
+  const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
+  const panes = Array.from(document.querySelectorAll('#showsPanels .shows-pane'));
+  if (!tabs.length || !panes.length) return;
+
+  const show = (key) => {
+    panes.forEach(p => p.hidden = p.dataset.pane !== key);
+    tabs.forEach(t => {
+      const on = t.dataset.tab === key;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+  };
+
+  // click to switch
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+
+  // default: Upcoming if it actually has items, else Past
+  const upcomingPane = document.querySelector('#showsPanels [data-pane="upcoming"]');
+  const hasUpcoming  = !!(upcomingPane && upcomingPane.querySelector('li, .show, [data-show]'));
+  show(hasUpcoming ? 'upcoming' : 'past');
+})();
+</script>
+
 
 
 
