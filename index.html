@@ -303,6 +303,14 @@
       .links{ display:none !important; }
       .menu-btn{ display:inline-flex !important; }
     }
+    /* lock the nav visible once activated */
+.nav.nav-locked{
+  opacity:1 !important;
+  transform:none !important;
+  pointer-events:auto !important;
+  position:sticky !important;  /* keep the glass nav stuck to top */
+}
+
   </style>
 </head>
 
@@ -825,5 +833,26 @@
       qn.addEventListener('mouseenter', function(){ qn.classList.add('is-on'); });
     })();
   </script>
+  <script>
+/* show nav after the first scroll, then keep it on */
+(function(){
+  const nav = document.querySelector('.nav');
+  if(!nav) return;
+
+  function activate(){
+    nav.classList.remove('is-hidden');   // reveal it
+    nav.classList.add('nav-locked');     // and lock it visible forever
+    window.removeEventListener('scroll', onScroll);
+  }
+  function onScroll(){
+    if (window.scrollY > 10) activate();
+  }
+
+  // if we land on an anchor below the fold, activate immediately
+  if (window.scrollY > 10) activate();
+  else window.addEventListener('scroll', onScroll, { passive:true });
+})();
+</script>
+
 </body>
 </html>
