@@ -27,6 +27,24 @@
 
 
   <style>
+    /* Hide the full nav (bar + background) until interaction */
+.nav {
+  transition: opacity .4s ease, transform .4s ease;
+  will-change: opacity, transform;
+}
+.nav.is-hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* optional softer translucent nav when visible over hero */
+body.in-hero .nav {
+  background: rgba(8,12,18,0.45);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
     /* Hide/show the sticky nav by sliding it off the top */
 .nav{ transition: transform .28s ease; will-change: transform; }
 .nav.is-hidden{ transform: translateY(-100%); }
@@ -1015,6 +1033,47 @@ body.in-hero .nav{ background: linear-gradient(180deg, rgba(10,14,20,.55), rgba(
     }
   }, { passive:true });
 })();
+    // ===== Hide entire nav bar on hero until user interacts =====
+(() => {
+  const nav  = document.querySelector('.nav');
+  const hero = document.querySelector('.hero');
+  if (!nav || !hero) return;
+
+  const heroHeight = () => hero.getBoundingClientRect().height;
+  const isInHero = () => window.scrollY < heroHeight() - 10;
+
+  let hideTimer;
+  const hideNav = () => {
+    if (isInHero()) nav.classList.add('is-hidden');
+  };
+  const showNav = () => {
+    nav.classList.remove('is-hidden');
+    clearTimeout(hideTimer);
+    if (isInHero()) hideTimer = setTimeout(() => nav.classList.add('is-hidden'), 2000);
+  };
+
+  // Start hidden at top
+  if (isInHero()) nav.classList.add('is-hidden');
+  document.body.classList.toggle('in-hero', isInHero());
+
+  // Reveal when user moves mouse or presses a key
+  ['mousemove','touchstart','keydown'].forEach(ev => {
+    window.addEventListener(ev, e => {
+      if (isInHero()) showNav();
+    }, { passive:true });
+  });
+
+  // Keep visible once scrolled past hero
+  window.addEventListener('scroll', () => {
+    const inHero = isInHero();
+    document.body.classList.toggle('in-hero', inHero);
+    if (!inHero) {
+      nav.classList.remove('is-hidden');
+      clearTimeout(hideTimer);
+    } else hideNav();
+  }, { passive:true });
+})();
+
 
   </script>
 </body>
