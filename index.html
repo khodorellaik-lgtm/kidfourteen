@@ -84,6 +84,23 @@
   align-items:center;
   white-space:nowrap;
 }
+.links a {
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.92;
+  position: relative;
+  text-shadow:
+    0 0 6px rgba(127,234,209,0.18),
+    0 0 22px rgba(127,234,209,0.25);
+  transition: opacity .25s ease;
+}
+
+.links a:hover {
+  opacity: 1;
+  text-shadow:
+    0 0 10px rgba(127,234,209,0.35),
+    0 0 22px rgba(127,234,209,0.4);
+}
 
     /* =================== HERO =================== */
     .hero{position:relative;min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden;background:#0c1219;isolation:isolate}
