@@ -812,44 +812,28 @@
       setMode('player');
     })();
   </script>
-   <script>
-// Shows: Tabs (Upcoming / Past) — hard default to Upcoming
-document.addEventListener('DOMContentLoaded', () => {
-  const tabs  = Array.from(document.querySelectorAll('[role="tab"][data-target]'));
-  const panes = Array.from(document.querySelectorAll('.shows-pane[data-pane]'));
+  <script>
+(function () {
+  const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
+  const panes = Array.from(document.querySelectorAll('#showsPanels .shows-pane'));
   if (!tabs.length || !panes.length) return;
 
-  const setTab = (target) => {
-    // reset all tabs
+  const show = (key) => {
+    panes.forEach(p => p.hidden = p.dataset.pane !== key);
     tabs.forEach(t => {
-      const on = t.dataset.target === target;
+      const on = t.dataset.tab === key;
       t.classList.toggle('is-active', on);
       t.setAttribute('aria-selected', String(on));
     });
-    // reset all panes
-    panes.forEach(p => {
-      p.hidden = (p.dataset.pane !== target);
-    });
   };
 
-  // click to switch
-  tabs.forEach(t => t.addEventListener('click', () => setTab(t.dataset.target)));
+  // Click handling
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
 
-  // HARD default to Upcoming on every load
-  setTab('upcoming');
-});
-
-// Shows: Full history toggle (unchanged)
-(() => {
-  const btn = document.getElementById('toggleFullHistory');
-  const box = document.getElementById('fullShowHistory');
-  if(!btn || !box) return;
-  btn.addEventListener('click', () => {
-    const open = box.hidden;
-    box.hidden = !open;
-    btn.setAttribute('aria-expanded', String(open));
-    btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
-  });
+  // Default: Upcoming if it has shows, otherwise Past
+  const upcomingPane = document.querySelector('#showsPanels [data-pane="upcoming"]');
+  const hasUpcoming  = !!(upcomingPane && upcomingPane.querySelector('li, .show, [data-show]'));
+  show(hasUpcoming ? 'upcoming' : 'past');
 })();
 </script>
 </body>
