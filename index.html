@@ -831,21 +831,30 @@ document.addEventListener('click', function(e){
       audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
       audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
 
-      // Tabs: Player <-> Spotify
-const tabs = Array.from(document.querySelectorAll('.music-switch[aria-label="Music player mode"] .music-tab'));
-      const embed = document.getElementById('spotifyEmbed');
-      const setMode = (mode)=>{
-        const isPlayer = mode==='player';
-        root.hidden = !isPlayer; embed.hidden = isPlayer;
-        document.querySelector('.music-tab.is-active')?.classList.remove('is-active');
-        tabs.find(t=>t.dataset.mode===mode)?.classList.add('is-active');
-        tabs.forEach(t=>t.setAttribute('aria-selected', String(t.dataset.mode===mode)));
-        if(!isPlayer && !audio.paused) audio.pause();
-      };
-      tabs.forEach(t=> t.addEventListener('click', ()=> setMode(t.dataset.mode)) );
-      setMode('player');
-    })();
-  </script>
+  <script>
+// Tabs: Player <-> Spotify  (scoped to #music only)
+(() => {
+  const root  = document.getElementById('k14Player');
+  const audio = document.getElementById('audio');
+  const tabs  = Array.from(document.querySelectorAll('.music-switch[aria-label="Music player mode"] .music-tab'));
+  const embed = document.getElementById('spotifyEmbed');
+  if (!tabs.length || !root || !embed) return;
+
+  const setMode = (mode)=>{
+    const isPlayer = mode === 'player';
+    root.hidden = !isPlayer;
+    embed.hidden = isPlayer;
+    document.querySelector('.music-tab.is-active')?.classList.remove('is-active');
+    tabs.find(t => t.dataset.mode === mode)?.classList.add('is-active');
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === mode)));
+    if (!isPlayer && audio && !audio.paused) audio.pause();
+  };
+
+  tabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+  setMode('player');
+})();
+</script>
+
   <script>
 (function () {
   const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
