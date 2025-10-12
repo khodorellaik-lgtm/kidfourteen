@@ -518,53 +518,56 @@
   </section>
 
   <!-- SHOWS -->
-  <section id="shows" class="section">
-    <div class="wrap">
-      <h2>Shows</h2>
+<section id="shows" class="section">
+  <div class="wrap">
+    <h2>Shows</h2>
 
-      <div class="panel" id="showsPanels">
-        <!-- UPCOMING -->
-        <div class="shows-pane" data-pane="upcoming">
-          <p class="muted">No upcoming shows announced.</p>
-        </div>
+    <div class="panel" id="showsPanels">
+      <!-- UPCOMING (visible) -->
+      <div class="shows-pane" data-pane="upcoming">
+        <h3 style="margin-top:0">Upcoming</h3>
+        <p class="muted">No upcoming shows announced.</p>
+      </div>
 
-        <!-- PAST -->
-        <div class="shows-pane" data-pane="past" hidden>
-          <h3 style="margin-top:0">Memorable Shows</h3>
-          <ul class="shows-list" id="pastShowsMemorable">
+      <!-- PAST (visible) -->
+      <div class="shows-pane" data-pane="past">
+        <h3 style="margin-top:22px">Memorable Shows</h3>
+        <ul class="shows-list" id="pastShowsMemorable">
+          <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
+          <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
+          <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
+          <li>Oct 2024 — Read The Room Festival (KIAA Theatre) — Brussels, Belgium</li>
+        </ul>
+
+        <button class="press-toggle" id="toggleFullHistory" type="button" aria-expanded="false" style="margin-top:14px">
+          View Full Show History
+        </button>
+
+        <div id="fullShowHistory" hidden>
+          <!-- Grouped newest → oldest -->
+          <h4>2025</h4>
+          <ul class="shows-list">
             <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
             <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
             <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
-            <li>Oct 2024 — Read The Room Festival (KIAA Theatre) — Brussels, Belgium</li>
           </ul>
-
-          <button class="press-toggle" id="toggleFullHistory" type="button" aria-expanded="false" style="margin-top:14px">
-            View Full Show History
-          </button>
-
-          <div id="fullShowHistory" hidden>
-            <h4>2025</h4>
-            <ul class="shows-list">
-              <li>Oct 2025 — Institut des Cultures d’Islam — Paris, France</li>
-              <li>Aug 2025 — Noorderzon Festival — Groningen, Netherlands</li>
-              <li>May 2025 — Beirut Art Center — Beirut, Lebanon</li>
-            </ul>
-            <h4>2024</h4>
-            <ul class="shows-list">
-              <li>Oct 2024 — De Centrale — Gent, Belgium</li>
-              <li>Oct 2024 — Read The Room Festival — Brussels, Belgium</li>
-              <li>Oct 2024 — Stigberget Live Festival — Gothenburg, Sweden</li>
-              <li>Aug 2024 — S.M.A.K. Museum — Gent, Belgium</li>
-              <li>Jun 2024 — Institut Suédois — Paris, France</li>
-              <li>Jun 2024 — Live in Marseille — Marseille, France</li>
-              <li>Jun 2024 — DOC! — Paris, France</li>
-              <li>Feb 2024 — Platon Party Paradis — Nantes, France</li>
-            </ul>
-          </div>
+          <h4>2024</h4>
+          <ul class="shows-list">
+            <li>Oct 2024 — De Centrale — Gent, Belgium</li>
+            <li>Oct 2024 — Read The Room Festival — Brussels, Belgium</li>
+            <li>Oct 2024 — Stigberget Live Festival — Gothenburg, Sweden</li>
+            <li>Aug 2024 — S.M.A.K. Museum — Gent, Belgium</li>
+            <li>Jun 2024 — Institut Suédois — Paris, France</li>
+            <li>Jun 2024 — Live in Marseille — Marseille, France</li>
+            <li>Jun 2024 — DOC! — Paris, France</li>
+            <li>Feb 2024 — Platon Party Paradis — Nantes, France</li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- VIDEO -->
   <section id="video" class="section">
