@@ -56,6 +56,32 @@ body.in-hero .nav {
 
 /* optional: slightly softer nav while over the hero */
 body.in-hero .nav{ background: linear-gradient(180deg, rgba(10,14,20,.55), rgba(10,14,20,.25)); }
+    /* Hide the full nav on first paint (avoid top gap) */
+body.preload .nav{
+  position: fixed;        /* take it out of flow */
+  top: 0; left: 0; right: 0;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* While in the hero, nav is fixed (no reserved height) */
+body.in-hero .nav{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+}
+
+/* Your existing animated hide/show */
+.nav{
+  transition: opacity .4s ease, transform .4s ease;
+  will-change: opacity, transform;
+}
+.nav.is-hidden{
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
 
     /* SHOWS styling */
     .shows-list{margin:0; padding-left:18px}
@@ -1015,6 +1041,9 @@ body.in-hero .nav{ background: linear-gradient(180deg, rgba(10,14,20,.55), rgba(
   // Start hidden if we load at the top (in hero)
   if (inHero()) nav.classList.add('is-hidden');
   document.body.classList.toggle('in-hero', inHero());
+  // remove the preload class once initial state is applied
+document.body.classList.remove('preload');
+
 
   // Reveal on mouse move / touch / keyboard (Tab/Esc) while in hero
   let lastMove = 0;
