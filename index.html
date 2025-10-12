@@ -763,8 +763,9 @@
   };
 
   tabs.forEach(t => t.addEventListener('click', () => setTab(t.dataset.target)));
-  const upcomingEmpty = document.querySelector('.shows-pane[data-pane="upcoming"] .muted');
-  if (upcomingEmpty) setTab('past'); else setTab('upcoming');
+const upcomingEmpty = document.querySelector('.shows-pane[data-pane="upcoming"] .muted');
+if (upcomingEmpty) setTab('past'); else setTab('upcoming');
+
 })();
 
 // Shows: Full history toggle
