@@ -813,20 +813,34 @@
       setMode('player');
     })();
   </script>
-  <script>
-(function () {
-  const tabs  = Array.from(document.querySelectorAll('.shows-switch .music-tab'));
-  const panes = Array.from(document.querySelectorAll('#showsPanels .shows-pane'));
+ <script>
+(() => {
+  // Scope to the Shows section only
+  const shows = document.getElementById('shows');
+  if (!shows) return;
+
+  // Your markup uses aria-label="Shows view" + data-target
+  const tabs  = Array.from(shows.querySelectorAll('[aria-label="Shows view"] .music-tab'));
+  const panes = Array.from(shows.querySelectorAll('#showsPanels .shows-pane'));
   if (!tabs.length || !panes.length) return;
 
-  const show = (key) => {
+  const getPane = (key) => shows.querySelector(`#showsPanels .shows-pane[data-pane="${key}"]`);
+
+  function show(key){
     panes.forEach(p => p.hidden = p.dataset.pane !== key);
     tabs.forEach(t => {
-      const on = t.dataset.tab === key;
+      const on = t.dataset.target === key;
       t.classList.toggle('is-active', on);
       t.setAttribute('aria-selected', String(on));
     });
-  };
+  }
+
+  function hasUpcomingShows(){
+    const up = getPane('upcoming');
+    if (!up) return false;
+    const nodes = Array.from(up.querySelectorAll('li, [data-show], .show'));
+    const valid = nodes.filter(n => n.offsetParent !==
+
 
   // Click handling
   tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
