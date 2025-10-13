@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -442,6 +441,18 @@
   #playlist.playlist { grid-template-columns: 1fr; gap: 8px; }
   #playlist .track { padding-left: 40px; }
 }
+    /* Balance the playlist grid (no awkward empty space) */
+@media (min-width: 900px){
+  #playlist.playlist{
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    grid-auto-flow: row dense; /* backfill if needed */
+  }
+  /* If there’s an odd number of tracks, make the last one full width */
+  #playlist .track:last-child:nth-child(odd){
+    grid-column: 1 / -1;
+  }
+}
+
 
 </style>
 </head>
