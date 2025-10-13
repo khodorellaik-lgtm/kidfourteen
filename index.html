@@ -510,38 +510,51 @@
   pointer-events: none;
 }
 #playlist .track.is-active::after { right: 52px; }
-/* === Wallpaper behind the custom player only (fixed stacking) === */
+/* === Player wallpaper with Ken-Burns + face focus === */
 .k14-player.wallpaper{
   position: relative;
-  overflow: hidden;         
-  isolation: isolate;       
+  overflow: hidden;
+  isolation: isolate;          /* keeps layers under content */
 }
 
+/* Photo layer (drifts slowly) */
 .k14-player.wallpaper::before{
   content:"";
-  position:absolute; inset:-2px;
-  z-index:0;
-  pointer-events:none;
+  position:absolute; inset:-6%;           /* extra bleed so moves without showing edges */
+  z-index:0; pointer-events:none;
   background-image: var(--player-wallpaper, url('kidfourteen_live_2022.jpg'));
-  background-size: cover;
-  background-position: 50% 35%;
-  filter: saturate(108%) contrast(104%) brightness(82%);
-  opacity: var(--player-wallpaper-opacity, .30);
+  background-size: var(--wallpaper-zoom, 120%);       /* zoom-in so we can pan */
+  background-position: var(--face-x, 55%) var(--face-y, 60%); /* focus point (tweak below) */
+  filter: saturate(108%) contrast(104%) brightness(86%);
+  opacity: var(--player-wallpaper-opacity, .42);
+
+  /* Ken-Burns drift */
+  animation: k14Ken 22s ease-in-out infinite alternate;
+  will-change: transform, background-position;
 }
 
+/* Gentle vignette that leaves the face area clearer */
 .k14-player.wallpaper::after{
   content:"";
-  position:absolute; inset:-2px;
-  z-index:0;
-  pointer-events:none;
+  position:absolute; inset:-2px; z-index:0; pointer-events:none;
   background:
-    radial-gradient(120% 100% at 70% 20%, rgba(0,0,0,.25), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45));
+    radial-gradient(80% 65% at var(--face-x,55%) var(--face-y,60%),
+      rgba(0,0,0,.06), rgba(0,0,0,.28) 60%, rgba(0,0,0,.42) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.35));
 }
 
-.k14-player.wallpaper > *{
-  position: relative;
-  z-index: 1;
+/* Keep UI above wallpaper layers */
+.k14-player.wallpaper > *{ position:relative; z-index:1 }
+
+/* Motion */
+@keyframes k14Ken{
+  0%   { transform: translate3d(-2%, -2%, 0) scale(1.06) }
+  100% { transform: translate3d( 2%,  2%, 0) scale(1.10) }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .k14-player.wallpaper::before{ animation:none }
 }
 </style>
 </head>
@@ -594,7 +607,12 @@
       </div>
 
       <!-- Custom Player -->
-<div class="k14-player wallpaper" id="k14Player" data-mode="player">
+<div class="k14-player wallpaper" id="k14Player" data-mode="player"
+     style="--player-wallpaper:url('kidfourteen_live_2022.jpg');
+            --player-wallpaper-opacity:.44;   /* stronger image */
+            --wallpaper-zoom:120%;
+            --face-x:58%;                     /* move left/right 0–100% */
+            --face-y:70%;">                   /* move up/down 0–100%  */
         <div class="player-shell">
           <div class="art"><img src="cover.png" alt="Current cover" loading="lazy"></div>
           <div class="meta">
