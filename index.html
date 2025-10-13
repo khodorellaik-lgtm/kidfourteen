@@ -556,6 +556,58 @@
 @media (prefers-reduced-motion: reduce){
   .k14-player.wallpaper::before{ animation:none }
 }
+    /* === Player wallpaper using real overlay elements (scoped) === */
+.k14-player.wallpaper{ position:relative; overflow:hidden; isolation:isolate; }
+
+/* Photo layer (Ken Burns) */
+.k14-player.wallpaper .player-wallpaper{
+  position:absolute; inset:-6%;
+  z-index:0; pointer-events:none;
+  background-image: var(--player-wallpaper, url('kidfourteen_live_2022.jpg'));
+  background-size: var(--wallpaper-zoom, 120%);
+  background-position: var(--face-x, 50%) var(--face-y, 65%);
+  filter: saturate(108%) contrast(104%) brightness(86%);
+  opacity: var(--player-wallpaper-opacity, .44);
+  animation: k14Ken 20s ease-in-out infinite alternate;  /* faster drift */
+  will-change: transform, background-position;
+  backface-visibility:hidden;  /* smoother GPU render */
+}
+
+
+/* Pulse + vignette */
+.k14-player.wallpaper .player-pulse{
+  position:absolute; inset:-2px;
+  z-index:1; pointer-events:none;
+  background:
+    radial-gradient(80% 80% at 50% 30%, rgba(127,234,209, var(--pulse-alpha, .00)), transparent 70%),
+    radial-gradient(80% 65% at var(--face-x,55%) var(--face-y,65%),
+      rgba(0,0,0,.06), rgba(0,0,0,.28) 60%, rgba(0,0,0,.42) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.35));
+  animation: k14Pulse 15s ease-in-out infinite alternate;
+}
+
+/* Keep UI above overlays */
+.k14-player.wallpaper > *:not(.player-wallpaper):not(.player-pulse){
+  position:relative; z-index:2;
+}
+
+/* Motion */
+@keyframes k14Ken{
+  0%   { transform: translate3d(-3%, -2%, 0) scale(1.10); }
+  100% { transform: translate3d( 3%,  2%, 0) scale(1.14); }
+}
+
+@keyframes k14Pulse{
+  0%   { --pulse-alpha: .10; }
+  100% { --pulse-alpha: .26; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .k14-player.wallpaper .player-wallpaper,
+  .k14-player.wallpaper .player-pulse{ animation:none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -612,7 +664,9 @@
             --player-wallpaper-opacity:.44;   /* stronger image */
             --wallpaper-zoom:120%;
             --face-x:58%;                     
-            --face-y:65%;">                  
+            --face-y:65%;">
+    <div class="player-wallpaper" aria-hidden="true"></div>
+  <div class="player-pulse" aria-hidden="true"></div>
         <div class="player-shell">
           <div class="art"><img src="cover.png" alt="Current cover" loading="lazy"></div>
           <div class="meta">
