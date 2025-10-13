@@ -1069,6 +1069,10 @@
       audio.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
       audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
       audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
+      audio.addEventListener('loadedmetadata', () => {
+  dur.textContent = fmt(audio.duration || 0);  // show the correct length immediately
+});
+
 
       // Tabs: Player <-> Spotify  (scoped to #music only)
 const tabWrap = document.querySelector('#music [aria-label="Music player mode"]');
