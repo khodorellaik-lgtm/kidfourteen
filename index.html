@@ -346,7 +346,27 @@
   opacity: 0.85;                   /* slight transparency */
   text-shadow: 0 0 8px rgba(127, 234, 209, 0.2);
 }
+    .more-videos {
+  text-align: center;
+  margin-top: 1.5em;
+}
 
+.more-videos a {
+  display: inline-block;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.more-videos a:hover {
+  color: #b9f6ec;
+  text-shadow: 0 0 10px rgba(127, 234, 209, 0.5);
+  transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -694,13 +714,25 @@
 
 
   <!-- VIDEO -->
-  <section id="video" class="section">
-    <div class="wrap">
-      <h2>Video</h2>
-      <div class="cols">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8"
-          frameborder="0" title="Kid Fourteen - Video 1" allowfullscreen loading="lazy"></iframe>
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750"
+<section id="video" class="section">
+  <div class="wrap">
+    <h2>Video</h2>
+    <div class="cols">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/oMM0ygCcLv8"
+        frameborder="0" title="Kid Fourteen – Video 1" allowfullscreen loading="lazy"></iframe>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/-jTtAfME750"
+        frameborder="0" title="Kid Fourteen – Video 2" allowfullscreen loading="lazy"></iframe>
+    </div>
+
+    <div class="more-videos">
+      <a href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">
+        Watch more →
+      </a>
+    </div>
+  </div>
+</section>
+
+
           frameborder="0" title="Kid Fourteen - Video 2" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
