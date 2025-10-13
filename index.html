@@ -510,6 +510,58 @@
   pointer-events: none;
 }
 #playlist .track.is-active::after { right: 52px; }
+/* === Ambient backgrounds for non-hero sections (safe, reversible) === */
+.section{ position:relative; z-index:0; isolation:isolate } /* keep all content above bg layers */
+
+/* Soft moving glow */
+.section[data-ambient="glow"]::before{
+  content:""; position:absolute; inset:-8%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(40% 28% at 65% 35%, rgba(127,234,209,.18), transparent 60%),
+    radial-gradient(32% 24% at 30% 70%, rgba(140,200,255,.12), transparent 65%);
+  filter: blur(48px);
+  animation: ambientDrift 26s ease-in-out infinite alternate;
+  opacity:.55;
+}
+@keyframes ambientDrift{
+  0%   { transform: translate3d(-2%, -1%, 0) }
+  50%  { transform: translate3d(3%, 2%, 0) }
+  100% { transform: translate3d(-1%, 3%, 0) }
+}
+
+/* Subtle techno grid (very low-contrast) */
+.section[data-ambient="grid"]::before{
+  content:""; position:absolute; inset:-2%; z-index:-1; pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 20px);
+  mask: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+  opacity:.35;
+}
+
+/* Image/texture wash (set the URL via --ambient-url on the section style) */
+.section[data-ambient="art"]::before{
+  content:""; position:absolute; inset:-4%; z-index:-1; pointer-events:none;
+  background-image: var(--ambient-url, none);
+  background-size: cover; background-position:center;
+  filter: saturate(105%) contrast(104%) brightness(85%) blur(2px);
+  opacity:.22;
+}
+
+/* Optional: ambient video layer (drop a <video> with class .ambient-video inside a section) */
+.section .ambient-video{
+  position:absolute; inset:-2%; z-index:-1; pointer-events:none; overflow:hidden;
+  border-radius:12px; /* matches your card rounding vibe (soft) */
+}
+.section .ambient-video video{
+  width:100%; height:100%; object-fit:cover; opacity:.35;
+  filter:saturate(108%) contrast(104%);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .section[data-ambient="glow"]::before{ animation:none }
+}
 
 
 </style>
@@ -633,41 +685,42 @@
   </section>
 
   <!-- BIO -->
-  <section id="bio" class="section">
-    <div class="wrap">
-      <h2>Bio</h2>
+<section id="bio" class="section" data-ambient="glow">
+  <div class="wrap">
+    <h2>Bio</h2>
 
     <p class="bio-quote" style="--d:.00s;">
-  <em>“A midnight ritual of noise-pop confession and electronic pulse.”</em>
-  <br><span class="muted">— Bandcamp Daily</span>
-</p>
+      <em>“A midnight ritual of noise-pop confession and electronic pulse.”</em>
+      <br><span class="muted">— Bandcamp Daily</span>
+    </p>
 
-      <div class="bio-grid">
-        <div class="bio-card reveal" style="--d:.10s;">
-          <div class="prose">
-            <p class="dropcap">
-              Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all hanging on the same clothesline that became his own distinct sound.
-            </p>
-            <p>
-              His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.
-            </p>
-          </div>
-
-          <div class="bio-chips">
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">Dream Kids Never Sleep — 2016</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">Blood-thick Silence — 2018</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">Love — 2020</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">A Brief Emotional Dragon — 2023</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">Heart is a Malady — 2024</a>
-          </div>
+    <div class="bio-grid">
+      <div class="bio-card reveal" style="--d:.10s;">
+        <div class="prose">
+          <p class="dropcap">
+            Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes – all while managing to keep it all hanging on the same clothesline that became his own distinct sound.
+          </p>
+          <p>
+            His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.
+          </p>
         </div>
 
-        <figure class="bio-photo reveal" style="--d:.18s;">
-          <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
-        </figure>
+        <div class="bio-chips">
+          <a class="chip" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">Dream Kids Never Sleep — 2016</a>
+          <a class="chip" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">Blood-thick Silence — 2018</a>
+          <a class="chip" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">Love — 2020</a>
+          <a class="chip" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">A Brief Emotional Dragon — 2023</a>
+          <a class="chip" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">Heart is a Malady — 2024</a>
+        </div>
       </div>
+
+      <figure class="bio-photo reveal" style="--d:.18s;">
+        <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
+      </figure>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- PRESS -->
   <section id="press" class="section">
