@@ -566,12 +566,13 @@
   background-image: var(--player-wallpaper, url('kidfourteen_live_2022.jpg'));
   background-size: var(--wallpaper-zoom, 120%);
   background-position: var(--face-x, 50%) var(--face-y, 65%);
-  filter: saturate(108%) contrast(104%) brightness(86%);
+  filter: saturate(105%) contrast(102%) brightness(88%);
   opacity: var(--player-wallpaper-opacity, .44);
-  animation: k14Ken 20s ease-in-out infinite alternate;  /* faster drift */
-  will-change: transform, background-position;
-  backface-visibility:hidden;  /* smoother GPU render */
+  animation: k14Pan 20s ease-in-out infinite alternate;  /* crisp pan, no blur */
+  will-change: background-position;
+  backface-visibility:hidden;
 }
+
 
 
 /* Pulse + vignette */
@@ -592,10 +593,19 @@
 }
 
 /* Motion */
-@keyframes k14Ken{
-  0%   { transform: translate3d(-3%, -2%, 0) scale(1.10); }
-  100% { transform: translate3d( 3%,  2%, 0) scale(1.14); }
+@keyframes k14Pan{
+  0% {
+    background-position:
+      calc(var(--face-x, 50%) - 4%)
+      calc(var(--face-y, 65%) - 2%);
+  }
+  100% {
+    background-position:
+      calc(var(--face-x, 50%) + 4%)
+      calc(var(--face-y, 65%) + 2%);
+  }
 }
+
 
 @keyframes k14Pulse{
   0%   { --pulse-alpha: .10; }
