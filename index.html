@@ -510,6 +510,31 @@
   pointer-events: none;
 }
 #playlist .track.is-active::after { right: 52px; }
+/* === Wallpaper behind the custom player only (Kid's Selection tab) === */
+.k14-player.wallpaper{
+  position: relative;        /* enables pseudo-layers */
+  overflow: hidden;          /* keep inside rounded corners */
+}
+
+/* Photo layer */
+.k14-player.wallpaper::before{
+  content:"";
+  position:absolute; inset:-2px; z-index:-1; pointer-events:none;
+  background-image: var(--player-wallpaper, url('kidfourteen_live_2022.jpg'));
+  background-size: cover;
+  background-position: 50% 35%;    /* tweak if you want to shift the focus */
+  filter: saturate(108%) contrast(104%) brightness(82%);
+  opacity: var(--player-wallpaper-opacity, .28);  /* change via inline style if needed */
+}
+
+/* Soft vignette to keep UI readable */
+.k14-player.wallpaper::after{
+  content:"";
+  position:absolute; inset:-2px; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(120% 100% at 70% 20%, rgba(0,0,0,.25), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45));
+}
 
 
 </style>
@@ -563,7 +588,7 @@
       </div>
 
       <!-- Custom Player -->
-      <div class="k14-player" id="k14Player" data-mode="player">
+<div class="k14-player wallpaper" id="k14Player" data-mode="player">
         <div class="player-shell">
           <div class="art"><img src="cover.png" alt="Current cover" loading="lazy"></div>
           <div class="meta">
