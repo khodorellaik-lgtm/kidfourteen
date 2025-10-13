@@ -509,6 +509,7 @@
 #playlist .duration {
   pointer-events: none;
 }
+#playlist .track.is-active::after { right: 52px; }
 
 
 </style>
@@ -584,7 +585,7 @@
           </div>
         </div>
 
-        <ul class="playlist" id="playlist" aria-label="Track list">
+       <ul class="playlist" id="playlist" aria-label="Track list">
   <li class="track is-active"
       data-src="audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3"
       data-title="Whirlwind Blues" data-cover="cover3.jpg">
@@ -615,6 +616,7 @@
     Love and the City Pt. 3 <span class="duration">4:11</span>
   </li>
 </ul>
+
  <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
       </div>
 
@@ -1022,9 +1024,16 @@
       const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
 
       function encodeSrc(src){
-        try { return src.split('/').map((seg,i,arr)=> i===arr.length-1? encodeURIComponent(seg) : seg).join('/'); }
-        catch(e){ return src.replace(/ /g,'%20'); }
-      }
+  try {
+    const normalized = src.replace(/[\u2013\u2014]/g, '-'); // en/em dash → hyphen
+    return normalized
+      .split('/')
+      .map((seg,i,arr)=> i===arr.length-1 ? encodeURIComponent(seg) : seg)
+      .join('/');
+  } catch(e){
+    return src.replace(/ /g,'%20');
+  }
+}
 
       function load(i){
         index = (i+items.length)%items.length;
