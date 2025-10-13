@@ -367,6 +367,82 @@
   text-shadow: 0 0 10px rgba(127, 234, 209, 0.5);
   transform: translateY(-2px);
 }
+    /* --- Sleek track list (no HTML/JS changes) --- */
+#playlist.playlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  counter-reset: track;
+}
+
+#playlist .track {
+  position: relative;
+  padding: 12px 14px 12px 44px;  /* room for number badge */
+  min-height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+  border: 1px solid var(--chip-border);
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  font-weight: 600;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+}
+
+/* Subtle, classy number badge */
+#playlist .track::before {
+  content: counter(track, decimal-leading-zero);
+  counter-increment: track;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .5px;
+  color: var(--accent);
+  background: rgba(127,234,209,.12);
+  border: 1px solid rgba(127,234,209,.35);
+  border-radius: 8px;
+  padding: 2px 6px;
+}
+
+/* Hover: lift + glow */
+#playlist .track:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(127,234,209,.25);
+  color: var(--accent);
+}
+
+/* Active/now playing */
+#playlist .track.is-active {
+  background: rgba(127,234,209,.10);
+  border-color: var(--accent);
+  box-shadow: 0 8px 22px rgba(127,234,209,.18), 0 0 0 1px rgba(127,234,209,.35);
+}
+
+/* Tiny play dot on active (tasteful) */
+#playlist .track.is-active::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(127,234,209,.7);
+}
+
+/* Compact on very small screens */
+@media (max-width:520px){
+  #playlist.playlist { grid-template-columns: 1fr; gap: 8px; }
+  #playlist .track { padding-left: 40px; }
+}
+
 </style>
 </head>
 <body>
