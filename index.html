@@ -529,7 +529,7 @@
   opacity: var(--player-wallpaper-opacity, .42);
 
   /* Ken-Burns drift */
-  animation: k14Ken 22s ease-in-out infinite alternate;
+animation: k14Ken 16s ease-in-out infinite alternate;
   will-change: transform, background-position;
 }
 
@@ -548,10 +548,9 @@
 
 /* Motion */
 @keyframes k14Ken{
-  0%   { transform: translate3d(-2%, -2%, 0) scale(1.06) }
-  100% { transform: translate3d( 2%,  2%, 0) scale(1.10) }
+  0%   { transform: translate3d(-5%, -3%, 0) scale(1.04); }
+  100% { transform: translate3d( 5%,  3%, 0) scale(1.08); }
 }
-
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   .k14-player.wallpaper::before{ animation:none }
