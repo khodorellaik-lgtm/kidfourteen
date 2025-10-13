@@ -528,33 +528,46 @@
   filter: saturate(108%) contrast(104%) brightness(86%);
   opacity: var(--player-wallpaper-opacity, .42);
 
-  /* Ken-Burns drift */
-  animation: k14Ken 22s ease-in-out infinite alternate;
+/* Ken-Burns drift (wider + slower) */
+.k14-player.wallpaper::before{
+  /* ... keep your other props above ... */
+  animation: k14Ken 28s ease-in-out infinite alternate;
   will-change: transform, background-position;
 }
+@keyframes k14Ken{
+  0%   { transform: translate3d(-3%, -2%, 0) scale(1.08); }
+  100% { transform: translate3d( 3%,  2%, 0) scale(1.12); }
+}
 
-/* Gentle vignette that leaves the face area clearer */
+/* Subtle turquoise light pulse overlay + vignette (single ::after layer) */
 .k14-player.wallpaper::after{
   content:"";
   position:absolute; inset:-2px; z-index:0; pointer-events:none;
   background:
+    /* pulse layer (alpha animated via CSS var) */
+    radial-gradient(80% 80% at 50% 30%, rgba(127,234,209, var(--pulse-alpha, .00)), transparent 70%),
+    /* vignette that leaves face area clearer */
     radial-gradient(80% 65% at var(--face-x,55%) var(--face-y,60%),
       rgba(0,0,0,.06), rgba(0,0,0,.28) 60%, rgba(0,0,0,.42) 100%),
     linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.35));
+  animation: k14Pulse 15s ease-in-out infinite alternate;
+}
+@keyframes k14Pulse{
+  0%   { --pulse-alpha: .06; }
+  100% { --pulse-alpha: .22; }
 }
 
-/* Keep UI above wallpaper layers */
-.k14-player.wallpaper > *{ position:relative; z-index:1 }
-
-/* Motion */
-@keyframes k14Ken{
-  0%   { transform: translate3d(-2%, -2%, 0) scale(1.06) }
-  100% { transform: translate3d( 2%,  2%, 0) scale(1.10) }
+/* Respect reduced motion: stop both animations */
+@media (prefers-reduced-motion: reduce){
+  .k14-player.wallpaper::before{ animation: none !important; }
+  .k14-player.wallpaper::after{  animation: none !important; }
 }
+
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
-  .k14-player.wallpaper::before{ animation:none }
+  .k14-player.wallpaper::before{ animation: none !important; }
+  .k14-player.wallpaper::after{  animation: none !important; }
 }
 </style>
 </head>
