@@ -569,6 +569,17 @@
   .k14-player.wallpaper::before{ animation: none !important; }
   .k14-player.wallpaper::after{  animation: none !important; }
 }
+  /* FORCE MOTION — debug override */
+.k14-player.wallpaper::before{
+  animation: k14Ken 18s ease-in-out infinite alternate !important;
+  will-change: transform, background-position;
+}
+
+/* In case a previous rule disabled it for reduced motion, temporarily ignore that */
+@media (prefers-reduced-motion: reduce){
+  .k14-player.wallpaper::before{ animation: k14Ken 18s ease-in-out infinite alternate !important; }
+}
+
 </style>
 </head>
 <body>
