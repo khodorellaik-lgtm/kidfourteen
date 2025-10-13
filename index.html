@@ -510,33 +510,6 @@
   pointer-events: none;
 }
 #playlist .track.is-active::after { right: 52px; }
-/* === A1. Global animated gradient === */
-body {
-  background: radial-gradient(1200px 800px at 10% -10%, #18212e 0%, transparent 55%),
-              radial-gradient(1200px 800px at 110% 110%, #12202a 0%, transparent 50%),
-              linear-gradient(120deg, #0f141b, #111823, #0f141b);
-  background-size: 100% 100%, 100% 100%, 400% 400%;
-  animation: k14BgShift 42s ease-in-out infinite;
-}
-@keyframes k14BgShift {
-  0%,100% { background-position: center, center,   0% 50%; }
-  50%     { background-position: center, center, 100% 50%; }
-}
-
-/* === A2. Film grain overlay (no image; SVG turbulence) === */
-.k14-grain {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  mix-blend-mode: soft-light; opacity: .06; /* tune 0.04–0.10 */
-}
-.k14-grain svg { width: 100%; height: 100%; display:block; }
-
-/* Keep content above the grain */
-.nav, .hero, .section, footer { position: relative; z-index: 1; }
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  body { animation: none; }
-}
 
 
 </style>
@@ -1189,18 +1162,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 0);
 });
 </script>
-  <!-- Subtle grain overlay -->
-<div class="k14-grain" aria-hidden="true">
-  <svg xmlns="http://www.w3.org/2000/svg">
-    <filter id="k14Noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
-      <feColorMatrix type="saturate" values="0" />
-      <feComponentTransfer>
-        <feFuncA type="table" tableValues="0 0.35"/>
-      </feComponentTransfer>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#k14Noise)"/>
-  </svg>
-</div>
 </body>
 </html>
