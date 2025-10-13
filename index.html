@@ -470,80 +470,41 @@
   background:rgba(255,255,255,.12);
   border-radius:8px;
 }
-#playlist.playlist::-webkit-scrollbar-track{
-  background:transparent;
+/* === Add durations aligned to the right === */
+#playlist .track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;  /* align title left, duration right */
+  align-items: center;
+  padding: 10px 14px 10px 52px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 15.5px;
+  letter-spacing: 0.1px;
+  color: rgba(230,234,239,0.95);
+  transition: all 0.18s ease;
 }
 
-/* each row */
-#playlist .track{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:0 0 8px;
-  padding:12px 14px 12px 52px;  /* room for number badge */
-  border:1px solid var(--chip-border);
-  border-radius:12px;
-  background:rgba(255,255,255,.03);
-  box-shadow:0 4px 12px rgba(0,0,0,.18);
-  font-weight:600;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease, background .14s ease, color .14s ease;
+/* duration style */
+#playlist .track .duration {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(200,220,230,0.7);
+  margin-left: auto;
+  letter-spacing: 0.3px;
 }
 
-/* row divider vibe without hard lines */
-#playlist .track + .track{ margin-top:10px }
-
-/* number badge (01, 02…) */
-#playlist .track::before{
-  content: counter(track, decimal-leading-zero);
-  counter-increment: track;
-  position:absolute;
-  left:12px; top:50%;
-  transform:translateY(-50%);
-  font-variant-numeric:tabular-nums;
-  font-weight:800;
-  font-size:12px;
-  letter-spacing:.5px;
-  color:var(--accent);
-  background:rgba(127,234,209,.12);
-  border:1px solid rgba(127,234,209,.35);
-  border-radius:10px;
-  padding:3px 8px;
+/* hover + active state consistency */
+#playlist .track:hover .duration,
+#playlist .track.is-active .duration {
+  color: var(--accent);
+  opacity: 0.9;
 }
-
-/* hover state */
-#playlist .track:hover{
-  transform:translateY(-1px);
-  border-color:var(--accent);
-  color:var(--accent);
-  box-shadow:0 10px 24px rgba(0,0,0,.28), 0 0 0 1px rgba(127,234,209,.22);
-}
-
-/* active/now playing row */
-#playlist .track.is-active{
-  background:linear-gradient(180deg, rgba(127,234,209,.10), rgba(127,234,209,.06));
-  border-color:var(--accent);
-  box-shadow:0 8px 22px rgba(127,234,209,.18), 0 0 0 1px rgba(127,234,209,.28);
-}
-
-/* subtle play dot on active */
-#playlist .track.is-active::after{
-  content:'';
-  position:absolute; right:12px; top:50%; transform:translateY(-50%);
-  width:6px; height:6px; border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 10px rgba(127,234,209,.7);
-}
-
-/* mobile: comfortable tap targets */
-@media (max-width:520px){
-  #playlist.playlist{ max-height:none }          /* let it grow */
-  #playlist .track{ padding-left:48px; font-size:15px }
-}
-
 
 
 </style>
@@ -620,14 +581,37 @@
         </div>
 
         <ul class="playlist" id="playlist" aria-label="Track list">
-          <li class="track is-active" data-src="audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3" data-title="Whirlwind Blues" data-cover="cover3.jpg">Whirlwind Blues</li>
-          <li class="track" data-src="audio/Kid Fourteen - A Brief Emotional Dragon - 05 Learning How to Die.mp3" data-title="Learning How to Die" data-cover="cover.png">Learning How to Die</li>
-          <li class="track" data-src="audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3" data-title="Latifa" data-cover="cover2.jpg">Latifa</li>
-          <li class="track" data-src="audio/Kid Fourteen - Between Light and Fragrance.mp3" data-title="Between Light and Fragrance" data-cover="cover4.jpg">Between Light and Fragrance</li>
-          <li class="track" data-src="audio/Kid Fourteen - Love (B Side) - 04 Love and the City Pt. 3.mp3" data-title="Love and the City Pt. 3" data-cover="cover5.png">Love and the City Pt. 3</li>
-        </ul>
+  <li class="track is-active"
+      data-src="audio/Kid Fourteen – Dream Kids Never Sleep – 04 Whirlwind Blues.mp3"
+      data-title="Whirlwind Blues" data-cover="cover3.jpg">
+    Whirlwind Blues <span class="duration">3:47</span>
+  </li>
 
-        <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
+  <li class="track"
+      data-src="audio/Kid Fourteen – A Brief Emotional Dragon – 05 Learning How to Die.mp3"
+      data-title="Learning How to Die" data-cover="cover.png">
+    Learning How to Die <span class="duration">4:02</span>
+  </li>
+
+  <li class="track"
+      data-src="audio/Kid Fourteen – Blood-Thick Silence – 04 Latifa.mp3"
+      data-title="Latifa" data-cover="cover2.jpg">
+    Latifa <span class="duration">3:35</span>
+  </li>
+
+  <li class="track"
+      data-src="audio/Kid Fourteen – Between Light and Fragrance.mp3"
+      data-title="Between Light and Fragrance" data-cover="cover4.jpg">
+    Between Light and Fragrance <span class="duration">5:18</span>
+  </li>
+
+  <li class="track"
+      data-src="audio/Kid Fourteen – Love (B Side) – 04 Love and the City Pt. 3.mp3"
+      data-title="Love and the City Pt. 3" data-cover="cover5.png">
+    Love and the City Pt. 3 <span class="duration">4:11</span>
+  </li>
+</ul>
+ <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
       </div>
 
       <!-- Spotify embed -->
