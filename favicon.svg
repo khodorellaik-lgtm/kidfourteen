@@ -1,16 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Black circle -->
-  <circle cx="32" cy="32" r="30" fill="#0f141b"/>
-
-  <!-- BIG white 14 -->
-  <g fill="#e6eaef">
-    <!-- 1 (tall slab) -->
-    <rect x="22" y="12" width="7" height="34"/>
-    <rect x="20" y="12" width="11" height="4"/>
-
-    <!-- 4 (tall, angular) -->
-    <rect x="38" y="16" width="7" height="30"/>
-    <rect x="28" y="30" width="22" height="6"/>
-    <polygon points="38,16 38,30 28,40 28,30"/>
-  </g>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="512" height="512" fill="white"/>
+<ellipse cx="255.5" cy="252.5" rx="252.5" ry="249.048" fill="#0F141B"/>
+<path d="M336.417 308.4V273.644L411.962 154.608H442.847V201.79H424.928L380.718 271.843V273.283H490.119V308.4H336.417ZM425.469 339.014V297.775L426.369 282.558V154.608H468.059V339.014H425.469Z" fill="#E6EAEF"/>
+<path d="M297.902 154.608V339.014H253.421V196.207H252.34L211.101 221.419V182.881L256.572 154.608H297.902Z" fill="#E6EAEF"/>
+<path d="M34.9565 339.014V154.608H79.5273V232.584H81.9584L142.917 154.608H195.411L130.041 236.906L196.582 339.014H143.277L97.3556 266.53L79.5273 289.041V339.014H34.9565Z" fill="#E6EAEF"/>
 </svg>
