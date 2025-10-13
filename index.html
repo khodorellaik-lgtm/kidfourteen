@@ -452,6 +452,98 @@
     grid-column: 1 / -1;
   }
 }
+    /* === Playlist-style arrangement (stacked tracks) === */
+/* reset any previous grid styles */
+#playlist.playlist{
+  display:block;
+  grid-template-columns:none;
+  gap:0;
+  counter-reset: track;
+  max-height: 260px;         /* scroll if long; tweak as you like */
+  overflow:auto;
+  padding-right: 4px;        /* space for scrollbar */
+}
+
+/* nicer slim scrollbar (webkit) */
+#playlist.playlist::-webkit-scrollbar{ width:8px }
+#playlist.playlist::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.12);
+  border-radius:8px;
+}
+#playlist.playlist::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+/* each row */
+#playlist .track{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 8px;
+  padding:12px 14px 12px 52px;  /* room for number badge */
+  border:1px solid var(--chip-border);
+  border-radius:12px;
+  background:rgba(255,255,255,.03);
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease, background .14s ease, color .14s ease;
+}
+
+/* row divider vibe without hard lines */
+#playlist .track + .track{ margin-top:10px }
+
+/* number badge (01, 02…) */
+#playlist .track::before{
+  content: counter(track, decimal-leading-zero);
+  counter-increment: track;
+  position:absolute;
+  left:12px; top:50%;
+  transform:translateY(-50%);
+  font-variant-numeric:tabular-nums;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.5px;
+  color:var(--accent);
+  background:rgba(127,234,209,.12);
+  border:1px solid rgba(127,234,209,.35);
+  border-radius:10px;
+  padding:3px 8px;
+}
+
+/* hover state */
+#playlist .track:hover{
+  transform:translateY(-1px);
+  border-color:var(--accent);
+  color:var(--accent);
+  box-shadow:0 10px 24px rgba(0,0,0,.28), 0 0 0 1px rgba(127,234,209,.22);
+}
+
+/* active/now playing row */
+#playlist .track.is-active{
+  background:linear-gradient(180deg, rgba(127,234,209,.10), rgba(127,234,209,.06));
+  border-color:var(--accent);
+  box-shadow:0 8px 22px rgba(127,234,209,.18), 0 0 0 1px rgba(127,234,209,.28);
+}
+
+/* subtle play dot on active */
+#playlist .track.is-active::after{
+  content:'';
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px rgba(127,234,209,.7);
+}
+
+/* mobile: comfortable tap targets */
+@media (max-width:520px){
+  #playlist.playlist{ max-height:none }          /* let it grow */
+  #playlist .track{ padding-left:48px; font-size:15px }
+}
+
 
 
 </style>
