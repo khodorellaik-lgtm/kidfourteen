@@ -765,12 +765,14 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   font-size: clamp(1.6rem, 3.2vw, 2.4rem);
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: rgba(127, 234, 209, 0.9);
-  text-shadow:
-    0 0 8px rgba(127, 234, 209, 0.6),
-    0 0 16px rgba(127, 234, 209, 0.4),
-    0 0 32px rgba(127, 234, 209, 0.3);
+  color: rgba(127, 234, 209, 0.7);
+text-shadow:
+  0 0 10px rgba(127, 234, 209, 0.8),
+  0 0 28px rgba(127, 234, 209, 0.5),
+  0 0 42px rgba(127, 234, 209, 0.35);
   animation: glowPulse 6s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+filter: brightness(1.1);
 }
 
 .album-banner-sub {
@@ -784,15 +786,15 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   animation: glowPulseSub 7s ease-in-out infinite alternate;
 }
 
-@keyframes glowPulse {
+@@keyframes glowPulse {
   from {
     text-shadow: 0 0 4px rgba(127, 234, 209, 0.3),
                  0 0 12px rgba(127, 234, 209, 0.25);
-    opacity: 0.85;
+    opacity: 0.7;
   }
   to {
-    text-shadow: 0 0 14px rgba(127, 234, 209, 0.7),
-                 0 0 32px rgba(127, 234, 209, 0.5);
+    text-shadow: 0 0 20px rgba(127, 234, 209, 0.8),
+                 0 0 40px rgba(127, 234, 209, 0.6);
     opacity: 1;
   }
 }
