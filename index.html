@@ -762,42 +762,39 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 }
 
 .album-banner-title {
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: rgba(127, 234, 209, 0.7);
-text-shadow:
-  0 0 10px rgba(127, 234, 209, 0.8),
-  0 0 28px rgba(127, 234, 209, 0.5),
-  0 0 42px rgba(127, 234, 209, 0.35);
-  animation: glowPulse 6s ease-in-out infinite alternate;
-  mix-blend-mode: screen;
-filter: brightness(1.1);
-}
-
-.album-banner-sub {
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  color: rgba(127, 234, 209, 0.6);
-  margin-top: 6px;
-  letter-spacing: 0.25em;
+  color: rgba(127, 234, 209, 0.15);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  position: relative;
+  animation: k14GhostDrift 10s ease-in-out infinite alternate;
   text-shadow:
-    0 0 6px rgba(127, 234, 209, 0.4),
-    0 0 12px rgba(127, 234, 209, 0.2);
-  animation: glowPulseSub 7s ease-in-out infinite alternate;
+    0 0 20px rgba(127, 234, 209, 0.25),
+    0 0 60px rgba(127, 234, 209, 0.35),
+    0 0 120px rgba(127, 234, 209, 0.4);
+  transform: scale(1.02);
+  transition: opacity 1s ease-in-out, transform 6s ease-in-out;
 }
 
-@@keyframes glowPulse {
-  from {
-    text-shadow: 0 0 4px rgba(127, 234, 209, 0.3),
-                 0 0 12px rgba(127, 234, 209, 0.25);
-    opacity: 0.7;
+@keyframes k14GhostDrift {
+  0% {
+    opacity: 0.25;
+    transform: translateY(8px) scale(1.05);
+    filter: blur(2px) brightness(0.8);
   }
-  to {
-    text-shadow: 0 0 20px rgba(127, 234, 209, 0.8),
-                 0 0 40px rgba(127, 234, 209, 0.6);
-    opacity: 1;
+  50% {
+    opacity: 0.35;
+    transform: translateY(0) scale(1.08);
+    filter: blur(3px) brightness(1);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateY(-6px) scale(1.03);
+    filter: blur(4px) brightness(0.7);
   }
 }
+
 
 @keyframes glowPulseSub {
   from {
