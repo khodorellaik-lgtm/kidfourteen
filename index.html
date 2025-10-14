@@ -752,74 +752,90 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   margin: 12px 0 36px;
   pointer-events: none;
 }
-/* === Albums banner (readable ghost) === */
-
-.album-banner{ 
+/* === Albums banner — ghostly float illusion === */
+.album-banner {
   position: relative;
-  margin: 8px 0 22px;             /* space before the grid */
+  margin: 8px 0 22px;
   text-align: center;
-  perspective: 900px;             /* depth for translateZ */
+  perspective: 1200px;
 }
 
+/* Main title: drifting presence */
 .album-banner-title {
   display: block;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: rgba(127, 234, 209, 0.26);
+  color: rgba(127, 234, 209, 0.25);
   text-shadow:
-    0 0 18px rgba(127, 234, 209, 0.35),
-    0 0 45px rgba(127, 234, 209, 0.25),
-    0 0 80px rgba(127, 234, 209, 0.30);
-  transform: perspective(900px) translateZ(-80px) scale(1.1);
-  animation: k14TitleDrift 12s ease-in-out infinite alternate;
-  will-change: transform, opacity, filter;
+    0 0 14px rgba(127, 234, 209, 0.35),
+    0 0 36px rgba(127, 234, 209, 0.25),
+    0 0 90px rgba(127, 234, 209, 0.3);
   opacity: 0.35;
-  filter: blur(0.6px) brightness(1.05);
+  filter: blur(0.5px) brightness(1.05);
+  transform-origin: center center;
+  animation: k14FloatPresence 14s ease-in-out infinite alternate;
+  will-change: transform, opacity, filter;
 }
 
+/* Subtitle shares the same illusion but lighter, delayed phase */
 .album-banner-sub {
   display: block;
   margin-top: 6px;
   letter-spacing: 0.4em;
   font-weight: 600;
   font-size: 0.9rem;
-  color: rgba(127, 234, 209, 0.22);
+  color: rgba(127, 234, 209, 0.2);
   text-shadow:
     0 0 10px rgba(127, 234, 209, 0.25),
     0 0 30px rgba(127, 234, 209, 0.15);
-  transform: perspective(900px) translateZ(-100px) scale(1.05);
-  animation: k14TitleDrift 12s ease-in-out infinite alternate-reverse;
+  opacity: 0.25;
+  filter: blur(0.8px) brightness(0.9);
+  transform-origin: center center;
+  animation: k14FloatPresence 14s ease-in-out infinite alternate-reverse;
   will-change: transform, opacity, filter;
-  opacity: 0.28;
-  filter: blur(1.1px) brightness(0.9);
 }
 
-@keyframes k14TitleDrift {
+/* Keyframes: simulate forward drift without literal approach */
+@keyframes k14FloatPresence {
   0% {
-    transform: perspective(900px) translateZ(-120px) translateY(4px) scale(1.12);
-    opacity: 0.25;
-    filter: blur(1.4px) brightness(0.9);
+    transform: perspective(900px)
+               translateY(2px)
+               rotateX(3deg)
+               rotateY(-1deg)
+               scale(1.05);
+    opacity: 0.3;
+    filter: blur(0.8px) brightness(0.9);
   }
   50% {
-    transform: perspective(900px) translateZ(-60px) translateY(0) scale(1.18);
-    opacity: 0.42;
-    filter: blur(0.5px) brightness(1.05);
+    transform: perspective(900px)
+               translateY(0)
+               rotateX(0deg)
+               rotateY(1deg)
+               scale(1.08);
+    opacity: 0.4;
+    filter: blur(0.4px) brightness(1.05);
   }
   100% {
-    transform: perspective(900px) translateZ(-140px) translateY(-3px) scale(1.1);
-    opacity: 0.30;
-    filter: blur(1.2px) brightness(0.85);
+    transform: perspective(900px)
+               translateY(-2px)
+               rotateX(-2deg)
+               rotateY(0deg)
+               scale(1.06);
+    opacity: 0.32;
+    filter: blur(0.6px) brightness(0.95);
   }
 }
 
-/* motion-safe */
-@media (prefers-reduced-motion: reduce){
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
   .album-banner-title,
-  .album-banner-sub { animation: none; filter: none; }
+  .album-banner-sub {
+    animation: none;
+    filter: none;
+  }
 }
-
 
 </style>
 </head>
