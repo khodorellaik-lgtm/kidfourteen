@@ -882,14 +882,25 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   }
 }
     /* === PRESS: animated charcoal wallpaper (cover3.jpg) === */
+/* === PRESS: intense glowing charcoal figure (cover3.jpg) === */
 .press-wallpaper{
   position: relative;
-  isolation: isolate; /* keep overlays contained */
-  --press-zoom: 120%;   /* overall size of the art */
-  --press-rot: 0deg;    /* will be nudged by JS (optional) */
-  --press-x: 53%;        /* focus horizontal (53 = slightly right) */
-  --press-y: 35%;        /* focus vertical (35 = a bit higher) */
+  isolation: isolate;
+  --press-zoom: 120%;
+  --press-rot: 0deg;
+  --press-x: 53%;
+  --press-y: 35%;
 }
+
+/* Image layer — with stronger glow and motion */
+.press-wallpaper::before{
+  content:"";
+  position:absolute; inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(3,8,14,0) 0%, rgba(3,8,14,.7) 60%, rgba(3,8,14,.95) 100%),
+    url('cover
+
 
 /* Artwork layer */
 .press-wallpaper::before{
