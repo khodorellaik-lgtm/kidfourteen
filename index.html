@@ -757,21 +757,26 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 /* TITLE: nearer, brighter, a touch bigger */
 .album-banner-title {
   display: block;
-  font-size: clamp(2.8rem, 6vw, 4.3rem);
+  font-size: clamp(2.6rem, 6vw, 4rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 3px;
   text-align: center;
-  color: rgba(127, 234, 209, 0.36);
+  color: rgba(127, 234, 209, 0.32);
   text-shadow:
-    0 0 10px rgba(127, 234, 209, 0.45),
-    0 0 30px rgba(127, 234, 209, 0.35),
-    0 0 60px rgba(127, 234, 209, 0.25),
-    0 0 120px rgba(94, 179, 220, 0.35);
-  opacity: 0.45;
-  filter: brightness(1.05) saturate(1.2);
-  animation: k14Pulse 5.5s ease-in-out infinite;
+    0 0 12px rgba(127, 234, 209, 0.35),
+    0 0 30px rgba(127, 234, 209, 0.25),
+    0 0 60px rgba(127, 234, 209, 0.18),
+    0 0 120px rgba(94, 179, 220, 0.22);
+  opacity: 0.38;
+  filter: blur(0.6px) brightness(1.05) saturate(1.1);
+  transform-origin: center;
+  animation: k14FloatTitle 13s ease-in-out infinite alternate,
+             k14Pulse 5.5s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+  position: relative;
 }
+
 @keyframes k14Pulse {
   0%, 100% {
     text-shadow:
@@ -841,14 +846,14 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   font-weight: 600;
   letter-spacing: 0.45em;
-  color: rgba(127, 234, 209, 0.38);        /* a touch less bright */
+  color: rgba(127, 234, 209, 0.45);
   text-shadow:
-    0 0 10px rgba(127, 234, 209, 0.35),
-    0 0 24px rgba(127, 234, 209, 0.25),
-    0 0 48px rgba(127, 234, 209, 0.15);
-  opacity: 0.45;                           /* cleaner translucency */
-  filter: blur(0.2px) brightness(1.1);     /* reduce fog */
-  transform-origin: center;
+    0 0 8px rgba(127, 234, 209, 0.25),
+    0 0 20px rgba(127, 234, 209, 0.15),
+    0 0 40px rgba(127, 234, 209, 0.1);
+  opacity: 0.5;
+  filter: blur(0.4px) brightness(1.15);
+  transform: perspective(1100px) translateZ(-15px) scale(1.05);
   animation: k14FloatSub 16s ease-in-out infinite alternate-reverse;
   will-change: transform, opacity, filter;
 }
