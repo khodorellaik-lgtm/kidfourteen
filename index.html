@@ -752,81 +752,100 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   margin: 12px 0 36px;
   pointer-events: none;
 }
-/* === Albums banner — ghostly float illusion === */
-.album-banner {
-  position: relative;
-  margin: 8px 0 22px;
-  text-align: center;
-  perspective: 1200px;
-}
+/* === Albums banner — split depth for real parallax feel === */
 
-/* Main title: drifting presence */
-.album-banner-title {
-  display: block;
-  font-size: clamp(2.4rem, 6vw, 3.8rem);
-  font-weight: 800;
-  text-transform: uppercase;
+/* TITLE: nearer, brighter, a touch bigger */
+.album-banner-title{
+  display:block;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight:800;
+  text-transform:uppercase;
   letter-spacing: 3px;
-  color: rgba(127, 234, 209, 0.25);
+  color: rgba(127,234,209,.30);
   text-shadow:
-    0 0 14px rgba(127, 234, 209, 0.35),
-    0 0 36px rgba(127, 234, 209, 0.25),
-    0 0 90px rgba(127, 234, 209, 0.3);
-  opacity: 0.35;
-  filter: blur(0.5px) brightness(1.05);
-  transform-origin: center center;
-  animation: k14FloatPresence 14s ease-in-out infinite alternate;
+    0 0 16px rgba(127,234,209,.38),
+    0 0 40px rgba(127,234,209,.28),
+    0 0 90px rgba(127,234,209,.22);
+  opacity:.40;                          /* stronger than sub */
+  filter: blur(.4px) brightness(1.05);  /* crisper than sub */
+  transform-origin:center;
+  animation: k14FloatTitle 13s ease-in-out infinite alternate;
   will-change: transform, opacity, filter;
 }
 
-/* Subtitle shares the same illusion but lighter, delayed phase */
-.album-banner-sub {
-  display: block;
-  margin-top: 6px;
-  letter-spacing: 0.4em;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: rgba(127, 234, 209, 0.2);
+/* SUB: farther, lighter, softer + slightly slower and counter-phased */
+.album-banner-sub{
+  display:block;
+  margin-top:6px;
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  font-weight:600;
+  letter-spacing:.45em;
+  color: rgba(127,234,209,.20);
   text-shadow:
-    0 0 10px rgba(127, 234, 209, 0.25),
-    0 0 30px rgba(127, 234, 209, 0.15);
-  opacity: 0.25;
-  filter: blur(0.8px) brightness(0.9);
-  transform-origin: center center;
-  animation: k14FloatPresence 14s ease-in-out infinite alternate-reverse;
+    0 0 10px rgba(127,234,209,.22),
+    0 0 28px rgba(127,234,209,.16);
+  opacity:.28;
+  filter: blur(.9px) brightness(.95);   /* softer than title */
+  transform-origin:center;
+  animation: k14FloatSub 16s ease-in-out infinite alternate-reverse;
   will-change: transform, opacity, filter;
 }
 
-/* Keyframes: simulate forward drift without literal approach */
-@keyframes k14FloatPresence {
-  0% {
-    transform: perspective(900px)
-               translateY(2px)
-               rotateX(3deg)
-               rotateY(-1deg)
-               scale(1.05);
-    opacity: 0.3;
-    filter: blur(0.8px) brightness(0.9);
+/* TITLE motion: closer plane (less blur, slightly larger scale) */
+@keyframes k14FloatTitle{
+  0%{
+    transform: perspective(1100px)
+              translateY(2px) translateX(-4px)
+              rotateX(2deg) rotateY(-1deg)
+              scale(1.08);
+    opacity:.36; filter: blur(.7px) brightness(.95);
   }
-  50% {
-    transform: perspective(900px)
-               translateY(0)
-               rotateX(0deg)
-               rotateY(1deg)
-               scale(1.08);
-    opacity: 0.4;
-    filter: blur(0.4px) brightness(1.05);
+  50%{
+    transform: perspective(1100px)
+              translateY(0) translateX(0)
+              rotateX(0deg) rotateY(1deg)
+              scale(1.13);
+    opacity:.44; filter: blur(.3px) brightness(1.06);
   }
-  100% {
-    transform: perspective(900px)
-               translateY(-2px)
-               rotateX(-2deg)
-               rotateY(0deg)
-               scale(1.06);
-    opacity: 0.32;
-    filter: blur(0.6px) brightness(0.95);
+  100%{
+    transform: perspective(1100px)
+              translateY(-2px) translateX(3px)
+              rotateX(-1deg) rotateY(0deg)
+              scale(1.10);
+    opacity:.38; filter: blur(.6px) brightness(.98);
   }
 }
+
+/* SUB motion: deeper plane (more blur, slower, wider X drift) */
+@keyframes k14FloatSub{
+  0%{
+    transform: perspective(1100px)
+              translateY(3px) translateX(6px)
+              rotateX(3deg) rotateY(0deg)
+              scale(1.03);
+    opacity:.24; filter: blur(1.3px) brightness(.9);
+  }
+  50%{
+    transform: perspective(1100px)
+              translateY(0) translateX(0)
+              rotateX(0deg) rotateY(-1deg)
+              scale(1.07);
+    opacity:.32; filter: blur(.7px) brightness(1.0);
+  }
+  100%{
+    transform: perspective(1100px)
+              translateY(-3px) translateX(-6px)
+              rotateX(-2deg) rotateY(1deg)
+              scale(1.02);
+    opacity:.26; filter: blur(1.1px) brightness(.92);
+  }
+}
+
+/* Motion-safe */
+@media (prefers-reduced-motion: reduce){
+  .album-banner-title, .album-banner-sub{ animation:none; filter:none; }
+}
+
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
