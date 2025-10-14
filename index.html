@@ -800,20 +800,20 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 }
 
 /* --- REPLACE everything below with the new bright subtext version --- */
-.album-banner-sub{
-  display:block;
-  margin-top:6px;
-  font-size: clamp(.9rem, 1.8vw, 1.1rem);
-  font-weight:600;
-  letter-spacing:.45em;
-  color: rgba(127,234,209,.45);        /* brighter */
+.album-banner-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  color: rgba(127, 234, 209, 0.38);        /* a touch less bright */
   text-shadow:
-    0 0 12px rgba(127,234,209,.45),
-    0 0 36px rgba(127,234,209,.35),
-    0 0 72px rgba(127,234,209,.25);
-  opacity:.55;                         /* stronger presence */
-  filter: blur(.5px) brightness(1.2);  /* cleaner, more radiant */
-  transform-origin:center;
+    0 0 10px rgba(127, 234, 209, 0.35),
+    0 0 24px rgba(127, 234, 209, 0.25),
+    0 0 48px rgba(127, 234, 209, 0.15);
+  opacity: 0.45;                           /* cleaner translucency */
+  filter: blur(0.2px) brightness(1.1);     /* reduce fog */
+  transform-origin: center;
   animation: k14FloatSub 16s ease-in-out infinite alternate-reverse;
   will-change: transform, opacity, filter;
 }
