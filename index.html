@@ -745,6 +745,35 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   .album-backtitle{ top: 56%; }
   .album-backtitle .line{ opacity:.18; }
 }
+/* Album banner under title */
+.album-banner {
+  position: relative;
+  text-align: center;
+  margin: 12px 0 36px;
+  pointer-events: none;
+}
+
+.album-banner-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(127, 234, 209, 0.45);
+  text-shadow: 0 0 12px rgba(127, 234, 209, 0.3);
+  animation: fadeGlow 5s ease-in-out infinite alternate;
+}
+
+.album-banner-sub {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: rgba(127, 234, 209, 0.3);
+  margin-top: 6px;
+  letter-spacing: 0.25em;
+  text-shadow: 0 0 8px rgba(127, 234, 209, 0.25);
+}
+
+@keyframes fadeGlow {
+  from { text-shadow: 0 0 4px rgba(127,234,209,0.2); opacity: 0.8; }
+  to { text-shadow: 0 0 18px rgba(127,234,209,0.6); opacity: 1; }
+}
 
 </style>
 </head>
@@ -991,10 +1020,11 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   <section id="albums" class="section">
     <div class="wrap">
       <h2>Albums</h2>
-      <div class="album-backtitle" aria-hidden="true">
-  <span class="line">FAR AWAY AND WELL ADJUSTED</span>
-  <span class="line sub">— COMING SOON —</span>
+     <div class="album-banner">
+  <div class="album-banner-title">FAR AWAY AND WELL ADJUSTED</div>
+  <div class="album-banner-sub">COMING SOON</div>
 </div>
+
 
       <div class="album-backtitle" aria-hidden="true">
   FAR AWAY AND WELL ADJUSTED — COMING SOON
