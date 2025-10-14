@@ -881,7 +881,66 @@ animation: k14Ken 18s ease-in-out infinite alternate;
     opacity:.5; filter: blur(.6px) brightness(1.15);
   }
 }
-    
+    /* === PRESS: animated charcoal wallpaper (cover3.jpg) === */
+.press-wallpaper{
+  position: relative;
+  isolation: isolate; /* keep overlays contained */
+  --press-zoom: 120%;   /* overall size of the art */
+  --press-rot: 0deg;    /* will be nudged by JS (optional) */
+  --press-x: 53%;        /* focus horizontal (53 = slightly right) */
+  --press-y: 35%;        /* focus vertical (35 = a bit higher) */
+}
+
+/* Artwork layer */
+.press-wallpaper::before{
+  content:"";
+  position:absolute; inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(3,8,14,0) 0%, rgba(3,8,14,.75) 65%, rgba(3,8,14,.95) 100%),
+    url('cover3.jpg') center/var(--press-zoom) no-repeat;
+  background-position: var(--press-x) var(--press-y);
+  filter: contrast(1.02) brightness(.85) grayscale(.1);
+  opacity:.18;                           /* visibility strength */
+  mix-blend-mode: lighten;               /* sits nicely behind text/cards */
+  transform: translateZ(0) rotate(var(--press-rot));
+  animation: k14PressFloat 18s ease-in-out infinite alternate;
+  will-change: transform, filter, opacity, background-position;
+}
+
+/* Gentle halo & vignette to keep text readable */
+.press-wallpaper::after{
+  content:"";
+  position:absolute; inset:-2px;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(60% 35% at 50% 22%, rgba(127,234,209,.08) 0%, rgba(127,234,209,0) 60%),
+    linear-gradient(to bottom, rgba(5,10,16,.30), rgba(5,10,16,0) 28%, rgba(5,10,16,.30) 100%);
+  mix-blend-mode: screen;
+  animation: k14PressPulse 7s ease-in-out infinite;
+  opacity:.8;
+}
+
+/* Floating drift (breathing motion) */
+@keyframes k14PressFloat{
+  0%   { transform: translate3d(-4px, 3px, 0) scale(1.02) rotate(-0.2deg); opacity:.16; }
+  50%  { transform: translate3d( 0px, 0px, 0) scale(1.05) rotate( 0deg);   opacity:.20; }
+  100% { transform: translate3d( 5px,-3px, 0) scale(1.03) rotate( 0.2deg); opacity:.18; }
+}
+
+/* Soft turquoise pulse (subtle glow) */
+@keyframes k14PressPulse{
+  0%,100%{ filter: brightness(1.00) blur(.6px); opacity:.75; }
+  50%    { filter: brightness(1.08) blur(.2px); opacity:.95; }
+}
+
+/* Accessibility: disable motion if user prefers */
+@media (prefers-reduced-motion: reduce){
+  .press-wallpaper::before,
+  .press-wallpaper::after{ animation:none }
+}
+
 
 
 </style>
@@ -1047,7 +1106,7 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   </section>
 
   <!-- PRESS -->
-  <section id="press" class="section">
+  <section id="press" class="section press-wallpaper">
     <div class="wrap">
       <h2>Press</h2>
 
@@ -1557,6 +1616,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('.album-banner-title');
   if (title) observer.observe(title);
 });
+</script>
+  <script>
+(() => {
+  const sec = document.querySelector('#press.press-wallpaper');
+  if(!sec) return;
+
+  const onScroll = () => {
+    const r = sec.getBoundingClientRect();
+    const vh = window.innerHeight || 800;
+    const t = 1 - Math.min(Math.max((r.top + r.height*0.4)/vh, 0), 1);
+    const x = 53 + (t * 1.5);
+    const y = 35 + (t * 2.5);
+    sec.style.setProperty('--press-x', x + '%');
+    sec.style.setProperty('--press-y', y + '%');
+  };
+
+  const onMove = (e) => {
+    const b = sec.getBoundingClientRect();
+    const mx = (e.clientX - (b.left + b.width/2)) / b.width;
+    const my = (e.clientY - (b.top  + b.height/2)) / b.height;
+    const rot = (mx * 0.4) + (my * -0.3);
+    sec.style.setProperty('--press-rot', rot.toFixed(3) + 'deg');
+  };
+
+  let rafId = null;
+  const queued = (fn) => {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => { fn(); rafId = null; });
+  };
+
+  window.addEventListener('scroll', () => queued(onScroll), { passive:true });
+  sec.addEventListener('mousemove', (e) => queued(() => onMove(e)));
+
+  onScroll();
+})();
 </script>
 </body>
 </html>
