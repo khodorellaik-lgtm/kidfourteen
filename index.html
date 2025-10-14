@@ -563,30 +563,65 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 /* keep the cards/heading above the backtitle */
 #albums .wrap > *:not(.album-backtitle){ position:relative; z-index:2; }
 
-.album-backtitle{
-  position:absolute;
-  left:50%;
-  top:52%;                                /* move up/down if needed */
-  transform: translate(-50%,-50%) perspective(900px) rotateX(12deg);
-  width:min(1200px,92vw);
-  text-align:center;
-  pointer-events:none;
-  z-index:0;
+.album-backtitle {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%) perspective(900px) rotateX(10deg);
+  width: min(1200px, 92vw);
+  text-align: center;
+  pointer-events: none;
+  z-index: 0;
 
-  /* hero look */
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-size:clamp(44px,8vw,120px);
-  color:var(--accent);
-  opacity:.16;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: clamp(36px, 7vw, 90px);
+  color: var(--accent);
+  opacity: 0.12;
   text-shadow:
-    0 0 12px rgba(127,234,209,.45),
-    0 0 28px rgba(127,234,209,.25),
-    0 0 64px rgba(127,234,209,.15);
-  mix-blend-mode:screen;
-  animation: heroBreath 7s ease-in-out infinite;
+    0 0 15px rgba(127, 234, 209, 0.4),
+    0 0 35px rgba(127, 234, 209, 0.2),
+    0 0 90px rgba(127, 234, 209, 0.1);
+  mix-blend-mode: screen;
+
+  animation: albumGlow 6s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
+
+/* Soft breathing glow */
+@keyframes albumGlow {
+  0% {
+    opacity: 0.1;
+    text-shadow:
+      0 0 10px rgba(127, 234, 209, 0.3),
+      0 0 30px rgba(127, 234, 209, 0.15);
+    transform: translate(-50%, -50%) perspective(900px) rotateX(10deg) scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    text-shadow:
+      0 0 25px rgba(127, 234, 209, 0.6),
+      0 0 50px rgba(127, 234, 209, 0.3);
+    transform: translate(-50%, -51%) perspective(900px) rotateX(12deg) scale(1.03);
+  }
+  100% {
+    opacity: 0.1;
+    text-shadow:
+      0 0 15px rgba(127, 234, 209, 0.35),
+      0 0 35px rgba(127, 234, 209, 0.15);
+    transform: translate(-50%, -49%) perspective(900px) rotateX(9deg) scale(0.995);
+  }
+}
+
+/* Scroll-reactive “float” motion */
+window.addEventListener('scroll', () => {
+  const banner = document.querySelector('.album-backtitle');
+  if (!banner) return;
+  const y = window.scrollY * 0.1; // gentle parallax
+  banner.style.transform = `translate(-50%, calc(-50% + ${y}px)) perspective(900px) rotateX(10deg)`;
+});
+
 
 /* gentle hero-like pulse */
 @keyframes heroBreath{
