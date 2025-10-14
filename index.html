@@ -752,66 +752,73 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   margin: 12px 0 36px;
   pointer-events: none;
 }
-
 /* === Albums banner (readable ghost) === */
-.albumbanner-fix { /* helper if you need it; not required */
-  /* no-op */
-}
 
 .album-banner{ 
   position: relative;
-  margin: 8px 0 22px;             /* gives space before the grid */
-  text-align:center;
+  margin: 8px 0 22px;             /* space before the grid */
+  text-align: center;
   perspective: 900px;             /* depth for translateZ */
 }
 
-.album-banner-title{
-  display:inline-block;
-  text-transform:uppercase;
-  font-weight:800;
-  letter-spacing:2px;
-  color: rgba(127,234,209,0.30);  /* was ~0.18 → more readable */
+.album-banner-title {
+  display: block;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(127, 234, 209, 0.26);
   text-shadow:
-    0 0 12px rgba(127,234,209,.30),
-    0 0 28px rgba(127,234,209,.22),
-    0 0 60px rgba(127,234,209,.18);
-  transform: translateZ(-60px) scale(1.06);
-  opacity: .34;                   /* was ~.16–.26 → more readable */
-  filter: blur(.6px) brightness(1.05); /* softer blur so letters stay clear */
-  animation: k14DepthGhost 11s ease-in-out infinite alternate;
+    0 0 18px rgba(127, 234, 209, 0.35),
+    0 0 45px rgba(127, 234, 209, 0.25),
+    0 0 80px rgba(127, 234, 209, 0.30);
+  transform: perspective(900px) translateZ(-80px) scale(1.1);
+  animation: k14TitleDrift 12s ease-in-out infinite alternate;
   will-change: transform, opacity, filter;
+  opacity: 0.35;
+  filter: blur(0.6px) brightness(1.05);
 }
 
-@keyframes k14DepthGhost{
-  0%{
-    transform: translateZ(-90px) translateY(2px) scale(1.07);
-    opacity:.28;
-    filter: blur(1.1px) brightness(.95);
+.album-banner-sub {
+  display: block;
+  margin-top: 6px;
+  letter-spacing: 0.4em;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgba(127, 234, 209, 0.22);
+  text-shadow:
+    0 0 10px rgba(127, 234, 209, 0.25),
+    0 0 30px rgba(127, 234, 209, 0.15);
+  transform: perspective(900px) translateZ(-100px) scale(1.05);
+  animation: k14TitleDrift 12s ease-in-out infinite alternate-reverse;
+  will-change: transform, opacity, filter;
+  opacity: 0.28;
+  filter: blur(1.1px) brightness(0.9);
+}
+
+@keyframes k14TitleDrift {
+  0% {
+    transform: perspective(900px) translateZ(-120px) translateY(4px) scale(1.12);
+    opacity: 0.25;
+    filter: blur(1.4px) brightness(0.9);
   }
-  50%{
-    transform: translateZ(-45px) translateY(0) scale(1.09);
-    opacity:.38;
-    filter: blur(.5px) brightness(1.05);
+  50% {
+    transform: perspective(900px) translateZ(-60px) translateY(0) scale(1.18);
+    opacity: 0.42;
+    filter: blur(0.5px) brightness(1.05);
   }
-  100%{
-    transform: translateZ(-100px) translateY(-2px) scale(1.05);
-    opacity:.26;
-    filter: blur(1.2px) brightness(.9);
+  100% {
+    transform: perspective(900px) translateZ(-140px) translateY(-3px) scale(1.1);
+    opacity: 0.30;
+    filter: blur(1.2px) brightness(0.85);
   }
 }
 
-/* small, clean subtitle */
-.album-banner-sub{
-  margin-top: 4px;
-  letter-spacing: .35em;
-  color: rgba(127,234,209,.65);
-  text-shadow: 0 0 10px rgba(127,234,209,.35);
-  font-weight:700;
+/* motion-safe */
+@media (prefers-reduced-motion: reduce){
+  .album-banner-title,
+  .album-banner-sub { animation: none; filter: none; }
 }
-
-/* Keep the banner above any accidental masks/layers */
-#albums .wrap{ position:relative; z-index: 1; }
-
 
 
 </style>
