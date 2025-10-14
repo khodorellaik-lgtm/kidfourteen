@@ -756,20 +756,21 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 
 /* TITLE: nearer, brighter, a touch bigger */
 .album-banner-title {
-  /* keep your current “Far Away and Well Adjusted” styles */
-  display:block;
+  display: block;
   font-size: clamp(2.6rem, 6vw, 4rem);
-  font-weight:800;
-  text-transform:uppercase;
+  font-weight: 800;
+  text-transform: uppercase;
   letter-spacing: 3px;
-  color: rgba(127,234,209,.30);
+  text-align: center;
+  color: rgba(127, 234, 209, 0.32);
   text-shadow:
-    0 0 16px rgba(127,234,209,.38),
-    0 0 40px rgba(127,234,209,.28),
-    0 0 90px rgba(127,234,209,.22);
-  opacity:.40;
-  filter: blur(.4px) brightness(1.05);
-  transform-origin:center;
+    0 0 12px rgba(127, 234, 209, 0.35),
+    0 0 30px rgba(127, 234, 209, 0.25),
+    0 0 60px rgba(127, 234, 209, 0.18),
+    0 0 120px rgba(94, 179, 220, 0.25); /* subtle cyan outer ring */
+  opacity: 0.38;
+  filter: blur(0.3px) brightness(1.05) saturate(1.15);
+  transform-origin: center;
   animation: k14FloatTitle 13s ease-in-out infinite alternate;
   will-change: transform, opacity, filter;
 }
