@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -244,30 +245,6 @@
     .album-card img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block; transition:transform .3s ease}
     .album-card:hover img{transform:scale(1.08)}
     .album-card .label{padding:12px; background:#121821; text-align:center; font-weight:700; font-size:14px; border-top:1px solid var(--chip-border)}
-
-    /* ALBUMS BANNER */
-.album-banner {
-  position: relative;
-  display: block;
-  text-align: center;
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--accent);
-  text-transform: uppercase;
-  opacity: 0.08;
-  margin: 60px 0 -40px;
-  filter: blur(0.5px);
-  mix-blend-mode: screen;
-  animation: fadePulse 10s ease-in-out infinite alternate;
-}
-
-@keyframes fadePulse {
-  0% { opacity: 0.06; transform: scale(1); }
-  100% { opacity: 0.12; transform: scale(1.03); }
-}
-
-    
 
     /* ===== Columns / Panels ===== */
     .cols{display:grid; gap:28px}
@@ -579,91 +556,6 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 @media (prefers-reduced-motion: reduce){
   .k14-player.wallpaper::before{ animation:none }
 }
-    /* --- Albums background banner --- */
-#albums.section { position:relative; z-index:0; isolation:isolate; }
-#albums .wrap > *:not(.album-banner){ position:relative; z-index:2; } /* cards above banner */
-
-.album-banner{
-  position:absolute;
-  left:50%; top:52%;
-  transform: translate(-50%,-50%) perspective(900px) rotateX(12deg);
-  width:min(1100px, 92vw);
-  text-align:center;
-  pointer-events:none;
-  z-index:0;
-  mix-blend-mode:screen;
-  will-change: transform, opacity;
-  animation: albumDrift 9s ease-in-out infinite alternate;
-}
-
-/* Main line (hero glow) */
-.album-banner .title{
-  display:block;
-  font-size:clamp(40px, 7vw, 96px);
-  font-weight:800;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--accent);
-  opacity:.14;
-  text-shadow:
-    0 0 12px rgba(127,234,209,.45),
-    0 0 28px rgba(127,234,209,.25),
-    0 0 64px rgba(127,234,209,.15);
-  animation: albumGlow 7s ease-in-out infinite alternate;
-}
-
-/* Small subline */
-.album-banner .sub{
-  display:block;
-  margin-top:.1em;
-  font-size:clamp(14px, 2.2vw, 22px);
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  color:rgba(200,220,230,.45);
-  opacity:.8;
-  filter: blur(.2px);
-}
-
-/* Gentle drift + glow */
-@keyframes albumDrift{
-  0%   { transform: translate(-50%,-50%) perspective(900px) rotateX(12deg) translateX(-6px); }
-  100% { transform: translate(-50%,-50%) perspective(900px) rotateX(12deg) translateX( 6px); }
-}
-@keyframes albumGlow{
-  0%,100%{
-    text-shadow:
-      0 0 10px rgba(127,234,209,.35),
-      0 0 26px rgba(127,234,209,.25),
-      0 0 56px rgba(127,234,209,.15);
-    opacity:.12;
-  }
-  50%{
-    text-shadow:
-      0 0 20px rgba(127,234,209,.7),
-      0 0 40px rgba(127,234,209,.45),
-      0 0 80px rgba(127,234,209,.25);
-    opacity:.18;
-  }
-}
-
-/* Soft gradient so the banner doesn't compete with the section heading */
-#albums .wrap::before{
-  content:""; position:absolute; left:0; right:0; top:0; height:140px;
-  background:linear-gradient(to bottom, rgba(15,20,27,1), rgba(15,20,27,0));
-  z-index:1; pointer-events:none;
-}
-
-/* Mobile polish */
-@media (max-width: 640px){
-  .album-banner{ top:50%; }
-  .album-banner .title{ opacity:.12; }
-}
-
-/* Safari/iOS blend fallback */
-@supports (-webkit-touch-callout:none){
-  .album-banner{ mix-blend-mode:normal; }
-}
-
 </style>
 </head>
 <body>
@@ -909,13 +801,6 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   <section id="albums" class="section">
     <div class="wrap">
       <h2>Albums</h2>
-      <div class="album-banner" aria-hidden="true">
-  <span class="title">Far Away and Well Adjusted</span>
-  <span class="sub">Coming Soon</span>
-</div>
-
-      <div class="album-banner">Far Away And Well Adjusted - Coming Soon</div>
-
       <div class="album-grid">
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
           <img src="cover4.jpg" alt="Heart Is a Malady"><div class="label">Heart Is a Malady</div>
