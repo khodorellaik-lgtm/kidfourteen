@@ -563,64 +563,79 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 /* keep the cards/heading above the backtitle */
 #albums .wrap > *:not(.album-backtitle){ position:relative; z-index:2; }
 
-.album-backtitle {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  transform: translate(-50%, -50%) perspective(900px) rotateX(10deg);
-  width: min(1200px, 92vw);
-  text-align: center;
-  pointer-events: none;
-  z-index: 0;
+./* Readable, hero-like background title */
+.album-backtitle{
+  position:absolute;
+  left:50%;
+  top:60%;                           /* moved lower so letters sit in the gaps */
+  transform: translate(-50%,-50%) perspective(800px) rotateX(8deg);
+  width:min(1200px,92vw);
+  text-align:center;
+  pointer-events:none;
+  z-index:0;
 
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: clamp(36px, 7vw, 90px);
-  color: var(--accent);
-  opacity: 0.12;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+  font-size:clamp(38px,7.2vw,108px);
+
+  /* switch from blend “screen” (too faint) to normal + outline */
+  mix-blend-mode:normal;
+  color:rgba(127,234,209,.9);         /* solid accent */
+  opacity:.22;                        /* stronger presence */
+
+  /* subtle dark outline + glow = readable on busy art */
   text-shadow:
-    0 0 15px rgba(127, 234, 209, 0.4),
-    0 0 35px rgba(127, 234, 209, 0.2),
-    0 0 90px rgba(127, 234, 209, 0.1);
-  mix-blend-mode: screen;
+    0 0 1px rgba(0,0,0,.50),          /* crisp edge */
+    0 2px 18px rgba(0,0,0,.30),       /* dark plate so letters pop */
+    0 0 16px rgba(127,234,209,.45),
+    0 0 42px rgba(127,234,209,.28),
+    0 0 86px rgba(127,234,209,.18);
 
-  animation: albumGlow 6s ease-in-out infinite alternate;
-  will-change: transform, opacity;
+  animation: albumHeroBreath 7s ease-in-out infinite alternate;
 }
 
-/* Soft breathing glow */
-@keyframes albumGlow {
-  0% {
-    opacity: 0.1;
+/* gentle hero-like pulse */
+@keyframes albumHeroBreath{
+  0%{
+    opacity:.20;
     text-shadow:
-      0 0 10px rgba(127, 234, 209, 0.3),
-      0 0 30px rgba(127, 234, 209, 0.15);
-    transform: translate(-50%, -50%) perspective(900px) rotateX(10deg) scale(1);
+      0 0 1px rgba(0,0,0,.50),
+      0 2px 18px rgba(0,0,0,.30),
+      0 0 12px rgba(127,234,209,.35),
+      0 0 32px rgba(127,234,209,.22),
+      0 0 70px rgba(127,234,209,.12);
+    transform: translate(-50%,-50%) perspective(800px) rotateX(8deg) scale(1);
   }
-  50% {
-    opacity: 0.18;
+  100%{
+    opacity:.26;
     text-shadow:
-      0 0 25px rgba(127, 234, 209, 0.6),
-      0 0 50px rgba(127, 234, 209, 0.3);
-    transform: translate(-50%, -51%) perspective(900px) rotateX(12deg) scale(1.03);
-  }
-  100% {
-    opacity: 0.1;
-    text-shadow:
-      0 0 15px rgba(127, 234, 209, 0.35),
-      0 0 35px rgba(127, 234, 209, 0.15);
-    transform: translate(-50%, -49%) perspective(900px) rotateX(9deg) scale(0.995);
+      0 0 1px rgba(0,0,0,.50),
+      0 2px 18px rgba(0,0,0,.30),
+      0 0 20px rgba(127,234,209,.65),
+      0 0 50px rgba(127,234,209,.38),
+      0 0 100px rgba(127,234,209,.22);
+    transform: translate(-50%,-52%) perspective(800px) rotateX(9deg) scale(1.015);
   }
 }
 
-/* Scroll-reactive “float” motion */
-window.addEventListener('scroll', () => {
-  const banner = document.querySelector('.album-backtitle');
-  if (!banner) return;
-  const y = window.scrollY * 0.1; // gentle parallax
-  banner.style.transform = `translate(-50%, calc(-50% + ${y}px)) perspective(900px) rotateX(10deg)`;
-});
+/* keep content above the banner (if not already present) */
+#albums.section{ position:relative; z-index:0; isolation:isolate; }
+#albums .wrap{ position:relative; }
+#albums .wrap > *:not(.album-backtitle){ position:relative; z-index:2; }
+
+/* slight top fade so it never clashes with the “Albums” heading */
+#albums .wrap::before{
+  content:""; position:absolute; left:0; right:0; top:0; height:120px;
+  background:linear-gradient(to bottom, rgba(15,20,27,1), rgba(15,20,27,0));
+  z-index:1; pointer-events:none;
+}
+
+/* mobile tuning */
+@media (max-width:640px){
+  .album-backtitle{ top:58%; font-size:clamp(30px,9vw,70px); opacity:.20; }
+}
+
 
 
 /* gentle hero-like pulse */
