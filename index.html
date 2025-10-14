@@ -757,25 +757,33 @@ animation: k14Ken 18s ease-in-out infinite alternate;
 /* TITLE: nearer, brighter, a touch bigger */
 .album-banner-title {
   display: block;
-  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-size: clamp(2.8rem, 6vw, 4.3rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 3px;
   text-align: center;
-  color: rgba(127, 234, 209, 0.32);
+  color: rgba(127, 234, 209, 0.28);
   text-shadow:
-    0 0 12px rgba(127, 234, 209, 0.35),
+    0 0 10px rgba(127, 234, 209, 0.3),
     0 0 30px rgba(127, 234, 209, 0.25),
     0 0 60px rgba(127, 234, 209, 0.18),
-    0 0 120px rgba(94, 179, 220, 0.25); /* subtle cyan outer ring */
-  opacity: 0.38;
-  filter: blur(0.3px) brightness(1.05) saturate(1.15);
+    0 0 90px rgba(94, 179, 220, 0.4),   /* turquoise outer shimmer */
+    0 0 160px rgba(127, 234, 209, 0.28);
+  opacity: 0.42;
+  filter: blur(0.25px) brightness(1.1) saturate(1.2);
   transform-origin: center;
-  animation: k14FloatTitle 13s ease-in-out infinite alternate;
+  animation: k14FloatTitle 14s ease-in-out infinite alternate;
   will-change: transform, opacity, filter;
+  animation: k14FloatTitle 14s ease-in-out infinite alternate,
+           k14HueShift 25s linear infinite;
 }
 
 /* --- keep this whole title animation block --- */
+    @keyframes k14HueShift {
+  0%   { filter: hue-rotate(0deg) brightness(1.1) saturate(1.2); }
+  50%  { filter: hue-rotate(15deg) brightness(1.15) saturate(1.25); }
+  100% { filter: hue-rotate(0deg) brightness(1.1) saturate(1.2); }
+}
 @keyframes k14FloatTitle{
   0%{
     transform: perspective(1100px)
