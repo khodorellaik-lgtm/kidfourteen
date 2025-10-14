@@ -753,27 +753,61 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
+/* Album banner under title (glowing + breathing) */
+.album-banner {
+  position: relative;
+  text-align: center;
+  margin: 12px 0 36px;
+  pointer-events: none;
+}
+
 .album-banner-title {
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: rgba(127, 234, 209, 0.45);
-  text-shadow: 0 0 12px rgba(127, 234, 209, 0.3);
-  animation: fadeGlow 5s ease-in-out infinite alternate;
+  color: rgba(127, 234, 209, 0.9);
+  text-shadow:
+    0 0 8px rgba(127, 234, 209, 0.6),
+    0 0 16px rgba(127, 234, 209, 0.4),
+    0 0 32px rgba(127, 234, 209, 0.3);
+  animation: glowPulse 6s ease-in-out infinite alternate;
 }
 
 .album-banner-sub {
   font-size: clamp(0.9rem, 1.5vw, 1rem);
-  color: rgba(127, 234, 209, 0.3);
+  color: rgba(127, 234, 209, 0.6);
   margin-top: 6px;
   letter-spacing: 0.25em;
-  text-shadow: 0 0 8px rgba(127, 234, 209, 0.25);
+  text-shadow:
+    0 0 6px rgba(127, 234, 209, 0.4),
+    0 0 12px rgba(127, 234, 209, 0.2);
+  animation: glowPulseSub 7s ease-in-out infinite alternate;
 }
 
-@keyframes fadeGlow {
-  from { text-shadow: 0 0 4px rgba(127,234,209,0.2); opacity: 0.8; }
-  to { text-shadow: 0 0 18px rgba(127,234,209,0.6); opacity: 1; }
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 4px rgba(127, 234, 209, 0.3),
+                 0 0 12px rgba(127, 234, 209, 0.25);
+    opacity: 0.85;
+  }
+  to {
+    text-shadow: 0 0 14px rgba(127, 234, 209, 0.7),
+                 0 0 32px rgba(127, 234, 209, 0.5);
+    opacity: 1;
+  }
 }
+
+@keyframes glowPulseSub {
+  from {
+    text-shadow: 0 0 3px rgba(127, 234, 209, 0.3);
+    opacity: 0.7;
+  }
+  to {
+    text-shadow: 0 0 10px rgba(127, 234, 209, 0.5);
+    opacity: 1;
+  }
+}
+
 
 </style>
 </head>
@@ -1023,11 +1057,6 @@ animation: k14Ken 18s ease-in-out infinite alternate;
      <div class="album-banner">
   <div class="album-banner-title">FAR AWAY AND WELL ADJUSTED</div>
   <div class="album-banner-sub">COMING SOON</div>
-</div>
-
-
-      <div class="album-backtitle" aria-hidden="true">
-  FAR AWAY AND WELL ADJUSTED — COMING SOON
 </div>
      <div class="album-grid">
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
