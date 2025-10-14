@@ -746,41 +746,25 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   .album-backtitle .line{ opacity:.18; }
 }
 /* Album banner under title */
-.album-banner {
-  position: relative;
-  text-align: center;
-  margin: 12px 0 36px;
-  pointer-events: none;
-}
-/* === Albums banner — split depth for real parallax feel === */
-
-/* TITLE: nearer, brighter, a touch bigger */
 .album-banner-title {
-
-
-/* --- keep this whole title animation block --- */
-@keyframes k14FloatTitle{
-  0%{
-    transform: perspective(1100px)
-              translateY(2px) translateX(-4px)
-              rotateX(2deg) rotateY(-1deg)
-              scale(1.08);
-    opacity:.36; filter: blur(.7px) brightness(.95);
-  }
-  50%{
-    transform: perspective(1100px)
-              translateY(0) translateX(0)
-              rotateX(0deg) rotateY(1deg)
-              scale(1.13);
-    opacity:.44; filter: blur(.3px) brightness(1.06);
-  }
-  100%{
-    transform: perspective(1100px)
-              translateY(-2px) translateX(3px)
-              rotateX(-1deg) rotateY(0deg)
-              scale(1.10);
-    opacity:.38; filter: blur(.6px) brightness(.98);
-  }
+  display: block;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-align: center;
+  color: rgba(127, 234, 209, 0.42); /* stronger base tint */
+  text-shadow:
+    0 0 14px rgba(127, 234, 209, 0.45),
+    0 0 36px rgba(127, 234, 209, 0.3),
+    0 0 70px rgba(127, 234, 209, 0.25),
+    0 0 110px rgba(94, 179, 220, 0.5),   /* visible cyan rim */
+    0 0 180px rgba(127, 234, 209, 0.3); /* soft outer glow */
+  opacity: 0.5;
+  filter: brightness(1.15) saturate(1.25);
+  transform-origin: center;
+  animation: k14FloatTitle 13s ease-in-out infinite alternate;
+  will-change: transform, opacity, filter;
 }
 
 /* --- REPLACE everything below with the new bright subtext version --- */
