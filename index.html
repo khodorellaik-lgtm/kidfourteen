@@ -753,59 +753,65 @@ animation: k14Ken 18s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
-/* Album banner under title (glowing + breathing) */
-.album-banner {
-  position: relative;
-  text-align: center;
-  margin: 12px 0 36px;
-  pointer-events: none;
+/* === Albums banner (readable ghost) === */
+.albumbanner-fix { /* helper if you need it; not required */
+  /* no-op */
 }
 
-.album-banner-title {
-  color: rgba(127, 234, 209, 0.15);
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 2px;
+.album-banner{ 
   position: relative;
-  animation: k14GhostDrift 10s ease-in-out infinite alternate;
+  margin: 8px 0 22px;             /* gives space before the grid */
+  text-align:center;
+  perspective: 900px;             /* depth for translateZ */
+}
+
+.album-banner-title{
+  display:inline-block;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:2px;
+  color: rgba(127,234,209,0.30);  /* was ~0.18 → more readable */
   text-shadow:
-    0 0 20px rgba(127, 234, 209, 0.25),
-    0 0 60px rgba(127, 234, 209, 0.35),
-    0 0 120px rgba(127, 234, 209, 0.4);
-  transform: scale(1.02);
-  transition: opacity 1s ease-in-out, transform 6s ease-in-out;
+    0 0 12px rgba(127,234,209,.30),
+    0 0 28px rgba(127,234,209,.22),
+    0 0 60px rgba(127,234,209,.18);
+  transform: translateZ(-60px) scale(1.06);
+  opacity: .34;                   /* was ~.16–.26 → more readable */
+  filter: blur(.6px) brightness(1.05); /* softer blur so letters stay clear */
+  animation: k14DepthGhost 11s ease-in-out infinite alternate;
+  will-change: transform, opacity, filter;
 }
 
-@keyframes k14GhostDrift {
-  0% {
-    opacity: 0.25;
-    transform: translateY(8px) scale(1.05);
-    filter: blur(2px) brightness(0.8);
+@keyframes k14DepthGhost{
+  0%{
+    transform: translateZ(-90px) translateY(2px) scale(1.07);
+    opacity:.28;
+    filter: blur(1.1px) brightness(.95);
   }
-  50% {
-    opacity: 0.35;
-    transform: translateY(0) scale(1.08);
-    filter: blur(3px) brightness(1);
+  50%{
+    transform: translateZ(-45px) translateY(0) scale(1.09);
+    opacity:.38;
+    filter: blur(.5px) brightness(1.05);
   }
-  100% {
-    opacity: 0.2;
-    transform: translateY(-6px) scale(1.03);
-    filter: blur(4px) brightness(0.7);
+  100%{
+    transform: translateZ(-100px) translateY(-2px) scale(1.05);
+    opacity:.26;
+    filter: blur(1.2px) brightness(.9);
   }
 }
 
-
-@keyframes glowPulseSub {
-  from {
-    text-shadow: 0 0 3px rgba(127, 234, 209, 0.3);
-    opacity: 0.7;
-  }
-  to {
-    text-shadow: 0 0 10px rgba(127, 234, 209, 0.5);
-    opacity: 1;
-  }
+/* small, clean subtitle */
+.album-banner-sub{
+  margin-top: 4px;
+  letter-spacing: .35em;
+  color: rgba(127,234,209,.65);
+  text-shadow: 0 0 10px rgba(127,234,209,.35);
+  font-weight:700;
 }
+
+/* Keep the banner above any accidental masks/layers */
+#albums .wrap{ position:relative; z-index: 1; }
+
 
 
 </style>
