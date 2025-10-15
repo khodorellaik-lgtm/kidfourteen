@@ -200,11 +200,34 @@
       text-shadow:0 0 18px rgba(127,234,209,.25); letter-spacing:-0.02em;
     }
     .bio-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-    .bio-chips .chip{
-      display:inline-block; padding:8px 14px; border-radius:999px; background:var(--chip); border:1px solid var(--chip-border);
-      font-size:13px; font-weight:600; letter-spacing:.01em; white-space:nowrap; color:var(--text);
-      transition:transform .16s ease,background .16s ease,border-color .16s ease,color .16s ease
-    }
+   /* Album chips — sharper, luminous, inviting */
+.bio-chips .chip{
+  display:inline-block;
+  margin:8px 12px;
+  padding:9px 18px;
+  border-radius:12px;                          /* sharper corners instead of pill */
+  background:linear-gradient(145deg, rgba(127,234,209,0.18) 0%, rgba(139,198,255,0.12) 100%);
+  border:1px solid rgba(127,234,209,0.35);
+  color:var(--text);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:all .25s ease;
+  box-shadow:0 2px 8px rgba(127,234,209,0.15);
+  backdrop-filter:blur(4px);
+}
+
+/* Hover glow */
+.bio-chips .chip:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+  background:linear-gradient(145deg, rgba(127,234,209,0.35) 0%, rgba(139,198,255,0.25) 100%);
+  box-shadow:0 0 12px rgba(127,234,209,0.35), 0 0 32px rgba(127,234,209,0.25);
+  transform:translateY(-2px);
+}
+
     .bio-chips .chip:hover{transform:translateY(-2px); background:#1e293b; border-color:var(--accent); color:var(--accent)}
 
     .reveal{opacity:1; transform:none}
