@@ -201,31 +201,32 @@
     }
     .bio-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
    /* Album chips — sharper, luminous, inviting */
+/* Album chips — refined and balanced version */
 .bio-chips .chip{
   display:inline-block;
-  margin:8px 12px;
-  padding:9px 18px;
-  border-radius:12px;                          /* sharper corners instead of pill */
-  background:linear-gradient(145deg, rgba(127,234,209,0.18) 0%, rgba(139,198,255,0.12) 100%);
-  border:1px solid rgba(127,234,209,0.35);
+  margin:6px 10px;
+  padding:7px 14px;
+  border-radius:10px; /* cleaner, not too round */
+  background:linear-gradient(145deg, rgba(127,234,209,0.12) 0%, rgba(139,198,255,0.08) 100%);
+  border:1px solid rgba(127,234,209,0.25);
   color:var(--text);
-  font-size:13px;
+  font-size:12.5px;
   font-weight:600;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
   text-transform:uppercase;
   white-space:nowrap;
   transition:all .25s ease;
-  box-shadow:0 2px 8px rgba(127,234,209,0.15);
-  backdrop-filter:blur(4px);
+  box-shadow:0 1px 5px rgba(127,234,209,0.08);
+  backdrop-filter:blur(3px);
 }
 
-/* Hover glow */
+/* Hover — subtle depth and glow */
 .bio-chips .chip:hover{
   color:var(--accent);
   border-color:var(--accent);
-  background:linear-gradient(145deg, rgba(127,234,209,0.35) 0%, rgba(139,198,255,0.25) 100%);
-  box-shadow:0 0 12px rgba(127,234,209,0.35), 0 0 32px rgba(127,234,209,0.25);
-  transform:translateY(-2px);
+  background:linear-gradient(145deg, rgba(127,234,209,0.22) 0%, rgba(139,198,255,0.15) 100%);
+  box-shadow:0 0 10px rgba(127,234,209,0.25);
+  transform:translateY(-1px);
 }
 
     .bio-chips .chip:hover{transform:translateY(-2px); background:#1e293b; border-color:var(--accent); color:var(--accent)}
@@ -807,15 +808,14 @@
             </p>
           </div>
 
-          <div class="bio-chips">
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">Dream Kids Never Sleep — 2016</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">Blood-thick Silence — 2018</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">Love — 2020</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">A Brief Emotional Dragon — 2023</a>
-            <a class="chip" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">Heart is a Malady — 2024</a>
-          </div>
-        </div>
-
+         <div class="bio-chips">
+  <span class="chip">Dream Kids Never Sleep - 2016</span>
+  <span class="chip">Blood-thick Silence - 2018</span>
+  <span class="chip">Love - 2020</span>
+  <span class="chip">A Brief Emotional Dragon - 2023</span>
+  <span class="chip">Heart is a Malady - 2024</span>
+</div>
+</div>
         <figure class="bio-photo reveal" style="--d:.18s;">
           <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
         </figure>
