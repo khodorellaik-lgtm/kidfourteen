@@ -163,8 +163,12 @@
     .bio-quote::before,.bio-quote::after{position:absolute; pointer-events:none; color:var(--accent); opacity:.18; font-family:Georgia,serif}
     .bio-quote::before{content:"“"; left:14px; top:-10px; font-size:38px}
     .bio-quote::after{content:"”"; right:14px; bottom:-14px; font-size:32px}
-
-    .bio-card{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:16px; padding:24px 26px;
+  .bio-card .prose p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+   .bio-card{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:16px; padding:24px 26px;
       box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04); backdrop-filter:blur(6px)}
     .prose p{margin:0 0 14px}
     .prose em{font-style:italic}
