@@ -137,55 +137,64 @@
     @media (max-width:640px){.player-shell{grid-template-columns:1fr}.vol{width:100px}}
 
     /* ===== Bio ===== */
-    .bio-grid{display:grid; gap:28px; align-items:center}
-    /* BIO background: distant starfield + soft nova burst */
+   .bio-grid{display:grid; gap:28px; align-items:center}
+@media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
+    /* ===== Bio background: starfield + distant nova (behind content) ===== */
 #bio{
-  position: relative;      /* create a local stacking context */
-  z-index: 0;              /* so we can place the glow behind */
-  overflow: visible;       /* allow the glow to bleed a little */
-  isolation: isolate;      /* keep effects contained to this section */
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
 }
 
-/* starfield + nova live BEHIND the section content */
 #bio::before,
 #bio::after{
   content:"";
   position:absolute;
-  left:-10vw; right:-10vw; top:-40px; bottom:-40px; /* a little bleed */
+  left:-10vw; right:-10vw; top:-40px; bottom:-40px;
   pointer-events:none;
-  z-index:-1;               /* behind all normal content */
+  z-index:0; /* behind the bio content, above page bg */
 }
 
-/* faint starfield dots */
+/* subtle starfield */
 #bio::after{
   background:
-    radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.25) 50%, transparent 51%),
-    radial-gradient(1px 1px at 78% 12%, rgba(127,234,209,.25) 50%, transparent 51%),
-    radial-gradient(1px 1px at 30% 80%, rgba(139,198,255,.25) 50%, transparent 51%),
-    radial-gradient(1px 1px at 62% 58%, rgba(255,255,255,.18) 50%, transparent 51%),
-    radial-gradient(1px 1px at 90% 44%, rgba(127,234,209,.22) 50%, transparent 51%);
-  opacity:.12;
-  filter: blur(.2px);
+    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,.32) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 78% 12%, rgba(127,234,209,.32) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 30% 80%, rgba(139,198,255,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 62% 58%, rgba(255,255,255,.24) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 90% 44%, rgba(127,234,209,.28) 50%, transparent 51%);
+  opacity:.18;
+  filter: blur(.3px);
 }
 
-/* distant nova glow (top-right-ish) */
+/* distant nova glow (top-right) */
 #bio::before{
   background:
-    radial-gradient(closest-side, rgba(127,234,209,.20),
-                                  rgba(127,234,209,.08) 35%,
-                                  rgba(0,0,0,0) 75%);
-  transform-origin: 80% 14%;        /* move glow position here */
+    radial-gradient(closest-side,
+      rgba(127,234,209,.26),
+      rgba(127,234,209,.10) 35%,
+      rgba(0,0,0,0) 75%);
+  transform-origin: 80% 14%;
   animation: k14Nova 22s ease-in-out infinite;
-  opacity:.20;
-  mix-blend-mode:screen;
+  opacity:.22;
+  mix-blend-mode: screen;
   will-change: transform, opacity, filter;
 }
 
+/* keep bio content above the glow */
+#bio .bio-quote,
+#bio .bio-grid,
+#bio .bio-card,
+#bio .bio-photo{
+  position: relative;
+  z-index: 1;
+}
+
 @keyframes k14Nova{
-  0%   { transform: scale(0.85); opacity:.12; filter:brightness(1) saturate(1); }
-  45%  { transform: scale(1.22); opacity:.24; filter:brightness(1.08) saturate(1.1); }
-  60%  { transform: scale(1.32); opacity:.18; filter:brightness(1.12) saturate(1.18); }
-  100% { transform: scale(0.9);  opacity:.12; filter:brightness(1) saturate(1); }
+  0%   { transform: scale(.85); opacity:.14; filter:brightness(1) saturate(1); }
+  45%  { transform: scale(1.22); opacity:.28; filter:brightness(1.08) saturate(1.12); }
+  60%  { transform: scale(1.32); opacity:.20; filter:brightness(1.12) saturate(1.2); }
+  100% { transform: scale(.90); opacity:.14; filter:brightness(1) saturate(1); }
 }
 
 /* accessibility */
@@ -193,47 +202,12 @@
   #bio::before{ animation:none; }
 }
 
-    @media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
-    /* BIO background: distant star + gentle nova burst */
-#bio{ position:relative; isolation:isolate; }          /* keeps FX behind content */
-#bio::after, #bio::before{
-  content:""; position:absolute; inset:-40px -10vw;    /* bleed out a bit */
-  z-index:0; pointer-events:none;
-}
-
-/* faint starfield */
-#bio::after{
-  background:
-    radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.25) 50%, transparent 51%),
-    radial-gradient(1px 1px at 78% 12%, rgba(127,234,209,.25) 50%, transparent 51%),
-    radial-gradient(1px 1px at 30% 80%, rgba(139,198,255,.25) 50%, transparent 51%),
-    radial-gradient(1px 1px at 62% 58%, rgba(255,255,255,.18) 50%, transparent 51%),
-    radial-gradient(1px 1px at 90% 44%, rgba(127,234,209,.22) 50%, transparent 51%);
-  opacity:.12; filter: blur(.2px);
-}
-
-/* far-away nova burst (very soft) */
-#bio::before{
-  background:
-    radial-gradient(closest-side, rgba(127,234,209,.22), rgba(127,234,209,.08) 35%, rgba(0,0,0,0) 75%);
-  transform-origin: 68% 18%;                           /* where the star “is” */
-  animation: k14Nova 22s ease-in-out infinite;
-  opacity:.20; mix-blend-mode:screen;
-}
-
-/* motion */
-@keyframes k14Nova{
-  0%   { transform: translate3d(0,0,0) scale(0.85); opacity:.12; filter:brightness(1) saturate(1); }
-  45%  { transform: translate3d(0,0,0) scale(1.25); opacity:.24; filter:brightness(1.08) saturate(1.1); }
-  60%  { transform: translate3d(0,0,0) scale(1.35); opacity:.18; filter:brightness(1.15) saturate(1.2); } /* peak */
-  100% { transform: translate3d(0,0,0) scale(0.9);  opacity:.12; filter:brightness(1) saturate(1); }
-}
-
-/* respect reduced motion */
+  
+/* accessibility */
 @media (prefers-reduced-motion: reduce){
   #bio::before{ animation:none; }
 }
-
+    @media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}  
     .bio-photo{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:12px; overflow:hidden;
       box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04),0 0 40px rgba(127,234,209,.08)}
     .bio-photo img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:4/5}
