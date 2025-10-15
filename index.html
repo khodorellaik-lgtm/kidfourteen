@@ -136,10 +136,26 @@
     .track.is-active{background:rgba(127,234,209,.12); border-color:var(--accent)}
     @media (max-width:640px){.player-shell{grid-template-columns:1fr}.vol{width:100px}}
 
-    /* ===== Bio ===== */
-    .bio-grid{display:grid; gap:28px; align-items:center}
-    @media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
-    .bio-photo{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:12px; overflow:hidden;
+   /* ===== Bio ===== */
+.bio-grid{display:grid; gap:28px; align-items:center}
+@media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
+
+/* Make the bio text card a perfect square */
+@media (min-width:900px){
+  .bio-card {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@media (min-width:900px){
+  .bio-photo {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+  }
+}
+ .bio-photo{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:12px; overflow:hidden;
       box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04),0 0 40px rgba(127,234,209,.08)}
     .bio-photo img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:4/5}
 
