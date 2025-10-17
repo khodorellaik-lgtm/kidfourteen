@@ -721,6 +721,17 @@
     transition: transform 1.2s ease-in-out, filter .8s ease, opacity 1s ease;
     animation: k14SaxDrift 24s ease-in-out infinite alternate;
   }
+  .download-photo {
+  display: block;
+  position: absolute;
+  top: clamp(220px, 16vw, 320px);   /* pushes it below the title on big screens */
+  right: 8%;                        /* a touch more breathing room from the edge */
+  width: clamp(320px, 24vw, 460px); /* scales nicely with viewport */
+  pointer-events: none;             /* never blocks clicks on the PRESSKIT link */
+  z-index: 0;                       /* sits behind the glow */
+  /* keep the rest of your filter/box-shadow/transition/animation lines */
+}
+
 
   .download-photo:hover {
     transform: scale(1.04);
