@@ -696,7 +696,35 @@
     opacity:.5; filter: blur(.6px) brightness(1.15);
   }
 }
-    
+/* --- Disable reveal everywhere, except keep it for the Bio quote --- */
+.reveal,
+body.js .reveal{
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Keep a soft fade just for the Bio quote */
+.bio-quote{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.bio-quote.is-visible{
+  opacity: 1;
+  transform: none;
+}
+
+/* Album chips: center + slightly larger/nicer touch target */
+.bio-chips{ justify-content: center; }           /* new */
+.bio-chips .chip{
+  padding: 8px 12px;                             /* was 5px 10px */
+  font-size: 13px;                               /* was 11.5px */
+  border-radius: 10px;                           /* a hair rounder */
+  margin: 6px 8px;                               /* a bit more breathing room */
+  line-height: 1.25;
+}
+
 
 
 </style>
@@ -1137,8 +1165,7 @@
 
     // Reveal-on-scroll
     (() => {
-      const els = Array.from(document.querySelectorAll('.reveal'));
-      if (!els.length) return;
+const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.length) return;
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
