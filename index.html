@@ -855,6 +855,41 @@ body.js .reveal{
   .bio-chips{ gap:8px 10px; max-width:100% }
   .bio-chips .chip{ font-size:11.5px; padding:5px 12px }
 }
+    /* === Bio album chips — left-aligned compact pills (like your screenshot) === */
+.bio-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;     /* left align with paragraph */
+  gap: 8px 10px;                   /* tight horizontal spacing */
+  max-width: 700px;                /* roughly paragraph width */
+  margin: 16px 0 0;
+}
+
+.bio-chips .chip {
+  display: inline-block;
+  padding: 6px 14px;               /* compact pill size */
+  border-radius: 999px;            /* capsule shape */
+  background: rgba(127,234,209,0.08);
+  border: 1px solid rgba(127,234,209,0.18);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;            /* Title Case, not uppercase */
+  line-height: 1.25;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.bio-chips .chip:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(127,234,209,0.14);
+  transform: translateY(-1px);
+}
+
 </style>
 </head>
 <body>
