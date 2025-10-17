@@ -698,57 +698,6 @@
 }
     
 
-/* DOWNLOADS — sax photo refinement */
-#downloads .wrap { position: relative; }
-
-.download-photo {
-  display: none; /* hidden on mobile for simplicity */
-}
-
-@media (min-width: 1024px) {
-  .download-photo {
-    display: block;
-    position: absolute;
-    top: 100px;                 /* fine-tune position */
-    right: 6%;
-    width: 400px;               /* size tweak for balance */
-    border-radius: 14px;
-    opacity: 0.9;
-    filter: brightness(0.95) contrast(1.05) saturate(1.1);
-    box-shadow:
-      0 0 20px rgba(127,234,209,0.08),
-      0 0 60px rgba(127,234,209,0.06);
-    transition: transform 1.2s ease-in-out, filter .8s ease, opacity 1s ease;
-    animation: k14SaxDrift 24s ease-in-out infinite alternate;
-  }
-  .download-photo {
-  display: block;
-  position: absolute;
-  top: clamp(220px, 16vw, 320px);   /* pushes it below the title on big screens */
-  right: 8%;                        /* a touch more breathing room from the edge */
-  width: clamp(320px, 24vw, 460px); /* scales nicely with viewport */
-  pointer-events: none;             /* never blocks clicks on the PRESSKIT link */
-  z-index: 0;                       /* sits behind the glow */
-  /* keep the rest of your filter/box-shadow/transition/animation lines */
-}
-
-
-  .download-photo:hover {
-    transform: scale(1.04);
-    filter: brightness(1.1) contrast(1.15) saturate(1.2);
-    box-shadow:
-      0 0 24px rgba(127,234,209,0.12),
-      0 0 90px rgba(127,234,209,0.1);
-    opacity: 1;
-  }
-}
-
-/* Subtle Ken Burns–style motion */
-@keyframes k14SaxDrift {
-  0%   { transform: translate3d(-1%, 0, 0) scale(1.02); }
-  50%  { transform: translate3d(1%, -1%, 0) scale(1.04); }
-  100% { transform: translate3d(-1%, 1%, 0) scale(1.03); }
-}
 
 </style>
 </head>
@@ -1161,11 +1110,6 @@
     >
       PRESSKIT
     </a>
-  <img src="Kid%20Fourteen%207_Credit%20Olivier%20Nemnom.jpg"
-     alt="Kid Fourteen performing live"
-     class="download-photo"
-     loading="lazy">
-
   </div>
 </section>
 
