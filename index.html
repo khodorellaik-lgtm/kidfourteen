@@ -696,7 +696,60 @@
     opacity:.5; filter: blur(.6px) brightness(1.15);
   }
 }
-    
+    /* ===== Downloads section ===== */
+#downloads .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+/* glowing presskit link (already exists, reinforce layout) */
+.presskit-glow {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 18px 28px;
+  border-radius: 14px;
+  border: 1px solid var(--chip-border);
+  background: linear-gradient(120deg, rgba(127,234,209,0.1), rgba(0,0,0,0.1));
+  box-shadow: 0 0 18px rgba(127,234,209,0.15);
+  color: var(--text);
+  font-weight: 500;
+  transition: box-shadow .4s ease, transform .3s ease;
+}
+.presskit-glow:hover {
+  box-shadow: 0 0 24px rgba(127,234,209,0.3);
+  transform: scale(1.03);
+}
+
+/* glowing image (new) */
+.download-card.glow-image {
+  width: min(480px, 90%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(127,234,209,0.15),
+              0 0 45px rgba(127,234,209,0.1);
+  transition: box-shadow .4s ease, transform .4s ease;
+}
+.download-card.glow-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 35px rgba(127,234,209,0.25),
+              0 0 60px rgba(127,234,209,0.2);
+}
+.download-card.glow-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+  filter: brightness(1.05) contrast(1.1);
+  transition: transform .5s ease, filter .4s ease;
+}
+.download-card.glow-image:hover img {
+  filter: brightness(1.15) contrast(1.2);
+  transform: scale(1.04);
+}
+
 
 
 </style>
@@ -1102,16 +1155,21 @@
 <section id="downloads" class="section">
   <div class="wrap" style="text-align:center;">
     <h2>Downloads</h2>
-    <a
-      href="https://drive.google.com/file/d/1oAD0E78j-_g6LFyYTTlCIRl7ezp_G_vW/view"
-      target="_blank"
-      rel="noopener"
-      class="presskit-glow"
-    >
+
+    <a href="https://drive.google.com/file/d/1oAD0E78J_g6LFyYTTIC1RL7ezp_G_vW/view"
+       target="_blank"
+       rel="noopener"
+       class="presskit-glow">
       PRESSKIT
     </a>
+
+    <div class="download-card glow-image">
+      <img src="Kid%20Fourteen%207_Credit%20Olivier%20Nemnom.jpg"
+           alt="Kid Fourteen performing live" />
+    </div>
   </div>
 </section>
+
 
   <!-- CONTACT -->
   <section id="contact" class="section">
