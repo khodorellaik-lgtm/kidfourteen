@@ -763,6 +763,59 @@ body.js .reveal{
   box-shadow: 0 0 8px rgba(127,234,209,0.2);
   transform: translateY(-1px);
 }
+    /* === Bio album chips • compact, non-overlapping grid === */
+.bio-chips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); /* a touch wider than 180 fixes squeeze */
+  gap:10px 12px;
+  align-items:stretch;
+  justify-items:stretch;
+  margin-top:18px;
+}
+
+.bio-chips .chip{
+  display:inline-block;
+  width:100%;
+  padding:8px 10px;
+  border-radius:10px;
+  background:linear-gradient(145deg, rgba(127,234,209,.1) 0%, rgba(139,198,255,.07) 100%);
+  border:1px solid rgba(127,234,209,.18);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  line-height:1.25;
+
+  /* IMPORTANT: allow wrapping so long titles don't spill into neighbors */
+  white-space:normal;         /* overrides the old nowrap */
+  text-wrap:balance;          /* nicer multi-line breaks (supported browsers) */
+  word-break:normal;          /* no mid-word breaks unless needed */
+  overflow-wrap:anywhere;     /* last-resort wrap to avoid overflow */
+
+  /* tidy visuals */
+  text-align:center;
+  box-shadow:0 1px 4px rgba(127,234,209,.05);
+  backdrop-filter:blur(2px);
+  transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease;
+}
+
+/* unify hover so there’s no conflicting transforms from older rules */
+.bio-chips .chip:hover{
+  transform:translateY(-1px);
+  color:var(--accent);
+  border-color:var(--accent);
+  background:linear-gradient(145deg, rgba(127,234,209,.18) 0%, rgba(139,198,255,.12) 100%);
+}
+
+/* optional: slightly tighter on small screens to keep 2-per-row */
+@media (max-width:480px){
+  .bio-chips{
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+    gap:8px 10px;
+  }
+  .bio-chips .chip{ font-size:11.5px; padding:7px 9px }
+}
+
 
 
 
