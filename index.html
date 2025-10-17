@@ -833,6 +833,32 @@ body.js .reveal{
   border-color:var(--accent) !important;
   background:rgba(127,234,209,.14) !important;
 }
+    /* Bio chips: cancel old grid/full-width styles */
+#bio .bio-card .bio-chips{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:flex-start !important; /* left-align under the paragraph */
+  gap:8px 10px !important;
+  max-width:700px !important;
+  margin:16px 0 0 !important;
+}
+
+#bio .bio-card .bio-chips .chip{
+  flex:0 0 auto !important;   /* don't stretch */
+  width:auto !important;       /* kills the old width:100% */
+  padding:6px 14px !important;
+  border-radius:999px !important;
+  background:rgba(127,234,209,.08) !important;
+  border:1px solid rgba(127,234,209,.18) !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  letter-spacing:.02em !important;
+  text-transform:none !important;
+  white-space:nowrap !important;
+  line-height:1.25 !important;
+  text-decoration:none !important;
+}
+
 </style>
 </head>
 <body>
