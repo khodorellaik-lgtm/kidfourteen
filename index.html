@@ -698,7 +698,30 @@
 }
     
 
+/* DOWNLOADS — place photo elegantly beside glowing presskit */
+#downloads .wrap { position: relative; }
 
+.download-photo {
+  display: none; /* hidden by default on small screens */
+}
+
+@media (min-width: 1024px) {
+  .download-photo {
+    display: block;
+    position: absolute;
+    top: 120px;       /* adjust vertical alignment if needed */
+    right: 4%;
+    width: 380px;     /* resize as you like (360–420px works well) */
+    border-radius: 14px;
+    box-shadow: 0 0 22px rgba(127,234,209,.15);
+    transition: transform .4s ease, filter .4s ease, box-shadow .4s ease;
+  }
+  .download-photo:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow: 0 0 34px rgba(127,234,209,.35);
+  }
+}
 </style>
 </head>
 <body>
@@ -1110,6 +1133,11 @@
     >
       PRESSKIT
     </a>
+  <img src="Kid%20Fourteen%207_Credit%20Olivier%20Nemnom.jpg"
+     alt="Kid Fourteen performing live"
+     class="download-photo"
+     loading="lazy">
+
   </div>
 </section>
 
