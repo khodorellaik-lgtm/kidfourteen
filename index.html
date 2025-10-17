@@ -382,21 +382,30 @@
       .pill{padding:9px 11px; font-size:14px}
     }
     @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
-  .presskit-glow {
-  display:inline-block;
-  margin-top:32px;
-  font-size:clamp(42px,6vw,86px);
-  font-weight:800;
-  letter-spacing:.08em;
-  color:var(--accent);
-  text-transform:uppercase;
-  text-shadow:
-    0 0 12px rgba(127,234,209,.45),
-    0 0 28px rgba(127,234,209,.25),
-    0 0 64px rgba(127,234,209,.15);
-  animation: glowPulse 3.6s ease-in-out infinite;
-  transition:transform .3s ease, text-shadow .3s ease, color .3s ease;
+  /* restore elegant presskit link */
+.presskit-glow {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 28px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  transition: color .3s ease, background-color .3s ease, box-shadow .4s ease, transform .3s ease;
+  box-shadow: 0 0 10px rgba(127,234,209,0.15);
 }
+.presskit-glow:hover {
+  color: var(--bg);
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(127,234,209,0.35);
+  transform: translateY(-2px);
+}
+
 
 /* gentle breathing glow */
 @keyframes glowPulse {
