@@ -815,10 +815,46 @@ body.js .reveal{
   }
   .bio-chips .chip{ font-size:11.5px; padding:7px 9px }
 }
+/* === Bio album chips — compact pills aligned with the text === */
+.bio-chips{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;     /* align with paragraph */
+  gap:10px 12px;                  /* tight rows */
+  max-width:680px;                /* same visual width as prose */
+  margin:14px 0 0;                /* tuck under the text */
+}
 
+.bio-chips .chip{
+  display:inline-block;
+  padding:6px 14px;               /* small pill */
+  border-radius:999px;            /* capsule */
+  background:rgba(127,234,209,.08);
+  border:1px solid rgba(127,234,209,.18);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.02em;
+  text-transform:none;            /* keep Title Case like your screenshot */
+  line-height:1.2;
+  white-space:nowrap;             /* each chip stays on one line */
+  text-decoration:none;           /* for <a class="chip"> */
+  transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease;
+}
 
+.bio-chips .chip:hover{
+  transform:translateY(-1px);
+  color:var(--accent);
+  border-color:var(--accent);
+  background:rgba(127,234,209,.14);
+}
 
-
+/* phone: just a hair smaller to keep rows tidy */
+@media (max-width:520px){
+  .bio-chips{ gap:8px 10px; max-width:100% }
+  .bio-chips .chip{ font-size:11.5px; padding:5px 12px }
+}
 </style>
 </head>
 <body>
