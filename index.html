@@ -703,6 +703,49 @@ body.js .reveal.is-visible {
   transform: none !important;
   transition: none !important;
 }
+    /* === Downloads right-side portrait === */
+#downloads .wrap { position: relative; }
+
+.downloads-photo {
+  position: absolute;
+  top: clamp(140px, 25vh, 260px);
+  right: max(4vw, 50px);
+  width: min(30vw, 380px);
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-soft);
+  border: 1px solid var(--chip-border);
+  box-shadow:
+    0 8px 28px rgba(0,0,0,.5),
+    0 0 0 1px rgba(255,255,255,.05),
+    0 0 60px rgba(127,234,209,.12);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.downloads-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional hover lift */
+.downloads-photo:hover img {
+  transform: scale(1.05);
+  transition: transform .6s ease;
+}
+
+/* Mobile: move below text */
+@media (max-width: 900px) {
+  .downloads-photo {
+    position: static;
+    display: block;
+    margin: 24px auto 0;
+    width: min(80vw, 400px);
+    pointer-events: auto;
+  }
+}
 </style>
 </head>
 <body>
@@ -1114,6 +1157,14 @@ body.js .reveal.is-visible {
     >
       PRESSKIT
     </a>
+    <!-- Saxophone portrait to the right of PRESSKIT -->
+<figure class="downloads-photo" aria-hidden="true">
+  <img
+    src="Kid%20Fourteen%207_Credit%20Olivier%20Nemnom.jpg"
+    alt=""
+    loading="lazy"
+  >
+</figure>
   </div>
 </section>
 
