@@ -947,6 +947,34 @@ body.js .reveal{
   background: rgba(15,20,27,.70);
   border: 1px solid rgba(127,234,209,.20);
   box-shadow: 0 10px 30px rgba(0,0,
+                               /* === SHOWS background sizing fix (no more blown-up art) === */
+#shows::before{
+  /* keep your gradient overlay + image */
+  background:
+    linear-gradient(180deg, rgba(12,18,25,.78), rgba(12,18,25,.86)),
+    url('cover3.jpg') center/auto no-repeat !important;
+
+  /* cap the image width instead of using 'cover' */
+  background-position: center 10% !important;
+  background-size: clamp(900px, 75vw, 1300px) auto !important; /* cap width, keep aspect */
+
+  /* stop any extra scaling from animations */
+  transform: none !important;
+}
+
+/* if you kept the parallax snippet, use translate only (no scale) */
+#shows[data-parallax="on"]::before{
+  transform: translate3d(var(--showsParallaxX,0), var(--showsParallaxY,0), 0) !important;
+}
+
+/* optional: on very small screens, let it fit the section width */
+@media (max-width: 640px){
+  #shows::before{
+    background-size: 100% auto !important;
+    background-position: center top !important;
+  }
+}
+
 </style>
 </head>
 <body>
