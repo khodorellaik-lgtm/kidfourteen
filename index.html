@@ -813,7 +813,97 @@ body.js .reveal{
   border-color:var(--accent);
   background:rgba(127,234,209,.14);
 }
+/* ===== SHOWS — Neon animated backdrop powered by cover3.jpg ===== */
+#shows {
+  position: relative;
+  isolation: isolate;                 /* contain the effects */
+  overflow: hidden;                   /* keep lights inside */
+}
 
+/* Base: the artwork (Ken Burns + slow hue drift) */
+#shows::before{
+  content:"";
+  position:absolute; inset:-6%;
+  z-index:-2;
+  background:
+    radial-gradient(120% 120% at 85% 30%, rgba(127,234,209,.15), transparent 60%),
+    url('cover3.jpg') center/cover no-repeat;
+  transform: scale(1.06);
+  filter: saturate(115%) contrast(110%) brightness(88%)
+          hue-rotate(0deg);
+  animation:
+    k14ShowsKen 22s ease-in-out infinite alternate,
+    k14Hue 14s ease-in-out infinite alternate;
+}
+
+/* Layer: neon sweep beams */
+#shows::after{
+  content:"";
+  position:absolute; inset:-20% -10%;
+  z-index:-1;
+  background:
+    conic-gradient(from 180deg at 20% 40%, rgba(127,234,209,.18), transparent 35%, rgba(139,198,255,.15), transparent 70%),
+    linear-gradient(115deg, transparent 40%, rgba(127,234,209,.12) 50%, transparent 60%),
+    radial-gradient(40% 35% at 75% 65%, rgba(139,198,255,.12), transparent 60%);
+  mix-blend-mode: screen;
+  opacity:.75;
+  animation: k14Sweep 9s linear infinite;
+  pointer-events:none;
+}
+
+/* Glass & glow upgrade to the panel so text stays readable */
+#shows .panel{
+  background: rgba(15,20,27,.66);
+  border:1px solid rgba(127,234,209,.20);
+  box-shadow: 0 10px 30px rgba(0,0,0,.55),
+              inset 0 0 0 1px rgba(255,255,255,.04);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+}
+
+/* Make the tab pills pop like little LEDs */
+#shows .music-tab{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(127,234,209,.22);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.03), 0 6px 16px rgba(0,0,0,.35);
+}
+#shows .music-tab.is-active{
+  background: rgba(127,234,209,.20);
+  color: var(--accent);
+  border-color: var(--accent);
+  text-shadow: 0 0 8px rgba(127,234,209,.35);
+}
+
+/* Soft outline so section header sits above the chaos */
+#shows h2{
+  text-shadow: 0 0 10px rgba(127,234,209,.25), 0 0 30px rgba(127,234,209,.18);
+}
+
+/* KEYFRAMES */
+@keyframes k14ShowsKen{
+  0%   { transform: translate3d(-2%, -1%, 0) scale(1.08); }
+  100% { transform: translate3d( 2%,  1%, 0) scale(1.12); }
+}
+@keyframes k14Hue{
+  0% { filter: saturate(115%) contrast(110%) brightness(88%) hue-rotate(0deg); }
+  50%{ filter: saturate(120%) contrast(115%) brightness(92%) hue-rotate(18deg); }
+  100%{ filter: saturate(115%) contrast(110%) brightness(88%) hue-rotate(0deg); }
+}
+@keyframes k14Sweep{
+  0%   { transform: translateX(-10%) rotate(0deg); opacity:.65; }
+  50%  { transform: translateX(10%)  rotate(1.5deg); opacity:.85; }
+  100% { transform: translateX(-10%) rotate(0deg); opacity:.65; }
+}
+
+/* Mouse parallax — the backdrop reacts slightly to cursor */
+#shows[data-parallax="on"]::before{
+  transition: transform .08s ease-out;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #shows::before, #shows::after { animation:none }
+}
 </style>
 </head>
 <body>
@@ -1465,6 +1555,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('.album-banner-title');
   if (title) observer.observe(title);
 });
+</script>
+  <script>
+(() => {
+  const sec = document.getElementById('shows');
+  if(!sec) return;
+  // opt-in parallax
+  sec.setAttribute('data-parallax','on');
+  let raf = null;
+  const onMove = (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const rect = sec.getBoundingClientRect();
+      const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+      const dx = (e.clientX - cx) / rect.width;   // -0.5..0.5
+      const dy = (e.clientY - cy) / rect.height;  // -0.5..0.5
+      // tiny translate for the ::before image
+      sec.style.setProperty('--showsParallaxX', (dx * 10).toFixed(2) + 'px');
+      sec.style.setProperty('--showsParallaxY', (dy * 10).toFixed(2) + 'px');
+      raf = null;
+    });
+  };
+  // feed the CSS var into the transform
+  const style = document.createElement('style');
+  style.textContent = `
+    #shows::before{ transform: translate3d(var(--showsParallaxX,0), var(--showsParallaxY,0), 0) scale(1.1); }
+    @media (prefers-reduced-motion: reduce){ #shows::before{ transform: scale(1.08) !important; } }
+  `;
+  document.head.appendChild(style);
+  window.addEventListener('mousemove', onMove, {passive:true});
+})();
 </script>
 </body>
 </html>
