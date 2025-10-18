@@ -904,6 +904,49 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   #shows::before, #shows::after { animation:none }
 }
+    /* === SHOWS: rein in the background + proper overlay === */
+#shows{
+  position: relative;
+  isolation: isolate;      /* keeps bg layers behind content */
+  overflow: hidden;
+}
+
+/* Background image stays inside the section (no giant bleed) */
+#shows::before{
+  content:"";
+  position:absolute;
+  inset:0;                                   /* <- was -6%, now locked to section */
+  z-index:-2;
+  background:
+    /* dark glass overlay for readability */
+    linear-gradient(180deg, rgba(12,18,25,.78), rgba(12,18,25,.86)),
+    url('cover3.jpg') center/cover no-repeat;
+  transform:none;                             /* no extra scale */
+  filter: saturate(112%) contrast(108%) brightness(92%);
+  animation: k14ShowsKen 22s ease-in-out infinite alternate;
+}
+
+/* Light beams toned down so they don’t wash the UI */
+#shows::after{
+  content:"";
+  position:absolute; inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(40% 35% at 75% 65%, rgba(139,198,255,.10), transparent 60%),
+    linear-gradient(120deg, transparent 55%, rgba(127,234,209,.12) 60%, transparent 68%);
+  mix-blend-mode: screen;
+  opacity:.28;                                 /* was heavy; now subtle */
+  animation: k14Sweep 9s linear infinite;
+  pointer-events:none;
+}
+
+/* Make sure the card sits above the bg and stays readable */
+#shows .panel{
+  position: relative;
+  z-index: 1;
+  background: rgba(15,20,27,.70);
+  border: 1px solid rgba(127,234,209,.20);
+  box-shadow: 0 10px 30px rgba(0,0,
 </style>
 </head>
 <body>
