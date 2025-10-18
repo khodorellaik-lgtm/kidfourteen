@@ -814,49 +814,48 @@ body.js .reveal{
   background:rgba(127,234,209,.14);
 }
 /* Downloads: presskit text + animated photo side-by-side */
+/* Downloads — centered PRESSKIT with image below */
 .downloads-layout{
-  display:grid;
-  grid-template-columns: 1fr min(38vw, 420px);
-  gap: clamp(16px, 4vw, 36px);
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px; /* spacing between PRESSKIT and image */
+  text-align: center;
 }
 
-/* keep the presskit title/button centered without centering the grid */
-.presskit-cta{ text-align:center }
-
-/* photo container — no borders, no shadow, never too tall/wide */
+/* image block — same size, centered */
 .presskit-art{
-  margin:0;
-  width:100%;
-  max-width:420px;
-  max-height: min(52vh, 560px);       /* avoids overlapping the next section */
-  overflow:hidden;
-  border:none;
+  margin: 0 auto;
+  max-width: 360px;
+  max-height: min(48vh, 520px);
+  overflow: hidden;
+  border: none;
 }
 
-/* image: cover + gentle drift; reuse your k14Ken motion */
+/* animated image (same as before) */
 .presskit-art img{
-  display:block;
-  width:100%; height:100%;
-  object-fit:cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transform-origin: 55% 45%;
   animation: k14Ken 18s ease-in-out infinite alternate;
   filter: saturate(108%) contrast(104%) brightness(92%);
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 92%);
+  mask-image: radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,1) 62%, rgba(0,0,0,0) 92%);
 }
 
-/* stack cleanly on smaller screens */
+/* smaller screens */
 @media (max-width: 900px){
-  .downloads-layout{
-    grid-template-columns: 1fr;
-    justify-items:center;
+  .presskit-art{
+    max-width: 78vw;
+    max-height: 64vw;
   }
-  .presskit-art{ max-width: 78vw; max-height: 64vw; }
+}
+@media (prefers-reduced-motion: reduce){
+  .presskit-art img{ animation: none; }
 }
 
-/* respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .presskit-art img{ animation: none }
-}
 /* Downloads – fine-tune layout */
 .downloads-layout{
   /* make the image column a bit smaller than before */
