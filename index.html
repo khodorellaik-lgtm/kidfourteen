@@ -857,7 +857,45 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   .presskit-art img{ animation: none }
 }
+/* Downloads – fine-tune layout */
+.downloads-layout{
+  /* make the image column a bit smaller than before */
+  grid-template-columns: 1fr min(32vw, 360px);
+  align-items: start; /* allows us to shift the image down */
+}
 
+/* image block: smaller + lowered a bit */
+.presskit-art{
+  margin: clamp(10px, 2vw, 22px) 0 0 0;   /* <- nudge DOWN to align head with the “T” */
+  max-width: 360px;                        /* smaller cap */
+  max-height: min(48vh, 520px);            /* keeps distance from Contact */
+}
+
+/* gentle edge blend so dark edges melt into page bg (no editor needed) */
+.presskit-art img{
+  /* already covering + drifting */
+  object-fit: cover;
+  transform-origin: 55% 45%;
+  animation: k14Ken 18s ease-in-out infinite alternate;
+  filter: saturate(108%) contrast(104%) brightness(92%);
+
+  /* feather edges to match site background */
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 50%,
+      rgba(0,0,0,1) 62%,
+      rgba(0,0,0,0) 92%);
+  mask-image: radial-gradient(120% 120% at 50% 50%,
+      rgba(0,0,0,1) 62%,
+      rgba(0,0,0,0) 92%);
+}
+
+/* mobile: keep it tidy */
+@media (max-width: 900px){
+  .downloads-layout{ grid-template-columns: 1fr; justify-items:center }
+  .presskit-art{ margin-top: 14px; max-width: 78vw; max-height: 64vw }
+}
+@media (prefers-reduced-motion: reduce){
+  .presskit-art img{ animation:none }
+}
 </style>
 </head>
 <body>
