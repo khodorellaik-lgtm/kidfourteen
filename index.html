@@ -724,16 +724,6 @@ body.js .reveal{
   margin: 6px 8px;                               /* a bit more breathing room */
   line-height: 1.25;
 }
-/* --- Compact, grid-based album chips --- */
-.bio-chips {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px 12px;
-  justify-items: center;
-  align-items: center;
-  margin-top: 18px;
-  text-align: center;
-}
 
 .bio-chips .chip {
   display: inline-block;
@@ -763,16 +753,7 @@ body.js .reveal{
   box-shadow: 0 0 8px rgba(127,234,209,0.2);
   transform: translateY(-1px);
 }
-    /* === Bio album chips • compact, non-overlapping grid === */
-.bio-chips{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); /* a touch wider than 180 fixes squeeze */
-  gap:10px 12px;
-  align-items:stretch;
-  justify-items:stretch;
-  margin-top:18px;
-}
-
+   
 .bio-chips .chip{
   display:inline-block;
   width:100%;
@@ -799,64 +780,38 @@ body.js .reveal{
   transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease;
 }
 
-/* FORCE compact left-aligned album pills under BIO */
+
+  /* === Bio album chips — FINAL (left-aligned compact pills) === */
 #bio .bio-card .bio-chips{
-  display:flex !important;
-  flex-wrap:wrap !important;
-  justify-content:flex-start !important;
-  gap:8px 10px !important;
-  max-width:700px !important;   /* same visual width as the prose */
-  margin:16px 0 0 !important;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;   /* align with the paragraph */
+  gap:8px 10px;
+  max-width:700px;              /* same visual width as prose */
+  margin:16px 0 0;
 }
 
 #bio .bio-card .bio-chips .chip{
-  display:inline-block !important;
-  padding:6px 14px !important;
-  border-radius:999px !important;
-  background:rgba(127,234,209,.08) !important;
-  border:1px solid rgba(127,234,209,.18) !important;
-  color:var(--text) !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  letter-spacing:.02em !important;
-  text-transform:none !important;    /* Title Case like your example */
-  white-space:nowrap !important;
-  line-height:1.25 !important;
-  text-decoration:none !important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03) !important;
-  transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease !important;
+  flex:0 0 auto;                /* do NOT stretch */
+  width:auto;
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(127,234,209,.08);
+  border:1px solid rgba(127,234,209,.18);
+  color:var(--text);
+  font:700 12px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  letter-spacing:.02em;
+  text-transform:none;          /* Title Case */
+  white-space:nowrap;
+  text-decoration:none;
+  transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease;
 }
 
 #bio .bio-card .bio-chips .chip:hover{
-  transform:translateY(-1px) !important;
-  color:var(--accent) !important;
-  border-color:var(--accent) !important;
-  background:rgba(127,234,209,.14) !important;
-}
-    /* Bio chips: cancel old grid/full-width styles */
-#bio .bio-card .bio-chips{
-  display:flex !important;
-  flex-wrap:wrap !important;
-  justify-content:flex-start !important; /* left-align under the paragraph */
-  gap:8px 10px !important;
-  max-width:700px !important;
-  margin:16px 0 0 !important;
-}
-
-#bio .bio-card .bio-chips .chip{
-  flex:0 0 auto !important;   /* don't stretch */
-  width:auto !important;       /* kills the old width:100% */
-  padding:6px 14px !important;
-  border-radius:999px !important;
-  background:rgba(127,234,209,.08) !important;
-  border:1px solid rgba(127,234,209,.18) !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  letter-spacing:.02em !important;
-  text-transform:none !important;
-  white-space:nowrap !important;
-  line-height:1.25 !important;
-  text-decoration:none !important;
+  transform:translateY(-1px);
+  color:var(--accent);
+  border-color:var(--accent);
+  background:rgba(127,234,209,.14);
 }
 
 </style>
