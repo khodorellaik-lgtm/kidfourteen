@@ -827,25 +827,27 @@ body.js .reveal{
 #press::before {
   content: "";
   position: absolute;
-  inset: -5% 0; /* small bleed so motion never shows edges */
+  inset: -5% 0;
   z-index: -1;
   pointer-events: none;
 
-  /* center the dragon and make it span full width */
   background:
-    radial-gradient(60% 50% at center, rgba(127,234,209,.10), transparent 70%),
+    radial-gradient(60% 50% at center, rgba(127,234,209,.14), transparent 70%),
     url('DRAGON.png') center center / clamp(700px, 75vw, 1100px) auto no-repeat;
 
-  opacity: 0.35;
+  opacity: 0.5;
   mix-blend-mode: screen;
   filter:
-    drop-shadow(0 0 24px rgba(127,234,209,.35))
-    drop-shadow(0 0 60px rgba(127,234,209,.18));
+    drop-shadow(0 0 50px rgba(127,234,209,.75))
+    drop-shadow(0 0 100px rgba(127,234,209,.45))
+    drop-shadow(0 0 180px rgba(127,234,209,.35))
+    brightness(1.15) contrast(1.2)
+    saturate(1.3);
 
   transform: translate3d(0, 0, 0) scale(1.05);
   animation:
-    k14DragonFloat 20s ease-in-out infinite alternate,
-    k14DragonGlow 6s ease-in-out infinite;
+    k14DragonFloat 18s ease-in-out infinite alternate,
+    k14DragonGlow 5.5s ease-in-out infinite;
 }
 
 /* Readability veil behind cards/text */
@@ -874,16 +876,22 @@ body.js .reveal{
   0%   { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
   100% { transform: translate3d( 1.5%,  1%, 0) rotate( 2deg) scale(1.05); }
 }
-@keyframes k14DragonGlow{
-  0%,100%{
+@keyframes k14DragonGlow {
+  0%, 100% {
     filter:
-      drop-shadow(0 0 16px rgba(127,234,209,.35))
-      drop-shadow(0 0 48px rgba(127,234,209,.16));
+      drop-shadow(0 0 35px rgba(127,234,209,.7))
+      drop-shadow(0 0 90px rgba(127,234,209,.4))
+      drop-shadow(0 0 160px rgba(127,234,209,.25))
+      brightness(1.1) contrast(1.15)
+      saturate(1.2);
   }
-  50%{
+  50% {
     filter:
-      drop-shadow(0 0 28px rgba(127,234,209,.65))
-      drop-shadow(0 0 90px rgba(127,234,209,.28));
+      drop-shadow(0 0 70px rgba(127,234,209,1))
+      drop-shadow(0 0 180px rgba(127,234,209,.75))
+      drop-shadow(0 0 280px rgba(127,234,209,.45))
+      brightness(1.35) contrast(1.3)
+      saturate(1.5);
   }
 }
 
