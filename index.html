@@ -1049,6 +1049,24 @@ background-color: #0f141b; /* fallback fill around the image */
 @media (prefers-reduced-motion: reduce){
   #shows .shows-bg img{ animation:none; transform:none; }
 }
+    /* ===== SHOWS — HARD RESET ===== */
+#shows::before,
+#shows::after{ content:none !important; }   /* disable old pseudo-bg */
+#shows .shows-bg{ display:none !important; } /* disable the extra bg div */
+
+/* Add a safe, contained background directly on the section */
+#shows{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  /* gradient overlay + the image as a SECOND layer */
+  background-image:
+    linear-gradient(180deg, rgba(12,18,25,.82), rgba(12,18,25,.90)),
+    url('cover3.jpg');
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center, center top;       /* gradient fills; image centered */
+  background-size: 100% 100%, clamp(900px, 70vw, 1200px) auto; /* image size is CLAMPED */
+}
 </style>
 </head>
 <body>
