@@ -816,7 +816,80 @@ body.js .reveal{
 #shows .panel button {
   cursor: pointer;
 }
+/* === PRESS: animated neon dragon background (DRAGON.png) === */
+#press{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
 
+/* Dragon layer */
+#press::before{
+  content:"";
+  position:absolute;
+  inset:-10% -6% -6% -6%;                  /* bleed so motion never shows edges */
+  z-index:-1;
+  pointer-events:none;
+
+  /* dragon + a soft cyan haze */
+  background:
+    radial-gradient(70% 60% at 70% 40%, rgba(127,234,209,.12), transparent 60%),
+    url('DRAGON.png') right 8% center / clamp(420px, 42vw, 760px) auto no-repeat;
+
+  opacity:.35;
+  mix-blend-mode: screen;
+  filter:
+    drop-shadow(0 0 24px rgba(127,234,209,.35))
+    drop-shadow(0 0 60px rgba(127,234,209,.18));
+
+  transform: translate3d(0,0,0) rotate(-2deg) scale(1.02);
+  animation: k14DragonFloat 22s ease-in-out infinite alternate,
+             k14DragonGlow 6s ease-in-out infinite;
+}
+
+/* Readability veil behind cards/text */
+#press::after{
+  content:"";
+  position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(100% 80% at 20% 30%, rgba(12,18,25,.55), transparent 60%),
+    linear-gradient(180deg, rgba(12,18,25,.45), rgba(12,18,25,.75));
+}
+
+/* Glass cards — a touch clearer over the dragon */
+#press .press-card{
+  background: rgba(18,24,33,.58);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+}
+#press .press-card:hover{
+  background: rgba(18,24,33,.72);
+  border-color: var(--accent);
+}
+
+/* Motion + glow */
+@keyframes k14DragonFloat{
+  0%   { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
+  100% { transform: translate3d( 1.5%,  1%, 0) rotate( 2deg) scale(1.05); }
+}
+@keyframes k14DragonGlow{
+  0%,100%{
+    filter:
+      drop-shadow(0 0 16px rgba(127,234,209,.35))
+      drop-shadow(0 0 48px rgba(127,234,209,.16));
+  }
+  50%{
+    filter:
+      drop-shadow(0 0 28px rgba(127,234,209,.65))
+      drop-shadow(0 0 90px rgba(127,234,209,.28));
+  }
+}
+
+/* Respect accessibility */
+@media (prefers-reduced-motion: reduce){
+  #press::before{ animation:none }
+}
 </style>
 </head>
 <body>
