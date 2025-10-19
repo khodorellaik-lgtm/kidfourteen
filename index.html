@@ -891,35 +891,60 @@ body.js .reveal{
   }
 }
 /* === BIO BACKGROUND: Zoomed-in, aligned figure === */
-#bio {
+/* === BIO: dedicated background layer, zoomed-in image + neon fade === */
+#bio{
   position: relative;
-  background-image:
-    linear-gradient(180deg, rgba(255,255,255,0.65), rgba(230,230,230,0.85)),
-    url('/bio.jpg');   /* balcony image only — forest image removed */
-  background-repeat: no-repeat;
-  background-size: 170% auto;          /* zoomed in */
-  background-position: 60% 30%;       /* tweak for framing */
-  background-attachment: fixed;
-  color: #111; /* dark text */
+  z-index: 0;
+  padding-bottom: 180px;
+  overflow: visible;
 }
-/* Soft neon fade from light bio to dark background */
-/* --- BIO: soft neon blur that fades into the dark site bg --- */
-#bio::after{
+
+#bio > *{ position: relative; z-index: 1; }
+
+#bio .bio-bg{
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
+    url('/bio.jpg') 68% 38% / 145% auto no-repeat;  /* zoom + align */
+}
+
+#bio .bio-bg::after{
   content:"";
   position:absolute;
-  left:0; right:0; bottom:-1px;
-  height:160px;
-  pointer-events:none;
-
-  /* mint glow + fade to site dark */
+  left:0; right:0; bottom:0;
+  height:180px;
   background:
-    radial-gradient(120% 140% at 50% 120%, rgba(127,234,209,.18), rgba(127,234,209,0) 55%),
+    radial-gradient(120% 140% at 50% 10%, rgba(127,234,209,.18), rgba(127,234,209,0) 55%),
     linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(15,20,27,1) 100%);
-
   filter: blur(8px);
-  opacity:.9;
-  z-index:0;     /* sits under content */
+  opacity: .9;
 }
+
+/* keep text dark & readable */
+#bio h2, #bio p, #bio blockquote, #bio span, #bio strong { color:#111 !important; }
+#bio p, #bio h2, #bio blockquote { text-shadow: 0 0 6px rgba(255,255,255,.4); }
+
+/* quote box style */
+#bio .bio-quote{
+  display:block;
+  max-width: 680px;
+  margin: 0 0 24px 0;
+  padding: 16px 18px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 6px 22px rgba(0,0,0,.08);
+  color:#111;
+  font-style:normal;
+  text-shadow:0 0 6px rgba(255,255,255,.4);
+}
+#bio .bio-quote em{ font-style:italic; font-weight:600; color:#111; }
+#bio .bio-quote cite{ display:block; margin-top:6px; color:#333; font-style:normal; font-weight:500; }
+#bio .bio-quote::before, #bio .bio-quote::after{ content:none; }
+
 
 
 /* ensure paragraphs and blockquotes are black too */
@@ -1240,6 +1265,7 @@ body.js .reveal{
 
   <!-- BIO -->
   <section id="bio" class="section">
+    <div class="bio-bg" aria-hidden="true"></div>
     <div class="wrap">
       <h2>Bio</h2>
 
