@@ -1039,21 +1039,64 @@ body.js .reveal{
   content:none !important;
   background:none !important;
 }
-
 #bio{
   position: relative;
+  /* Bigger image + better framing */
   background:
-    linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
-    url(url('/bio.jpg')) 70% 40% / cover no-repeat;
+    linear-gradient(180deg, rgba(255,255,255,.85), rgba(242,246,248,.92) 55%, rgba(15,20,27,1) 125%),
+    url('/bio.jpg') 68% 38% / 170% auto no-repeat;
+  background-attachment: fixed;
   color:#111;
 }
+/* --- BIO: thick neon blend into site background --- */
+#bio::before,
+#bio::after{
+  content:"";
+  position:absolute; left:0; right:0;
+  pointer-events:none; z-index:0;
+}
+
+/* Top fade into site’s dark header */
+#bio::before{
+  top:-1px; height:180px;
+  background: linear-gradient(to top, rgba(255,255,255,0), rgba(15,20,27,.88) 95%);
+  filter: blur(8px);
+  opacity:.9;
+}
+
+/* Bottom glow + fade into dark section below */
+#bio::after{
+  bottom:-1px; height:220px;
+  background:
+    radial-gradient(120% 150% at 50% 120%, rgba(127,234,209,.16), rgba(127,234,209,0) 55%),
+    linear-gradient(to bottom, rgba(255,255,255,0), rgba(15,20,27,1) 100%);
+  filter: blur(8px);
+  opacity:.9;
+}
+
+/* keep content above these fades */
+#bio .wrap{ position:relative; z-index:1; }
+
 #bio .bio-card .prose p{ text-shadow: 0 0 6px rgba(255,255,255,.45); }
     /* Quote box — keep it over the left column only */
 #bio .bio-quote{
   display:block;
-  max-width: 660px;      /* adjust: 620–720px if you like */
-  margin: 0 0 24px 0;    /* left-aligned (not centered) */
+  max-width: 680px;
+  margin: 0 24px 24px 0;   /* keep it over the left column */
+  padding: 16px 18px 14px;
+  background: rgba(255,255,255,.60);
+  border-left: 3px solid var(--accent);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
+
+#bio .bio-quote em{
+  font-style: normal;       /* not italic inside the box */
+  font-weight: 600;
+  font-size: 1.03rem;
+  letter-spacing: .01em;
+  color:#111;
+}
+#bio .bio-quote .muted{ color:#333; }
 
 /* On small screens let it be full width again */
 @media (max-width: 900px){
@@ -1135,9 +1178,14 @@ body.js .reveal{
   letter-spacing:.08em;
   opacity:.9;
 }
-
-
-    
+/* --- Add this if .bio-photo doesn't exist --- */
+.bio-photo{
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
 </style>
 </head>
 <body>
