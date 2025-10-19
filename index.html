@@ -999,10 +999,26 @@ body.js .reveal{
   position: relative;
   background:
     linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
-    url('Kid Fourteen 2_Credit Olivier Nemnom (1).jpg') 70% 40% / cover no-repeat;
+    url(url('/bio.jpg')) 70% 40% / cover no-repeat;
   color:#111;
 }
 #bio .bio-card .prose p{ text-shadow: 0 0 6px rgba(255,255,255,.45); }
+    /* Quote box — keep it over the left column only */
+#bio .bio-quote{
+  display:block;
+  max-width: 660px;      /* adjust: 620–720px if you like */
+  margin: 0 0 24px 0;    /* left-aligned (not centered) */
+}
+
+/* On small screens let it be full width again */
+@media (max-width: 900px){
+  #bio .bio-quote{
+    max-width: none;
+    margin: 0 0 16px 0;
+  }
+}
+
+    
 </style>
 </head>
 <body>
