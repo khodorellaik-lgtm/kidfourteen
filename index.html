@@ -1769,6 +1769,67 @@ body.js .reveal{
   0%   { transform: translate3d(-1%, -1%, 0) scale(1.06); }
   100% { transform: translate3d( 1%,  1%, 0) scale(1.06); }
 }
+/* === BIO: cinematic sky background that auto-fits under the text === */
+#bio {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* keep the portrait photo intact */
+#bio .bio-photo img {
+  position: relative;
+  z-index: 2;
+  filter: none;
+}
+
+/* floating blurred sky backdrop */
+#bio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  /* automatically size and center the sky portion */
+  background:
+    url('bio.jpg') no-repeat center top / 125% auto;
+  opacity: 0.38;
+  filter: brightness(0.9) contrast(1.1) saturate(1.05) blur(1.5px);
+
+  /* fade bottom edge into darkness */
+  -webkit-mask-image: linear-gradient(to bottom,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.9) 45%,
+      rgba(0,0,0,0.5) 70%,
+      rgba(0,0,0,0) 92%);
+  mask-image: linear-gradient(to bottom,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.9) 45%,
+      rgba(0,0,0,0.5) 70%,
+      rgba(0,0,0,0) 92%);
+
+  transform: scale(1.08);
+  animation: bioSkyFloat 90s ease-in-out infinite alternate;
+}
+
+/* subtle ambient gradient overlay for cohesion */
+#bio::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 25% 25%, rgba(12,18,25,.35), transparent 60%),
+    linear-gradient(180deg, rgba(12,18,25,.25), rgba(12,18,25,.65));
+}
+
+/* slow drifting motion for life */
+@keyframes bioSkyFloat {
+  0%   { transform: translate3d(-1%, -1%, 0) scale(1.08); }
+  100% { transform: translate3d(1%, 1%, 0) scale(1.08); }
+}
 
 </style>
 </head>
