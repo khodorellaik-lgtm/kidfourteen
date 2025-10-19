@@ -1248,6 +1248,45 @@ body.js .reveal{
 }
 #bio .bio-quote em{ font-style: italic; }
 #bio .bio-quote .muted{ color: var(--muted); }
+/* ===== BIO: restore pale sky background like your screenshot ===== */
+#bio{
+  position: relative;
+  background: #e7eaed; /* neutral sky-like tone */
+  color: #0f141b;      /* restore dark text */
+  isolation: isolate;
+}
+
+/* Optional: subtle vertical gradient so it feels like sky fading */
+#bio::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background: linear-gradient(to bottom,
+    rgba(231,234,237,1) 0%,
+    rgba(231,234,237,0.85) 45%,
+    rgba(231,234,237,0.7) 100%);
+}
+
+/* Keep all bio content above the background layer */
+#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep your enlarged photo design */
+#bio .bio-card img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  object-position:center 58%;
+  transform: scale(1.1);
+  filter: contrast(1.06) saturate(1.05) brightness(1.05);
+  border-radius: 16px;
+  transition: transform .4s ease, filter .4s ease;
+}
+#bio .bio-card:hover img{
+  transform: scale(1.13);
+  filter: contrast(1.08) saturate(1.07) brightness(1.07);
+}
 
     
 </style>
