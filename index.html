@@ -1136,6 +1136,74 @@ body.js .reveal{
   opacity:.9;
 }
 
+/* ===== BIO: sky-only background (hide/mini head) ===== */
+#bio{ position: relative; background: transparent; }
+
+/* Use the same bio.jpg as a *background layer* showing mainly sky */
+#bio::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image: url('/bio.jpg');     /* adjust path if needed */
+  background-size: 140%;                 /* zoom so railing/head sit lower */
+  background-position: center 8%;        /* crop high = mostly sky */
+  filter: brightness(1.04) contrast(1.02) saturate(1.03);
+
+/* fade out toward the bottom so the lower head/railing disappears */
+  -webkit-mask-image: linear-gradient(to bottom,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 46%,
+      rgba(0,0,0,0) 80%);
+  mask-image: linear-gradient(to bottom,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 46%,
+      rgba(0,0,0,0) 80%);
+}
+
+/* subtle side darkening so the sky melts into the page edges */
+#bio::after{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background: linear-gradient(to right,
+      rgba(15,20,27,.85) 0%,
+      rgba(15,20,27,.55) 5%,
+      transparent 14%,
+      transparent 86%,
+      rgba(15,20,27,.55) 95%,
+      rgba(15,20,27,.85) 100%);
+}
+
+/* ensure your actual content sits above the background layers */
+#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card{ position:relative; z-index:1; }
+
+/* ===== BIO: make the image-in-the-box larger & clearer ===== */
+#bio .bio-card{ 
+  overflow:hidden; border-radius:18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.45),
+              0 0 0 1px rgba(255,255,255,.05),
+              0 0 60px rgba(127,234,209,.08);
+}
+
+/* give the photo column more real estate without breaking layout */
+#bio .bio-grid{
+  grid-template-columns: minmax(0,1fr) minmax(360px, 560px); /* text | photo */
+  align-items:start;
+}
+
+/* make the photo feel closer and punchier inside its frame */
+#bio .bio-card img{
+  width:100%; height:auto; display:block; object-fit:cover; object-position:center 58%;
+  transform: scale(1.10);                     /* bigger inside frame */
+  filter: contrast(1.08) saturate(1.06) brightness(1.06);
+  transition: transform .5s ease, filter .5s ease;
+}
+#bio .bio-card:hover img{
+  transform: scale(1.14);
+  filter: contrast(1.1) saturate(1.1) brightness(1.07);
+}
+
+/* mobile: keep composition tidy */
+@media (max-width: 860px){
+  #bio .bio-grid{ grid-template-columns: 1fr; }
+  #bio .bio-card img{ transform: scale(1.06); object-position:center 62%; }
+}
 
     
 </style>
