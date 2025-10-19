@@ -919,9 +919,10 @@ body.js .reveal{
 
   /* aim at the figure (right-of-center) — tweak % if you want */
   --cover-x: 68%;
-  --cover-y: 15%;
-  background-position: center center, var(--cover-x) var(--cover-y);
-
+  --cover-y: 28%;
+background-position:
+    center center, 50% 32%;  /* ← 32% moves the image UP to reveal the head */
+}
   /* keep it moody but readable */
   filter: saturate(110%) contrast(108%) brightness(90%);
   opacity: .34;
