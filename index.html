@@ -891,15 +891,17 @@ body.js .reveal{
     background-size: 130% auto;
   }
 }
-    /* === BIO: Full clear image behind text === */
+/* === BIO BACKGROUND: Zoomed-in, aligned figure === */
 #bio {
   position: relative;
-  isolation: isolate;
-  color: #000; /* make all text black over the bright sky */
-  background: url('bio.jpg') center top / cover no-repeat;
-  min-height: 100vh; /* ensures full coverage */
-  padding-top: 6rem; /* spacing for readability */
-  padding-bottom: 6rem;
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.65), rgba(230,230,230,0.85)),
+    url('/bio.jpg');   /* balcony image only — forest image removed */
+  background-repeat: no-repeat;
+  background-size: 140% auto;          /* zoomed in */
+  background-position: 60% 35%;        /* tweak for framing */
+  background-attachment: fixed;
+  color: #111; /* dark text */
 }
 
 /* ensure paragraphs and blockquotes are black too */
@@ -1017,6 +1019,7 @@ body.js .reveal{
     margin: 0 0 16px 0;
   }
 }
+    
 
     
 </style>
