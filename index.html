@@ -1334,6 +1334,41 @@ section#bio.section {
   border-radius: 16px;
   transition: transform .4s ease, filter .4s ease;
 }
+/* ========== BIO — Quote upgrade (no content change) ========== */
+#bio .bio-quote{
+  display:block;
+  margin: 8px 0 22px 0;
+  padding: 14px 18px;
+  background: rgba(255,255,255,.32);               /* works on light sky bg */
+  border: 1px solid rgba(0,0,0,.08);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  color:#0f141b;                                   /* dark readable text */
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 0 1px rgba(255,255,255,.04) inset;
+  backdrop-filter: blur(6px) saturate(108%);
+}
+#bio .bio-quote em{ font-style: italic; }
+#bio .bio-quote .muted{ color: var(--muted); }
+
+/* ========== BIO — Edge melt to page (top & bottom only) ========== */
+#bio{ position:relative; isolation:isolate; }
+#bio::before,
+#bio::after{
+  content:"";
+  position:absolute; left:0; right:0; pointer-events:none; z-index:0;
+}
+#bio::before{                                           /* top fade from dark page -> sky */
+  top:-1px; height: min(16vh, 180px);
+  background: linear-gradient(to bottom, var(--bg) 0%, rgba(231,234,238,0) 100%);
+}
+#bio::after{                                            /* bottom fade from dark page -> sky */
+  bottom:-1px; height: min(18vh, 220px);
+  background: linear-gradient(to top, var(--bg) 0%, rgba(231,234,238,0) 100%);
+}
+/* keep all actual content above these fades */
+#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{ z-index:1; position:relative; }
 
     
 </style>
