@@ -200,40 +200,7 @@
       text-shadow:0 0 18px rgba(127,234,209,.25); letter-spacing:-0.02em;
     }
     .bio-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-   /* Album chips — sharper, luminous, inviting */
-/* Album chips — refined and balanced version */
-/* Album chips — compact, refined version */
-.bio-chips .chip{
-  display:inline-block;
-  margin:4px 8px;                     /* tighter spacing between bubbles */
-  padding:5px 10px;                   /* smaller interior space */
-  border-radius:8px;                  /* sharper corners */
-  background:linear-gradient(145deg, rgba(127,234,209,0.1) 0%, rgba(139,198,255,0.07) 100%);
-  border:1px solid rgba(127,234,209,0.2);
-  color:var(--text);
-  font-size:11.5px;                   /* slightly smaller text */
-  font-weight:600;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  white-space:nowrap;
-  transition:all .25s ease;
-  box-shadow:0 1px 4px rgba(127,234,209,0.05);
-  backdrop-filter:blur(2px);
-  line-height:1.2;
-}
-
-/* Hover — soft glow */
-.bio-chips .chip:hover{
-  color:var(--accent);
-  border-color:var(--accent);
-  background:linear-gradient(145deg, rgba(127,234,209,0.18) 0%, rgba(139,198,255,0.12) 100%);
-  box-shadow:0 0 8px rgba(127,234,209,0.2);
-  transform:translateY(-1px);
-}
-
-
-    .bio-chips .chip:hover{transform:translateY(-2px); background:#1e293b; border-color:var(--accent); color:var(--accent)}
-
+  
     .reveal{opacity:1; transform:none}
     body.js .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease,transform .6s ease; transition-delay:var(--d,0s)}
     body.js .reveal.is-visible{opacity:1; transform:none}
@@ -716,71 +683,7 @@ body.js .reveal{
 }
 
 /* Album chips: center + slightly larger/nicer touch target */
-.bio-chips{ justify-content: center; }           /* new */
-.bio-chips .chip{
-  padding: 8px 12px;                             /* was 5px 10px */
-  font-size: 13px;                               /* was 11.5px */
-  border-radius: 10px;                           /* a hair rounder */
-  margin: 6px 8px;                               /* a bit more breathing room */
-  line-height: 1.25;
-}
-
-.bio-chips .chip {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  padding: 6px 8px;
-  border-radius: 8px;
-  background: linear-gradient(145deg, rgba(127,234,209,0.1) 0%, rgba(139,198,255,0.07) 100%);
-  border: 1px solid rgba(127,234,209,0.18);
-  color: var(--text);
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  line-height: 1.3;
-  white-space: nowrap;
-  transition: all .25s ease;
-  box-shadow: 0 1px 4px rgba(127,234,209,0.05);
-  backdrop-filter: blur(2px);
-}
-
-/* Hover — soft glow */
-.bio-chips .chip:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  background: linear-gradient(145deg, rgba(127,234,209,0.18) 0%, rgba(139,198,255,0.12) 100%);
-  box-shadow: 0 0 8px rgba(127,234,209,0.2);
-  transform: translateY(-1px);
-}
    
-.bio-chips .chip{
-  display:inline-block;
-  width:100%;
-  padding:8px 10px;
-  border-radius:10px;
-  background:linear-gradient(145deg, rgba(127,234,209,.1) 0%, rgba(139,198,255,.07) 100%);
-  border:1px solid rgba(127,234,209,.18);
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  line-height:1.25;
-
-  /* IMPORTANT: allow wrapping so long titles don't spill into neighbors */
-  white-space:normal;         /* overrides the old nowrap */
-  text-wrap:balance;          /* nicer multi-line breaks (supported browsers) */
-  word-break:normal;          /* no mid-word breaks unless needed */
-  overflow-wrap:anywhere;     /* last-resort wrap to avoid overflow */
-
-  /* tidy visuals */
-  text-align:center;
-  box-shadow:0 1px 4px rgba(127,234,209,.05);
-  backdrop-filter:blur(2px);
-  transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease;
-}
-
-
   /* === Bio album chips — FINAL (left-aligned compact pills) === */
 #bio .bio-card .bio-chips{
   display:flex;
