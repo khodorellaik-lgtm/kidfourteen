@@ -898,57 +898,55 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   #press::before{ animation:none }
 }
-/* SHOWS — Blood-Thick Silence cover as section background */
-#shows{
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-
-  /* overlay + album art */
-  background-image:
-  linear-gradient(180deg, rgba(12,18,25,.72), rgba(12,18,25,.82)), /* was .84/.90 */
-  url('cover2.jpg');
-filter: brightness(1.05) contrast(112%) saturate(112%);           /* was 90% brightness */
-
-
-  /* gradient fills; image clamped so it never blows up */
-    background-size:
-  100% 100%,
-  clamp(800px, 60vw, 1200px) auto;
-
-  /* aim at the figure; tweak via CSS vars */
-  background-position:
-    center center,
-    var(--cover-x, 68%) var(--cover-y, 14%);
-
-  /* subtle pan (no scale) */
-  animation: showsPan 22s ease-in-out infinite alternate;
-  filter: saturate(110%) contrast(108%) brightness(90%);
+    /* ==== SHOWS — final, single source of truth (Blood-thick Silence cover) ==== */
+#shows::before,
+#shows::after{
+  /* kill all previous pseudo-BGs */
+  content:none !important;
+  background:none !important;
+  animation:none !important;
+  transform:none !important;
 }
 
-/* readable glass card */
+#shows{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+
+  /* gradient overlay (first) + album art (second) */
+  background-image:
+    linear-gradient(180deg, rgba(12,18,25,.80), rgba(12,18,25,.88)),
+    url('cover2.jpg') !important;
+
+  background-repeat: no-repeat, no-repeat !important;
+
+  /* smaller image = more head visible; clamp keeps it responsive */
+  background-size: 100% 100%,
+                   clamp(900px, 70vw, 1200px) auto !important;
+
+  /* aim at the head (right-of-center, higher) — tweak if needed */
+  background-position: center center,
+                       60% 22% !important;
+
+  /* gentle drift without scaling (prevents “blow up”) */
+  animation: showsPan 20s ease-in-out infinite alternate;
+}
+
+/* tiny parallax drift of the image position only */
+@keyframes showsPan{
+  0%   { background-position: center center, 58% 23%; }
+  100% { background-position: center center, 62% 21%; }
+}
+
+/* keep the card readable */
 #shows .panel{
-  position: relative; z-index: 1;
+  position:relative; z-index:1;
   background: rgba(15,20,27,.70);
   border: 1px solid rgba(127,234,209,.20);
   box-shadow: 0 10px 30px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04);
   backdrop-filter: blur(10px) saturate(130%);
   -webkit-backdrop-filter: blur(10px) saturate(130%);
 }
-
-@keyframes showsPan{
-  0%   { background-position: center center, calc(var(--cover-x) - 2%) calc(var(--cover-y) + 1%); }
-  100% { background-position: center center, calc(var(--cover-x) + 2%) calc(var(--cover-y) - 1%); }
-}
-
-/* small screens: keep it modest */
-@media (max-width: 700px){
-  #shows{
-    background-size: 100% 100%, 120% auto;
-    filter: brightness(92%);
-  }
-}
-
 </style>
 </head>
 <body>
@@ -1219,7 +1217,7 @@ filter: brightness(1.05) contrast(112%) saturate(112%);           /* was 90% bri
   </section>
 
  <!-- SHOWS -->
-<section id="shows" class="section" style="--cover-x:66%; --cover-y:18%;">
+<section id="shows" class="section">
   <div class="wrap">
     <h2>Shows</h2>
 
