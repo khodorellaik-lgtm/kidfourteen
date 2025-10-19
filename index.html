@@ -898,45 +898,34 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   #press::before{ animation:none }
 }
-    /* === SHOWS — Blood-thick Silence backdrop (zoomed to the red figure) === */
+/* SHOWS — Blood-Thick Silence cover as section background */
 #shows{
   position: relative;
   isolation: isolate;
   overflow: hidden;
-}
 
-/* backdrop image + dark overlay */
-#shows::before{
-  content:"";
-  position:absolute; inset:0; z-index:-1;
-
-  /* overlay (fills) + album art (clamped, not giant) */
+  /* overlay + album art */
   background-image:
     linear-gradient(180deg, rgba(12,18,25,.84), rgba(12,18,25,.90)),
     url('cover2.jpg');
   background-repeat: no-repeat, no-repeat;
-  background-size: 100% 100%, clamp(1000px, 78vw, 1600px) auto;
 
-  /* aim at the figure (right-of-center) — tweak % if you want */
-  --cover-x: 68%;
-  --cover-y: 28%;
-background-position:
-    center center, 50% 32%;  /* ← 32% moves the image UP to reveal the head */
-}
-  /* keep it moody but readable */
+  /* gradient fills; image clamped so it never blows up */
+  background-size:
+    100% 100%,
+    clamp(950px, 72vw, 1450px) auto;
+
+  /* aim at the figure; tweak via CSS vars */
+  background-position:
+    center center,
+    var(--cover-x, 68%) var(--cover-y, 28%);
+
+  /* subtle pan (no scale) */
+  animation: showsPan 22s ease-in-out infinite alternate;
   filter: saturate(110%) contrast(108%) brightness(90%);
-  opacity: .34;
-
-  /* gentle drift (no scale, so size never explodes) */
-  animation: k14ShowsDrift 22s ease-in-out infinite alternate;
 }
 
-@keyframes k14ShowsDrift{
-  0%   { background-position: center center, calc(var(--cover-x) - 2%) calc(var(--cover-y) + 1%); }
-  100% { background-position: center center, calc(var(--cover-x) + 2%) calc(var(--cover-y) - 1%); }
-}
-
-/* readable panel over the image */
+/* readable glass card */
 #shows .panel{
   position: relative; z-index: 1;
   background: rgba(15,20,27,.70);
@@ -946,60 +935,17 @@ background-position:
   -webkit-backdrop-filter: blur(10px) saturate(130%);
 }
 
-/* lighter treatment on small screens */
-@media (max-width: 700px){
-  #shows::before{
-    background-size: 100% 100%, 120% auto;
-    opacity: .50;
-  }
-}
-    /* --- SHOWS: remove old pseudo bg and put the cover directly on the section --- */
-#shows::before,
-#shows::after{
-  content:none !important;
-  background:none !important;
-}
-
-/* Blood-thick Silence cover behind the Shows section */
-#shows{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-
-  /* gradient overlay + the album art */
-  background-image:
-    linear-gradient(180deg, rgba(12,18,25,.84), rgba(12,18,25,.90)),
-    url('cover2.jpg');
-  background-repeat: no-repeat, no-repeat;
-
-  /* keep gradient full-bleed; clamp the image so it doesn’t blow up */
-  background-size: 100% 100%, clamp(1000px, 78vw, 1600px) auto;
-
-  /* aim at the blurred red figure (adjust these % to taste) */
-  background-position: center center, 68% 56%;
-
-  /* gentle drift of the image only */
-  animation: showsPan 22s ease-in-out infinite alternate;
-}
-
 @keyframes showsPan{
-  0%   { background-position: center center, 66% 57%; }
-  100% { background-position: center center, 70% 55%; }
+  0%   { background-position: center center, calc(var(--cover-x) - 2%) calc(var(--cover-y) + 1%); }
+  100% { background-position: center center, calc(var(--cover-x) + 2%) calc(var(--cover-y) - 1%); }
 }
 
-/* keep the card readable */
-#shows .panel{
-  position:relative; z-index:1;
-  background: rgba(15,20,27,.70);
-  border: 1px solid rgba(127,234,209,.20);
-  box-shadow: 0 10px 30px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04);
-  backdrop-filter: blur(10px) saturate(130%);
-  -webkit-backdrop-filter: blur(10px) saturate(130%);
-}
-
-/* tone things down on small screens */
+/* small screens: keep it modest */
 @media (max-width: 700px){
-  #shows{ background-size: 100% 100%, 120% auto; }
+  #shows{
+    background-size: 100% 100%, 120% auto;
+    filter: brightness(92%);
+  }
 }
 
 </style>
@@ -1272,7 +1218,7 @@ background-position:
   </section>
 
  <!-- SHOWS -->
-<section id="shows" class="section">
+<section id="shows" class="section" style="--cover-x:68%; --cover-y:28%;">
   <div class="wrap">
     <h2>Shows</h2>
 
