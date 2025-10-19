@@ -906,14 +906,15 @@ body.js .reveal{
 
   /* overlay + album art */
   background-image:
-    linear-gradient(180deg, rgba(12,18,25,.84), rgba(12,18,25,.90)),
-    url('cover2.jpg');
-  background-repeat: no-repeat, no-repeat;
+  linear-gradient(180deg, rgba(12,18,25,.72), rgba(12,18,25,.82)), /* was .84/.90 */
+  url('cover2.jpg');
+filter: brightness(1.05) contrast(112%) saturate(112%);           /* was 90% brightness */
+
 
   /* gradient fills; image clamped so it never blows up */
-  background-size:
-    100% 100%,
-    clamp(950px, 72vw, 1450px) auto;
+    background-size:
+  100% 100%,
+  clamp(800px, 60vw, 1200px) auto;
 
   /* aim at the figure; tweak via CSS vars */
   background-position:
@@ -1218,7 +1219,7 @@ body.js .reveal{
   </section>
 
  <!-- SHOWS -->
-<section id="shows" class="section" style="--cover-x:68%; --cover-y:28%;">
+<section id="shows" class="section" style="--cover-x:66%; --cover-y:18%;">
   <div class="wrap">
     <h2>Shows</h2>
 
