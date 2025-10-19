@@ -1204,6 +1204,50 @@ body.js .reveal{
   #bio .bio-grid{ grid-template-columns: 1fr; }
   #bio .bio-card img{ transform: scale(1.06); object-position:center 62%; }
 }
+/* ===== BIO: quick reset so colors/background go back ===== */
+#bio { position: relative; background: unset !important; }  /* don't force a dark bg */
+#bio::before, #bio::after { content: none !important; }     /* remove sky/overlays entirely */
+#bio .bio-grid, #bio .bio-copy, #bio .bio-quote, #bio .bio-card { position: relative; z-index: 1; }
+#bio .bio-copy, #bio .bio-quote { color: inherit !important; filter: none !important; opacity: 1 !important; }
+
+/* ===== BIO: bigger/cleaner photo in the right-hand card (design only) ===== */
+#bio .bio-card {
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.05),
+    0 0 60px rgba(127,234,209,.08);
+}
+#bio .bio-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  object-position:center 58%;   /* tweak 50–65% to shift framing */
+  transform: scale(1.10);       /* make it feel closer */
+  filter: contrast(1.06) saturate(1.05) brightness(1.05);
+  transition: transform .4s ease, filter .4s ease;
+}
+/* (optional) gentle hover – delete if you don't want it */
+#bio .bio-card:hover img{
+  transform: scale(1.13);
+  filter: contrast(1.08) saturate(1.07) brightness(1.06);
+}
+
+/* ===== BIO: stronger, cleaner quote styling (no content change) ===== */
+#bio .bio-quote{
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--chip-border);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,255,255,.04);
+}
+#bio .bio-quote em{ font-style: italic; }
+#bio .bio-quote .muted{ color: var(--muted); }
 
     
 </style>
