@@ -801,6 +801,65 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   #press::before{ animation:none }
 }
+    /* === SHOWS — Subtle floating red figure (Blood Thick Silence cover) === */
+#shows {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(12,18,25,0.95) 0%, rgba(12,18,25,1) 100%);
+}
+
+/* Glowing figure layer */
+#shows::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background: url('cover2.jpg') center 35% / clamp(480px, 50vw, 720px) auto no-repeat;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+
+  mask-image: radial-gradient(circle at center, rgba(255,255,255,1) 45%, rgba(255,255,255,0) 80%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(255,255,255,1) 45%, rgba(255,255,255,0) 80%);
+
+  filter:
+    brightness(1.2)
+    contrast(1.15)
+    saturate(1.25)
+    drop-shadow(0 0 40px rgba(127,234,209,0.25))
+    blur(0.5px);
+
+  animation: floatFigure 26s ease-in-out infinite alternate;
+  transform: translate3d(0,0,0);
+}
+
+/* Gentle floating motion */
+@keyframes floatFigure {
+  0%   { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+  100% { transform: translate3d(1.5%, 1%, 0) scale(1.03); }
+}
+
+/* Ensure readability over dark backdrop */
+#shows .panel {
+  position: relative;
+  z-index: 1;
+  background: rgba(15,20,27,0.75);
+  border: 1px solid rgba(127,234,209,0.18);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+}
+
+/* Adjust glow strength for small screens */
+@media (max-width: 700px) {
+  #shows::before {
+    opacity: 0.45;
+    background-size: 130% auto;
+  }
+}
+
 </style>
 </head>
 <body>
