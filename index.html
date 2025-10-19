@@ -1067,8 +1067,32 @@ body.js .reveal{
 }
 #bio .bio-quote em { color:#000; font-style:italic; }
 #bio .bio-quote cite { display:block; margin-top:6px; color:#333; font-size:.9rem; }
-
-    
+/* --- Bio quote polish: clean, rectangular, balanced --- */
+#bio .bio-quote {
+  background: rgba(255,255,255,0.3);
+  border-left: 3px solid var(--accent);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  font-weight: 500;
+  font-style: normal;
+  border-radius: 0;
+  max-width: 680px;
+  margin: 0 auto 36px;
+  padding: 18px 26px;
+}
+#bio .bio-quote em {
+  color: #000;
+  font-style: italic;
+}
+#bio .bio-quote cite {
+  display: block;
+  margin-top: 6px;
+  color: #333;
+  font-size: .9rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}    
 </style>
 </head>
 <body>
