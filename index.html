@@ -952,6 +952,55 @@ body.js .reveal{
     opacity: .50;
   }
 }
+    /* --- SHOWS: remove old pseudo bg and put the cover directly on the section --- */
+#shows::before,
+#shows::after{
+  content:none !important;
+  background:none !important;
+}
+
+/* Blood-thick Silence cover behind the Shows section */
+#shows{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+
+  /* gradient overlay + the album art */
+  background-image:
+    linear-gradient(180deg, rgba(12,18,25,.84), rgba(12,18,25,.90)),
+    url('cover2.jpg');
+  background-repeat: no-repeat, no-repeat;
+
+  /* keep gradient full-bleed; clamp the image so it doesn’t blow up */
+  background-size: 100% 100%, clamp(1000px, 78vw, 1600px) auto;
+
+  /* aim at the blurred red figure (adjust these % to taste) */
+  background-position: center center, 68% 56%;
+
+  /* gentle drift of the image only */
+  animation: showsPan 22s ease-in-out infinite alternate;
+}
+
+@keyframes showsPan{
+  0%   { background-position: center center, 66% 57%; }
+  100% { background-position: center center, 70% 55%; }
+}
+
+/* keep the card readable */
+#shows .panel{
+  position:relative; z-index:1;
+  background: rgba(15,20,27,.70);
+  border: 1px solid rgba(127,234,209,.20);
+  box-shadow: 0 10px 30px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+}
+
+/* tone things down on small screens */
+@media (max-width: 700px){
+  #shows{ background-size: 100% 100%, 120% auto; }
+}
+
 </style>
 </head>
 <body>
