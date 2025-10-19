@@ -920,6 +920,40 @@ body.js .reveal{
   background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(15,20,27,1));
   pointer-events: none;
 }
+/* === HARD RECT CHIPS — bold, present, John-Maus style === */
+#bio .bio-card .bio-chips{
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-start;
+  margin-top:16px;
+}
+
+#bio .bio-card .bio-chips .chip{
+  /* reset softness */
+  background: var(--accent);          /* solid, loud */
+  color: #0c1219;                     /* dark text on mint */
+  border: 2px solid var(--accent);
+  border-radius: 4px;                 /* nearly straight corners */
+  padding: 10px 14px;
+  font: 800 12.5px/1.1 system-ui,-apple-system,Segoe UI,Inter,Arial,sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(0,0,0,.25); /* hard button feel */
+  transition: transform .12s ease, background .12s ease, color .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+
+#bio .bio-card .bio-chips .chip:hover{
+  background: transparent;            /* invert on hover */
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 rgba(0,0,0,.28);
+}
+
+#bio .bio-card .bio-chips .chip:active{
+  transform: translateY(0);
+  box-shadow: 0 1px 0 rgba(0,0,0,.2);
+}
 
 </style>
 </head>
