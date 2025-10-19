@@ -1369,6 +1369,76 @@ section#bio.section {
 }
 /* keep all actual content above these fades */
 #bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{ z-index:1; position:relative; }
+/* ==== BIO — stronger quote (clean + punchy) ==== */
+#bio .bio-quote{
+  margin: 10px 0 24px;
+  padding: 16px 20px;
+  color:#0f141b;                               /* dark, readable */
+  background: linear-gradient(180deg,
+              rgba(255,255,255,.72),
+              rgba(255,255,255,.52));
+  border-left: 5px solid var(--accent);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 14px;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.18),
+    0 0 0 1px rgba(255,255,255,.05) inset;
+  backdrop-filter: blur(6px) saturate(108%);
+}
+#bio .bio-quote em { font-style: italic; font-weight: 600; }
+#bio .bio-quote .muted{ color: var(--muted); }
+
+/* ==== BIO — clear, visible edge melts (top/bottom + sides) ==== */
+#bio{
+  /* keep your sky tone */
+  --bio-sky: #e7eaee;
+  background: var(--bio-sky);
+  color:#0f141b;
+  position:relative;
+  isolation:isolate;
+
+  /* strong vignette using inset shadows (no extra markup) */
+  box-shadow:
+    inset 0   90px 160px rgba(15,20,27,.55),   /* top */
+    inset 0  -110px 180px rgba(15,20,27,.60),  /* bottom */
+    inset 140px 0 180px rgba(15,20,27,.40),    /* left */
+    inset -140px 0 180px rgba(15,20,27,.40);   /* right */
+}
+
+/* dial back the vignette on small screens so it doesn't overwhelm */
+@media (max-width: 860px){
+  #bio{
+    box-shadow:
+      inset 0   60px 120px rgba(15,20,27,.45),
+      inset 0   -80px 140px rgba(15,20,27,.50),
+      inset 70px 0 120px rgba(15,20,27,.34),
+      inset -70px 0 120px rgba(15,20,27,.34);
+  }
+}
+/* ===== BIO — stronger top sky-to-dark gradient melt ===== */
+#bio::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15,20,27,0.75) 0%,       /* same dark as site header */
+    rgba(15,20,27,0.45) 10%,
+    rgba(231,234,238,0) 65%       /* fade smoothly into sky */
+  );
+}
+
+/* make sure all real content stays above the gradient */
+#bio .wrap,
+#bio .bio-grid,
+#bio .bio-copy,
+#bio .bio-card,
+#bio .bio-quote{
+  position:relative;
+  z-index:1;
+}
 
     
 </style>
