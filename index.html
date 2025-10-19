@@ -898,61 +898,6 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   #press::before{ animation:none }
 }
-    /* ==== SHOWS — final, single source of truth (Blood-thick Silence cover) ==== */
-#shows::before,
-#shows::after{
-  /* kill all previous pseudo-BGs */
-  content:none !important;
-  background:none !important;
-  animation:none !important;
-  transform:none !important;
-}
-
-#shows{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-
-  /* gradient overlay (first) + album art (second) */
-  background-image:
-    linear-gradient(180deg, rgba(12,18,25,.80), rgba(12,18,25,.88)),
-    url('cover2.jpg') !important;
-
-  background-repeat: no-repeat, no-repeat !important;
-
-  /* smaller image = more head visible; clamp keeps it responsive */
-  background-size: 100% 100%,
-                   clamp(900px, 70vw, 1200px) auto !important;
-
-  /* aim at the head (right-of-center, higher) — tweak if needed */
-  background-position: center center,
-                       60% 22% !important;
-
-  /* gentle drift without scaling (prevents “blow up”) */
-  animation: showsPan 20s ease-in-out infinite alternate;
-}
-
-/* tiny parallax drift of the image position only */
-@keyframes showsPan{
-  0%   { background-position: center center, 58% 23%; }
-  100% { background-position: center center, 62% 21%; }
-}
-
-/* keep the card readable */
-#shows .panel{
-  position:relative; z-index:1;
-  background: rgba(15,20,27,.70);
-  border: 1px solid rgba(127,234,209,.20);
-  box-shadow: 0 10px 30px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04);
-  backdrop-filter: blur(10px) saturate(130%);
-  -webkit-backdrop-filter: blur(10px) saturate(130%);
-}
-    @keyframes showsPan{
-  0%   { background-position: center center, 58% 23%; }
-  100% { background-position: center center, 62% 21%; }
-}
-#shows{ animation: showsPan 22s ease-in-out infinite alternate; }
-
 </style>
 </head>
 <body>
@@ -1223,7 +1168,7 @@ body.js .reveal{
   </section>
 
  <!-- SHOWS -->
-<section id="shows" class="section"   style="     /* cache-bust the image with ?v=4 so you SEE changes */     background-image:       linear-gradient(180deg, rgba(12,18,25,.84), rgba(12,18,25,.90)),       url('cover2.jpg?v=4');     background-repeat: no-repeat, no-repeat;     background-size: 100% 100%, clamp(900px, 70vw, 1200px) auto; /* zoom */     background-position: center center, 60% 50%;                  /* figure X% Y% */     filter: saturate(110%) contrast(108%) brightness(92%);   ">
+<section id="shows" class="section">
   <div class="wrap">
     <h2>Shows</h2>
 
