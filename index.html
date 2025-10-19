@@ -857,15 +857,7 @@ body.js .reveal{
   }
 }
     /* === BIO: Full clear image behind text === */
-#bio {
-  position: relative;
-  isolation: isolate;
-  color: #000; /* make all text black over the bright sky */
-  background: url('bio.jpg') center top / cover no-repeat;
-  min-height: 100vh; /* ensures full coverage */
-  padding-top: 6rem; /* spacing for readability */
-  padding-bottom: 6rem;
-}
+
 
 /* ensure paragraphs and blockquotes are black too */
 #bio h2, #bio p, #bio blockquote, #bio span, #bio strong {
@@ -881,16 +873,6 @@ body.js .reveal{
 #bio .bio-photo {
   position: relative;
   z-index: 2;  
-}
-/* === BIO section cleanup — transparent background, no overlay === */
-#bio {
-  position: relative;
-  isolation: isolate;
-  color: #000; /* black text */
-  background: url('bio.jpg') center top / cover no-repeat;
-  min-height: 100vh;
-  padding-top: 6rem;
-  padding-bottom: 6rem;
 }
 
 /* Make any panels or boxes inside the bio transparent */
