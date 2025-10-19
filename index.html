@@ -880,7 +880,29 @@ body.js .reveal{
 /* make sure the portrait photo doesn’t overlap weirdly */
 #bio .bio-photo {
   position: relative;
-  z-index: 2;
+  z-index: 2;  
+}
+/* === BIO section cleanup — transparent background, no overlay === */
+#bio {
+  position: relative;
+  isolation: isolate;
+  color: #000; /* black text */
+  background: url('bio.jpg') center top / cover no-repeat;
+  min-height: 100vh;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* Make any panels or boxes inside the bio transparent */
+#bio .panel,
+#bio .bio-panel,
+#bio article,
+#bio div {
+  background: rgba(255,255,255,0) !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 </style>
