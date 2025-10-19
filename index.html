@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -857,17 +858,40 @@ body.js .reveal{
   }
 }
     /* === BIO: Full clear image behind text === */
-
+#bio {
+  position: relative;
+  isolation: isolate;
+  color: #000; /* make all text black over the bright sky */
+  background: url('bio.jpg') center top / cover no-repeat;
+  min-height: 100vh; /* ensures full coverage */
+  padding-top: 6rem; /* spacing for readability */
+  padding-bottom: 6rem;
+}
 
 /* ensure paragraphs and blockquotes are black too */
 #bio h2, #bio p, #bio blockquote, #bio span, #bio strong {
   color: #000 !important;
 }
 
+/* optional: light shadow on text to keep it readable against bright zones */
+#bio p, #bio h2, #bio blockquote {
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
 /* make sure the portrait photo doesn’t overlap weirdly */
 #bio .bio-photo {
   position: relative;
   z-index: 2;  
+}
+/* === BIO section cleanup — transparent background, no overlay === */
+#bio {
+  position: relative;
+  isolation: isolate;
+  color: #000; /* black text */
+  background: url('bio.jpg') center top / cover no-repeat;
+  min-height: 100vh;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 /* Make any panels or boxes inside the bio transparent */
@@ -930,111 +954,6 @@ body.js .reveal{
 #bio .bio-card .bio-chips .chip:active{
   transform: translateY(0);
   box-shadow: 0 1px 0 rgba(0,0,0,.2);
-}
-    #bio{
-  background-image: 
-    linear-gradient(180deg, rgba(255,255,255,0.65), rgba(230,230,230,0.85)),
-    url('Kid Fourteen 2_Credit Olivier Nemnom (1).jpg');
-  background-size: cover;
-  background-position: 70% 38%;
-  background-attachment: fixed;
-  color: #111; /* dark graphite text */
-}
-
-#bio .bio-card {
-  background: rgba(255,255,255,0.3);
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  backdrop-filter: blur(10px);
-}
-
-#bio .pill {
-  border-radius: 0; /* straight edges */
-  background: rgba(20, 255, 200, 0.8);
-  color: #000;
-  text-transform: uppercase;
-  font-weight: 700;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.25);
-  letter-spacing: 0.05em;
-}
-/* --- Bio Quote restyle (rectangular, bolder aesthetic) --- */
-#bio blockquote {
-  border-radius: 0;
-  border-left: 4px solid var(--accent, #7fead1);
-  background: rgba(255,255,255,0.25);
-  padding: 28px 32px;
-  margin: 0 0 40px 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  letter-spacing: 0.02em;
-  font-style: normal;
-  color: #111;
-  position: relative;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.bio-quote{
-  display:inline-block; margin:0 auto 24px; padding:18px 26px; border-left:3px solid var(--accent);
-  border-radius:14px; font-size:clamp(18px,2.2vw,20px); line-height:1.7; font-style:italic; color:var(--text);
-  background:linear-gradient(180deg,rgba(26,34,48,.6),rgba(26,34,48,.3)); box-shadow:0 2px 18px rgba(0,0,0,.25);
-  text-align:center; position:relative; max-width:700px
-}
-.bio-quote::before,.bio-quote::after{position:absolute; pointer-events:none; color:var(--accent); opacity:.18; font-family:Georgia,serif}
-.bio-quote::before{content:"“"; left:14px; top:-10px; font-size:38px}
-.bio-quote::after{content:"”"; right:14px; bottom:-14px; font-size:32px}
-/* --- Bio Quote: rectangular, bolder, no curly quote ornaments --- */
-.bio-quote{
-  display:block;
-  margin: 0 0 32px 0;
-  padding: 24px 28px;
-  border-left: 4px solid var(--accent, #7fead1);
-  border-radius: 0;
-  background: rgba(255,255,255,0.25);
-  color: #111;
-  font-style: normal;
-  font-weight: 600;
-  font-size: clamp(18px, 2.1vw, 20px);
-  line-height: 1.6;
-  letter-spacing: .01em;
-  box-shadow: 0 8px 30px rgba(0,0,0,.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  text-align: left;
-}
-
-/* remove the decorative open/close quote marks */
-.bio-quote::before,
-.bio-quote::after{ content:none !important; }
-
-/* keep your reveal animation behavior */
-.bio-quote{ opacity:0; transform:translateY(16px); transition:opacity .6s, transform .6s; }
-.bio-quote.is-visible{ opacity:1; transform:none; }
-
-/* citation line inside the same <p> (optional—only if you keep “— Bandcamp Daily” in there) */
-.bio-quote .muted{
-  display:block;
-  margin-top:8px;
-  font-weight:500;
-  color:#333;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-}
-/* --- BIO: hard reset any old backgrounds --- */
-#bio, #bio::before, #bio::after {
-  background: none !important;
-  background-image: none !important;
-}
-
-/* The ONLY background we want on Bio */
-#bio{
-  background-image:
-    linear-gradient(180deg, rgba(255,255,255,0.65), rgba(230,230,230,0.85)),
-    url('Kid Fourteen 2_Credit Olivier Nemnom (1).jpg');
-  background-size: cover !important;
-  background-position: 70% 38% !important;
-  background-attachment: fixed !important;
-  color: #111; /* dark text over light bg */
 }
 
 </style>
