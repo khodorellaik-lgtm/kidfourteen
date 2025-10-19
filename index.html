@@ -902,12 +902,14 @@ body.js .reveal{
 #bio > *{ position: relative; z-index: 1; }
 
 #bio .bio-bg{
-  position:absolute; inset:0; z-index:-1; overflow:hidden;
-  background-image: url('/bio.jpg');     /* <-- this is the key */
-  background-size: cover;
-  background-position: center 62%;       /* adjust crop here */
-  filter: saturate(1.08) contrast(1.06) brightness(0.92);
-  transform: scale(1.04);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
+    url('/bio.jpg') 68% 38% / 145% auto no-repeat;  /* zoom + align */
 }
 
 #bio .bio-bg::after{
@@ -1037,64 +1039,21 @@ body.js .reveal{
   content:none !important;
   background:none !important;
 }
+
 #bio{
   position: relative;
-  /* Bigger image + better framing */
   background:
-    linear-gradient(180deg, rgba(255,255,255,.85), rgba(242,246,248,.92) 55%, rgba(15,20,27,1) 125%),
-    url('/bio.jpg') 68% 38% / 170% auto no-repeat;
-  background-attachment: fixed;
+    linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
+    url(url('/bio.jpg')) 70% 40% / cover no-repeat;
   color:#111;
 }
-/* --- BIO: thick neon blend into site background --- */
-#bio::before,
-#bio::after{
-  content:"";
-  position:absolute; left:0; right:0;
-  pointer-events:none; z-index:0;
-}
-
-/* Top fade into site’s dark header */
-#bio::before{
-  top:-1px; height:180px;
-  background: linear-gradient(to top, rgba(255,255,255,0), rgba(15,20,27,.88) 95%);
-  filter: blur(8px);
-  opacity:.9;
-}
-
-/* Bottom glow + fade into dark section below */
-#bio::after{
-  bottom:-1px; height:220px;
-  background:
-    radial-gradient(120% 150% at 50% 120%, rgba(127,234,209,.16), rgba(127,234,209,0) 55%),
-    linear-gradient(to bottom, rgba(255,255,255,0), rgba(15,20,27,1) 100%);
-  filter: blur(8px);
-  opacity:.9;
-}
-
-/* keep content above these fades */
-#bio .wrap{ position:relative; z-index:1; }
-
 #bio .bio-card .prose p{ text-shadow: 0 0 6px rgba(255,255,255,.45); }
     /* Quote box — keep it over the left column only */
 #bio .bio-quote{
   display:block;
-  max-width: 680px;
-  margin: 0 24px 24px 0;   /* keep it over the left column */
-  padding: 16px 18px 14px;
-  background: rgba(255,255,255,.60);
-  border-left: 3px solid var(--accent);
-  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  max-width: 660px;      /* adjust: 620–720px if you like */
+  margin: 0 0 24px 0;    /* left-aligned (not centered) */
 }
-
-#bio .bio-quote em{
-  font-style: normal;       /* not italic inside the box */
-  font-weight: 600;
-  font-size: 1.03rem;
-  letter-spacing: .01em;
-  color:#111;
-}
-#bio .bio-quote .muted{ color:#333; }
 
 /* On small screens let it be full width again */
 @media (max-width: 900px){
@@ -1176,125 +1135,9 @@ body.js .reveal{
   letter-spacing:.08em;
   opacity:.9;
 }
-/* --- Add this if .bio-photo doesn't exist --- */
-.bio-photo{
-  background: transparent;
-  border: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,.25);
-}
-    /* ===== BIO SECTION ===== */
-#bio.section.bio{
-  position: relative;
-  isolation: isolate;              /* keeps blending clean */
-  padding: clamp(56px, 8vw, 120px) 0;
-  overflow: clip;                  /* prevents stray scrollbars */
-  --bio-edge: clamp(48px, 10vw, 160px);  /* thickness of side blends */
-  --bio-vfade: clamp(60px, 12vw, 220px); /* top/bottom fade height */
-}
 
-/* Big balcony image, super present */
-#bio .bio-bg{
-  position:absolute; inset:0; z-index:-1; overflow:hidden;
-}
-#bio .bio-bg img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center 35%;
-  filter: saturate(1.08) contrast(1.06) brightness(0.92);
-  transform: scale(1.04);          /* tiny push for presence */
-}
 
-/* Thick edge blending (left/right + top/bottom) */
-#bio .bio-bg::before{
-  content:""; position:absolute; inset:-1px; pointer-events:none;
-  background:
-    linear-gradient(to right,
-      var(--bg) 0,
-      rgba(15,20,27,.75) 4%,
-      transparent var(--bio-edge),
-      transparent calc(100% - var(--bio-edge)),
-      rgba(15,20,27,.75) 96%,
-      var(--bg) 100%
-    ),
-    linear-gradient(to top, var(--bg), transparent var(--bio-vfade)),
-    linear-gradient(to bottom, var(--bg), transparent var(--bio-vfade));
-  mix-blend-mode:multiply;
-}
-
-/* Subtle blur seam at top & bottom to smooth transitions between sections */
-#bio::before,
-#bio::after{
-  content:""; position:absolute; left:0; right:0; height:min(13vh, 180px);
-  pointer-events:none; z-index:0;
-  background: linear-gradient(var(--bg), transparent);
-  backdrop-filter: blur(10px) saturate(110%);
-}
-#bio::before{ top:0; }
-#bio::after{ bottom:0; transform: scaleY(-1); }
-
-/* Layout inside Bio */
-#bio .bio-wrap{
-  display:grid; gap: clamp(20px, 3vw, 36px);
-  grid-template-columns: 1.1fr minmax(320px, 0.9fr);
-  align-items:start;
-}
-@media (max-width: 860px){
-  #bio .bio-wrap{ grid-template-columns: 1fr; }
-}
-
-/* Copy block: keep it clean and readable over image */
-#bio .bio-copy{
-  background: linear-gradient(to bottom, rgba(17,23,32,0.55), rgba(17,23,32,0.25));
-  border:1px solid var(--chip-border);
-  border-radius: 16px;
-  padding: clamp(16px, 2.4vw, 24px);
-  backdrop-filter: blur(6px) saturate(108%);
-  box-shadow:
-    0 10px 28px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.04),
-    0 0 42px rgba(127,234,209,.08);
-}
-
-/* Pull-quote (glassy glow card) */
-#bio .pullquote{
-  position: relative;
-  background: linear-gradient(180deg, rgba(18,24,33,.55), rgba(18,24,33,.30));
-  border:1px solid var(--chip-border);
-  border-radius: 18px;
-  padding: clamp(16px, 2.4vw, 24px);
-  backdrop-filter: blur(8px) saturate(112%);
-  box-shadow:
-    0 10px 40px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.05),
-    0 0 60px rgba(127,234,209,.10);
-}
-#bio .pullquote blockquote{ margin:0; }
-#bio .pullquote p{ margin:0 0 8px 0; font-size: clamp(18px, 2.2vw, 22px); line-height:1.45; }
-#bio .pullquote footer{ color: var(--muted); font-size: .95em; }
-
-/* Neon accent strip on the left of the quote card */
-#bio .pullquote .pullquote-accent{
-  position:absolute; left:-1px; top:10px; bottom:10px; width:3px; border-radius:3px;
-  background: linear-gradient(180deg, rgba(127,234,209,.0), rgba(127,234,209,.85), rgba(127,234,209,.0));
-  box-shadow: 0 0 20px rgba(127,234,209,.55), 0 0 2px rgba(127,234,209,.85) inset;
-}
-
-/* Accessibility: if user prefers less motion, remove tiny scale */
-@media (prefers-reduced-motion: reduce){
-  #bio .bio-bg img{ transform:none; }
-}
-
-/* Kill any reveal/fade-in scripts targeting this section */
-#bio .reveal, 
-#bio [data-reveal],
-#bio [data-animate]{
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
-  transition: none !important;
-}
-
+    
 </style>
 </head>
 <body>
@@ -1420,34 +1263,43 @@ body.js .reveal{
     </div>
   </section>
 
-  <<!-- BIO — START -->
-<section id="bio" class="section bio">
-  <!-- Background image -->
-  <div class="bio-bg" aria-hidden="true">
-    <!-- Use your actual path/filename; keep the largest version here -->
-  </div>
+  <!-- BIO -->
+  <section id="bio" class="section">
+    <div class="bio-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2>Bio</h2>
 
-  <div class="wrap bio-wrap">
-    <div class="bio-copy">
-      <h2 class="h2">Bio</h2>
+    <p class="bio-quote" style="--d:.00s;">
+  <em>“A midnight ritual of noise-pop confession and electronic pulse.”</em>
+  <br><span class="muted">— Bandcamp Daily</span>
+</p>
 
-      <!-- Keep your existing bio paragraphs here; this is just a placeholder -->
-      <p>Kid Fourteen is the solo moniker of Khodor Ellaik, an experimental pop project balancing noise, melody, and rupture. (Keep your real copy — this is a slot.)</p>
-      <p>…</p>
+      <div class="bio-grid">
+        <div class="bio-card reveal" style="--d:.10s;">
+          <div class="prose">
+            <p class="dropcap">
+              Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes - all bound by his distinct sonic identity.
+            </p>
+            <p>
+              His debut album <em>Dream Kids Never Sleep</em> was an Experimental Pop record released in 2016 on the Lebanese label Ruptured. Two years later after inviting Xiu Xiu to play in Beirut, a collaboration with Jamie Stewart directed Kid Fourteen to the UK label Bad Paintings, where he released his second Noise Rock album <em>Blood-thick Silence</em> in 2018. Khodor toured extensively between 2016 and 2019, and by 2020 he had recorded, arranged, mixed, and mastered his Synth/Electro/Pop album <em>Love</em> which was released on his own label Kidsplay. He moved to Paris in 2022, where he released his cathartic 4th studio album <em>A Brief Emotional Dragon</em> in 2023, drawing inspiration from Westerns and Japanese Synth music. His latest instrumental album <em>Heart is a Malady</em>, released in 2024, is a sonic exploration of Arabic poetry.
+            </p>
+          </div>
+
+        <div class="bio-chips">
+  <a class="chip" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">Dream Kids Never Sleep — 2016</a>
+  <a class="chip" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">Blood-thick Silence — 2018</a>
+  <a class="chip" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">Love — 2020</a>
+  <a class="chip" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">A Brief Emotional Dragon — 2023</a>
+  <a class="chip" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">Heart is a Malady — 2024</a>
+</div>
+
+</div>
+        <figure class="bio-photo reveal" style="--d:.18s;">
+          <img src="bio.jpg" alt="Kid Fourteen — press portrait" loading="lazy" width="900" height="1125">
+        </figure>
+      </div>
     </div>
-
-    <!-- Pull-quote / press blurb -->
-    <aside class="pullquote" role="note">
-      <div class="pullquote-accent" aria-hidden="true"></div>
-      <blockquote>
-        <p>“Arguably one of the region’s most forward-thinking musicians.”</p>
-        <footer>— Scene Noise</footer>
-      </blockquote>
-    </aside>
-  </div>
-</section>
-<!-- BIO — END -->
-
+  </section>
 
   <!-- PRESS -->
   <section id="press" class="section">
