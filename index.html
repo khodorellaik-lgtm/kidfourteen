@@ -957,6 +957,38 @@ body.js .reveal{
 }
 :is(#bio, section#bio.section) .bio-quote::before,
 :is(#bio, section#bio.section) .bio-quote::after{ content:none !important; display:none !important; }
+    /* === BIO: force compact quote + lift photo (final, scoped, no stacking) === */
+
+/* 1) Compact quote — hits .bio-quote OR a plain blockquote in the bio text */
+:is(#bio, section#bio.section) .bio-card .bio-quote,
+:is(#bio, section#bio.section) .bio-card blockquote.bio-quote,
+:is(#bio, section#bio.section) .bio-card blockquote{
+  position:static !important;
+  background:none !important; border:0 !important; box-shadow:none !important; padding:0 !important;
+
+  max-width:32ch !important;             /* magazine-tight */
+  margin:0 0 14px 0 !important;
+  font-weight:800 !important;
+  font-size:clamp(22px, 2.6vw, 34px) !important;
+  line-height:1.2 !important;
+  letter-spacing:.005em !important;
+  color:#111 !important;
+  text-shadow:0 0 6px rgba(127,234,209,.14), 0 0 14px rgba(127,234,209,.08) !important;
+}
+:is(#bio, section#bio.section) .bio-card blockquote .muted{
+  display:block !important; margin-top:.35em !important;
+  font-size:.9em !important; opacity:.72 !important; color:#222 !important;
+}
+
+/* Keep the body text wide/comfortable (in case any older rule squeezed it) */
+:is(#bio, section#bio.section) .bio-card .prose{
+  max-width:68ch !important; padding-left:0 !important; margin-left:0 !important;
+}
+
+/* 2) Lift the photo higher — hard specificity so it actually moves */
+@media (min-width:900px){
+  :is(#bio, section#bio.section) .bio-photo{ margin-top:-72px !important; } /* tweak -56 to -96 as you like */
+}
 </style>
 </head>
 <body>
