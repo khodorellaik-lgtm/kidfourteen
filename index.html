@@ -1705,6 +1705,68 @@ body.js .reveal{
   #bio .bio-grid{ grid-template-columns:1fr !important; gap:20px !important; }
   #bio .bio-card .prose{ max-width:none !important; }
 }
+    /* === BIO: EMERGENCY LAYOUT RESET (paste at end) ===================== */
+
+/* 0) Make sure we're overriding anything earlier */
+:is(#bio, section#bio.section) * { box-sizing: border-box; }
+
+/* 1) QUOTE — back in normal flow above the text */
+:is(#bio, section#bio.section) .bio-quote{
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 0 22px 0 !important;     /* sits above the body text */
+  max-width: 820px !important;       /* readable width, not full bleed */
+  padding: 0 !important;             /* no padded box behind it */
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  z-index: auto !important;
+}
+
+/* 2) TEXT COLUMN — remove any clamps that were cramping width */
+:is(#bio, section#bio.section) .bio-card{
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  min-width: 0 !important;           /* allow it to grow to the column */
+}
+:is(#bio, section#bio.section) .bio-card .prose{
+  width: auto !important;
+  max-width: none !important;         /* no fixed  px/ch caps */
+  min-width: 0 !important;
+}
+
+/* 3) GRID — restore a comfortable left/right split (like before) */
+@media (min-width:900px){
+  :is(#bio, section#bio.section) .bio-grid{
+    display: grid !important;
+    grid-template-columns: 1.2fr .85fr !important;
+    gap: 32px !important;
+    align-items: start !important;
+  }
+  /* Photo should not force the text narrower */
+  :is(#bio, section#bio.section) .bio-photo{
+    margin-top: 0 !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+}
+
+/* 4) MOBILE — simple stack with comfy gap */
+@media (max-width:899px){
+  :is(#bio, section#bio.section) .bio-grid{
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  :is(#bio, section#bio.section) .bio-card .prose{
+    max-width: none !important;
+  }
+}
 </style>
 </head>
 <body>
