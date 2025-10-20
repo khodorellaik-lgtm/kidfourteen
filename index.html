@@ -1767,6 +1767,52 @@ body.js .reveal{
     max-width: none !important;
   }
 }
+    /* ===== BIO LAYOUT FIX (restore natural text width, keep quote above) ===== */
+
+/* Make sure Bio’s grid children can size correctly */
+#bio .bio-card,
+#bio .bio-photo{ min-width:0 }
+
+/* Desktop: give the text column a real reading width again */
+@media (min-width: 900px){
+  /* Left = readable column, Right = controlled photo width */
+  #bio .bio-grid{
+    grid-template-columns:
+      minmax(56ch, 1fr)               /* text column (≈ natural 56–68ch) */
+      clamp(420px, 36vw, 560px);      /* photo column */
+    column-gap: 32px;
+    align-items: start;
+  }
+
+  /* Ensure the prose isn’t constrained by any old rules */
+  #bio .bio-card{ width:auto }
+  #bio .bio-card .prose{
+    max-width: 68ch;                  /* comfortable reading measure */
+  }
+
+  /* Nudge photo slightly up to align with quote/title (adjust if needed) */
+  #bio .bio-photo{ margin-top: -14px }
+}
+
+/* Tablet: relax a bit but keep the left column comfortable */
+@media (min-width: 700px) and (max-width: 899px){
+  #bio .bio-grid{
+    grid-template-columns:
+      minmax(48ch, 1fr)
+      clamp(360px, 42vw, 520px);
+    column-gap: 28px;
+  }
+  #bio .bio-card .prose{ max-width: 62ch }
+}
+
+/* Mobile remains stacked & natural; no change required */
+
+/* Keep the quote as a normal block above the bio text */
+#bio .bio-quote{
+  position: static !important;  /* ensure it never overlays the text */
+  margin: 0 0 18px 0 !important;
+  max-width: none !important;
+}
 </style>
   <style id="bio-hotfix">
 /* ===== BIO HARD OVERRIDE (loads after everything else) ===== */
