@@ -217,15 +217,7 @@
     .prose p{margin:0 0 14px}
     .prose em{font-style:italic}
     /* --- Bio text clean justification (safe) --- */
-#bio .bio-card .prose p{
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  line-height: 1.7;
-}
+
     .bio-card .prose .dropcap:first-letter{
       float:left; font-weight:800; font-family:Georgia,"Times New Roman",serif;
       font-size:clamp(60px,9vw,95px); line-height:.85; padding:6px 10px 0 0; margin-right:12px; color:var(--accent);
@@ -892,710 +884,7 @@ body.js .reveal{
 }
 /* === BIO BACKGROUND: Zoomed-in, aligned figure === */
 /* === BIO: dedicated background layer, zoomed-in image + neon fade === */
-#bio{
-  position: relative;
-  z-index: 0;
-  padding-bottom: 180px;
-  overflow: visible;
-}
 
-#bio > *{ position: relative; z-index: 1; }
-
-#bio .bio-bg{
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
-    url('/bio.jpg') 68% 38% / 145% auto no-repeat;  /* zoom + align */
-}
-
-#bio .bio-bg::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:0;
-  height:180px;
-  background:
-    radial-gradient(120% 140% at 50% 10%, rgba(127,234,209,.18), rgba(127,234,209,0) 55%),
-    linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(15,20,27,1) 100%);
-  filter: blur(8px);
-  opacity: .9;
-}
-
-/* keep text dark & readable */
-#bio h2, #bio p, #bio blockquote, #bio span, #bio strong { color:#111 !important; }
-#bio p, #bio h2, #bio blockquote { text-shadow: 0 0 6px rgba(255,255,255,.4); }
-
-/* quote box style */
-#bio .bio-quote{
-  display:block;
-  max-width: 680px;
-  margin: 0 0 24px 0;
-  padding: 16px 18px;
-  background: rgba(255,255,255,.78);
-  border: 1px solid rgba(0,0,0,.08);
-  box-shadow: 0 6px 22px rgba(0,0,0,.08);
-  color:#111;
-  font-style:normal;
-  text-shadow:0 0 6px rgba(255,255,255,.4);
-}
-#bio .bio-quote em{ font-style:italic; font-weight:600; color:#111; }
-#bio .bio-quote cite{ display:block; margin-top:6px; color:#333; font-style:normal; font-weight:500; }
-#bio .bio-quote::before, #bio .bio-quote::after{ content:none; }
-
-
-
-/* ensure paragraphs and blockquotes are black too */
-#bio h2, #bio p, #bio blockquote, #bio span, #bio strong {
-  color: #000 !important;
-}
-
-/* optional: light shadow on text to keep it readable against bright zones */
-#bio p, #bio h2, #bio blockquote {
-  text-shadow: 0 0 8px rgba(255,255,255,0.6);
-}
-
-/* make sure the portrait photo doesn’t overlap weirdly */
-#bio .bio-photo {
-  position: relative;
-  z-index: 2;  
-}
-/* === BIO section cleanup — transparent background, no overlay === */
-#bio {
-  position: relative;
-  isolation: isolate;
-  color: #000; /* black text */
-  background: url('bio.jpg') center top / cover no-repeat;
-  min-height: 100vh;
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
-/* Make any panels or boxes inside the bio transparent */
-#bio .panel,
-#bio .bio-panel,
-#bio article,
-#bio div {
-  background: rgba(255,255,255,0) !important;
-  border: none !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-/* Subtle text glow for readability over light sky */
-#bio {
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-}
-
-/* Give the section a smooth gradient fade into the dark site tone below */
-#bio::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(15,20,27,1));
-  pointer-events: none;
-}
-/* === HARD RECT CHIPS — bold, present, John-Maus style === */
-#bio .bio-card .bio-chips{
-  display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-start;
-  margin-top:16px;
-}
-
-#bio .bio-card .bio-chips .chip{
-  /* reset softness */
-  background: var(--accent);          /* solid, loud */
-  color: #0c1219;                     /* dark text on mint */
-  border: 2px solid var(--accent);
-  border-radius: 4px;                 /* nearly straight corners */
-  padding: 10px 14px;
-  font: 800 12.5px/1.1 system-ui,-apple-system,Segoe UI,Inter,Arial,sans-serif;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  text-decoration: none;
-  box-shadow: 0 2px 0 rgba(0,0,0,.25); /* hard button feel */
-  transition: transform .12s ease, background .12s ease, color .12s ease, border-color .12s ease, box-shadow .12s ease;
-}
-
-#bio .bio-card .bio-chips .chip:hover{
-  background: transparent;            /* invert on hover */
-  color: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-1px);
-  box-shadow: 0 3px 0 rgba(0,0,0,.28);
-}
-
-#bio .bio-card .bio-chips .chip:active{
-  transform: translateY(0);
-  box-shadow: 0 1px 0 rgba(0,0,0,.2);
-}
-/* BIO — single clean background (photo + light wash), kill old pseudo layers */
-#bio::before, #bio::after{
-  content:none !important;
-  background:none !important;
-}
-
-#bio{
-  position: relative;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.85), rgba(240,245,247,.92) 55%, rgba(15,20,27,1) 120%),
-    url(url('/bio.jpg')) 70% 40% / cover no-repeat;
-  color:#111;
-}
-#bio .bio-card .prose p{ text-shadow: 0 0 6px rgba(255,255,255,.45); }
-    /* Quote box — keep it over the left column only */
-#bio .bio-quote{
-  display:block;
-  max-width: 660px;      /* adjust: 620–720px if you like */
-  margin: 0 0 24px 0;    /* left-aligned (not centered) */
-}
-
-/* On small screens let it be full width again */
-@media (max-width: 900px){
-  #bio .bio-quote{
-    max-width: none;
-    margin: 0 0 16px 0;
-  }
-}
-    
-/* === BIO — clean image background (no forest), zoom + align === */
-#bio{
-  position: relative;
-  background-image:
-    /* soft light so black text stays readable */
-    linear-gradient(180deg, rgba(255,255,255,.68), rgba(230,230,230,.88)),
-    url('bio.jpg');                  /* ← ONLY this file */
-  background-repeat: no-repeat;
-  background-size: 140% auto;        /* ← zoom (raise/lower to taste) */
-  background-position: 60% 35%;      /* ← frame: X% Y%  (move left/right, up/down) */
-  background-attachment: fixed;      /* nice parallax feel */
-  color: #111;
-}
-
-/* ensure bio text is dark over the sky */
-#bio h2, #bio p, #bio blockquote, #bio span, #bio strong { color:#000 !important; }
-
-/* subtle text lift on bright areas */
-#bio p, #bio h2, #bio blockquote { text-shadow: 0 0 8px rgba(255,255,255,0.6); }
-
-/* keep the portrait card above the background image */
-#bio .bio-photo{ position:relative; z-index:1; }
-
-/* === BIO quote — rectangular, non-gimmicky === */
-#bio .bio-quote{
-  margin: 0 0 28px;
-  padding: 16px 18px;
-  border-left: 4px solid var(--accent);
-  border-radius: 0;
-  background: rgba(255,255,255,.25);
-  box-shadow: 0 8px 24px rgba(0,0,0,.08);
-  color: #111;
-  font-style: normal;                 /* content stays same, just no italic box */
-}
-#bio .bio-quote::before,
-#bio .bio-quote::after{ content:none !important; }   /* kill the curly quotes */
-#bio .bio-quote em{ font-style: italic; font-weight:600; color:#111; }  /* keep quote text italic */
-#bio .bio-quote .muted{ color:#333; }
-#bio .bio-quote {
-  background: rgba(255,255,255,0.30);
-  border-left: 4px solid var(--accent);
-  border-top: 1px solid rgba(0,0,0,0.08);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.07);
-  border-radius: 0;
-
-  /* type & layout */
-  font-style: normal;
-  font-weight: 600;
-  font-size: clamp(17px, 1.6vw, 19px);
-  line-height: 1.55;
-  letter-spacing: .01em;
-
-  max-width: 760px;     /* a touch wider */
-  margin: 0 0 36px;     /* ← left aligned (no auto centering) */
-  padding: 18px 26px;
-}
-
-#bio .bio-quote em{
-  color:#0b0f14;
-  font-style: italic;    /* keep the italic quote */
-  font-weight: 600;      /* punchier */
-}
-#bio .bio-quote cite{
-  display:block;
-  margin-top:8px;
-  color:#2e3945;
-  font-size:.85rem;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  opacity:.9;
-}
-
-/* ===== BIO: sky-only background (hide/mini head) ===== */
-#bio{ position: relative; background: transparent; }
-
-/* Use the same bio.jpg as a *background layer* showing mainly sky */
-#bio::before{
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image: url('/bio.jpg');     /* adjust path if needed */
-  background-size: 140%;                 /* zoom so railing/head sit lower */
-  background-position: center 8%;        /* crop high = mostly sky */
-  filter: brightness(1.04) contrast(1.02) saturate(1.03);
-
-/* fade out toward the bottom so the lower head/railing disappears */
-  -webkit-mask-image: linear-gradient(to bottom,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,1) 46%,
-      rgba(0,0,0,0) 80%);
-  mask-image: linear-gradient(to bottom,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,1) 46%,
-      rgba(0,0,0,0) 80%);
-}
-
-/* subtle side darkening so the sky melts into the page edges */
-#bio::after{
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background: linear-gradient(to right,
-      rgba(15,20,27,.85) 0%,
-      rgba(15,20,27,.55) 5%,
-      transparent 14%,
-      transparent 86%,
-      rgba(15,20,27,.55) 95%,
-      rgba(15,20,27,.85) 100%);
-}
-
-/* ensure your actual content sits above the background layers */
-#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card{ position:relative; z-index:1; }
-
-/* ===== BIO: make the image-in-the-box larger & clearer ===== */
-#bio .bio-card{ 
-  overflow:hidden; border-radius:18px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.45),
-              0 0 0 1px rgba(255,255,255,.05),
-              0 0 60px rgba(127,234,209,.08);
-}
-
-/* give the photo column more real estate without breaking layout */
-#bio .bio-grid{
-  grid-template-columns: minmax(0,1fr) minmax(360px, 560px); /* text | photo */
-  align-items:start;
-}
-
-/* make the photo feel closer and punchier inside its frame */
-#bio .bio-card img{
-  width:100%; height:auto; display:block; object-fit:cover; object-position:center 58%;
-  transform: scale(1.10);                     /* bigger inside frame */
-  filter: contrast(1.08) saturate(1.06) brightness(1.06);
-  transition: transform .5s ease, filter .5s ease;
-}
-#bio .bio-card:hover img{
-  transform: scale(1.14);
-  filter: contrast(1.1) saturate(1.1) brightness(1.07);
-}
-
-/* mobile: keep composition tidy */
-@media (max-width: 860px){
-  #bio .bio-grid{ grid-template-columns: 1fr; }
-  #bio .bio-card img{ transform: scale(1.06); object-position:center 62%; }
-}
-/* ===== BIO: quick reset so colors/background go back ===== */
-#bio { position: relative; background: unset !important; }  /* don't force a dark bg */
-#bio .bio-grid, #bio .bio-copy, #bio .bio-quote, #bio .bio-card { position: relative; z-index: 1; }
-#bio .bio-copy, #bio .bio-quote { color: inherit !important; filter: none !important; opacity: 1 !important; }
-
-/* ===== BIO: bigger/cleaner photo in the right-hand card (design only) ===== */
-#bio .bio-card {
-  overflow: hidden;
-  border-radius: 18px;
-  box-shadow:
-    0 12px 40px rgba(0,0,0,.45),
-    0 0 0 1px rgba(255,255,255,.05),
-    0 0 60px rgba(127,234,209,.08);
-}
-#bio .bio-card img{
-  display:block;
-  width:100%;
-  height:auto;
-  object-fit:cover;
-  object-position:center 58%;   /* tweak 50–65% to shift framing */
-  transform: scale(1.10);       /* make it feel closer */
-  filter: contrast(1.06) saturate(1.05) brightness(1.05);
-  transition: transform .4s ease, filter .4s ease;
-}
-/* (optional) gentle hover – delete if you don't want it */
-#bio .bio-card:hover img{
-  transform: scale(1.13);
-  filter: contrast(1.08) saturate(1.07) brightness(1.06);
-}
-
-/* ===== BIO: stronger, cleaner quote styling (no content change) ===== */
-#bio .bio-quote{
-  background: rgba(255,255,255,.06);
-  border: 1px solid var(--chip-border);
-  border-left: 3px solid var(--accent);
-  border-radius: 12px;
-  padding: 14px 18px;
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.35),
-    0 0 0 1px rgba(255,255,255,.04);
-}
-#bio .bio-quote em{ font-style: italic; }
-#bio .bio-quote .muted{ color: var(--muted); }
-/* ===== BIO: restore pale sky background like your screenshot ===== */
-#bio{
-  position: relative;
-  background: #e7eaed; /* neutral sky-like tone */
-  color: #0f141b;      /* restore dark text */
-  isolation: isolate;
-}
-
-/* Optional: subtle vertical gradient so it feels like sky fading */
-#bio::before{
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background: linear-gradient(to bottom,
-    rgba(231,234,237,1) 0%,
-    rgba(231,234,237,0.85) 45%,
-    rgba(231,234,237,0.7) 100%);
-}
-
-/* Keep all bio content above the background layer */
-#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
-  position: relative;
-  z-index: 1;
-}
-
-/* Keep your enlarged photo design */
-#bio .bio-card img{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:cover;
-  object-position:center 58%;
-  transform: scale(1.1);
-  filter: contrast(1.06) saturate(1.05) brightness(1.05);
-  border-radius: 16px;
-  transition: transform .4s ease, filter .4s ease;
-}
-#bio .bio-card:hover img{
-  transform: scale(1.13);
-  filter: contrast(1.08) saturate(1.07) brightness(1.07);
-}
-/* ===== BIO: force sky background + dark text (section-only) ===== */
-#bio,
-section#bio.section {
-  /* pale sky; tweak if you want slightly warmer/cooler */
-  --bio-sky: #e7eaee;
-  background: var(--bio-sky) !important;
-  position: relative;
-  isolation: isolate;
-}
-
-/* keep a soft vertical sky fade (doesn't darken text) */
-#bio::before{
-  content:"";
-  position:absolute; inset:0; z-index:0; pointer-events:none;
-  background: linear-gradient(to bottom,
-    rgba(231,234,238,1) 0%,
-    rgba(231,234,238,0.92) 40%,
-    rgba(231,234,238,0.80) 100%);
-}
-
-/* put all content above that background layer */
-#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote { 
-  position: relative; z-index: 1;
-}
-
-/* ===== Dark readable text inside Bio only ===== */
-#bio h1, #bio h2, #bio h3,
-#bio .prose, #bio .prose p, #bio .prose li, 
-#bio .muted {
-  color: #0f141b !important;   /* dark ink */
-  text-shadow: none !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* keep links using your site palette (don’t force dark) */
-#bio .prose a { color: var(--link) !important; }
-
-/* (keep your bigger photo-in-card from earlier; if you removed it, here it is) */
-#bio .bio-card img{
-  display:block; width:100%; height:auto; object-fit:cover;
-  object-position:center 58%;
-  transform: scale(1.10);
-  filter: contrast(1.06) saturate(1.05) brightness(1.05);
-  border-radius: 16px;
-  transition: transform .4s ease, filter .4s ease;
-}
-/* === BIO: top & bottom neon gradient melts (no sides, no content changes) === */
-#bio{
-  position: relative;
-  isolation: isolate;
-}
-
-/* Top melt: dark -> sky + turquoise glow */
-#bio::before{
-  content:"";
-  position:absolute; left:0; right:0; top:-1px;
-  height: clamp(80px, 14vh, 240px);
-  pointer-events:none; z-index:0;
-  background:
-    /* neon glow band */
-    linear-gradient(to bottom,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 15%,
-      rgba(127,234,209,0) 45%
-    ),
-    /* dark -> transparent fade */
-    linear-gradient(to bottom,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.65) 20%,
-      rgba(15,20,27,0.00) 80%
-    );
-  filter: blur(4px);                 /* soft neon */
-  mix-blend-mode: normal;
-}
-
-/* Bottom melt: dark -> sky + turquoise glow */
-#bio::after{
-  content:"";
-  position:absolute; left:0; right:0; bottom:-1px;
-  height: clamp(90px, 16vh, 260px);
-  pointer-events:none; z-index:0;
-  background:
-    /* neon glow band */
-    linear-gradient(to top,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 15%,
-      rgba(127,234,209,0) 45%
-    ),
-    /* dark -> transparent fade */
-    linear-gradient(to top,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.65) 20%,
-      rgba(15,20,27,0.00) 80%
-    );
-  filter: blur(4px);
-  mix-blend-mode: normal;
-}
-
-/* Ensure your content sits above the melts */
-#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
-  position: relative; z-index: 1;
-}
-
-/* Optional: quick knob to intensify or soften the neon */
-@media (max-width: 860px){
-  #bio::before, #bio::after{ filter: blur(5px); }
-}
-/* If you want slightly stronger neon overall, bump .35/.18 up a bit.
-   If you want a shorter fade, reduce the height values. */
-    /* BIO — only top & bottom neon melts (override any previous kill rules) */
-section#bio.section { position: relative; isolation: isolate; }
-
-/* TOP melt */
-section#bio.section::before{
-  content: "" !important;                 /* override any 'content:none !important' */
-  position: absolute; left: 0; right: 0; top: -1px;
-  height: clamp(80px, 14vh, 240px);
-  pointer-events: none; z-index: 0;
-  background:
-    /* turquoise neon band */
-    linear-gradient(to bottom,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 15%,
-      rgba(127,234,209,0) 45%
-    ),
-    /* dark page -> transparent */
-    linear-gradient(to bottom,
-      rgba(15,20,27,.92) 0%,
-      rgba(15,20,27,.65) 20%,
-      rgba(15,20,27,0) 80%
-    );
-  filter: blur(4px);
-}
-
-/* BOTTOM melt */
-section#bio.section::after{
-  content: "" !important;                 /* override any 'content:none !important' */
-  position: absolute; left: 0; right: 0; bottom: -1px;
-  height: clamp(90px, 16vh, 260px);
-  pointer-events: none; z-index: 0;
-  background:
-    /* turquoise neon band */
-    linear-gradient(to top,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 15%,
-      rgba(127,234,209,0) 45%
-    ),
-    /* dark page -> transparent */
-    linear-gradient(to top,
-      rgba(15,20,27,.92) 0%,
-      rgba(15,20,27,.65) 20%,
-      rgba(15,20,27,0) 80%
-    );
-  filter: blur(4px);
-}
-
-/* keep your real content above the melts */
-#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
-  position: relative; z-index: 1;
-}
-    /* BIO — top & bottom neon melts, no pseudo-elements */
-#bio{
-  /* your sky tone; tweak if needed */
-  --bio-sky: #e7eaee;
-
-  /* four layered gradients + base sky color */
-  background:
-    /* TOP turquoise neon band */
-    linear-gradient(to bottom,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 18%,
-      rgba(127,234,209,0)   45%)                         ,
-    /* TOP dark -> transparent */
-    linear-gradient(to bottom,
-      rgba(15,20,27,.92) 0%,
-      rgba(15,20,27,.65) 22%,
-      rgba(15,20,27,0)   80%)                            ,
-    /* BOTTOM turquoise neon band */
-    linear-gradient(to top,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 18%,
-      rgba(127,234,209,0)   45%)                         ,
-    /* BOTTOM dark -> transparent */
-    linear-gradient(to top,
-      rgba(15,20,27,.92) 0%,
-      rgba(15,20,27,.65) 22%,
-      rgba(15,20,27,0)   80%)                            ,
-    /* BASE sky */
-    var(--bio-sky)                                        !important;
-
-  /* size & placement of the four overlay gradients */
-  background-repeat: no-repeat;
-  background-size:
-    100% clamp(80px,14vh,220px),   /* top neon */
-    100% clamp(90px,16vh,240px),   /* top dark fade */
-    100% clamp(90px,16vh,240px),   /* bottom neon */
-    100% clamp(100px,18vh,260px),  /* bottom dark fade */
-    auto;
-  background-position:
-    top, top,
-    bottom, bottom,
-    0 0;
-}
-    /* BIO — force top/bottom neon melts, ignore old rules */
-section#bio.section{ position:relative; isolation:isolate; }
-
-/* put all real content above the overlays */
-section#bio.section .wrap,
-section#bio.section .bio-grid,
-section#bio.section .bio-copy,
-section#bio.section .bio-card,
-section#bio.section .bio-quote{
-  position:relative; z-index:3;
-}
-
-/* TOP melt (on top of the sky) */
-section#bio.section::before{
-  content:"" !important;                  /* defeats any previous 'content:none !important' */
-  position:absolute; left:0; right:0; top:-1px;
-  height:clamp(80px,14vh,240px);
-  pointer-events:none; z-index:2;
-  /* dark -> transparent + subtle turquoise neon */
-  background:
-    linear-gradient(to bottom,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 12%,
-      rgba(127,234,209,0) 40%
-    ),
-    linear-gradient(to bottom,
-      rgba(15,20,27,.92) 0%,
-      rgba(15,20,27,.62) 26%,
-      rgba(15,20,27,0) 90%
-    );
-  filter: blur(5px);
-}
-
-/* BOTTOM melt (on top of the sky) */
-section#bio.section::after{
-  content:"" !important;
-  position:absolute; left:0; right:0; bottom:-1px;
-  height:clamp(90px,16vh,260px);
-  pointer-events:none; z-index:2;
-  background:
-    linear-gradient(to top,
-      rgba(127,234,209,.35) 0%,
-      rgba(127,234,209,.18) 12%,
-      rgba(127,234,209,0) 40%
-    ),
-    linear-gradient(to top,
-      rgba(15,20,27,.92) 0%,
-      rgba(15,20,27,.62) 26%,
-      rgba(15,20,27,0) 90%
-    );
-  filter: blur(5px);
-}
-
-/* knobs: stronger neon? raise .35/.18 a bit. shorter fades? reduce the heights. */
-/* BIO — top & bottom neon gradient melts (no pseudo-elements) */
-#bio,
-section#bio.section{
-  /* your sky base — adjust if you want warmer/cooler */
-  --bio-sky: #e7eaee;
-  --page-dark: #0f141b;       /* matches your site dark */
-  --neon: #7fead1;            /* your turquoise */
-
-  background-color: var(--bio-sky) !important;
-
-  /* 4 stacked backgrounds:
-     1) TOP dark->transparent
-     2) TOP neon glow
-     3) BOTTOM dark->transparent
-     4) BOTTOM neon glow
-  */
-  background-image:
-    linear-gradient(to bottom,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.62) 22%,
-      rgba(15,20,27,0.00) 85%
-    ),
-    linear-gradient(to bottom,
-      rgba(127,234,209,0.38) 0%,
-      rgba(127,234,209,0.20) 14%,
-      rgba(127,234,209,0.00) 45%
-    ),
-    linear-gradient(to top,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.62) 22%,
-      rgba(15,20,27,0.00) 85%
-    ),
-    linear-gradient(to top,
-      rgba(127,234,209,0.38) 0%,
-      rgba(127,234,209,0.20) 14%,
-      rgba(127,234,209,0.00) 45%
-    );
-
-  /* place + size the fades (top and bottom only) */
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-  background-position: top left, top left, bottom left, bottom left;
-  background-size:
-    100% clamp(84px, 14vh, 240px),
-    100% clamp(84px, 14vh, 240px),
-    100% clamp(96px, 16vh, 260px),
-    100% clamp(96px, 16vh, 260px);
-}
-
-/* keep all Bio content unaffected */
-#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
-  position: relative; z-index: 1;
-}
 
 /* mobile: slightly softer fades */
 @media (max-width: 860px){
@@ -1607,7 +896,77 @@ section#bio.section{
       100% clamp(84px, 18vh, 220px);
   }
 }
-  
+  /* === CLEAN BIO SECTION: sky base + top/bottom neon gradient fades === */
+#bio, section#bio.section{
+  position: relative;
+  isolation: isolate;
+
+  /* Base sky tone — tweak to your liking */
+  --bio-sky: #e7eaee;
+
+  /* Stack of 4 background layers:
+     1–2 = top fades (dark + neon)
+     3–4 = bottom fades (dark + neon)
+     + base sky color
+  */
+  background:
+    /* TOP dark → transparent */
+    linear-gradient(to bottom,
+      rgba(15,20,27,0.92) 0%,
+      rgba(15,20,27,0.62) 22%,
+      rgba(15,20,27,0.00) 85%
+    ),
+    /* TOP turquoise glow */
+    linear-gradient(to bottom,
+      rgba(127,234,209,0.38) 0%,
+      rgba(127,234,209,0.20) 14%,
+      rgba(127,234,209,0.00) 45%
+    ),
+    /* BOTTOM dark → transparent */
+    linear-gradient(to top,
+      rgba(15,20,27,0.92) 0%,
+      rgba(15,20,27,0.62) 22%,
+      rgba(15,20,27,0.00) 85%
+    ),
+    /* BOTTOM turquoise glow */
+    linear-gradient(to top,
+      rgba(127,234,209,0.38) 0%,
+      rgba(127,234,209,0.20) 14%,
+      rgba(127,234,209,0.00) 45%
+    ),
+    /* BASE sky */
+    var(--bio-sky) !important;
+
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: top left, top left, bottom left, bottom left;
+  background-size:
+    100% clamp(84px, 14vh, 240px),
+    100% clamp(84px, 14vh, 240px),
+    100% clamp(96px, 16vh, 260px),
+    100% clamp(96px, 16vh, 260px);
+}
+
+/* Keep content above fades */
+#bio .wrap,
+#bio .bio-grid,
+#bio .bio-copy,
+#bio .bio-card,
+#bio .bio-quote{
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile tweak — softer & shorter fades */
+@media (max-width: 860px){
+  #bio, section#bio.section{
+    background-size:
+      100% clamp(72px, 16vh, 200px),
+      100% clamp(72px, 16vh, 200px),
+      100% clamp(84px, 18vh, 220px),
+      100% clamp(84px, 18vh, 220px);
+  }
+}
+
 </style>
 </head>
 <body>
