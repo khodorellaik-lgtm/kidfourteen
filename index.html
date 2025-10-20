@@ -1490,6 +1490,61 @@ section#bio.section::after{
     bottom, bottom,
     0 0;
 }
+    /* BIO — force top/bottom neon melts, ignore old rules */
+section#bio.section{ position:relative; isolation:isolate; }
+
+/* put all real content above the overlays */
+section#bio.section .wrap,
+section#bio.section .bio-grid,
+section#bio.section .bio-copy,
+section#bio.section .bio-card,
+section#bio.section .bio-quote{
+  position:relative; z-index:3;
+}
+
+/* TOP melt (on top of the sky) */
+section#bio.section::before{
+  content:"" !important;                  /* defeats any previous 'content:none !important' */
+  position:absolute; left:0; right:0; top:-1px;
+  height:clamp(80px,14vh,240px);
+  pointer-events:none; z-index:2;
+  /* dark -> transparent + subtle turquoise neon */
+  background:
+    linear-gradient(to bottom,
+      rgba(127,234,209,.35) 0%,
+      rgba(127,234,209,.18) 12%,
+      rgba(127,234,209,0) 40%
+    ),
+    linear-gradient(to bottom,
+      rgba(15,20,27,.92) 0%,
+      rgba(15,20,27,.62) 26%,
+      rgba(15,20,27,0) 90%
+    );
+  filter: blur(5px);
+}
+
+/* BOTTOM melt (on top of the sky) */
+section#bio.section::after{
+  content:"" !important;
+  position:absolute; left:0; right:0; bottom:-1px;
+  height:clamp(90px,16vh,260px);
+  pointer-events:none; z-index:2;
+  background:
+    linear-gradient(to top,
+      rgba(127,234,209,.35) 0%,
+      rgba(127,234,209,.18) 12%,
+      rgba(127,234,209,0) 40%
+    ),
+    linear-gradient(to top,
+      rgba(15,20,27,.92) 0%,
+      rgba(15,20,27,.62) 26%,
+      rgba(15,20,27,0) 90%
+    );
+  filter: blur(5px);
+}
+
+/* knobs: stronger neon? raise .35/.18 a bit. shorter fades? reduce the heights. */
+
 </style>
 </head>
 <body>
