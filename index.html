@@ -1664,6 +1664,47 @@ body.js .reveal{
   #bio .bio-grid{ gap: 22px; }
   #bio .bio-card .prose{ max-width: none !important; }
 }
+    /* === BIO — reset widths, keep quote above, restore natural column === */
+
+/* 0) Safety: let grid children shrink normally */
+#bio .bio-card,
+#bio .bio-photo{ min-width:0 !important; }
+
+/* 1) Quote: normal flow above the text (no overlap) */
+#bio .bio-quote{
+  position:static !important;
+  inset:auto !important;
+  transform:none !important;
+  margin: 0 0 22px 0 !important;   /* sits above the paragraph */
+  max-width: 820px !important;     /* readable width, not full-bleed */
+}
+
+/* 2) Text column: remove hidden clamps and give it room */
+#bio .bio-card{ width:100% !important; max-width:none !important; padding:0 !important; }
+#bio .bio-card .prose{
+  max-width:none !important;       /* remove any ch/px cap causing cramp */
+  width:auto !important;
+}
+
+/* 3) Grid balance like before (wider left column) */
+@media (min-width:900px){
+  #bio .bio-grid{
+    grid-template-columns: 1.2fr .85fr !important;  /* back to your earlier ratio */
+    gap: 32px !important;
+    align-items:start !important;
+  }
+  /* Photo shouldn’t squeeze the text */
+  #bio .bio-photo{
+    margin-top:0 !important;
+    max-width:none !important;
+  }
+}
+
+/* 4) Mobile: simple stack with comfortable gap */
+@media (max-width:899px){
+  #bio .bio-grid{ grid-template-columns:1fr !important; gap:20px !important; }
+  #bio .bio-card .prose{ max-width:none !important; }
+}
 </style>
 </head>
 <body>
