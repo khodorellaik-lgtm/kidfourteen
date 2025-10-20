@@ -1313,6 +1313,124 @@ body.js .reveal{
 @media (min-width: 900px){
   #bio .bio-photo{ margin-top:-30px !important; }
 }
+    /* ===== BIO – FINAL OVERRIDES (paste at very end of <style>) ===== */
+
+/* Light sky + black text stays */
+#bio, section#bio.section{
+  position: relative !important;
+  isolation: isolate !important;
+  --bio-sky:#e9edf1;
+  background: var(--bio-sky) !important;
+  color:#111 !important;
+}
+
+/* Ensure a positioning context for the quote */
+#bio .wrap{ position:relative !important; z-index:1 }
+
+/* Thin edge fades (top & bottom) that start strong, fade fast */
+#bio::before, section#bio.section::before,
+#bio::after,  section#bio.section::after{
+  content:""; position:absolute; left:0; width:100%;
+  pointer-events:none; z-index:0; height:72px !important;
+}
+#bio::before, section#bio.section::before{
+  top:0;
+  background:
+    linear-gradient(to bottom,
+      rgba(15,20,27,0.85) 0%,
+      rgba(15,20,27,0.22) 38%,
+      rgba(15,20,27,0.00) 72%
+    ),
+    radial-gradient(120% 80% at 50% 0%,
+      rgba(127,234,209,0.16) 0%,
+      rgba(127,234,209,0.00) 55%
+    ) !important;
+}
+#bio::after, section#bio.section::after{
+  bottom:0;
+  background:
+    linear-gradient(to top,
+      rgba(15,20,27,0.85) 0%,
+      rgba(15,20,27,0.22) 38%,
+      rgba(15,20,27,0.00) 72%
+    ),
+    radial-gradient(120% 80% at 50% 100%,
+      rgba(127,234,209,0.16) 0%,
+      rgba(127,234,209,0.00) 55%
+    ) !important;
+}
+@media (max-width:860px){
+  #bio::before, section#bio.section::before,
+  #bio::after,  section#bio.section::after{ height:52px !important }
+}
+
+/* Remove dark card – clean text on sky */
+#bio .bio-card{
+  background:none !important; border:0 !important;
+  box-shadow:none !important; padding:0 !important;
+}
+#bio .prose p{ color:#111 !important }
+
+/* === QUOTE — no box, bigger font, sits left near the dropcap K === */
+/* Position relative to the .wrap so it doesn’t float over everything */
+#bio .bio-quote{
+  position:absolute !important;
+  /* quick nudge controls — tweak these two if you want */
+  --q-top: clamp(96px, 7.5vw, 140px);
+  --q-left: clamp(24px, 8vw, 120px);
+
+  top: var(--q-top) !important;
+  left: var(--q-left) !important;
+
+  max-width: 34ch !important;
+  padding:0 !important; margin:0 !important;
+  background:none !important; border:0 !important;
+  box-shadow:none !important; backdrop-filter:none !important;
+
+  color:#0f141b !important;
+  font-size: clamp(26px, 2.2vw + 10px, 38px) !important;
+  line-height:1.2 !important; font-weight:700 !important;
+  font-style: normal !important; letter-spacing:.01em !important;
+  text-shadow:
+    0 0 8px rgba(127,234,209,.22),
+    0 0 20px rgba(127,234,209,.12) !important;
+  z-index:2 !important;
+}
+#bio .bio-quote em{ font-style:italic !important }
+#bio .bio-quote .muted{
+  display:block !important;
+  margin-top:.25em !important;
+  font-size:.8em !important;
+  color:rgba(15,20,27,.7) !important;
+  text-shadow:none !important;
+}
+
+/* On mobile, put the quote back in flow, centered */
+@media (max-width:860px){
+  #bio .bio-quote{
+    position:relative !important; top:0 !important; left:0 !important;
+    max-width:none !important; text-align:center !important;
+    margin:0 0 18px 0 !important;
+    font-size: clamp(18px, 5vw, 22px) !important;
+  }
+}
+
+/* Chips tuned for light background (unchanged look) */
+#bio .bio-chips .chip{
+  color:#111 !important;
+  background:rgba(127,234,209,.12) !important;
+  border:1px solid rgba(127,234,209,.28) !important;
+}
+#bio .bio-chips .chip:hover{
+  color:#0f141b !important;
+  background:rgba(127,234,209,.18) !important;
+  border-color:var(--accent) !important;
+}
+
+/* Photo: lift slightly so it aligns with text block */
+@media (min-width:900px){
+  #bio .bio-photo{ margin-top:-30px !important; }
+}
 </style>
 </head>
 <body>
