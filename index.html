@@ -885,56 +885,65 @@ body.js .reveal{
 /* === BIO BACKGROUND: Zoomed-in, aligned figure === */
 /* === BIO: dedicated background layer, zoomed-in image + neon fade === */
 
-  /* === CLEAN BIO SECTION: sky base + top/bottom neon gradient fades === */
+ /* === BIO — edge-only fades: dark→sky with subtle neon (tight) === */
 #bio, section#bio.section{
   position: relative;
   isolation: isolate;
 
-  /* Base sky tone — tweak to your liking */
-  --bio-sky: #e7eaee;
+  /* Base sky from your photo + site dark + neon */
+  --bio-sky:  #e9edf1;  /* tweak if you want cooler/warmer sky */
+  --page-dark:#0f141b;  /* your site dark */
+  --neon:     #7fead1;  /* turquoise accent */
 
-  /* Stack of 4 background layers:
-     1–2 = top fades (dark + neon)
-     3–4 = bottom fades (dark + neon)
-     + base sky color
-  */
+  /* Layers (top to bottom): TOP neon, TOP dark, BOTTOM neon, BOTTOM dark, sky */
   background:
-    /* TOP dark → transparent */
+    /* TOP neon halo (slightly taller than the dark fade) */
     linear-gradient(to bottom,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.62) 22%,
-      rgba(15,20,27,0.00) 85%
+      rgba(127,234,209,0.22) 0%,
+      rgba(127,234,209,0.00) 60%
     ),
-    /* TOP turquoise glow */
+    /* TOP dark → transparent (short) */
     linear-gradient(to bottom,
-      rgba(127,234,209,0.38) 0%,
-      rgba(127,234,209,0.20) 14%,
-      rgba(127,234,209,0.00) 45%
+      rgba(15,20,27,0.90) 0%,
+      rgba(15,20,27,0.00) 100%
     ),
-    /* BOTTOM dark → transparent */
+    /* BOTTOM neon halo */
     linear-gradient(to top,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.62) 22%,
-      rgba(15,20,27,0.00) 85%
+      rgba(127,234,209,0.22) 0%,
+      rgba(127,234,209,0.00) 60%
     ),
-    /* BOTTOM turquoise glow */
+    /* BOTTOM dark → transparent (short) */
     linear-gradient(to top,
-      rgba(127,234,209,0.38) 0%,
-      rgba(127,234,209,0.20) 14%,
-      rgba(127,234,209,0.00) 45%
+      rgba(15,20,27,0.90) 0%,
+      rgba(15,20,27,0.00) 100%
     ),
     /* BASE sky */
     var(--bio-sky) !important;
 
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-  background-position: top left, top left, bottom left, bottom left;
+  background-position: top left, top left, bottom left, bottom left, 0 0;
   background-size:
-    100% clamp(84px, 14vh, 240px),
-    100% clamp(84px, 14vh, 240px),
-    100% clamp(96px, 16vh, 260px),
-    100% clamp(96px, 16vh, 260px);
+    100% 84px,   /* TOP neon (slightly taller) */
+    100% 56px,   /* TOP dark  */
+    100% 92px,   /* BOTTOM neon (slightly taller) */
+    100% 64px,   /* BOTTOM dark */
+    auto;
 }
 
+/* Keep content above the fades */
+#bio .wrap, #bio .bio-grid, #bio .bio-card, #bio .bio-quote{ position:relative; z-index:1; }
+
+/* Mobile: even tighter so it doesn’t bleed */
+@media (max-width: 860px){
+  #bio, section#bio.section{
+    background-size:
+      100% 64px,  /* TOP neon */
+      100% 44px,  /* TOP dark */
+      100% 72px,  /* BOTTOM neon */
+      100% 52px,  /* BOTTOM dark */
+      auto;
+  }
+}
 /* Keep content above fades */
 #bio .wrap,
 #bio .bio-grid,
