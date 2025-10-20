@@ -1597,6 +1597,34 @@ body.js .reveal{
 @media (max-width:899px){
   #bio .bio-photo{ margin-top: 0; }
 }
+    /* === BIO width + breathing room (no box) === */
+
+/* Give the left (text) column more width on desktop and a bigger gap */
+@media (min-width: 900px){
+  #bio .bio-grid{
+    grid-template-columns: 1.45fr 0.9fr;   /* wider text column */
+    gap: 36px;                              /* a bit more space between text/photo */
+  }
+}
+
+/* Add subtle inner padding ONLY to the text content (no background box) */
+#bio .bio-card{
+  padding: 0 !important;                    /* keep card itself naked */
+}
+#bio .bio-card .prose{
+  padding-right: 18px;                      /* breathing room on the right edge */
+  max-width: 720px;                         /* comfortable line length */
+}
+
+/* Keep quote above and independent */
+#bio .bio-quote{
+  margin: 6px 0 22px 0;                     /* slight tighten on top */
+}
+
+/* Keep the photo nudged up to align with the quote/text */
+@media (min-width: 900px){
+  #bio .bio-photo{ margin-top: -14px; }
+}
 </style>
 </head>
 <body>
