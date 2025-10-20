@@ -1768,6 +1768,73 @@ body.js .reveal{
   }
 }
 </style>
+  <style id="bio-hotfix">
+/* ===== BIO HARD OVERRIDE (loads after everything else) ===== */
+
+/* 1) Quote: back in flow above the text, no overlay */
+#bio .bio-quote{
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 0 22px 0 !important;
+  max-width: 760px !important;   /* roomy but not full-bleed */
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  z-index: auto !important;
+}
+/* kill any pseudo halos that might be re-adding a box */
+#bio .bio-quote::before,
+#bio .bio-quote::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* 2) Bio text: restore natural width in the left column */
+#bio .bio-card{
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  min-width: 0 !important;
+}
+#bio .bio-card .prose{
+  width: auto !important;
+  max-width: none !important;   /* remove any px/ch caps */
+  min-width: 0 !important;
+}
+
+/* 3) Grid split like before; don’t let the photo squeeze text */
+@media (min-width:900px){
+  #bio .bio-grid{
+    display: grid !important;
+    grid-template-columns: 1.2fr .85fr !important;
+    gap: 28px !important;
+    align-items: start !important;
+  }
+  #bio .bio-photo{
+    margin-top: 0 !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+}
+
+/* 4) Mobile: simple stack */
+@media (max-width:899px){
+  #bio .bio-grid{
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+}
+
+/* --- sanity check (temporary): uncomment to verify this runs ---
+#bio { outline: 3px solid magenta !important; }
+------------------------------------------------------------------ */
+</style>
 </head>
 <body>
   <!-- Fixed glass nav (single) -->
