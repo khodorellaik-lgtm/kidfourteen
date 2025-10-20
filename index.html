@@ -1003,6 +1003,66 @@ body.js .reveal{
   #bio::before, section#bio.section::before,
   #bio::after,  section#bio.section::after{ height:48px; }
 }
+    /* === BIO: light sky, black text, no dark box, compact quote (kept) === */
+#bio, section#bio.section{
+  color:#111;
+  --bio-sky:#e9edf1;
+  background:var(--bio-sky);
+}
+#bio .bio-card{ background:none !important; border:0 !important; box-shadow:none !important; padding:0 !important; }
+#bio .prose p{ color:#111; }
+
+/* Quote: align LEFT and stop at bio text column (desktop); compact on mobile */
+#bio .bio-quote{
+  background:rgba(255,255,255,.75);
+  color:#111;
+  border-left-color:var(--accent);
+  /* stop centering */
+  margin:0 0 22px 0;
+  max-width:100%;
+}
+@media (min-width:900px){
+  /* grid gap is 28px; columns are 1.2fr / .85fr → left ≈ 58.5% */
+  #bio .bio-quote{
+    width:calc((100% - 28px) * 0.585);
+  }
+}
+
+/* Keep ultra-thin top/bottom fades (no bleed) */
+#bio::before, section#bio.section::before,
+#bio::after,  section#bio.section::after{ height:64px; }
+#bio::before, section#bio.section::before{
+  background:
+    linear-gradient(to bottom, rgba(15,20,27,0.36) 0%, rgba(15,20,27,0) 92%),
+    linear-gradient(to bottom, rgba(127,234,209,0.04) 0%, rgba(127,234,209,0) 100%);
+}
+#bio::after, section#bio.section::after{
+  background:
+    linear-gradient(to top, rgba(15,20,27,0.36) 0%, rgba(15,20,27,0) 92%),
+    linear-gradient(to top, rgba(127,234,209,0.04) 0%, rgba(127,234,209,0) 100%);
+}
+@media (max-width:860px){
+  #bio::before, section#bio.section::before,
+  #bio::after,  section#bio.section::after{ height:48px; }
+}
+
+/* Photo polish over light sky (unchanged) */
+#bio .bio-photo{
+  background:rgba(255,255,255,.35);
+  border:1px solid rgba(0,0,0,.05);
+}
+
+/* === Bio album chips: BLACK text on light background === */
+#bio .bio-card .bio-chips .chip{
+  color:#111;
+  background:rgba(127,234,209,.12);
+  border:1px solid rgba(127,234,209,.28);
+}
+#bio .bio-card .bio-chips .chip:hover{
+  color:#0f141b;
+  background:rgba(127,234,209,.18);
+  border-color:var(--accent);
+}
 </style>
 </head>
 <body>
