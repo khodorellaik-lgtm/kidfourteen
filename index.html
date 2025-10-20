@@ -1063,6 +1063,133 @@ body.js .reveal{
   background:rgba(127,234,209,.18);
   border-color:var(--accent);
 }
+    
+    /* ===== BIO OVERRIDES (only changes below this line) ===== */
+
+    /* Solid light sky + black text for the whole Bio section */
+    #bio, section#bio.section{
+      position:relative;
+      isolation:isolate;
+      --bio-sky:#e9edf1;
+      background:var(--bio-sky);
+      color:#111;
+    }
+    /* Make sure bio content sits above the edge-fade layers */
+    #bio > *, section#bio.section > *{ position:relative; z-index:1 }
+
+    /* TOP & BOTTOM edge fades only — start strong at the edge, fade quickly into the sky */
+    #bio::before, section#bio.section::before,
+    #bio::after,  section#bio.section::after{
+      content:"";
+      position:absolute; left:0; width:100%;
+      pointer-events:none; z-index:0;
+      height:72px; /* desktop */
+    }
+    /* TOP fade: dark-at-edge → transparent quickly, with a whisper of neon */
+    #bio::before, section#bio.section::before{
+      top:0;
+      background:
+        linear-gradient(to bottom,
+          rgba(15,20,27,0.85) 0%,
+          rgba(15,20,27,0.20) 38%,
+          rgba(15,20,27,0.00) 72%
+        ),
+        radial-gradient(120% 80% at 50% 0%,
+          rgba(127,234,209,0.16) 0%,
+          rgba(127,234,209,0.00) 55%
+        );
+    }
+    /* BOTTOM fade: mirror */
+    #bio::after, section#bio.section::after{
+      bottom:0;
+      background:
+        linear-gradient(to top,
+          rgba(15,20,27,0.85) 0%,
+          rgba(15,20,27,0.20) 38%,
+          rgba(15,20,27,0.00) 72%
+        ),
+        radial-gradient(120% 80% at 50% 100%,
+          rgba(127,234,209,0.16) 0%,
+          rgba(127,234,209,0.00) 55%
+        );
+    }
+    /* tighter fades on mobile to avoid bleeding into the section */
+    @media (max-width:860px){
+      #bio::before, section#bio.section::before,
+      #bio::after,  section#bio.section::after{ height:52px }
+    }
+
+    /* Remove dark card look — let text sit on the sky cleanly */
+    #bio .bio-card{
+      background:none !important;
+      border:0 !important;
+      box-shadow:none !important;
+      padding:0 !important;
+    }
+    #bio .prose p{ color:#111 }
+
+    /* Quote — compact, centered, with subtle neon presence */
+    @keyframes k14QuotePulse {
+      0%,100%{
+        box-shadow:
+          0 0 0 1px rgba(127,234,209,.14),
+          0 10px 28px rgba(127,234,209,.10) inset,
+          0 0 18px rgba(127,234,209,.10);
+        text-shadow:
+          0 0 6px rgba(127,234,209,.18),
+          0 0 16px rgba(127,234,209,.10);
+      }
+      50%{
+        box-shadow:
+          0 0 0 1px rgba(127,234,209,.22),
+          0 10px 32px rgba(127,234,209,.14) inset,
+          0 0 26px rgba(127,234,209,.16);
+        text-shadow:
+          0 0 8px rgba(127,234,209,.26),
+          0 0 22px rgba(127,234,209,.16);
+      }
+    }
+    #bio .bio-quote{
+      max-width:min(760px,92%);
+      margin:0 auto 22px;
+      padding:18px 22px;
+      background:rgba(255,255,255,.78);
+      color:#111;
+      border-left:4px solid var(--accent);
+      border-radius:0;
+      letter-spacing:.01em;
+      font-weight:600;
+      box-shadow:
+        0 0 0 1px rgba(127,234,209,.12),
+        0 8px 24px rgba(0,0,0,.06);
+      animation:k14QuotePulse 5.2s ease-in-out infinite;
+    }
+    #bio .bio-quote em{ font-style:normal } /* keep quote upright */
+    #bio .bio-quote .muted{ color:#333 }
+
+    /* Chips on light background */
+    #bio .bio-chips .chip{
+      color:#111;
+      background:rgba(127,234,209,.12);
+      border:1px solid rgba(127,234,209,.28);
+    }
+    #bio .bio-chips .chip:hover{
+      color:#0f141b;
+      background:rgba(127,234,209,.18);
+      border-color:var(--accent);
+    }
+
+    /* Align photo slightly higher to meet the text block */
+    #bio .bio-grid{
+      align-items:start;            /* ensure top alignment */
+      gap:28px;
+    }
+    @media (min-width:900px){
+      #bio .bio-photo{ margin-top:-30px }  /* tweak -20 → -40 if needed */
+    }
+    @media (max-width:899px){
+      #bio .bio-photo{ margin-top:0 }      /* keep mobile natural */
+    }
 </style>
 </head>
 <body>
