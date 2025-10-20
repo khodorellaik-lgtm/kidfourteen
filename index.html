@@ -1026,7 +1026,7 @@ body.js .reveal{
 :is(#bio, section#bio.section) .bio-chips .chip,
 :is(#bio, section#bio.section) .bio-chips .pill{
   display:inline-flex; align-items:center; justify-content:center;
-  padding:8px 14px;
+  padding:6px 12px;
   border-radius:4px !important;                 /* kill round pills */
   background:rgba(15,20,27,.92) !important;     /* dark panel on light sky */
   border:1px solid rgba(127,234,209,.35) !important;
@@ -1066,10 +1066,10 @@ body.js .reveal{
 
   /* bigger/higher image column */
   #bio .bio-grid{
-    grid-template-columns: minmax(56ch,1fr) clamp(560px,42vw,740px) !important;
+    grid-template-columns: minmax(56ch,1fr) clamp(560px,42vw,640px) !important;
     gap:40px;
   }
-  #bio .bio-photo{ margin-top:-56px; }
+  #bio .bio-photo{ margin-top:-70px; }
 }
 @media (prefers-reduced-motion: reduce){
   #bio .bio-photo img{ animation:none !important; }
