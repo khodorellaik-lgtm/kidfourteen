@@ -1447,6 +1447,49 @@ section#bio.section::after{
 #bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
   position: relative; z-index: 1;
 }
+    /* BIO — top & bottom neon melts, no pseudo-elements */
+#bio{
+  /* your sky tone; tweak if needed */
+  --bio-sky: #e7eaee;
+
+  /* four layered gradients + base sky color */
+  background:
+    /* TOP turquoise neon band */
+    linear-gradient(to bottom,
+      rgba(127,234,209,.35) 0%,
+      rgba(127,234,209,.18) 18%,
+      rgba(127,234,209,0)   45%)                         ,
+    /* TOP dark -> transparent */
+    linear-gradient(to bottom,
+      rgba(15,20,27,.92) 0%,
+      rgba(15,20,27,.65) 22%,
+      rgba(15,20,27,0)   80%)                            ,
+    /* BOTTOM turquoise neon band */
+    linear-gradient(to top,
+      rgba(127,234,209,.35) 0%,
+      rgba(127,234,209,.18) 18%,
+      rgba(127,234,209,0)   45%)                         ,
+    /* BOTTOM dark -> transparent */
+    linear-gradient(to top,
+      rgba(15,20,27,.92) 0%,
+      rgba(15,20,27,.65) 22%,
+      rgba(15,20,27,0)   80%)                            ,
+    /* BASE sky */
+    var(--bio-sky)                                        !important;
+
+  /* size & placement of the four overlay gradients */
+  background-repeat: no-repeat;
+  background-size:
+    100% clamp(80px,14vh,220px),   /* top neon */
+    100% clamp(90px,16vh,240px),   /* top dark fade */
+    100% clamp(90px,16vh,240px),   /* bottom neon */
+    100% clamp(100px,18vh,260px),  /* bottom dark fade */
+    auto;
+  background-position:
+    top, top,
+    bottom, bottom,
+    0 0;
+}
 </style>
 </head>
 <body>
