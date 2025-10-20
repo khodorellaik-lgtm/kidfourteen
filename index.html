@@ -920,6 +920,60 @@ body.js .reveal{
   font-size: .9em;
   opacity: .7;
 }
+    /* === BIO: visible links + no white edge + bigger/higher photo + compact quote === */
+
+/* 0) Make inline links in the Bio clearly visible on the light sky */
+#bio .prose a{
+  color: var(--link);                /* blue from your palette */
+  text-decoration: underline;        /* guarantees contrast */
+  text-underline-offset: 2px;
+}
+#bio .prose a:hover{ color: var(--accent); text-decoration-thickness: 2px; }
+
+/* 1) Ken-Burns drift WITHOUT showing white edges at start */
+@keyframes k14BioKen {
+  0%   { transform: scale(1.08) translate3d(-2%, -1%, 0); }
+  100% { transform: scale(1.12) translate3d( 2%,  1%, 0); }
+}
+@media (min-width:900px){
+  #bio .bio-photo{
+    overflow:hidden;                 /* belt & suspenders */
+  }
+  #bio .bio-photo img{
+    transform: scale(1.08);          /* start already zoomed so no border flash */
+    transform-origin: 55% 40%;
+    animation: k14BioKen 20s ease-in-out infinite alternate;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  #bio .bio-photo img{ animation:none !important; }
+}
+
+/* 2) Make the image column larger and nudge it higher */
+@media (min-width:900px){
+  #bio .bio-grid{
+    grid-template-columns: minmax(56ch,1fr) clamp(560px, 42vw, 740px) !important;
+    gap: 40px;
+  }
+  #bio .bio-photo{
+    margin-top: -56px;               /* raise photo; tweak -40…-72 to taste */
+  }
+}
+
+/* 3) Quote: tighter, bookish measure; body stays full width */
+#bio .bio-quote{
+  max-width: 34ch;                   /* compact like your 2nd screenshot */
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.2;
+  letter-spacing: .005em;
+  margin: 0 0 12px 0;
+  text-shadow:
+    0 0 6px rgba(127,234,209,.14),
+    0 0 14px rgba(127,234,209,.08);
+}
+#bio .bio-quote .muted{ font-size:.9em; opacity:.7; }
 </style>
 </head>
 <body>
