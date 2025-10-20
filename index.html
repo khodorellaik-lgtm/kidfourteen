@@ -1597,33 +1597,28 @@ body.js .reveal{
 @media (max-width:899px){
   #bio .bio-photo{ margin-top: 0; }
 }
-    /* === BIO width + breathing room (no box) === */
-
-/* Give the left (text) column more width on desktop and a bigger gap */
+    /* === BIO layout fix: restore natural width and balance === */
 @media (min-width: 900px){
   #bio .bio-grid{
-    grid-template-columns: 1.45fr 0.9fr;   /* wider text column */
-    gap: 36px;                              /* a bit more space between text/photo */
+    grid-template-columns: 1.6fr 1fr;  /* wider text column */
+    align-items: start;
+    gap: 42px;                         /* more breathing space between text/photo */
+  }
+
+  #bio .bio-card .prose{
+    max-width: 820px;                  /* longer, comfortable line length */
+    padding-right: 0;
+  }
+
+  #bio .bio-photo{
+    margin-top: -14px;                 /* keep aligned with headline */
   }
 }
 
-/* Add subtle inner padding ONLY to the text content (no background box) */
-#bio .bio-card{
-  padding: 0 !important;                    /* keep card itself naked */
-}
-#bio .bio-card .prose{
-  padding-right: 18px;                      /* breathing room on the right edge */
-  max-width: 720px;                         /* comfortable line length */
-}
-
-/* Keep quote above and independent */
-#bio .bio-quote{
-  margin: 6px 0 22px 0;                     /* slight tighten on top */
-}
-
-/* Keep the photo nudged up to align with the quote/text */
-@media (min-width: 900px){
-  #bio .bio-photo{ margin-top: -14px; }
+/* Slightly more relaxed text rhythm */
+#bio .prose p{
+  line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 </style>
 </head>
