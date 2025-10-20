@@ -937,6 +937,72 @@ body.js .reveal{
     height:56px;
   }
 }
+    /* === BIO: light sky, black text, no dark box, compact quote === */
+
+/* Light section + black text */
+#bio, section#bio.section{
+  color:#111;                   /* text becomes black */
+  --bio-sky:#e9edf1;            /* sky fill already set in your bio block */
+  background: var(--bio-sky);   /* make sure it's solid sky */
+}
+
+/* Remove the dark card look */
+#bio .bio-card{
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;        /* let text sit directly on the sky */
+}
+
+/* Body copy stays readable */
+#bio .prose p{ color: #111; }
+
+/* Quote: keep style, but make it shorter and centered on the grid */
+#bio .bio-quote{
+  max-width: min(760px, 92%);
+  margin: 0 auto 22px;          /* center it, reduce length */
+  background: rgba(255,255,255,.75);  /* light glass over sky */
+  color:#111;
+  border-left-color: var(--accent);
+}
+
+/* Chips: tune for light background */
+#bio .bio-chips .chip{
+  color:#111;
+  background: rgba(127,234,209,.12);
+  border:1px solid rgba(127,234,209,.28);
+}
+#bio .bio-chips .chip:hover{
+  color:#0f141b;
+  background: rgba(127,234,209,.18);
+  border-color: var(--accent);
+}
+
+/* Make sure the photo keeps its polish on light sky */
+#bio .bio-photo{
+  background: rgba(255,255,255,.35);
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+/* Keep the ultra-thin edge fades you added (no bleed), just soften a hair) */
+#bio::before, section#bio.section::before,
+#bio::after,  section#bio.section::after{
+  height:64px; /* a bit tighter so edges don’t show other sections */
+}
+#bio::before, section#bio.section::before{
+  background:
+    linear-gradient(to bottom, rgba(15,20,27,0.36) 0%, rgba(15,20,27,0) 92%),
+    linear-gradient(to bottom, rgba(127,234,209,0.04) 0%, rgba(127,234,209,0) 100%);
+}
+#bio::after, section#bio.section::after{
+  background:
+    linear-gradient(to top, rgba(15,20,27,0.36) 0%, rgba(15,20,27,0) 92%),
+    linear-gradient(to top, rgba(127,234,209,0.04) 0%, rgba(127,234,209,0) 100%);
+}
+@media (max-width:860px){
+  #bio::before, section#bio.section::before,
+  #bio::after,  section#bio.section::after{ height:48px; }
+}
 </style>
 </head>
 <body>
