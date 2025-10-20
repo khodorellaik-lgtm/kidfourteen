@@ -1620,6 +1620,50 @@ body.js .reveal{
   line-height: 1.7;
   letter-spacing: 0.01em;
 }
+    /* === BIO width + layout reset (final) === */
+
+/* 1) Put the quote back in normal flow (no overlap), keep it wide and left-aligned */
+#bio .bio-quote{
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  max-width: 820px;          /* good, readable width */
+  margin: 0 0 22px 0;        /* sits above the text, left-aligned */
+  z-index: 1;
+}
+
+/* 2) Restore a comfortable text column and balance with the photo */
+@media (min-width: 900px){
+  #bio .bio-grid{
+    /* Give the text real room, keep photo narrower but healthy */
+    grid-template-columns: minmax(560px, 1.8fr) minmax(420px, 1fr) !important;
+    gap: 48px !important;
+    align-items: start;
+  }
+
+  /* Ensure nothing is secretly constraining width */
+  #bio .bio-card{ width: 100%; max-width: none !important; }
+  #bio .bio-card .prose{
+    max-width: clamp(620px, 58vw, 820px) !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* 3) Comfortable reading rhythm */
+#bio .prose p{
+  line-height: 1.7 !important;
+  letter-spacing: .01em;
+}
+
+/* 4) Keep the photo aligned nicely and not crowding the text */
+#bio .bio-photo{
+  margin-top: -10px;          /* gentle nudge up to meet the quote/title */
+}
+@media (max-width: 899px){
+  #bio .bio-grid{ gap: 22px; }
+  #bio .bio-card .prose{ max-width: none !important; }
+}
 </style>
 </head>
 <body>
