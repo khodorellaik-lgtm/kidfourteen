@@ -1441,17 +1441,6 @@ body.js .reveal{
   pointer-events:none;       /* lets you select/click text beneath */
 }
 
-/* Create a safe left gutter for the paragraph so it doesn't sit under the quote */
-@media (min-width: 900px){
-  #bio .bio-card .prose{
-    /* space roughly equal to the quote’s width */
-    --q-space: clamp(260px, 32ch, 420px);
-    padding-left: var(--q-space);
-  }
-  /* tighten first paragraph so the dropcap K still feels aligned */
-  #bio .bio-card .prose .dropcap{ margin-top: 2px; }
-}
-
 /* Mobile: no gutter (quote returns to normal flow in your earlier rules) */
 @media (max-width: 899px){
   #bio .bio-card .prose{ padding-left: 0; }
