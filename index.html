@@ -1456,6 +1456,88 @@ body.js .reveal{
 @media (max-width: 899px){
   #bio .bio-card .prose{ padding-left: 0; }
 }
+    /* ===== BIO OVERRIDES — paste at END of <style> ===== */
+
+/* Light sky + black text */
+#bio, section#bio.section{
+  position:relative; isolation:isolate;
+  --bio-sky:#e9edf1; background:var(--bio-sky); color:#111;
+}
+#bio > *, section#bio.section > *{ position:relative; z-index:1 }
+
+/* Strong-at-edge fades (TOP/BOTTOM only) */
+#bio::before, section#bio.section::before,
+#bio::after,  section#bio.section::after{
+  content:""; position:absolute; left:0; width:100%; pointer-events:none; z-index:0; height:72px;
+}
+#bio::before, section#bio.section::before{
+  top:0;
+  background:
+    linear-gradient(to bottom, rgba(15,20,27,.90) 0%, rgba(15,20,27,.22) 38%, rgba(15,20,27,0) 70%),
+    radial-gradient(120% 80% at 50% 0%, rgba(127,234,209,.14) 0%, rgba(127,234,209,0) 55%);
+}
+#bio::after, section#bio.section::after{
+  bottom:0;
+  background:
+    linear-gradient(to top, rgba(15,20,27,.90) 0%, rgba(15,20,27,.22) 38%, rgba(15,20,27,0) 70%),
+    radial-gradient(120% 80% at 50% 100%, rgba(127,234,209,.14) 0%, rgba(127,234,209,0) 55%);
+}
+@media (max-width:860px){
+  #bio::before, section#bio.section::before,
+  #bio::after,  section#bio.section::after{ height:52px; }
+}
+
+/* Remove dark card look */
+#bio .bio-card{ background:none!important; border:0!important; box-shadow:none!important; padding:0!important; }
+#bio .prose p{ color:#111; }
+
+/* Big quote — LEFT, no box, neon whisper */
+#bio .wrap{ position:relative; }         /* anchor for absolute quote */
+#bio .bio-quote{
+  --q-top: clamp(64px, 5vw, 110px);
+  --q-left: clamp(8px, 3vw, 36px);
+  --q-width: clamp(260px, 34vw, 520px);
+
+  position:absolute; top:var(--q-top); left:var(--q-left); width:var(--q-width);
+  margin:0; padding:0; border:0; background:none; border-left:none;
+  font-weight:800; letter-spacing:.01em;
+  font-size: clamp(22px, 3.2vw, 40px); line-height:1.1;
+  color:#111;
+  text-shadow:
+    0 0 6px rgba(127,234,209,.18),
+    0 0 16px rgba(127,234,209,.10);
+  pointer-events:none;               /* never block text selection */
+}
+#bio .bio-quote em{ font-style:normal; }
+#bio .bio-quote .muted{ color:#333; }
+
+/* Reserve space so text never sits under the quote */
+@media (min-width:900px){
+  #bio .bio-card{ margin-left: calc(var(--q-left) + var(--q-width) + clamp(16px, 2vw, 28px)); }
+}
+/* Mobile: quote back to normal flow; no offset */
+@media (max-width:899px){
+  #bio .bio-quote{
+    position:static; width:auto; margin: 0 0 16px 0;
+    text-shadow:
+      0 0 4px rgba(127,234,209,.14),
+      0 0 10px rgba(127,234,209,.08);
+  }
+  #bio .bio-card{ margin-left:0; }
+}
+
+/* Chips tuned for light bg */
+#bio .bio-chips .chip{
+  color:#111; background:rgba(127,234,209,.12); border:1px solid rgba(127,234,209,.28);
+}
+#bio .bio-chips .chip:hover{
+  color:#0f141b; background:rgba(127,234,209,.18); border-color:var(--accent);
+}
+
+/* Photo: lift slightly to align with text */
+@media (min-width:900px){
+  #bio .bio-photo{ margin-top:-24px; }
+}
 </style>
 </head>
 <body>
