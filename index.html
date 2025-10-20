@@ -1607,6 +1607,37 @@ section#bio.section{
       100% clamp(84px, 18vh, 220px);
   }
 }
+    /* === BIO — top & bottom neon gradient melts (final reliable version) === */
+#bio.section {
+  position: relative;
+  background-color: #e7eaee;  /* your sky tone */
+  isolation: isolate;
+
+  /* stack 4 gradients directly on the section itself */
+  background-image:
+    /* top dark -> transparent */
+    linear-gradient(to bottom,
+      rgba(15,20,27,0.92) 0%,
+      rgba(15,20,27,0.65) 25%,
+      rgba(15,20,27,0.00) 85%
+    ),
+    /* top turquoise glow */
+    linear-gradient(to bottom,
+      rgba(127,234,209,0.35) 0%,
+      rgba(127,234,209,0.20) 20%,
+      rgba(127,234,209,0.00) 50%
+    ),
+    /* bottom dark -> transparent */
+    linear-gradient(to top,
+      rgba(15,20,27,0.92) 0%,
+      rgba(15,20,27,0.65) 25%,
+      rgba(15,20,27,0.00) 85%
+    ),
+    /* bottom turquoise glow */
+    linear-gradient(to top,
+      rgba(127,234,209,0.35) 0%,
+      rgba(127,234,209,0.20) 20%,
+      rgba(12
 </style>
 </head>
 <body>
