@@ -1538,6 +1538,65 @@ body.js .reveal{
 @media (min-width:900px){
   #bio .bio-photo{ margin-top:-24px; }
 }
+    /* === BIO: keep text in normal flow; quote above; no overlay/box === */
+
+/* 1) Put the quote back into the normal document flow (no overlay) */
+#bio .bio-quote{
+  position: static !important;
+  display: block;
+  max-width: 780px;
+  margin: 10px 0 22px 0;         /* sits above the bio text */
+  padding: 0;                    /* no box */
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #111;
+  font-style: normal;            /* keep upright */
+  z-index: auto !important;
+  transform: none !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+
+  /* Bigger, bolder quote with a gentle neon whisper */
+  font-weight: 800;
+  letter-spacing: .01em;
+  font-size: clamp(28px, 3.8vw, 44px);
+  line-height: 1.15;
+  text-shadow:
+    0 0 8px rgba(127,234,209,.16),
+    0 0 18px rgba(127,234,209,.10);
+}
+#bio .bio-quote em{ font-style: normal }          /* no italics in the quote line */
+#bio .bio-quote .muted{
+  display: block;
+  margin-top: .4em;
+  font-weight: 700;
+  font-size: clamp(16px, 1.4vw, 18px);
+  color: #2a2a2a;
+  text-shadow: none;
+}
+/* remove any decorative “quote” pseudo-elements */
+#bio .bio-quote::before,
+#bio .bio-quote::after{ content: none !important; }
+
+/* 2) Restore the bio text position (remove any left gutter that pushed it right) */
+#bio .bio-card{
+  margin-left: 0 !important;     /* fixes the “skewed to the right” look */
+  padding: 0 !important;         /* keep your clean sky background */
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#bio .prose p{ color:#111; }      /* readable on the light sky */
+
+/* 3) Photo: nudge up very slightly to align with the text/quote */
+@media (min-width:900px){
+  #bio .bio-photo{ margin-top: -14px; }
+}
+@media (max-width:899px){
+  #bio .bio-photo{ margin-top: 0; }
+}
 </style>
 </head>
 <body>
