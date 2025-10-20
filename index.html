@@ -1009,6 +1009,82 @@ body.js .reveal{
   box-shadow:0 0 12px rgba(127,234,209,.25);
   transform:translateY(-1px);
 }
+    /* === BIO: chips -> sharp blocks, photo edge-safe KenBurns, compact quote === */
+
+/* 0) Make inline links readable on the light bio background */
+#bio .prose a{
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+#bio .prose a:hover{ color: var(--accent); text-decoration-thickness: 2px; }
+
+/* 1) Album chips -> SHARP RECTANGULAR BLOCKS (catch .chip/.pill/a) */
+:is(#bio, section#bio.section) .bio-chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+
+:is(#bio, section#bio.section) .bio-chips a,
+:is(#bio, section#bio.section) .bio-chips .chip,
+:is(#bio, section#bio.section) .bio-chips .pill{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:8px 14px;
+  border-radius:4px !important;                 /* kill round pills */
+  background:rgba(15,20,27,.92) !important;     /* dark panel on light sky */
+  border:1px solid rgba(127,234,209,.35) !important;
+  color:#bff7ec !important;                     /* readable mint text */
+  font:700 12.5px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  letter-spacing:.03em; text-transform:uppercase;
+  text-decoration:none !important;
+  box-shadow:0 0 10px rgba(127,234,209,.12);
+  -webkit-appearance:none;
+  transition:transform .15s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+:is(#bio, section#bio.section) .bio-chips a:hover,
+:is(#bio, section#bio.section) .bio-chips .chip:hover,
+:is(#bio, section#bio.section) .bio-chips .pill:hover{
+  transform:translateY(-1px);
+  background:rgba(127,234,209,.22) !important;
+  border-color:var(--accent) !important;
+  color:#fff !important;
+}
+
+/* 2) Photo KenBurns with PERMANENT BLEED (no white border flash) */
+@keyframes k14BioKen {
+  0%   { transform: scale(1.12) translate3d(-2%, -1%, 0); }
+  100% { transform: scale(1.18) translate3d( 2%,  1%, 0); }
+}
+@media (min-width:900px){
+  #bio .bio-photo{ overflow:hidden; }
+  #bio .bio-photo img{
+    position:relative;
+    width:100%; height:100%; object-fit:cover;
+    transform: scale(1.12);              /* start zoomed so edges never show */
+    transform-origin:55% 40%;
+    animation: k14BioKen 20s ease-in-out infinite alternate;
+    will-change: transform;
+    backface-visibility:hidden;
+  }
+
+  /* bigger/higher image column */
+  #bio .bio-grid{
+    grid-template-columns: minmax(56ch,1fr) clamp(560px,42vw,740px) !important;
+    gap:40px;
+  }
+  #bio .bio-photo{ margin-top:-56px; }
+}
+@media (prefers-reduced-motion: reduce){
+  #bio .bio-photo img{ animation:none !important; }
+}
+
+/* 3) Quote compact; body text stays wide */
+#bio .bio-quote{
+  max-width:32ch;                         /* tighter like your 2nd screenshot */
+  font-size:clamp(22px, 2.6vw, 34px);
+  line-height:1.2;
+  letter-spacing:.005em;
+  margin:0 0 12px 0;
+  text-shadow:0 0 6px rgba(127,234,209,.14), 0 0 14px rgba(127,234,209,.08);
+}
+#bio .bio-quote .muted{ font-size:.9em; opacity:.7; }
 </style>
 </head>
 <body>
