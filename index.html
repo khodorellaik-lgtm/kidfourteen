@@ -1396,7 +1396,57 @@ section#bio.section {
 }
 /* If you want slightly stronger neon overall, bump .35/.18 up a bit.
    If you want a shorter fade, reduce the height values. */
-    
+    /* BIO — only top & bottom neon melts (override any previous kill rules) */
+section#bio.section { position: relative; isolation: isolate; }
+
+/* TOP melt */
+section#bio.section::before{
+  content: "" !important;                 /* override any 'content:none !important' */
+  position: absolute; left: 0; right: 0; top: -1px;
+  height: clamp(80px, 14vh, 240px);
+  pointer-events: none; z-index: 0;
+  background:
+    /* turquoise neon band */
+    linear-gradient(to bottom,
+      rgba(127,234,209,.35) 0%,
+      rgba(127,234,209,.18) 15%,
+      rgba(127,234,209,0) 45%
+    ),
+    /* dark page -> transparent */
+    linear-gradient(to bottom,
+      rgba(15,20,27,.92) 0%,
+      rgba(15,20,27,.65) 20%,
+      rgba(15,20,27,0) 80%
+    );
+  filter: blur(4px);
+}
+
+/* BOTTOM melt */
+section#bio.section::after{
+  content: "" !important;                 /* override any 'content:none !important' */
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: clamp(90px, 16vh, 260px);
+  pointer-events: none; z-index: 0;
+  background:
+    /* turquoise neon band */
+    linear-gradient(to top,
+      rgba(127,234,209,.35) 0%,
+      rgba(127,234,209,.18) 15%,
+      rgba(127,234,209,0) 45%
+    ),
+    /* dark page -> transparent */
+    linear-gradient(to top,
+      rgba(15,20,27,.92) 0%,
+      rgba(15,20,27,.65) 20%,
+      rgba(15,20,27,0) 80%
+    );
+  filter: blur(4px);
+}
+
+/* keep your real content above the melts */
+#bio .wrap, #bio .bio-grid, #bio .bio-copy, #bio .bio-card, #bio .bio-quote{
+  position: relative; z-index: 1;
+}
 </style>
 </head>
 <body>
