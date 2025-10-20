@@ -885,7 +885,7 @@ body.js .reveal{
 /* === BIO BACKGROUND: Zoomed-in, aligned figure === */
 /* === BIO: dedicated background layer, zoomed-in image + neon fade === */
 
- /* === BIO — clean sky + edge-only fades (dark→sky with soft neon) === */
+/* === BIO — clean sky + edge-only fades (dark→sky with soft neon) === */
 #bio, section#bio.section{
   position: relative;
   isolation: isolate;
@@ -931,27 +931,6 @@ body.js .reveal{
   #bio::before, section#bio.section::before{ height:68px }
   #bio::after,  section#bio.section::after{ height:76px }
 }
-/* Keep content above fades */
-#bio .wrap,
-#bio .bio-grid,
-#bio .bio-copy,
-#bio .bio-card,
-#bio .bio-quote{
-  position: relative;
-  z-index: 1;
-}
-
-/* Mobile tweak — softer & shorter fades */
-@media (max-width: 860px){
-  #bio, section#bio.section{
-    background-size:
-      100% clamp(72px, 16vh, 200px),
-      100% clamp(72px, 16vh, 200px),
-      100% clamp(84px, 18vh, 220px),
-      100% clamp(84px, 18vh, 220px);
-  }
-}
-
 </style>
 </head>
 <body>
