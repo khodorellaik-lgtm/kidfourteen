@@ -885,56 +885,8 @@ body.js .reveal{
 /* === BIO BACKGROUND: Zoomed-in, aligned figure === */
 /* === BIO: dedicated background layer, zoomed-in image + neon fade === */
 
-  /* === CLEAN BIO SECTION: sky base + top/bottom neon gradient fades === */
-#bio, section#bio.section{
-  position: relative;
-  isolation: isolate;
-
-  /* Base sky tone — tweak to your liking */
-  --bio-sky: #e7eaee;
-
-  /* Stack of 4 background layers:
-     1–2 = top fades (dark + neon)
-     3–4 = bottom fades (dark + neon)
-     + base sky color
-  */
-  background:
-    /* TOP dark → transparent */
-    linear-gradient(to bottom,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.62) 22%,
-      rgba(15,20,27,0.00) 85%
-    ),
-    /* TOP turquoise glow */
-    linear-gradient(to bottom,
-      rgba(127,234,209,0.38) 0%,
-      rgba(127,234,209,0.20) 14%,
-      rgba(127,234,209,0.00) 45%
-    ),
-    /* BOTTOM dark → transparent */
-    linear-gradient(to top,
-      rgba(15,20,27,0.92) 0%,
-      rgba(15,20,27,0.62) 22%,
-      rgba(15,20,27,0.00) 85%
-    ),
-    /* BOTTOM turquoise glow */
-    linear-gradient(to top,
-      rgba(127,234,209,0.38) 0%,
-      rgba(127,234,209,0.20) 14%,
-      rgba(127,234,209,0.00) 45%
-    ),
-    /* BASE sky */
-    var(--bio-sky) !important;
-
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-  background-position: top left, top left, bottom left, bottom left;
-  background-size:
-    100% clamp(84px, 14vh, 240px),
-    100% clamp(84px, 14vh, 240px),
-    100% clamp(96px, 16vh, 260px),
-    100% clamp(96px, 16vh, 260px);
-}
-
+ ok I reverted back to this. last code you sent me it made a big gradient box all around the page - not what we want. i want top and bottom gradiend neon to mix with previous and next page. the bottom and top of the page should start aith black and gradient into the sky color without bleeding too much into the page, while have a neon effect. wr just want to get rid of the hard edges of the page. tell me if you understand everything before we move on into code.
+ChatGPT
 /* Keep content above fades */
 #bio .wrap,
 #bio .bio-grid,
@@ -1083,7 +1035,6 @@ body.js .reveal{
 
   <!-- BIO -->
   <section id="bio" class="section">
-    <div class="bio-bg" aria-hidden="true"></div>
     <div class="wrap">
       <h2>Bio</h2>
 
