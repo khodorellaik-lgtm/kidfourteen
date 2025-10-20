@@ -1248,6 +1248,71 @@ body.js .reveal{
     text-align: center;
   }
 }
+    /* === FINAL BIO QUOTE FIX (absolute override) === */
+#bio .bio-quote {
+  position: absolute !important;
+  top: clamp(120px, 8vw, 160px) !important;
+  left: clamp(5%, 9vw, 12%) !important;
+  max-width: 420px !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: rgba(15,20,27,0.9) !important;
+  font-size: clamp(22px, 2vw + 10px, 34px) !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  font-style: italic !important;
+  text-align: left !important;
+  letter-spacing: 0.01em !important;
+  text-shadow:
+    0 0 8px rgba(127,234,209,.25),
+    0 0 20px rgba(127,234,209,.15) !important;
+  animation: quoteGlow 6s ease-in-out infinite alternate;
+  z-index: 2 !important;
+}
+
+/* Smaller Bandcamp line */
+#bio .bio-quote .muted {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85em !important;
+  opacity: 0.65 !important;
+  color: rgba(15,20,27,0.75) !important;
+  text-shadow: none !important;
+}
+
+/* Gentle pulsing neon glow */
+@keyframes quoteGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 6px rgba(127,234,209,.25),
+      0 0 18px rgba(127,234,209,.12);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(127,234,209,.35),
+      0 0 28px rgba(127,234,209,.18);
+  }
+}
+
+/* Center on mobile */
+@media (max-width: 860px) {
+  #bio .bio-quote {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    max-width: none !important;
+    text-align: center !important;
+    margin: 0 0 24px 0 !important;
+    font-size: clamp(18px, 5vw, 22px) !important;
+  }
+}
+
+/* === OPTIONAL: photo align === */
+@media (min-width: 900px){
+  #bio .bio-photo{ margin-top:-30px !important; }
+}
 </style>
 </head>
 <body>
