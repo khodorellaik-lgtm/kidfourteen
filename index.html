@@ -2487,5 +2487,132 @@ document.addEventListener('DOMContentLoaded', () => {
   if (title) observer.observe(title);
 });
 </script>
+  <script>
+(() => {
+  const bio = document.getElementById('bio');
+  if (!bio) return;
+
+  /* 1) QUOTE: back in normal flow, no box, larger type, left above text */
+  const quote = bio.querySelector('.bio-quote');
+  if (quote) {
+    Object.assign(quote.style, {
+      position: 'static',
+      inset: 'auto',
+      transform: 'none',
+      margin: '0 0 22px 0',
+      maxWidth: '760px',
+      padding: '0',
+      background: 'none',
+      border: '0',
+      boxShadow: 'none',
+      textShadow: 'none',
+      zIndex: 'auto',
+      fontFamily: 'Georgia, "Times New Roman", serif',
+      fontSize: 'clamp(22px, 2.2vw, 30px)',
+      lineHeight: '1.35',
+      fontWeight: '600',
+      color: '#111',
+    });
+    // kill pseudo content look-alikes if they were injected earlier
+    quote.setAttribute('data-no-pseudos', '1');
+  }
+
+  /* 2) TEXT COLUMN: restore natural width (no card visuals) */
+  const card = bio.querySelector('.bio-card');
+  if (card) {
+    Object.assign(card.style, {
+      width: 'auto',
+      maxWidth: 'none',
+      padding: '0',
+      background: 'none',
+      border: '0',
+      boxShadow: 'none',
+      minWidth: '0',
+    });
+  }
+  const prose = bio.querySelector('.bio-card .prose');
+  if (prose) {
+    Object.assign(prose.style, {
+      width: 'auto',
+      maxWidth: 'none',
+      minWidth: '0',
+      color: '#111',
+    });
+  }
+
+  /* 3) GRID: keep the original split; don’t let photo squeeze text */
+  const grid = bio.querySelector('.bio-grid');
+  if (grid) {
+    grid.style.display = 'grid';
+    grid.style.gap = '28px';
+    grid.style.alignItems = 'start';
+    // desktop split
+    const applyDesktop = () => {
+      if (window.innerWidth >= 900) {
+        grid.style.gridTemplateColumns = '1.2fr .85fr';
+      } else {
+        grid.style.gridTemplateColumns = '1fr';
+      }
+    };
+    applyDesktop();
+    window.addEventListener('resize', applyDesktop, { passive: true });
+  }
+
+  const photo = bio.querySelector('.bio-photo');
+  if (photo) {
+    Object.assign(photo.style, {
+      marginTop: window.innerWidth >= 900 ? '0' : '0',
+      maxWidth: 'none',
+      minWidth: '0',
+    });
+  }
+
+  /* 4) EDGE FADES (top/bottom only): strong at edge → quick into sky */
+  // build two absolutely-positioned layers as children so they
+  // always render even if ::before/::after CSS was broken
+  const ensureEdgeLayer = (pos) => {
+    const id = pos === 'top' ? 'bio-edge-top' : 'bio-edge-bottom';
+    let layer = bio.querySelector(`#${id}`);
+    if (!layer) {
+      layer = document.createElement('div');
+      layer.id = id;
+      bio.prepend(layer);
+    }
+    Object.assign(layer.style, {
+      position: 'absolute',
+      left: '0',
+      right: '0',
+      height: window.innerWidth > 860 ? '72px' : '52px',
+      pointerEvents: 'none',
+      zIndex: '0',
+      top: pos === 'top' ? '0' : '',
+      bottom: pos === 'bottom' ? '0' : '',
+      backgroundImage:
+        pos === 'top'
+          ? 'linear-gradient(to bottom, rgba(15,20,27,0.85) 0%, rgba(15,20,27,0.20) 38%, rgba(15,20,27,0.00) 72%), radial-gradient(120% 80% at 50% 0%, rgba(127,234,209,0.16) 0%, rgba(127,234,209,0.00) 55%)'
+          : 'linear-gradient(to top, rgba(15,20,27,0.85) 0%, rgba(15,20,27,0.20) 38%, rgba(15,20,27,0.00) 72%), radial-gradient(120% 80% at 50% 100%, rgba(127,234,209,0.16) 0%, rgba(127,234,209,0.00) 55%)',
+      backgroundRepeat: 'no-repeat',
+    });
+    return layer;
+  };
+  const topLayer = ensureEdgeLayer('top');
+  const bottomLayer = ensureEdgeLayer('bottom');
+
+  const syncEdgeHeights = () => {
+    const h = window.innerWidth > 860 ? '72px' : '52px';
+    topLayer.style.height = h;
+    bottomLayer.style.height = h;
+  };
+  window.addEventListener('resize', syncEdgeHeights, { passive: true });
+
+  /* 5) Make sure the bio section itself is the sky w/ black text */
+  Object.assign(bio.style, {
+    position: 'relative',
+    isolation: 'isolate',
+    background: '#e9edf1',
+    color: '#111',
+  });
+})();
+</script>
 </body>
 </html>
