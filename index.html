@@ -1863,6 +1863,28 @@ section#bio.section .bio-photo{
 </style>
   <style id="bio-hotfix">
 /* ===== BIO HARD OVERRIDE (loads after everything else) ===== */
+    /* === BIO WIDTH FIX — kill leftover quote gutter & restore natural width === */
+#bio .bio-quote{
+  position: static !important;
+  left:auto !important; top:auto !important; transform:none !important;
+  margin: 0 0 22px 0 !important; max-width: 760px !important;
+}
+
+/* The real culprit was padding-left from an older rule */
+@media (min-width:900px){
+  #bio .bio-card{ margin-left:0 !important; }         /* no manual offset */
+  #bio .bio-card .prose{
+    padding-left:0 !important;                         /* <<< fix */
+    max-width:68ch !important;                         /* comfy reading width */
+  }
+}
+
+/* Safety net: if anything else tries to sneak padding-left in, nuke it */
+@media (min-width:900px){
+  #bio .prose, #bio .bio-card, #bio .bio-card *{
+    padding-left:0 !important;
+  }
+}
 
 /* 1) Quote: back in flow above the text, no overlay */
 #bio .bio-quote{
