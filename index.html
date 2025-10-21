@@ -140,38 +140,28 @@
     .bio-grid{display:grid; gap:28px; align-items:center}
     @media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
     .bio-photo{
-  background:none; border:0; border-radius:0; overflow:visible; box-shadow:none;
+.bio-photo{
+  background:none;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  box-shadow:none;
 }
-    .bio-photo img{   display:block;   width:100%;   height:auto;   object-fit:cover;   aspect-ratio:3/4; /* a touch taller */ }
-   @media (min-width:900px){
-  .bio-photo{ transform: scale(1.6); transform-origin: right top; }
-}
-    /* Bio photo: bigger + gentle Ken Burns (desktop only) */
-@media (min-width:900px){
-  /* make the photo card feel larger without changing layout flow */
-  .bio-photo{
-    transform: scale(1.25);           /* was 1.12 → now 1.25 for stronger presence */
-    transform-origin: center top;
-    transition: transform .6s ease;
-  }
-  .bio-photo:hover{
-    transform: scale(1.3);            /* slightly more lift on hover */
-  }
-
-  /* slow, elegant drift inside the frame */
-  .bio-photo img{
+.bio-photo img{
   display:block;
-  width:100%;
+  width:108%;
   height:auto;
   object-fit:cover;
-  aspect-ratio: 2.2 / 3;   /* a touch taller to match text height */
+  aspect-ratio:0.72/1;      /* slightly taller look */
+  transform:translateX(-4%);
 }
-
-@keyframes k14BioKen{
-  0%   { transform: scale(1.03) translate3d(-2%, -1%, 0); }
-  100% { transform: scale(1.08) translate3d( 2%,  1%, 0); }
+@media (min-width:900px){
+  .bio-photo{
+    transform: scale(1.45);
+    transform-origin: center top;
+  }
 }
-
+   
 
 #bio .bio-text .bio-chips .chip{
   padding:6px 12px;
@@ -199,7 +189,7 @@
     .prose{ color:#000; } .prose p{ margin:0 0 14px; }
     .prose em{font-style:italic}
     /* --- Bio text clean justification (safe) --- */
-#bio .bio-card .prose p{
+#bio .bio-text .prose p{
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
@@ -208,14 +198,14 @@
   -ms-hyphens: auto;
   line-height: 1.7;
 }
-    .bio-card .prose .dropcap:first-letter{
+    .bio-text .prose .dropcap:first-letter{
       float:left; font-weight:800; font-family:Georgia,"Times New Roman",serif;
       font-size:clamp(60px,9vw,95px); line-height:.85; padding:6px 10px 0 0; margin-right:12px; color:var(--accent);
       background:linear-gradient(135deg,rgba(127,234,209,.25),rgba(127,234,209,0));
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       text-shadow:0 0 18px rgba(127,234,209,.25); letter-spacing:-0.02em;
     }
-    .bio-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    #bio .bio-text .bio-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
   
     .reveal{opacity:1; transform:none}
     body.js .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease,transform .6s ease; transition-delay:var(--d,0s)}
@@ -334,9 +324,7 @@
   /* bio – stronger photo + tidy text */
   .bio-grid{ display:grid; grid-template-columns:1fr; gap:18px; align-items:start }
   .bio-photo{ max-width:92%; margin:0 auto; border-radius:14px }
-  .bio-card{ padding:18px 16px; border-radius:14px; box-shadow:0 8px 18px rgba(0,0,0,.35) }
-  .bio-quote{ font-size:16px; padding:14px 16px; margin-bottom:16px }
-  .bio-card .prose .dropcap:first-letter{
+  .bio-text .prose .dropcap:first-letter{
     font-size:56px; line-height:.9; padding:4px 8px 0 0; margin-right:10px
   }
   .bio-chips{ gap:8px; margin-top:12px }
@@ -704,16 +692,15 @@ body.js .reveal{
 #bio .bio-text .bio-chips{
   display:flex;
   flex-wrap:wrap;
-  justify-content:flex-start;   /* align with the paragraph */
+  justify-content:flex-start;
   gap:8px 10px;
-  max-width:700px;              /* same visual width as prose */
+  max-width:700px;
   margin:16px 0 0;
 }
-
 #bio .bio-text .bio-chips .chip{
   display:inline-block;
-  padding:6px 14px;
-  border-radius:999px;
+  padding:6px 12px;
+  border-radius:4px;            /* rectangle, not pill */
   background:#fff;
   border:2px solid #000;
   color:#000;
@@ -727,12 +714,6 @@ body.js .reveal{
   background:#000;
   color:#fff;
   border-color:#000;
-}
-#bio .bio-card .bio-chips .chip:hover{
-  transform:translateY(-1px);
-  color:var(--accent);
-  border-color:var(--accent);
-  background:rgba(127,234,209,.14);
 }
 #shows .panel button {
   cursor: pointer;
@@ -832,6 +813,15 @@ body.js .reveal{
       var(--bio-sky) 88%,
       rgba(15,20,27,.95) 100%);
   color:#000;
+}
+      #bio .bio-quote{
+  font-family: Georgia, "Times New Roman", serif;
+  text-align: left;
+  color:#000;
+  margin: 0 0 24px;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.7;
+  max-width: 60ch;
 }
     /* comfortable reading width + safe gap */
 #bio .bio-text{ max-width: 70ch; }
