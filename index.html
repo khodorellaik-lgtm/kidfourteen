@@ -667,6 +667,97 @@ section#bio.section .bio-quote .muted{
 .bio-quote[style*="position: absolute"]{
   position: static !important;
 }
+   /* ===============================
+   BIO — FINAL LOCKED OVERRIDES
+   (paste at the very end)
+   =============================== */
+
+/* 0) One knob: moves quote + photo together (keeps them aligned) */
+#bio{ --bio-quote-offset: 110px; }  /* increase = both move down; decrease = up */
+
+/* 1) Light "sky" background lives on .bio-bg; content sits above it */
+#bio{ position: relative; overflow: hidden; }
+#bio .bio-bg{
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(120% 140% at 15% 0%,
+      rgba(255,255,255,.85),
+      rgba(235,241,246,.92) 38%,
+      rgba(229,237,243,.95) 60%,
+      rgba(224,233,240,1) 100%) !important;
+}
+#bio .wrap{ position: relative; z-index: 1; }
+
+/* 2) Text is always above the photo; photo stays inside its cell */
+:is(#bio, section#bio.section) .bio-card{ position: relative; z-index: 2; }
+:is(#bio, section#bio.section) .bio-photo{ position: relative; z-index: 1; overflow: hidden; }
+
+/* 3) Quote: Georgia italic, normal flow, aligned by the knob */
+#bio .bio-quote{
+  position: static !important;
+  margin-top: var(--bio-quote-offset) !important;   /* aligns to image top */
+  margin-bottom: .5rem !important;
+  font-family: Georgia, serif !important;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem) !important;
+  line-height: 1.35 !important;
+  max-width: 48ch;
+  opacity: 1 !important; transform: none !important; filter: none !important;
+  color: #0f141b !important; /* dark ink on light sky */
+}
+#bio .bio-quote .muted{ color:#44525e !important; }
+
+/* Decorative curled quotes (mint glow) */
+#bio .bio-quote::before{
+  content:"“"; position:absolute; left:-0.35em; top:-0.05em;
+  font:700 3.4em/0.45 Georgia,serif;
+  color:rgba(127,234,209,.4);
+  text-shadow:0 0 8px rgba(127,234,209,.25), 0 0 18px rgba(127,234,209,.15);
+  pointer-events:none;
+}
+#bio .bio-quote::after{
+  content:"”"; position:absolute; right:-0.25em; bottom:-0.2em;
+  font:700 3.4em/0.45 Georgia,serif;
+  color:rgba(127,234,209,.4);
+  text-shadow:0 0 8px rgba(127,234,209,.25), 0 0 18px rgba(127,234,209,.15);
+  pointer-events:none;
+}
+
+/* 4) Grid: make room so body text never collides with the quote */
+#bio .bio-grid{
+  padding-top: var(--bio-quote-offset) !important;
+  align-items: start;
+  gap: clamp(24px, 4vw, 40px);
+}
+
+/* 5) Photo: lift by the same amount so its TOP == quote TOP */
+@media (min-width: 900px){
+  :is(#bio, section#bio.section) .bio-photo{
+    margin-top: calc(var(--bio-quote-offset) * -1) !important;
+    justify-self: end;
+    width: 100%;
+    max-width: clamp(500px, 36vw, 700px);
+  }
+  :is(#bio, section#bio.section) .bio-photo img{
+    object-position: center 18%;
+    transform: scale(1.08);
+    will-change: transform;
+  }
+}
+
+/* 6) Mobile: no lift; smaller quote offset */
+@media (max-width: 899px){
+  #bio{ --bio-quote-offset: 28px; }
+  :is(#bio, section#bio.section) .bio-photo{ margin-top: 0 !important; }
+}
+
+/* 7) Safety: nuke any stray absolute-position quote rules that might linger */
+#bio .bio-quote[style*="position: absolute"],
+.bio-quote[style*="position: absolute"]{
+  position: static !important;
+  top:auto !important; right:auto !important; bottom:auto !important; left:auto !important;
+  transform:none !important;
+}
 </style>
 </head>
 <body>
