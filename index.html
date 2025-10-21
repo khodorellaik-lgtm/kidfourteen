@@ -818,16 +818,17 @@ body.js .reveal{
 :is(#bio, section#bio.section) .bio-quote{
   position: relative;
   z-index: 3;
-  margin-top: 60px;
-  margin-bottom: 28px;
-  max-width: 32ch;
+  margin-top: 60px;             /* pulls it into view */
+  margin-bottom: 32px;
+  max-width: 34ch;
   font-weight: 800;
   font-size: clamp(22px, 2.6vw, 34px);
   line-height: 1.2;
   letter-spacing: .005em;
   color: #111;
   text-align: left;
-  text-indent: -0.25em;          /* small visual tuck for first line */
+  padding-left: 0.6em;          /* leaves room for curled mark */
+  padding-right: 0.4em;
 }
 
 /* decorative curled quotation marks */
@@ -836,24 +837,34 @@ body.js .reveal{
   position: absolute;
   font-family: Georgia, serif;
   font-weight: 700;
-  font-size: 3em;
-  line-height: 0.5;
-  color: rgba(127,234,209,.4);   /* same accent hue, softer opacity */
+  font-size: 3.4em;
+  line-height: 0.4;
+  color: rgba(127,234,209,.4);
   pointer-events: none;
+  text-shadow:
+    0 0 8px rgba(127,234,209,.25),
+    0 0 18px rgba(127,234,209,.15);
 }
 
 :is(#bio, section#bio.section) .bio-quote::before{
   content: "“";
-  left: -0.4em;
-  top: -0.1em;
+  left: -0.35em;
+  top: -0.05em;
 }
 
 :is(#bio, section#bio.section) .bio-quote::after{
   content: "”";
-  right: -0.3em;
+  right: -0.25em;
   bottom: -0.2em;
 }
 
+:is(#bio, section#bio.section) .bio-quote .muted{
+  display:block;
+  margin-top:0.35em;
+  font-size:0.9em;
+  opacity:0.72;
+  color:#222;
+}
 /* ===== PHOTO — bigger + higher, edge-safe Ken Burns ===== */
 @keyframes k14BioKen{0%{transform:scale(1.12) translate3d(-2%,-1%,0)}100%{transform:scale(1.18) translate3d(2%,1%,0)}}
 
