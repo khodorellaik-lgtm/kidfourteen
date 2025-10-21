@@ -816,7 +816,7 @@ body.js .reveal{
 }
     /* BIO: sky background with dark fades at top/bottom */
 :root{
-  --bio-sky: #c2c8cf;
+  --bio-sky: #E3E6ED;
 }
 
 #bio{
@@ -907,6 +907,60 @@ body.js .reveal{
 #bio .bio-photo:hover img {
   transform: scale(1.04);
   filter: brightness(1.03) saturate(1.1);
+}
+    /* === FINAL BIO FIX — clean + minimal === */
+
+/* 1. Proper quote curls (centered, no overflow) */
+#bio .bio-quote {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  text-align: left;
+  color: #000;
+  margin: 0 0 24px;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.7;
+  max-width: 60ch;
+}
+#bio .bio-quote::before,
+#bio .bio-quote::after {
+  position: absolute;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8em;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+#bio .bio-quote::before {
+  content: "“";
+  left: -0.25em;
+  top: -0.1em;
+}
+#bio .bio-quote::after {
+  content: "”";
+  right: -0.25em;
+  bottom: -0.1em;
+}
+
+/* 2. Bio photo bigger + blend softly with sky */
+#bio .bio-photo {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transform: scale(1.35);
+  transform-origin: center top;
+  margin-top: -10px;
+}
+#bio .bio-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: brightness(0.98) contrast(1.04) saturate(1.05);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+          mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
 }
 </style>
 </head>
