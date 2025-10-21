@@ -157,13 +157,6 @@
   aspect-ratio:2/3;
 }
 
-/* Make photo larger on desktop */
-@media (min-width:900px){
-  .bio-photo{
-    transform:scale(1.45);
-    transform-origin:right top;
-    transition:transform .6s ease;
-  }
   .bio-photo:hover{ transform:scale(1.5); }
 }
 
@@ -959,8 +952,44 @@ body.js .reveal{
   height: auto;
   object-fit: cover;
   filter: brightness(0.98) contrast(1.04) saturate(1.05);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-          mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom,
+  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+mask-image: linear-gradient(to bottom,
+  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+}
+/* === FINAL BIO SKY + TEXT POLISH === */
+
+/* 1. Sky color + subtle dark fades top/bottom */
+:root {
+  --bio-sky: #DFE2E9 !important;
+}
+#bio {
+  background: linear-gradient(
+    180deg,
+    rgba(15,20,27,0.95) 0%,
+    var(--bio-sky) 12%,
+    var(--bio-sky) 88%,
+    rgba(15,20,27,0.95) 100%
+  );
+}
+
+/* 2. Remove forced hyphens + justify cleanup */
+#bio .bio-text p {
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  -moz-hyphens: none !important;
+  -ms-hyphens: none !important;
+  text-align: left !important;
+  text-justify: none !important;
+  word-break: normal !important;
+}
+
+/* 3. Keep photo blend smooth */
+#bio .bio-photo img {
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
 }
 </style>
 </head>
