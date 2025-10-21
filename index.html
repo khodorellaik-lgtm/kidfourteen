@@ -842,7 +842,7 @@ body.js .reveal{
   :is(#bio, section#bio.section) .bio-photo{
 width:clamp(500px,36vw,700px) !important;   /* slightly smaller */
     height:auto !important;
-margin-top:-200px !important;               /* lift photo higher */
+margin-top:-190px !important;               /* lift photo higher */
     overflow:hidden;
   }
 
@@ -894,7 +894,36 @@ object-position:center 20%;                 /* raise visible frame a bit more */
 /* nuke any pseudo deco on quote */
 :is(#bio, section#bio.section) .bio-quote::before,
 :is(#bio, section#bio.section) .bio-quote::after{ content:none !important; display:none !important }
-    
+    /* BIO — keep quote above the photo and add clearance */
+:is(#bio, section#bio.section) .bio-quote{
+  position: relative;
+  z-index: 3;         /* quote always on top */
+}
+
+:is(#bio, section#bio.section) .bio-photo{
+  position: relative;
+  z-index: 1;         /* photo under the quote */
+}
+
+/* Desktop: lift photo, but create top padding so it doesn't hide the quote */
+@media (min-width:900px){
+  :is(#bio, section#bio.section) .bio-grid{
+    padding-top: 140px;     /* clearance that matches the lift */
+  }
+  :is(#bio, section#bio.section) .bio-photo{
+    margin-top:-220px !important;  /* was -240px; slightly less to reduce overlap */
+  }
+  :is(#bio, section#bio.section) .bio-photo img{
+    object-position: center 18%;   /* keep the head vertically aligned with text */
+    animation: k14BioKen 20s ease-in-out infinite alternate; /* keep Ken Burns */
+  }
+}
+
+/* Mobile: no lift/overlap */
+@media (max-width:899px){
+  :is(#bio, section#bio.section) .bio-grid{ padding-top: 0; }
+  :is(#bio, section#bio.section) .bio-photo{ margin-top: 0 !important; }
+}
 </style>
 </head>
 <body>
