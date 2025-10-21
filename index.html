@@ -1000,6 +1000,30 @@ section#bio.section .bio-card .bio-quote .muted{
   opacity:.72 !important;
   color:#222 !important;
 }
+    /* === bio quote: compact 2-line magazine layout === */
+section#bio.section .bio-quote {
+  max-width: 28ch !important;        /* narrower = natural line break */
+  font-size: clamp(22px, 2.6vw, 32px) !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.005em !important;
+  margin: 40px 0 24px !important;    /* centers it visually with the image */
+  text-align: left !important;
+  color: #111 !important;
+  position: relative !important;
+}
+section#bio.section .bio-quote em {
+  font-style: normal !important;
+}
+
+/* Bandcamp line */
+section#bio.section .bio-quote .muted {
+  display: block !important;
+  margin-top: 10px !important;
+  font-size: 0.9em !important;
+  opacity: 0.72 !important;
+  color: #222 !important;
+}
 </style>
 </head>
 <body>
