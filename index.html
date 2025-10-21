@@ -140,9 +140,13 @@ CLEAN CODE
     /* ===== Bio ===== */
     .bio-grid{display:grid; gap:28px; align-items:center}
     @media(min-width:900px){.bio-grid{grid-template-columns:1.2fr .8fr}}
-    .bio-photo{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:12px; overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04),0 0 40px rgba(127,234,209,.08)}
-    .bio-photo img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:4/5}
+    .bio-photo{
+  background:none; border:0; border-radius:0; overflow:visible; box-shadow:none;
+}
+    .bio-photo img{   display:block;   width:100%;   height:auto;   object-fit:cover;   aspect-ratio:3/4; /* a touch taller */ }
+    @media (min-width:900px){
+  .bio-photo{ transform: scale(1.4); transform-origin: center top; }
+}
     /* Bio photo: bigger + gentle Ken Burns (desktop only) */
 @media (min-width:900px){
   /* make the photo card feel larger without changing layout flow */
@@ -169,19 +173,32 @@ CLEAN CODE
 }
 
 
-    .bio-quote{
-      display:inline-block; margin:0 auto 24px; padding:18px 26px; border-left:3px solid var(--accent);
-      border-radius:14px; font-size:clamp(18px,2.2vw,20px); line-height:1.7; font-style:italic; color:var(--text);
-      background:linear-gradient(180deg,rgba(26,34,48,.6),rgba(26,34,48,.3)); box-shadow:0 2px 18px rgba(0,0,0,.25);
-      text-align:center; position:relative; max-width:700px
-    }
-    .bio-quote::before,.bio-quote::after{position:absolute; pointer-events:none; color:var(--accent); opacity:.18; font-family:Georgia,serif}
-    .bio-quote::before{content:"“"; left:14px; top:-10px; font-size:38px}
-    .bio-quote::after{content:"”"; right:14px; bottom:-14px; font-size:32px}
+   .bio-quote{
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.6;
+  text-align: center;
+  color: #000;
+  margin: 0 auto 40px;
+  max-width: 720px;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+.bio-quote::before,
+.bio-quote::after{ content: none; }
 
-    .bio-card{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:16px; padding:24px 26px;
-      box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04); backdrop-filter:blur(6px)}
-    .prose p{margin:0 0 14px}
+.bio-source{
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-size: 0.9em;
+  color: rgba(0,0,0,.6);
+}
+
+   
+    .prose{ color:#000; } .prose p{ margin:0 0 14px; }
     .prose em{font-style:italic}
     /* --- Bio text clean justification (safe) --- */
 #bio .bio-card .prose p{
@@ -802,6 +819,24 @@ body.js .reveal{
 @media (prefers-reduced-motion: reduce){
   #press::before{ animation:none }
 }
+    /* BIO: sky background with dark fades at top/bottom */
+:root{
+  --bio-sky: #a9c7da; /* tweak to match your photo’s sky */
+}
+
+#bio{
+  /* smooth merge with other sections */
+  background:
+    linear-gradient(180deg,
+      rgba(15,20,27,.95) 0%,
+      var(--bio-sky) 18%,
+      var(--bio-sky) 82%,
+      rgba(15,20,27,.95) 100%);
+  color:#000;
+}
+    /* comfortable reading width + safe gap */
+#bio .bio-text{ max-width: 70ch; }
+@media(min-width:900px){ .bio-grid{ column-gap: 34px; } }
 </style>
 </head>
 <body>
@@ -932,13 +967,14 @@ body.js .reveal{
     <div class="wrap">
       <h2>Bio</h2>
 
-    <p class="bio-quote" style="--d:.00s;">
-  <em>“A midnight ritual of noise-pop confession and electronic pulse.”</em>
-  <br><span class="muted">— Bandcamp Daily</span>
-</p>
+   blockquote class="bio-quote" style="--d:.00s;">
+  “A midnight ritual of noise-pop<br>
+  confession and electronic pulse.”
+  <br><span class="bio-source">— Bandcamp Daily</span>
+</blockquote>
 
       <div class="bio-grid">
-        <div class="bio-card reveal" style="--d:.10s;">
+        <div class="bio-text">
           <div class="prose">
             <p class="dropcap">
               Kid Fourteen AKA Khodor Ellaik has been jumping trains and switching Genres ever since he was fronting the Lebanese cult punk band Beirut Scum Society, all the way back in 2010. Since starting his solo career in 2015, he has released 5 studio albums with musical genres that range from Synth Pop and Dark Wave to Ambient and Experimental Saxophone Soundscapes - all bound by his distinct sonic identity.
