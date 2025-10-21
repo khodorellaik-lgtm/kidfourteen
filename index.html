@@ -757,27 +757,18 @@ body.js .reveal{
   }
 }
 /* =========================================================
-   KID FOURTEEN — BIO (single clean block)
-   - Light sky background
-   - Quote: compact (narrow), always in normal flow
-   - Photo: larger, higher, Ken Burns with no white-edge flash
-   - Album chips: sharp rectangular blocks (not round)
-   - Links readable on light background
+   KID FOURTEEN — BIO (final, forced)
    ========================================================= */
 
 :is(#bio, section#bio.section){
-  position: relative;
-  isolation: isolate;
-  --bio-sky: #e9edf1;
-  background: var(--bio-sky);
-  color: #111;
+  position:relative; isolation:isolate;
+  --bio-sky:#e9edf1; background:var(--bio-sky); color:#111;
 }
 
-/* ultra-thin fades (top/bottom) */
+/* edge fades */
 :is(#bio, section#bio.section)::before,
 :is(#bio, section#bio.section)::after{
-  content:"";
-  position:absolute; left:0; width:100%; height:64px; pointer-events:none; z-index:0;
+  content:""; position:absolute; left:0; width:100%; height:64px; pointer-events:none; z-index:0;
 }
 :is(#bio, section#bio.section)::before{
   top:0;
@@ -792,33 +783,28 @@ body.js .reveal{
     radial-gradient(120% 80% at 50% 100%, rgba(127,234,209,.14) 0%, rgba(127,234,209,0) 55%);
 }
 
-/* grid layout */
+/* grid */
 :is(#bio, section#bio.section) .bio-grid{
   display:grid; gap:28px; align-items:start;
 }
-:is(#bio, section#bio.section) .bio-grid > *{ min-width:0; } /* avoid squeezing */
-
 @media (min-width:900px){
   :is(#bio, section#bio.section) .bio-grid{
-    /* Wider text column + bigger photo column */
-    grid-template-columns: minmax(56ch,1fr) clamp(580px,44vw,800px);
-    gap:40px;
+    grid-template-columns:minmax(56ch,1fr) clamp(640px,48vw,900px) !important; /* wider photo col */
+    gap:48px !important;
   }
 }
 
-/* --- Text card (no chrome) + safety nukes for old offsets --- */
+/* text card reset */
 :is(#bio, section#bio.section) .bio-card{
   background:none !important; border:0 !important; box-shadow:none !important;
-  margin-left:0 !important; padding:0 !important; width:auto !important; max-width:none !important;
+  margin:0 !important; padding:0 !important; width:auto !important; max-width:none !important;
 }
 :is(#bio, section#bio.section) .bio-card .prose{
-  margin-left:0 !important; padding-left:0 !important; width:auto !important; max-width:68ch;
+  max-width:68ch !important; padding:0 !important; margin:0 !important;
 }
-:is(#bio, section#bio.section) .bio-card .prose p{
-  color:#111; line-height:1.7; letter-spacing:.01em;
-}
+:is(#bio, section#bio.section) .bio-card .prose p{ color:#111; line-height:1.7; letter-spacing:.01em }
 
-/* Dropcap */
+/* dropcap */
 :is(#bio, section#bio.section) .bio-card .prose .dropcap:first-letter{
   float:left; font-weight:800; font-family:Georgia,"Times New Roman",serif;
   font-size:clamp(60px,9vw,95px); line-height:.85; padding:6px 10px 0 0; margin-right:12px; color:var(--accent);
@@ -827,117 +813,81 @@ body.js .reveal{
   text-shadow:0 0 18px rgba(127,234,209,.25); letter-spacing:-.02em;
 }
 
-/* --- Quote: compact, NEVER absolute positioned --- */
+/* ===== COMPACT QUOTE — force win ===== */
 :is(#bio, section#bio.section) .bio-quote{
-  position:static !important; left:auto !important; top:auto !important; transform:none !important;
-  display:block; z-index:auto !important; background:none !important; border:0 !important; box-shadow:none !important;
-  max-width:32ch;                /* compact */
-  margin:0 0 14px 0;
-  font-weight:800;
-  font-size:clamp(22px,2.6vw,34px);
-  line-height:1.2;
-  letter-spacing:.005em;
-  color:#111;
-  text-shadow:0 0 6px rgba(127,234,209,.14), 0 0 14px rgba(127,234,209,.08);
+  position:static !important; background:none !important; border:0 !important; box-shadow:none !important; padding:0 !important;
+  max-width:32ch !important;               /* magazine width */
+  width:max-content !important;            /* actually stay narrow */
+  margin:0 0 14px 0 !important;
+  font-weight:800 !important;
+  font-size:clamp(22px,2.6vw,34px) !important;
+  line-height:1.2 !important; letter-spacing:.005em !important; color:#111 !important;
+  text-shadow:0 0 6px rgba(127,234,209,.14), 0 0 14px rgba(127,234,209,.08) !important;
 }
-:is(#bio, section#bio.section) .bio-quote em{ font-style:normal; }
-:is(#bio, section#bio.section) .bio-quote .muted{ display:block; margin-top:.35em; font-size:.9em; opacity:.72; color:#222; }
+:is(#bio, section#bio.section) .bio-quote em{ font-style:normal !important; }
+:is(#bio, section#bio.section) .bio-quote .muted{ display:block !important; margin-top:.35em !important; font-size:.9em !important; opacity:.72 !important; color:#222 !important; }
 
-/* --- Photo: bigger + higher + Ken Burns with permanent bleed --- */
-@keyframes k14BioKen {
-  0%   { transform: scale(1.12) translate3d(-2%, -1%, 0); }
-  100% { transform: scale(1.18) translate3d( 2%,  1%, 0); }
-}
+/* ===== PHOTO — bigger + higher, edge-safe Ken Burns ===== */
+@keyframes k14BioKen{0%{transform:scale(1.12) translate3d(-2%,-1%,0)}100%{transform:scale(1.18) translate3d(2%,1%,0)}}
 
 :is(#bio, section#bio.section) .bio-photo{
   display:flex; overflow:hidden; border-radius:12px;
   background:rgba(255,255,255,.35); border:1px solid rgba(0,0,0,.05);
   box-shadow:0 8px 25px rgba(0,0,0,.1); backdrop-filter:blur(6px);
-  transform:none !important; /* kill legacy scale tricks */
 }
 :is(#bio, section#bio.section) .bio-photo img{
-  display:block; width:100%; height:100%; object-fit:cover; aspect-ratio:auto;
+  display:block; width:100%; height:100%; object-fit:cover;
 }
-
 @media (min-width:900px){
-  :is(#bio, section#bio.section) .bio-photo{ margin-top:-72px; } /* raise photo */
-  :is(#bio, section#bio.section) .bio-photo img{
-    transform:scale(1.12);              /* start zoomed so edges never show */
-    transform-origin:55% 40%;
-    animation:k14BioKen 20s ease-in-out infinite alternate;
-    will-change:transform;
-    backface-visibility:hidden;
+  :is(#bio, section#bio.section) .bio-photo{
+    width:clamp(640px,46vw,860px) !important;
+    height:clamp(600px,62vh,900px) !important;
+    margin-top:-110px !important;                 /* lift */
   }
-}
-@media (max-width:899px){
-  :is(#bio, section#bio.section) .bio-photo{ margin-top:0; }
+  :is(#bio, section#bio.section) .bio-photo img{
+    transform:scale(1.12); transform-origin:55% 40%;
+    animation:k14BioKen 20s ease-in-out infinite alternate;
+    will-change:transform; backface-visibility:hidden;
+  }
 }
 @media (prefers-reduced-motion:reduce){
   :is(#bio, section#bio.section) .bio-photo img{ animation:none !important; }
 }
 
-/* --- Chips: sharp rectangular blocks (not round) --- */
-:is(#bio, section#bio.section) .bio-chips{
-  display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;
-}
+/* ===== SHARP CHIPS ===== */
+:is(#bio, section#bio.section) .bio-chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px }
 :is(#bio, section#bio.section) .bio-chips a,
 :is(#bio, section#bio.section) .bio-chips .chip,
 :is(#bio, section#bio.section) .bio-chips .pill{
   display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 16px;
-  border-radius:4px !important;
+  padding:10px 16px; border-radius:4px !important;
   background:rgba(15,20,27,.92) !important;
   border:1px solid rgba(127,234,209,.35) !important;
-  color:#bff7ec !important;
-  font:700 12.5px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  color:#bff7ec !important; font:700 12.5px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
   letter-spacing:.03em; text-transform:uppercase; text-decoration:none !important;
   box-shadow:0 0 10px rgba(127,234,209,.12);
-  transition:transform .15s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+  transition:transform .15s ease, background .25s, border-color .25s, color .25s, box-shadow .25s;
 }
 :is(#bio, section#bio.section) .bio-chips a:hover,
 :is(#bio, section#bio.section) .bio-chips .chip:hover,
 :is(#bio, section#bio.section) .bio-chips .pill:hover{
   transform:translateY(-1px);
-  background:rgba(127,234,209,.22) !important;
-  border-color:var(--accent) !important;
-  color:#fff !important;
+  background:rgba(127,234,209,.22) !important; border-color:var(--accent) !important; color:#fff !important;
 }
 
-/* --- Links in bio text on light bg --- */
-:is(#bio, section#bio.section) .prose a{
-  color: var(--link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-:is(#bio, section#bio.section) .prose a:hover{
-  color: var(--accent);
-  text-decoration-thickness: 2px;
-}
+/* links readable on light bg */
+:is(#bio, section#bio.section) .prose a{ color:var(--link); text-decoration:underline; text-underline-offset:2px }
+:is(#bio, section#bio.section) .prose a:hover{ color:var(--accent); text-decoration-thickness:2px }
 
-/* --- Mobile stack --- */
+/* mobile stack */
 @media (max-width:899px){
-  :is(#bio, section#bio.section) .bio-grid{ grid-template-columns:1fr; gap:22px; }
-  :is(#bio, section#bio.section) .bio-card .prose{ max-width:none; }
+  :is(#bio, section#bio.section) .bio-grid{ grid-template-columns:1fr; gap:22px }
+  :is(#bio, section#bio.section) .bio-card .prose{ max-width:none }
 }
 
-/* --- FINAL SAFETY: kill any legacy absolute quote or left gutters --- */
-@media (min-width:900px){
-  :is(#bio, section#bio.section) .bio-card .prose .dropcap{ margin-top:2px; }
-}
+/* nuke any pseudo deco on quote */
 :is(#bio, section#bio.section) .bio-quote::before,
-:is(#bio, section#bio.section) .bio-quote::after{ content:none !important; display:none !important; }
-   
-
-/* Keep the body text wide/comfortable (in case any older rule squeezed it) */
-:is(#bio, section#bio.section) .bio-card .prose{
-  max-width:68ch !important; padding-left:0 !important; margin-left:0 !important;
-}
-
-/* 2) Lift the photo higher — hard specificity so it actually moves */
-@media (min-width:900px){
-  :is(#bio, section#bio.section) .bio-photo{ margin-top:-72px !important; } /* tweak -56 to -96 as you like */
-}
- 
+:is(#bio, section#bio.section) .bio-quote::after{ content:none !important; display:none !important }
     
 </style>
 </head>
