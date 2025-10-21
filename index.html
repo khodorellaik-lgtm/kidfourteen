@@ -847,6 +847,39 @@ section#bio.section .bio-quote{
   pointer-events: none !important;
   content: "";
 }
+/* decorative curled quotation marks */
+#bio .bio-quote::before,
+#bio .bio-quote::after{
+  position: absolute !important;
+  font-family: Georgia, serif !important;
+  font-weight: 700 !important;
+  font-size: 3.4em !important;
+  line-height: 0.4 !important;
+  color: rgba(127,234,209,.4) !important;
+  text-shadow:
+    0 0 8px rgba(127,234,209,.25),
+    0 0 18px rgba(127,234,209,.15) !important;
+  pointer-events: none !important;
+  content: "";
+}
+
+/* anchor the quote to the top of the bio grid (same as image top) */
+#bio .bio-grid { position: relative; }
+
+#bio .bio-quote {
+  position: absolute;
+  top: 0;            /* aligns to the bio image top */
+  left: 0;
+  margin: 0;
+  padding: 0 2rem 1.25rem 0;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  line-height: 1.35;
+  color: var(--text);
+  z-index: 2;
+}
 
 #bio .bio-quote::before{ content:"“" !important; left:-0.35em !important; top:-0.05em !important; }
 #bio .bio-quote::after { content:"”" !important; right:-0.25em !important; bottom:-0.2em !important; }
@@ -1023,6 +1056,18 @@ section#bio.section .bio-quote .muted {
   font-size: 0.9em !important;
   opacity: 0.72 !important;
   color: #222 !important;
+}
+
+
+.bio-quote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-10%); /* adjust if needed */
+  width: 100%;
+  text-align: left; /* or center if you prefer */
+  margin: 0;
+  padding: 0 1rem;
 }
 </style>
 </head>
