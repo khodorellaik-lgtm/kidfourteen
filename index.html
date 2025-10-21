@@ -526,11 +526,31 @@
 :is(#bio, section#bio.section) .bio-photo img{
   display:block; width:100%; height:100%; object-fit:cover;
 }
+#bio .bio-quote{
+  opacity:1 !important; transform:none !important; filter:none !important;
+  position:static !important;
+  margin-top: 110px;  /* fixed offset for alignment with image top */
+  margin-bottom:.5rem;
+  font-family: Georgia, serif !important;
+  font-style: italic; font-weight:400;
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  line-height:1.35; color:var(--text) !important;
+  max-width:48ch;
+}
+
 @media (min-width:900px){
   :is(#bio, section#bio.section) .bio-photo{
     width:clamp(500px,36vw,700px) !important;
     height:auto !important;
-    margin-top:-110px !important;              /* ← match the quote offset */
+    margin-top:-110px !important;  /* lift photo by the same offset (perfect alignment) */
+  }
+  :is(#bio, section#bio.section) .bio-photo img{
+    width:100%; height:auto; object-fit:cover;
+    object-position:center 18%;
+    transform:scale(1.08); transform-origin:center;
+    animation:k14BioKen 20s ease-in-out infinite alternate; will-change:transform;
+  }
+}
   }
   :is(#bio, section#bio.section) .bio-photo img{
     width:100%; height:auto; object-fit:cover;
@@ -574,18 +594,6 @@
 :is(#bio, section#bio.section) .bio-quote{ position:relative; z-index:3 }
 :is(#bio, section#bio.section) .bio-photo{ position:relative; z-index:1 }
 
-/* Quote: normal flow + exact placement */
-#bio .bio-quote{
-  opacity:1 !important; transform:none !important; filter:none !important;
-  position:static !important;
-  margin-top:110px;                            /* ← set the quote height */
-  margin-bottom:.5rem;
-  font-family: Georgia, serif !important;
-  font-style: italic; font-weight:400;
-  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
-  line-height:1.35; color:var(--text) !important;
-  max-width:48ch;
-}
 
 /* Decorative curled quotes */
 section#bio.section .bio-card .bio-quote::before{
