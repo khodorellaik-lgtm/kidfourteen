@@ -330,8 +330,21 @@
 
   /* bio – stronger photo + tidy text */
   .bio-grid{ display:grid; grid-template-columns:1fr; gap:18px; align-items:start }
-  .bio-photo{ max-width:92%; margin:0 auto; border-radius:14px }
-  .bio-text .prose .dropcap:first-letter{
+.bio-photo{
+  width:100%;
+  max-width:none !important;
+  margin:0 auto;
+  border-radius:0;
+  overflow:visible !important;
+}
+.bio-photo img{
+  display:block;
+  width:125%;
+  height:auto;
+  object-fit:cover;
+  transform:translateX(-8%);
+  filter:brightness(1.05);
+}  .bio-text .prose .dropcap:first-letter{
     font-size:56px; line-height:.9; padding:4px 8px 0 0; margin-right:10px
   }
   .bio-chips{ gap:8px; margin-top:12px }
