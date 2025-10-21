@@ -841,13 +841,16 @@ body.js .reveal{
 @media (min-width:900px){
   :is(#bio, section#bio.section) .bio-photo{
     width:clamp(640px,46vw,860px) !important;
-    height:clamp(600px,62vh,900px) !important;
-    margin-top:-110px !important;                 /* lift */
+    height:auto !important;               /* let image decide height */
+    margin-top:-40px !important;          /* lift a bit without cutting */
   }
   :is(#bio, section#bio.section) .bio-photo img{
-    transform:scale(1.12); transform-origin:55% 40%;
-    animation:k14BioKen 20s ease-in-out infinite alternate;
-    will-change:transform; backface-visibility:hidden;
+    width:100% !important;
+    height:auto !important;               /* no fixed box -> no crop */
+    object-fit:contain !important;        /* show the whole photo */
+    object-position:center top !important;
+    transform:none !important;            /* disable zoom that caused edge cut */
+    animation:none !important;
   }
 }
 @media (prefers-reduced-motion:reduce){
