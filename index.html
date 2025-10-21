@@ -955,6 +955,54 @@ object-position:center 20%;                 /* raise visible frame a bit more */
   :is(#bio, section#bio.section) .bio-grid{ padding-top: 0; }
   :is(#bio, section#bio.section) .bio-photo{ margin-top: 0 !important; }
 }
+    /* === BIO QUOTE — enable and style (overrides the old kill rule) === */
+section#bio.section .bio-card .bio-quote{
+  position:relative !important;
+  z-index:3 !important;
+  max-width:34ch !important;
+  margin:24px 0 28px !important;   /* pushes it a bit down */
+  font-weight:800 !important;
+  font-size:clamp(22px,2.6vw,34px) !important;
+  line-height:1.2 !important;
+  letter-spacing:.005em !important;
+  color:#111 !important;
+}
+
+section#bio.section .bio-card .bio-quote em{
+  font-style:normal !important;
+}
+
+/* curled opening quote */
+section#bio.section .bio-card .bio-quote::before{
+  content:"“" !important;
+  position:absolute !important;
+  left:-0.35em !important;
+  top:-0.05em !important;
+  font:700 3.4em/0.45 Georgia,serif !important;
+  color:rgba(127,234,209,.40) !important;
+  text-shadow:0 0 8px rgba(127,234,209,.25), 0 0 18px rgba(127,234,209,.15) !important;
+  pointer-events:none !important;
+}
+
+/* curled closing quote */
+section#bio.section .bio-card .bio-quote::after{
+  content:"”" !important;
+  position:absolute !important;
+  right:-0.25em !important;
+  bottom:-0.2em !important;
+  font:700 3.4em/0.45 Georgia,serif !important;
+  color:rgba(127,234,209,.40) !important;
+  text-shadow:0 0 8px rgba(127,234,209,.25), 0 0 18px rgba(127,234,209,.15) !important;
+  pointer-events:none !important;
+}
+
+section#bio.section .bio-card .bio-quote .muted{
+  display:block !important;
+  margin-top:.35em !important;
+  font-size:.9em !important;
+  opacity:.72 !important;
+  color:#222 !important;
+}
 </style>
 </head>
 <body>
