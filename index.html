@@ -816,17 +816,43 @@ body.js .reveal{
 
 /* ===== COMPACT QUOTE — force win ===== */
 :is(#bio, section#bio.section) .bio-quote{
-  position:static !important; background:none !important; border:0 !important; box-shadow:none !important; padding:0 !important;
-  max-width:32ch !important;               /* magazine width */
-  width:max-content !important;            /* actually stay narrow */
-  margin:0 0 14px 0 !important;
-  font-weight:800 !important;
-  font-size:clamp(22px,2.6vw,34px) !important;
-  line-height:1.2 !important; letter-spacing:.005em !important; color:#111 !important;
-  text-shadow:0 0 6px rgba(127,234,209,.14), 0 0 14px rgba(127,234,209,.08) !important;
+  position: relative;
+  z-index: 3;
+  margin-top: 60px;
+  margin-bottom: 28px;
+  max-width: 32ch;
+  font-weight: 800;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.2;
+  letter-spacing: .005em;
+  color: #111;
+  text-align: left;
+  text-indent: -0.25em;          /* small visual tuck for first line */
 }
-:is(#bio, section#bio.section) .bio-quote em{ font-style:normal !important; }
-:is(#bio, section#bio.section) .bio-quote .muted{ display:block !important; margin-top:.35em !important; font-size:.9em !important; opacity:.72 !important; color:#222 !important; }
+
+/* decorative curled quotation marks */
+:is(#bio, section#bio.section) .bio-quote::before,
+:is(#bio, section#bio.section) .bio-quote::after{
+  position: absolute;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 3em;
+  line-height: 0.5;
+  color: rgba(127,234,209,.4);   /* same accent hue, softer opacity */
+  pointer-events: none;
+}
+
+:is(#bio, section#bio.section) .bio-quote::before{
+  content: "“";
+  left: -0.4em;
+  top: -0.1em;
+}
+
+:is(#bio, section#bio.section) .bio-quote::after{
+  content: "”";
+  right: -0.3em;
+  bottom: -0.2em;
+}
 
 /* ===== PHOTO — bigger + higher, edge-safe Ken Burns ===== */
 @keyframes k14BioKen{0%{transform:scale(1.12) translate3d(-2%,-1%,0)}100%{transform:scale(1.18) translate3d(2%,1%,0)}}
