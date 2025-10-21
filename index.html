@@ -995,6 +995,33 @@ section#bio.section .bio-quote .muted {
   margin: 0;
   padding: 0 1rem;
 }
+    /* --- BIO QUOTE: restore visibility, font, and position (no absolute) --- */
+#bio .bio-quote{
+  /* kill any reveal/fade transforms that might be dimming it */
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+
+  /* put it back in normal flow and place it into the yellow area */
+  position: static !important;
+  margin-top: clamp(60px, 8vw, 140px);  /* move down until it lines up with image top */
+  margin-bottom: 0.5rem;
+
+  /* typeface */
+  font-family: Georgia, serif !important;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  line-height: 1.35;
+  color: var(--text) !important;
+  max-width: 48ch;
+}
+
+/* if you previously added padding to push content under an absolute quote,
+   reduce it so the paragraphs don't start too low */
+#bio .bio-grid{
+  padding-top: clamp(40px, 10vw, 110px);
+}
 </style>
 </head>
 <body>
