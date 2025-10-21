@@ -615,38 +615,7 @@ body.js .reveal{
 
 /* Album chips: center + slightly larger/nicer touch target */
    
-  /* === Bio album chips — FINAL (left-aligned compact pills) === */
-#bio .bio-card .bio-chips{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-start;   /* align with the paragraph */
-  gap:8px 10px;
-  max-width:700px;              /* same visual width as prose */
-  margin:16px 0 0;
-}
-
-#bio .bio-card .bio-chips .chip{
-  flex:0 0 auto;                /* do NOT stretch */
-  width:auto;
-  padding:6px 14px;
-  border-radius:999px;
-  background:rgba(127,234,209,.08);
-  border:1px solid rgba(127,234,209,.18);
-  color:var(--text);
-  font:700 12px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-  letter-spacing:.02em;
-  text-transform:none;          /* Title Case */
-  white-space:nowrap;
-  text-decoration:none;
-  transition:transform .18s ease, background .25s ease, border-color .25s ease, color .25s ease;
-}
-
-#bio .bio-card .bio-chips .chip:hover{
-  transform:translateY(-1px);
-  color:var(--accent);
-  border-color:var(--accent);
-  background:rgba(127,234,209,.14);
-}
+ 
 #shows .panel button {
   cursor: pointer;
 }
@@ -957,28 +926,7 @@ body.js .reveal{
 }
 :is(#bio, section#bio.section) .bio-quote::before,
 :is(#bio, section#bio.section) .bio-quote::after{ content:none !important; display:none !important; }
-    /* === BIO: force compact quote + lift photo (final, scoped, no stacking) === */
-
-/* 1) Compact quote — hits .bio-quote OR a plain blockquote in the bio text */
-:is(#bio, section#bio.section) .bio-card .bio-quote,
-:is(#bio, section#bio.section) .bio-card blockquote.bio-quote,
-:is(#bio, section#bio.section) .bio-card blockquote{
-  position:static !important;
-  background:none !important; border:0 !important; box-shadow:none !important; padding:0 !important;
-
-  max-width:32ch !important;             /* magazine-tight */
-  margin:0 0 14px 0 !important;
-  font-weight:800 !important;
-  font-size:clamp(22px, 2.6vw, 34px) !important;
-  line-height:1.2 !important;
-  letter-spacing:.005em !important;
-  color:#111 !important;
-  text-shadow:0 0 6px rgba(127,234,209,.14), 0 0 14px rgba(127,234,209,.08) !important;
-}
-:is(#bio, section#bio.section) .bio-card blockquote .muted{
-  display:block !important; margin-top:.35em !important;
-  font-size:.9em !important; opacity:.72 !important; color:#222 !important;
-}
+   
 
 /* Keep the body text wide/comfortable (in case any older rule squeezed it) */
 :is(#bio, section#bio.section) .bio-card .prose{
@@ -989,105 +937,8 @@ body.js .reveal{
 @media (min-width:900px){
   :is(#bio, section#bio.section) .bio-photo{ margin-top:-72px !important; } /* tweak -56 to -96 as you like */
 }
-  /* === BIO: free-scaling photo fix === */
-
-@media (min-width:900px){
-  /* allow the right column to expand beyond normal text width */
-  :is(#bio, section#bio.section) .bio-grid{
-    grid-template-columns: minmax(56ch,1fr) auto !important;
-    align-items: start;
-    gap: 60px;
-  }
-
-  /* control the photo box manually */
-  :is(#bio, section#bio.section) .bio-photo{
-    position: relative;
-    width: clamp(580px, 45vw, 600px) !important;  /* adjust this for wider/narrower */
-    height: clamp(600px, 65vh, 1000px) !important; /* adjust this for taller/shorter */
-    margin-top: -80px !important;                 /* move photo up/down */
-    overflow: hidden;
-    border-radius: 12px;
-    background: rgba(255,255,255,.35);
-    border: 1px solid rgba(0,0,0,.05);
-    box-shadow: 0 8px 25px rgba(0,0,0,.1);
-    backdrop-filter: blur(6px);
-  }
-
-  /* make the image fill the box */
-  :is(#bio, section#bio.section) .bio-photo img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 40%;
-    transform: scale(1.1);
-    transform-origin: center;
-    animation: k14BioKen 20s ease-in-out infinite alternate;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-}
-
-@media (prefers-reduced-motion: reduce){
-  :is(#bio, section#bio.section) .bio-photo img{ animation: none !important; }
-}
-
-/* gentle zoom pan */
-@keyframes k14BioKen {
-  0%   { transform: scale(1.1) translate3d(-2%, -1%, 0); }
-  100% { transform: scale(1.18) translate3d( 2%,  1%, 0); }
-}
-    /* === BIO: final dial-in — compact quote + bigger/higher photo (edge-safe) === */
-
-/* 1) Compact magazine-style quote (works for .bio-quote OR plain blockquote) */
-:is(#bio, section#bio.section) .bio-card .bio-quote,
-:is(#bio, section#bio.section) .bio-card blockquote{
-  position:static !important;
-  background:none !important; border:0 !important; box-shadow:none !important; padding:0 !important;
-  max-width:30ch !important;           /* tighter width */
-  margin:0 0 12px 0 !important;
-  font-weight:800 !important;
-  font-size:clamp(22px,3vw,36px) !important;
-  line-height:1.18 !important;
-  letter-spacing:.005em !important;
-  color:#111 !important;
-}
-:is(#bio, section#bio.section) .bio-card blockquote .muted{ font-size:.9em !important; opacity:.72 !important; }
-
-/* 2) Photo: decouple from grid, set explicit width/height + lift it */
-@media (min-width:900px){
-  /* let the right column size to our photo width */
-  :is(#bio, section#bio.section) .bio-grid{
-    grid-template-columns:minmax(56ch,1fr) auto !important;
-    gap:48px !important;
-  }
-
-  /* photo box controls (tweak these 3 values to taste) */
-  :is(#bio, section#bio.section) .bio-photo{
-    width: clamp(640px, 46vw, 860px) !important;  /* wider/narrower */
-    height: clamp(600px, 62vh, 900px) !important; /* taller/shorter */
-    margin-top: -110px !important;                /* move up/down */
-    overflow:hidden; border-radius:12px;
-    background:rgba(255,255,255,.35); border:1px solid rgba(0,0,0,.05);
-    box-shadow:0 8px 25px rgba(0,0,0,.1); backdrop-filter:blur(6px);
-  }
-
-  /* fill the box + Ken Burns with permanent bleed (no white edge) */
-  :is(#bio, section#bio.section) .bio-photo img{
-    width:100%; height:100% !important; object-fit:cover;
-    object-position:50% 42%;
-    transform:scale(1.12);
-    transform-origin:55% 40%;
-    animation:k14BioKen 20s ease-in-out infinite alternate;
-    will-change:transform; backface-visibility:hidden;
-  }
-}
-@media (prefers-reduced-motion:reduce){
-  :is(#bio, section#bio.section) .bio-photo img{ animation:none !important; }
-}
-@keyframes k14BioKen{
-  0%{transform:scale(1.12) translate3d(-2%,-1%,0)}
-  100%{transform:scale(1.18) translate3d(2%,1%,0)}
-}
+ 
+    
 </style>
 </head>
 <body>
@@ -1740,133 +1591,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('.album-banner-title');
   if (title) observer.observe(title);
 });
-</script>
-  <script>
-(() => {
-  const bio = document.getElementById('bio');
-  if (!bio) return;
 
-  /* 1) QUOTE: back in normal flow, no box, larger type, left above text */
-  const quote = bio.querySelector('.bio-quote');
-  if (quote) {
-    Object.assign(quote.style, {
-      position: 'static',
-      inset: 'auto',
-      transform: 'none',
-      margin: '0 0 22px 0',
-      maxWidth: '760px',
-      padding: '0',
-      background: 'none',
-      border: '0',
-      boxShadow: 'none',
-      textShadow: 'none',
-      zIndex: 'auto',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      fontSize: 'clamp(22px, 2.2vw, 30px)',
-      lineHeight: '1.35',
-      fontWeight: '600',
-      color: '#111',
-    });
-    // kill pseudo content look-alikes if they were injected earlier
-    quote.setAttribute('data-no-pseudos', '1');
-  }
-
-  /* 2) TEXT COLUMN: restore natural width (no card visuals) */
-  const card = bio.querySelector('.bio-card');
-  if (card) {
-    Object.assign(card.style, {
-      width: 'auto',
-      maxWidth: 'none',
-      padding: '0',
-      background: 'none',
-      border: '0',
-      boxShadow: 'none',
-      minWidth: '0',
-    });
-  }
-  const prose = bio.querySelector('.bio-card .prose');
-  if (prose) {
-    Object.assign(prose.style, {
-      width: 'auto',
-      maxWidth: 'none',
-      minWidth: '0',
-      color: '#111',
-    });
-  }
-
-  /* 3) GRID: keep the original split; don’t let photo squeeze text */
-  const grid = bio.querySelector('.bio-grid');
-  if (grid) {
-    grid.style.display = 'grid';
-    grid.style.gap = '28px';
-    grid.style.alignItems = 'start';
-    // desktop split
-    const applyDesktop = () => {
-      if (window.innerWidth >= 900) {
-        grid.style.gridTemplateColumns = '1.2fr .85fr';
-      } else {
-        grid.style.gridTemplateColumns = '1fr';
-      }
-    };
-    applyDesktop();
-    window.addEventListener('resize', applyDesktop, { passive: true });
-  }
-
-  const photo = bio.querySelector('.bio-photo');
-  if (photo) {
-    Object.assign(photo.style, {
-      marginTop: window.innerWidth >= 900 ? '0' : '0',
-      maxWidth: 'none',
-      minWidth: '0',
-    });
-  }
-
-  /* 4) EDGE FADES (top/bottom only): strong at edge → quick into sky */
-  // build two absolutely-positioned layers as children so they
-  // always render even if ::before/::after CSS was broken
-  const ensureEdgeLayer = (pos) => {
-    const id = pos === 'top' ? 'bio-edge-top' : 'bio-edge-bottom';
-    let layer = bio.querySelector(`#${id}`);
-    if (!layer) {
-      layer = document.createElement('div');
-      layer.id = id;
-      bio.prepend(layer);
-    }
-    Object.assign(layer.style, {
-      position: 'absolute',
-      left: '0',
-      right: '0',
-      height: window.innerWidth > 860 ? '72px' : '52px',
-      pointerEvents: 'none',
-      zIndex: '0',
-      top: pos === 'top' ? '0' : '',
-      bottom: pos === 'bottom' ? '0' : '',
-      backgroundImage:
-        pos === 'top'
-          ? 'linear-gradient(to bottom, rgba(15,20,27,0.85) 0%, rgba(15,20,27,0.20) 38%, rgba(15,20,27,0.00) 72%), radial-gradient(120% 80% at 50% 0%, rgba(127,234,209,0.16) 0%, rgba(127,234,209,0.00) 55%)'
-          : 'linear-gradient(to top, rgba(15,20,27,0.85) 0%, rgba(15,20,27,0.20) 38%, rgba(15,20,27,0.00) 72%), radial-gradient(120% 80% at 50% 100%, rgba(127,234,209,0.16) 0%, rgba(127,234,209,0.00) 55%)',
-      backgroundRepeat: 'no-repeat',
-    });
-    return layer;
-  };
-  const topLayer = ensureEdgeLayer('top');
-  const bottomLayer = ensureEdgeLayer('bottom');
-
-  const syncEdgeHeights = () => {
-    const h = window.innerWidth > 860 ? '72px' : '52px';
-    topLayer.style.height = h;
-    bottomLayer.style.height = h;
-  };
-  window.addEventListener('resize', syncEdgeHeights, { passive: true });
-
-  /* 5) Make sure the bio section itself is the sky w/ black text */
-  Object.assign(bio.style, {
-    position: 'relative',
-    isolation: 'isolate',
-    background: '#e9edf1',
-    color: '#111',
-  });
-})();
 </script>
 </body>
 </html>
