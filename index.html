@@ -745,93 +745,7 @@ body.js .reveal{
     background-size: 130% auto;
   }
 }
-/* =========================================================
-   KID FOURTEEN — BIO (final, forced)
-   ========================================================= */
 
-:is(#bio, section#bio.section){
-  position:relative; isolation:isolate;
-  --bio-sky:#e8ebee; background:var(--bio-sky); color:#111;
-  background: linear-gradient(to bottom, #e8ebee 0%, #e9edf1 90%);
-}
-
-/* edge fades */
-:is(#bio, section#bio.section)::before,
-:is(#bio, section#bio.section)::after{
-  content:""; position:absolute; left:0; width:100%; height:64px; pointer-events:none; z-index:0;
-}
-:is(#bio, section#bio.section)::before{
-  top:0;
-  background:
-    linear-gradient(to bottom, rgba(15,20,27,.9) 0%, rgba(15,20,27,0) 70%),
-    radial-gradient(120% 80% at 50% 0%, rgba(127,234,209,.14) 0%, rgba(127,234,209,0) 55%);
-}
-:is(#bio, section#bio.section)::after{
-  bottom:0;
-  background:
-    linear-gradient(to top, rgba(15,20,27,.9) 0%, rgba(15,20,27,0) 70%),
-    radial-gradient(120% 80% at 50% 100%, rgba(127,234,209,.14) 0%, rgba(127,234,209,0) 55%);
-}
-
-/* grid */
-:is(#bio, section#bio.section) .bio-grid{
-  display:grid; gap:28px; align-items:start;
-}
-@media (min-width:900px){
-  :is(#bio, section#bio.section) .bio-grid{
-    grid-template-columns:minmax(56ch,1fr) clamp(640px,48vw,900px) !important; /* wider photo col */
-    gap:48px !important;
-  }
-}
-
-/* text card reset */
-:is(#bio, section#bio.section) .bio-card{
-  background:none !important; border:0 !important; box-shadow:none !important;
-  margin:0 !important; padding:0 !important; width:auto !important; max-width:none !important;
-}
-:is(#bio, section#bio.section) .bio-card .prose{
-  max-width:68ch !important; padding:0 !important; margin:0 !important;
-}
-:is(#bio, section#bio.section) .bio-card .prose p{ color:#111; line-height:1.7; letter-spacing:.01em }
-
-/* dropcap */
-:is(#bio, section#bio.section) .bio-card .prose .dropcap:first-letter{
-  float:left; font-weight:800; font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(60px,9vw,95px); line-height:.85; padding:6px 10px 0 0; margin-right:12px; color:var(--accent);
-  background:linear-gradient(135deg,rgba(127,234,209,.25),rgba(127,234,209,0));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  text-shadow:0 0 18px rgba(127,234,209,.25); letter-spacing:-.02em;
-}
-
-
-/* anchor the quote to the top of the bio grid (same as image top) */
-#bio .bio-grid { position: relative; }
-
-#bio .bio-quote {
-  position: absolute;
-  top: 20px;            /* aligns to the bio image top */
-  left: 0;
-  margin: 0;
-  padding: 0 2rem 1.25rem 0;
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
-  line-height: 1.35;
-  color: var(--text);
-  z-index: 2;
-}
-
-#bio .bio-quote::before{ content:"“" !important; left:-0.35em !important; top:-0.05em !important; }
-#bio .bio-quote::after { content:"”" !important; right:-0.25em !important; bottom:-0.2em !important; }
-
-#bio .bio-quote .muted{
-  display:block !important;
-  margin-top:0.35em !important;
-  font-size:0.9em !important;
-  opacity:0.72 !important;
-  color:#222 !important;
-}
 /* ===== PHOTO — bigger + higher, edge-safe Ken Burns ===== */
 @keyframes k14BioKen{0%{transform:scale(1.12) translate3d(-2%,-1%,0)}100%{transform:scale(1.18) translate3d(2%,1%,0)}}
 
@@ -845,9 +759,9 @@ body.js .reveal{
 }
 @media (min-width:900px){
   :is(#bio, section#bio.section) .bio-photo{
-width:clamp(500px,36vw,700px) !important;   /* slightly smaller */
+    width:clamp(500px,36vw,700px) !important;   /* slightly smaller */
     height:auto !important;
-margin-top:-190px !important;               /* lift photo higher */
+    margin-top:-190px !important;               /* lift photo higher */
     overflow:hidden;
   }
 
@@ -855,7 +769,8 @@ margin-top:-190px !important;               /* lift photo higher */
     width:100%;
     height:auto;
     object-fit:cover;
-object-position:center 20%;                 /* raise visible frame a bit more */    transform:scale(1.08);
+    object-position:center 20%;                 /* raise visible frame a bit more */
+    transform:scale(1.08);
     transform-origin:center center;
     animation:k14BioKen 22s ease-in-out infinite alternate;
     will-change:transform;
@@ -896,22 +811,18 @@ object-position:center 20%;                 /* raise visible frame a bit more */
   :is(#bio, section#bio.section) .bio-card .prose{ max-width:none }
 }
 
-    /* BIO — keep quote above the photo and add clearance */
+/* BIO — keep quote above the photo and add clearance */
 :is(#bio, section#bio.section) .bio-quote{
   position: relative;
   z-index: 3;         /* quote always on top */
 }
-
 :is(#bio, section#bio.section) .bio-photo{
   position: relative;
   z-index: 1;         /* photo under the quote */
 }
 
-/* Desktop: lift photo, but create top padding so it doesn't hide the quote */
+/* Desktop: lift photo (no extra grid padding here; handled below) */
 @media (min-width:900px){
-  :is(#bio, section#bio.section) .bio-grid{
-    padding-top: 140px;     /* clearance that matches the lift */
-  }
   :is(#bio, section#bio.section) .bio-photo{
     margin-top:-220px !important;  /* was -240px; slightly less to reduce overlap */
   }
@@ -926,24 +837,27 @@ object-position:center 20%;                 /* raise visible frame a bit more */
   :is(#bio, section#bio.section) .bio-grid{ padding-top: 0; }
   :is(#bio, section#bio.section) .bio-photo{ margin-top: 0 !important; }
 }
-   /* Bio quote: push it down to align with image top (no absolute needed) */
+
+/* --- BIO QUOTE: clean layout + type (no absolute) --- */
 #bio .bio-quote{
-  position: static !important;        /* stop absolute positioning */
-  margin-top: clamp(40px, 7vw, 120px);/* move it down into the yellow box area */
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+
+  position: static !important;                       /* normal flow */
+  margin-top: clamp(60px, 8vw, 140px);               /* adjust to align with image top */
   margin-bottom: 0.5rem;
-  font-family: Georgia, serif;
+
+  font-family: Georgia, serif !important;
   font-style: italic;
   font-weight: 400;
   font-size: clamp(1.25rem, 2.2vw, 1.8rem);
   line-height: 1.35;
+  color: var(--text) !important;
   max-width: 48ch;
 }
 
-section#bio.section .bio-card .bio-quote em{
-  font-style:normal !important;
-}
-
-/* curled opening quote */
+/* Decorative curled quotes */
 section#bio.section .bio-card .bio-quote::before{
   content:"“" !important;
   position:absolute !important;
@@ -954,8 +868,6 @@ section#bio.section .bio-card .bio-quote::before{
   text-shadow:0 0 8px rgba(127,234,209,.25), 0 0 18px rgba(127,234,209,.15) !important;
   pointer-events:none !important;
 }
-
-/* curled closing quote */
 section#bio.section .bio-card .bio-quote::after{
   content:"”" !important;
   position:absolute !important;
@@ -967,14 +879,6 @@ section#bio.section .bio-card .bio-quote::after{
   pointer-events:none !important;
 }
 
-section#bio.section .bio-card .bio-quote .muted{
-  display:block !important;
-  margin-top:.35em !important;
-  font-size:.9em !important;
-  opacity:.72 !important;
-  color:#222 !important;
-}
-   
 /* Bandcamp line */
 section#bio.section .bio-quote .muted {
   display: block !important;
@@ -984,41 +888,7 @@ section#bio.section .bio-quote .muted {
   color: #222 !important;
 }
 
-
-.bio-quote {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(-10%); /* adjust if needed */
-  width: 100%;
-  text-align: left; /* or center if you prefer */
-  margin: 0;
-  padding: 0 1rem;
-}
-    /* --- BIO QUOTE: restore visibility, font, and position (no absolute) --- */
-#bio .bio-quote{
-  /* kill any reveal/fade transforms that might be dimming it */
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
-
-  /* put it back in normal flow and place it into the yellow area */
-  position: static !important;
-  margin-top: clamp(60px, 8vw, 140px);  /* move down until it lines up with image top */
-  margin-bottom: 0.5rem;
-
-  /* typeface */
-  font-family: Georgia, serif !important;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
-  line-height: 1.35;
-  color: var(--text) !important;
-  max-width: 48ch;
-}
-
-/* if you previously added padding to push content under an absolute quote,
-   reduce it so the paragraphs don't start too low */
+/* Global grid spacing so paragraphs don’t collide with quote */
 #bio .bio-grid{
   padding-top: clamp(40px, 10vw, 110px);
 }
