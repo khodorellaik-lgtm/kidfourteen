@@ -837,6 +837,65 @@ body.js .reveal{
     /* comfortable reading width + safe gap */
 #bio .bio-text{ max-width: 70ch; }
 @media(min-width:900px){ .bio-grid{ column-gap: 40px; } }
+  /* ==== BIO OVERRIDE PATCH (place at the very end) ==== */
+
+/* 1) Sky color + dark fades */
+:root{ --bio-sky: #b8c3cc !important; } /* adjust later if needed */
+
+section#bio{
+  background: linear-gradient(
+    180deg,
+    rgba(15,20,27,.95) 0%,
+    var(--bio-sky) 12%,
+    var(--bio-sky) 88%,
+    rgba(15,20,27,.95) 100%
+  ) !important;
+  color:#000 !important;
+}
+
+/* 2) Quote left, Georgia, no box */
+section#bio .bio-quote{
+  font-family: Georgia, "Times New Roman", serif !important;
+  text-align: left !important;
+  margin: 0 0 40px !important;
+  padding-left: 4% !important;
+  color:#000 !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+}
+
+/* 3) Chips = white rectangles with black border */
+section#bio .bio-text .bio-chips .chip{
+  padding:6px 14px !important;
+  border-radius:6px !important;   /* set to 0 for perfectly square */
+  background:#fff !important;
+  border:2px solid #000 !important;
+  color:#000 !important;
+  font-weight:700 !important;
+}
+section#bio .bio-text .bio-chips .chip:hover{
+  transform:translateY(-1px) !important;
+  background:#000 !important;
+  color:#fff !important;
+  border-color:#000 !important;
+}
+
+/* 4) Photo bigger and not clipped */
+section#bio .bio-photo{
+  overflow:visible !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+}
+section#bio .bio-photo img{
+  width:120% !important;               /* larger */
+  transform:translateX(-10%) !important;/* keep centered after widening */
+  aspect-ratio: 0.7 / 1 !important;     /* a bit taller */
+  object-fit:cover !important;
+}
+@media (min-width:900px){
+  section#bio .bio-photo{
+    transform: scale(1.6) !important;
+    transform-origin: center top !important;
+  }
+}
 </style>
 </head>
 <body>
