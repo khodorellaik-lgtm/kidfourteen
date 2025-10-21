@@ -840,9 +840,9 @@ body.js .reveal{
 }
 @media (min-width:900px){
   :is(#bio, section#bio.section) .bio-photo{
-    width:clamp(520px,38vw,720px) !important;
+width:clamp(500px,36vw,700px) !important;   /* slightly smaller */
     height:auto !important;
-    margin-top:-160px !important;     /* ⬆ lifts the photo higher */
+margin-top:-200px !important;               /* lift photo higher */
     overflow:hidden;
   }
 
@@ -850,8 +850,7 @@ body.js .reveal{
     width:100%;
     height:auto;
     object-fit:cover;
-    object-position:center 25%;       /* pulls visible area up (head higher) */
-    transform:scale(1.08);
+object-position:center 20%;                 /* raise visible frame a bit more */    transform:scale(1.08);
     transform-origin:center center;
     animation:k14BioKen 22s ease-in-out infinite alternate;
     will-change:transform;
