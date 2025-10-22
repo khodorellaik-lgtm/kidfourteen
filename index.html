@@ -965,6 +965,54 @@ margin: 0 0 12px !important;
 #bio .bio-photo img{
   object-position: center 58% !important;  /* show a bit higher in the frame */
 }
+    /* ==== BIO PHOTO — CROPPED & PANNABLE (FINAL) ==== */
+#bio .bio-photo{
+  position: relative;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  /* the key: create a crop box */
+  overflow: hidden !important;
+  aspect-ratio: 2 / 3;          /* keeps a portrait frame */
+  max-height: 86vh;             /* don’t grow past the viewport */
+}
+
+#bio .bio-photo img{
+  display: block;
+  width: 100% !important;
+  height: 100% !important;      /* the key: fill the crop box so we can pan */
+  object-fit: cover !important;
+  object-position: center 85% !important; /* pan down -> less sky, figure higher */
+  margin: 0 !important;
+  transform: none !important;
+
+  /* remove the gradient mask that adds “empty” sky at the top */
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* Bring the figure even closer to the text on small screens */
+@media (max-width: 700px){
+  #bio .bio-photo{
+    aspect-ratio: 3 / 4;
+    max-height: 70vh;
+  }
+  #bio .bio-photo img{
+    object-position: center 78% !important;
+  }
+}
+
+/* Hyphens/justification: turn off forced hyphenation + ragged-right */
+#bio .bio-text .prose p{
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  -moz-hyphens: none !important;
+  -ms-hyphens: none !important;
+  text-align: left !important;
+  text-justify: auto !important;
+}
 </style>
 </head>
 <body>
