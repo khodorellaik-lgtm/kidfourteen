@@ -529,6 +529,34 @@ footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:ce
   .pill{padding:9px 11px; font-size:14px}
 }
 @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
+   /* === FINAL: Bio photo crops + pans, sits closer to text === */
+#bio .bio-grid{ align-items:start; }            /* keep items aligned to the top */
+
+#bio .bio-photo{
+  position: relative;
+  overflow: hidden;                             /* crop box */
+  aspect-ratio: 2 / 3;                          /* portrait frame */
+  max-height: 86vh;                             /* don’t exceed viewport */
+  margin-top: -48px;                            /* pull photo up (tweak -30..-70) */
+}
+
+#bio .bio-photo img{
+  display: block;
+  width: 100%;
+  height: 100%;                                 /* fill the crop box */
+  object-fit: cover;                            /* enable panning */
+  object-position: center 90%;                  /* raise subject (lower = more sky) */
+  margin: 0 !important;
+  transform: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* Optional: slightly different crop on narrow screens */
+@media (max-width: 700px){
+  #bio .bio-photo{ aspect-ratio: 3 / 4; max-height: 72vh; margin-top: -36px; }
+  #bio .bio-photo img{ object-position: center 84%; }
+}
 </style>
 </head>
 <body>
