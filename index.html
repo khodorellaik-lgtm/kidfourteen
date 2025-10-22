@@ -149,18 +149,6 @@
   box-shadow:none;
   transform:none;
 }
-.bio-photo img{
-  display:block;
-  width:160%;
-  max-width:none;
-  height:auto;
-  object-fit:cover;
-  object-position:center top;
-  transform:none !important;
-  margin-left:-25%;
-  filter:brightness(1.05);
-  transition:transform .4s ease, filter .4s ease;
-}
 
 .bio-photo:hover img{
   transform:scale(1.03);
@@ -371,16 +359,6 @@
   box-shadow:none !important;
   overflow:visible !important;
 }
-.bio-photo img{
-  display:block;
-  width:125%;
-  height:auto;
-  object-fit:cover;
-  transform:translateX(-8%);
-  filter:brightness(1.05);
-}  .bio-text .prose .dropcap:first-letter{
-    font-size:56px; line-height:.9; padding:4px 8px 0 0; margin-right:10px
-  }
   .bio-chips{ gap:8px; margin-top:12px }
   .bio-chips .chip{ padding:6px 10px; font-size:11px }
 
@@ -905,42 +883,6 @@ body.js .reveal{
   font-family: Georgia, "Times New Roman", serif;
 }
 
-
-
-    /* === FINAL BIO FIX — clean + minimal === */
-
-/* 1. Proper quote curls (centered, no overflow) */
-#bio .bio-quote {
-  position: relative;
-  display: inline-block;
-  font-style: italic;
-  font-family: Georgia, "Times New Roman", serif;
-  text-align: left;
-  color: #000;
-  margin: 0 0 24px;
-  font-size: clamp(20px, 2.2vw, 26px);
-  line-height: 1.7;
-  max-width: 60ch;
-}
-#bio .bio-quote::before,
-#bio .bio-quote::after {
-  position: absolute;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.8em;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.35);
-  pointer-events: none;
-}
-#bio .bio-quote::before {
-  content: "“";
-  left: -0.25em;
-  top: -0.1em;
-}
-#bio .bio-quote::after {
-  content: "”";
-  right: -0.25em;
-  bottom: -0.1em;
-}
 /* === CLEAN FINAL BIO IMAGE FIX === */
 #bio .bio-photo {
   position: relative;
