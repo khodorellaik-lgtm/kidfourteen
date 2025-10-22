@@ -151,15 +151,20 @@
 }
 .bio-photo img{
   display:block;
-  width:155%;
+  width:160%;
   max-width:none;
   height:auto;
   object-fit:cover;
-  aspect-ratio:2/3;
-  transform:translateX(-18%);
+  object-position:center top;
+  transform:none !important;
+  margin-left:-25%;
   filter:brightness(1.05);
+  transition:transform .4s ease, filter .4s ease;
 }
-  .bio-photo:hover{ transform:scale(1.5); }
+
+.bio-photo:hover img{
+  transform:scale(1.03);
+  filter:brightness(1.1);
 }
 
 /* Chips: white rectangles with black border */
