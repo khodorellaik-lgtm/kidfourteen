@@ -195,10 +195,9 @@
     }
     #bio .bio-text .bio-chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
   
-    .reveal{opacity:1; transform:none}
-    body.js .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease,transform .6s ease; transition-delay:var(--d,0s)}
-    body.js .reveal.is-visible{opacity:1; transform:none}
-
+  .reveal{opacity:1; transform:none}
+body.js .reveal{opacity:1; transform:none; transition:none}
+body.js .reveal.is-visible{opacity:1; transform:none}
     /* ===== Press ===== */
     .press-seen{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:8px; margin-bottom:14px; color:var(--muted); font-size:13px}
     .press-seen .seen-badge{
@@ -814,14 +813,16 @@
       rgba(15,20,27,.95) 100%);
   color:#000;
 }
-   #bio .bio-quote{
+  #bio .bio-quote{
   font-family: Georgia, "Times New Roman", serif;
   text-align: left;
   color:#000;
-  margin: 0 0 24px;
+  margin: 0 0 12px !important;   /* was 24px */
   font-size: clamp(20px, 2.2vw, 26px);
   line-height: 1.7;
   max-width: 60ch;
+  position: relative;            /* NEW: anchors ::before/::after */
+  display: inline-block;         /* NEW: keeps curls tight to text width */
 }
     /* comfortable reading width + safe gap */
 #bio .bio-text{ max-width: 70ch; }
