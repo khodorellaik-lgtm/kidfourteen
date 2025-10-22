@@ -685,24 +685,6 @@
     opacity:.5; filter: blur(.6px) brightness(1.15);
   }
 }
-/* --- Disable reveal everywhere, except keep it for the Bio quote --- */
-.reveal,
-body.js .reveal{
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-}
-
-/* Keep a soft fade just for the Bio quote */
-.bio-quote{
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity .6s ease, transform .6s ease;
-}
-.bio-quote.is-visible{
-  opacity: 1;
-  transform: none;
-}
 
 /* Album chips: center + slightly larger/nicer touch target */
    
@@ -907,6 +889,75 @@ body.js .reveal{
 #bio .bio-photo:hover img {
   transform: scale(1.03);
   filter: brightness(1.08);
+}
+    /* === HARD OVERRIDE: Fix quote + mobile layout === */
+
+/* 1️⃣ Neutralize any reveal/fade scripts */
+.bio-quote,
+.bio-quote.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* 2️⃣ Ensure quotes display correctly */
+#bio .bio-quote {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #000;
+  margin: 0 0 40px;
+  padding-left: 0.5em;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.7;
+  max-width: 60ch;
+}
+#bio .bio-quote::before,
+#bio .bio-quote::after {
+  position: absolute;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8em;
+  line-height: 1;
+  color: rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+#bio .bio-quote::before {
+  content: "“";
+  left: -0.25em;
+  top: -0.1em;
+}
+#bio .bio-quote::after {
+  content: "”";
+  right: -0.25em;
+  bottom: -0.1em;
+}
+
+/* 3️⃣ Mobile layout fix (photo first, text second) */
+@media (max-width: 700px) {
+  #bio .bio-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  #bio .bio-photo {
+    order: -1;  /* move photo above text */
+    transform: none !important;
+    margin: 0 auto;
+  }
+  #bio .bio-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center top;
+    margin: 0;
+  }
+  #bio .bio-text {
+    text-align: left;
+    max-width: 92%;
+    margin: 0 auto;
+  }
 }
 </style>
 </head>
