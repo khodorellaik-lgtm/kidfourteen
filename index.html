@@ -335,12 +335,24 @@
   .vol{ width:100% }
   #playlist.playlist{ max-height:220px; padding-right:4px }
 
-  /* bio – stronger photo + tidy text */
-  .bio-grid{
+ /* --- BIO GRID FIX --- */
+#bio .wrap{
+  max-width:none !important;
+  padding-inline:clamp(4vw, 8vw, 12vw);
+}
+
+.bio-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:minmax(340px, 0.9fr) minmax(400px, 1.2fr);
   align-items:center;
-  gap:40px;
+  gap:60px;
+}
+
+@media (max-width:800px){
+  .bio-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
 }
 
 @media (min-width:900px){
@@ -905,37 +917,9 @@ body.js .reveal{
   color: rgba(0,0,0,.35);
   font-family: Georgia, "Times New Roman", serif;
 }
-    /* === Bio photo: larger + soft blend with sky === */
-#bio .bio-photo {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  transform: scale(1.3);
-  transform-origin: center top;
-  margin-top: -20px;
-}
 
-/* Image: gentle fade into background */
-#bio .bio-photo img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  filter: brightness(0.98) contrast(1.02) saturate(1.05);
-  mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-  transition: transform 0.8s ease, filter 0.8s ease;
-}
 
-/* Slight zoom-on-hover for life */
-#bio .bio-photo:hover img {
-  transform: scale(1.04);
-  filter: brightness(1.03) saturate(1.1);
-}
+
     /* === FINAL BIO FIX — clean + minimal === */
 
 /* 1. Proper quote curls (centered, no overflow) */
@@ -970,61 +954,44 @@ body.js .reveal{
   right: -0.25em;
   bottom: -0.1em;
 }
-
-/* 2. Bio photo bigger + blend softly with sky */
+/* === CLEAN FINAL BIO IMAGE FIX === */
 #bio .bio-photo {
-  overflow: hidden;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  transform: scale(1.35);
-  transform-origin: center top;
-  margin-top: -10px;
+  position: relative;
+  overflow: visible !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  margin: 0 !important;
 }
+
 #bio .bio-photo img {
   display: block;
-  width: 100%;
+  width: 155%;
+  max-width: none !important;
   height: auto;
   object-fit: cover;
-  filter: brightness(0.98) contrast(1.04) saturate(1.05);
+  object-position: center top;
+  transform: none !important;
+  margin-left: -28%;
+  filter: brightness(1.05) contrast(1.04) saturate(1.05);
   -webkit-mask-image: linear-gradient(to bottom,
-  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-mask-image: linear-gradient(to bottom,
-  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-}
-/* === FINAL BIO SKY + TEXT POLISH === */
-
-/* 1. Sky color + subtle dark fades top/bottom */
-:root {
-  --bio-sky: #DFE2E9 !important;
-}
-#bio {
-  background: linear-gradient(
-    180deg,
-    rgba(15,20,27,0.95) 0%,
-    var(--bio-sky) 12%,
-    var(--bio-sky) 88%,
-    rgba(15,20,27,0.95) 100%
-  );
-}
-
-/* 2. Remove forced hyphens + justify cleanup */
-#bio .bio-text p {
-  hyphens: none !important;
-  -webkit-hyphens: none !important;
-  -moz-hyphens: none !important;
-  -ms-hyphens: none !important;
-  text-align: left !important;
-  text-justify: none !important;
-  word-break: normal !important;
-}
-
-/* 3. Keep photo blend smooth */
-#bio .bio-photo img {
-  -webkit-mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 15%,
+    rgba(0,0,0,1) 85%,
+    rgba(0,0,0,0) 100%);
   mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 15%,
+    rgba(0,0,0,1) 85%,
+    rgba(0,0,0,0) 100%);
+  transition: transform .4s ease, filter .4s ease;
+}
+
+#bio .bio-photo:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.08);
 }
 </style>
 </head>
