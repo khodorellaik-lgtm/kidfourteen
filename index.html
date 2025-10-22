@@ -850,161 +850,37 @@ body.js .reveal.is-visible{opacity:1; transform:none}
   font-family: Georgia, "Times New Roman", serif;
 }
 
-/* === CLEAN FINAL BIO IMAGE FIX === */
-#bio .bio-photo {
-  position: relative;
-  overflow: visible !important;
-  border: none !important;
-  border-radius: 0 !important;
-  background: none !important;
-  box-shadow: none !important;
-  transform: none !important;
-  margin: 0 !important;
-}
-
-#bio .bio-photo img {
-  display: block;
-  width: 155%;
-  max-width: none !important;
-  height: auto;
-  object-fit: cover;
-  object-position: center top;
-  transform: none !important;
-  margin-left: -28%;
-  filter: brightness(1.05) contrast(1.04) saturate(1.05);
-  -webkit-mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,1) 15%,
-    rgba(0,0,0,1) 85%,
-    rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to bottom,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,1) 15%,
-    rgba(0,0,0,1) 85%,
-    rgba(0,0,0,0) 100%);
-  transition: transform .4s ease, filter .4s ease;
-}
-
-#bio .bio-photo:hover img {
-  transform: scale(1.03);
-  filter: brightness(1.08);
-}
-    /* === HARD OVERRIDE: Fix quote + mobile layout === */
-
-/* 1️⃣ Neutralize any reveal/fade scripts */
-.bio-quote,
-.bio-quote.is-visible {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-}
-
-/* 2️⃣ Ensure quotes display correctly */
-#bio .bio-quote {
-  position: relative;
-  display: inline-block;
-  font-style: italic;
-  font-family: Georgia, "Times New Roman", serif;
-  color: #000;
-margin: 0 0 12px !important;
-  padding-left: 0.5em;
-  font-size: clamp(20px, 2.2vw, 26px);
-  line-height: 1.7;
-  max-width: 60ch;
-}
-#bio .bio-quote::before,
-#bio .bio-quote::after {
-  position: absolute;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.8em;
-  line-height: 1;
-  color: rgba(0,0,0,0.35);
-  pointer-events: none;
-}
-#bio .bio-quote::before {
-  content: "“";
-  left: -0.25em;
-  top: -0.1em;
-}
-#bio .bio-quote::after {
-  content: "”";
-  right: -0.25em;
-  bottom: -0.1em;
-}
-
-/* 3️⃣ Mobile layout fix (photo first, text second) */
-@media (max-width: 700px) {
-  #bio .bio-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-  }
-  #bio .bio-photo {
-    order: -1;  /* move photo above text */
-    transform: none !important;
-    margin: 0 auto;
-  }
-  #bio .bio-photo img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center top;
-    margin: 0;
-  }
-  #bio .bio-text {
-    text-align: left;
-    max-width: 92%;
-    margin: 0 auto;
-  }
-}
-    /* === FINAL TWEAK: bring the bio photo closer to the text === */
-#bio .bio-photo{
-  margin-top: -60px !important;   /* pull the whole photo upward */
-}
-#bio .bio-photo img{
-  object-position: center 58% !important;  /* show a bit higher in the frame */
-}
-    /* ==== BIO PHOTO — CROPPED & PANNABLE (FINAL) ==== */
-#bio .bio-photo{
+/* BIO photo — single source of truth (desktop + mobile) */
+section#bio .bio-grid > figure.bio-photo{
   position: relative;
   margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-
-  /* the key: create a crop box */
-  overflow: hidden !important;
-  aspect-ratio: 2 / 3;          /* keeps a portrait frame */
-  max-height: 86vh;             /* don’t grow past the viewport */
+  overflow: hidden !important;     /* crop box */
+  aspect-ratio: 2 / 3;
+  max-height: 86vh;
 }
 
-#bio .bio-photo img{
+section#bio .bio-grid > figure.bio-photo > img{
   display: block;
   width: 100% !important;
-  height: 100% !important;      /* the key: fill the crop box so we can pan */
+  height: 100% !important;
   object-fit: cover !important;
-  object-position: center 85% !important; /* pan down -> less sky, figure higher */
+  object-position: center 90% !important; /* raise figure (try 88–92) */
   margin: 0 !important;
   transform: none !important;
-
-  /* remove the gradient mask that adds “empty” sky at the top */
   -webkit-mask-image: none !important;
   mask-image: none !important;
 }
 
-/* Bring the figure even closer to the text on small screens */
+/* Mobile fine-tune */
 @media (max-width: 700px){
-  #bio .bio-photo{
-    aspect-ratio: 3 / 4;
-    max-height: 70vh;
-  }
-  #bio .bio-photo img{
-    object-position: center 78% !important;
-  }
+  section#bio .bio-grid > figure.bio-photo{ aspect-ratio: 3 / 4; max-height: 70vh; }
+  section#bio .bio-grid > figure.bio-photo > img{ object-position: center 82% !important; }
 }
 
-/* Hyphens/justification: turn off forced hyphenation + ragged-right */
+/* Turn off hyphenation + ragged-right */
 #bio .bio-text .prose p{
   hyphens: none !important;
   -webkit-hyphens: none !important;
@@ -1013,6 +889,7 @@ margin: 0 0 12px !important;
   text-align: left !important;
   text-justify: auto !important;
 }
+
 </style>
 </head>
 <body>
