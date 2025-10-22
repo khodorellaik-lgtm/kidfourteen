@@ -137,8 +137,12 @@
     @media (max-width:640px){.player-shell{grid-template-columns:1fr}.vol{width:100px}}
 
   /* ===== Bio ===== */
-.bio-grid{display:grid; gap:28px; align-items:center}
-@media (min-width:900px){ .bio-grid{ grid-template-columns:1.2fr .8fr } }
+.bio-grid{
+  display:grid;
+  gap:28px;
+  align-items:start;
+  margin-top:12px;
+}@media (min-width:900px){ .bio-grid{ grid-template-columns:1.2fr .8fr } }
 
 
 /* Chips: white rectangles with black border */
