@@ -420,19 +420,27 @@ footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:ce
 
 /* Photo — single source of truth (crop + pan) */
 section#bio .bio-grid > figure.bio-photo{
-  position:relative; margin:0; border:0; border-radius:0; box-shadow:none; background:none;
-  overflow:hidden; aspect-ratio:2/3; max-height:86vh; align-self:start; margin-top:-50px;
+  position: relative;
+  z-index: 1;                 /* lets it overlap the quote area if needed */
+  margin: 0;
+  border: 0; border-radius: 0; box-shadow: none; background: none;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  max-height: 86vh;
+  align-self: start;
+  margin-top: -160px;         /* was -50px — pull the whole photo up */
 }
+
 section#bio .bio-grid > figure.bio-photo > img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 60% !important; /* move figure up */
-  margin:0;
-  transform:none;
-  -webkit-mask-image:none !important;    /* kill the fade */
-  mask-image:none !important;            /* kill the fade */
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 80% !important;  /* was 60% — show less sky, figure higher */
+  margin: 0;
+  transform: none;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
 }
 
 /* Mobile BIO */
