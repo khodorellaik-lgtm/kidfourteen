@@ -452,15 +452,16 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .pill{padding:9px 11px; font-size:14px}
 }
 @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
-/* ---------- Press ---------- */
+/* ---------- Press (light sky version) ---------- */
 #press {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background: #DFE2E9; /* match Bio background */
-  color: #111; /* ensure contrast */
+  color: #111; /* switch to dark text */
 }
 
+/* Dragon image — brighter, more visible */
 #press::before {
   content: "";
   position: absolute;
@@ -468,68 +469,56 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   z-index: 0;
   pointer-events: none;
   background: url('DRAGON.png') center center / clamp(680px, 70vw, 950px) auto no-repeat;
-  opacity: 0.28; /* subtle and balanced */
-  mix-blend-mode: overlay; /* softly merges with sky tone */
-  filter: brightness(1.1) contrast(1.05) saturate(1.1);
+  opacity: 0.55; /* stronger presence */
+  mix-blend-mode: multiply; /* vivid but natural */
+  filter: brightness(1.2) contrast(1.25) saturate(1.25);
   animation: k14DragonFloat 18s ease-in-out infinite alternate;
 }
 
+/* Fade gradient moved to end of Press */
 #press::after {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: -1;
+  bottom: -1px; left: 0; right: 0;
+  height: 240px;
+  background: linear-gradient(to bottom, rgba(223,226,233,0), rgba(15,20,27,1));
+  z-index: 1;
   pointer-events: none;
-  background: none !important; /* remove any dark gradient */
 }
 
-/* Dragon movement */
+/* Dragon float animation */
 @keyframes k14DragonFloat {
-  0% {
-    transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02);
-  }
-  100% {
-    transform: translate3d(1.5%, 1%, 0) rotate(2deg) scale(1.05);
-  }
+  0% { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
+  100% { transform: translate3d(1.5%, 1%, 0) rotate(2deg) scale(1.05); }
 }
-@media (prefers-reduced-motion:reduce){#press::before{animation:none}}
 
-.press-seen{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:8px; margin-bottom:14px; color:var(--muted); font-size:13px}
-.press-seen .seen-badge{
-  display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(127,234,209,.1);
-  border:1px solid rgba(127,234,209,.25); color:var(--accent); text-transform:uppercase; font-weight:700; letter-spacing:.02em;
-  backdrop-filter:blur(6px) saturate(180%); -webkit-backdrop-filter:blur(6px) saturate(180%);
-  transition:background .3s ease,color .3s ease,border-color .3s ease,transform .2s ease
+/* Text elements inside press now use dark palette */
+#press h2, 
+#press h3, 
+#press p, 
+#press a, 
+#press .source, 
+#press blockquote {
+  color: #111 !important;
 }
-.press-seen .seen-badge:hover{background:var(--accent); color:var(--bg); border-color:var(--accent); transform:translateY(-1px)}
 
-.press-grid{display:block; margin-top:16px}
-.press-grid.masonry{column-count:3; column-gap:24px}
-@media (max-width:900px){.press-grid.masonry{column-count:2}}
-@media (max-width:600px){.press-grid.masonry{column-count:1}}
-.press-grid.masonry .press-card{display:inline-block; width:100%; break-inside:avoid; margin:0 0 24px}
-
-.press-card{position:relative; background:rgba(18,24,33,.58); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:28px;
-  box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.05);
-  backdrop-filter:blur(10px) saturate(150%); -webkit-backdrop-filter:blur(10px) saturate(150%);
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease; overflow:hidden}
-.press-card:hover{transform:translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,.55),0 0 0 1px rgba(127,234,209,.25); border-color:var(--accent); background:rgba(18,24,33,.72)}
-.press-badge{
-  display:inline-block; background:rgba(127,234,209,.1); border:1px solid rgba(127,234,209,.25); color:var(--accent);
-  font-size:13px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:14px;
-  backdrop-filter:blur(6px) saturate(180%); -webkit-backdrop-filter:blur(6px) saturate(180%);
-  box-shadow:0 0 8px rgba(127,234,209,.1);
-  transition:background .4s,color .3s,border-color .3s,box-shadow .3s,transform .25s
+/* Press badges + cards slightly lighter */
+.press-card {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px) saturate(120%);
 }
-.press-card blockquote{font-style:italic; font-size:15px; color:var(--text); margin:0; line-height:1.6; position:relative}
-.press-card blockquote::before{content:"“"; font-size:42px; line-height:0; position:absolute; left:-8px; top:-8px; color:var(--accent); opacity:.25}
-.press-card .source{text-align:right; font-size:13px; color:var(--muted); margin-top:16px}
-.press-card .source a{color:var(--muted); transition:color .3s}
-.press-card .source a:hover{color:var(--accent)}
-.press-card blockquote.clamp{-webkit-line-clamp:4; -webkit-box-orient:vertical; display:-webkit-box; overflow:hidden; max-height:calc(1.6em*4 + 6px)}
-.press-card.expanded blockquote.clamp{-webkit-line-clamp:unset; max-height:none}
-.quote-more{margin-top:12px; background:none; border:0; color:var(--link); font-weight:700; cursor:pointer; padding:0; text-decoration:none}
-.quote-more:hover{opacity:.85}
+.press-badge {
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #000;
+}
+.press-badge:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
 </style>
 </head>
 <body>
