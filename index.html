@@ -36,7 +36,7 @@
   --bg:#0f141b; --bg-soft:#121821; --text:#e6eaef; --muted:#9fb0c3;
   --chip:#1a2230; --chip-border:#243040; --accent:#7fead1; --link:#8bc6ff;
   --nav-h:64px;
-  --bio-sky:#E3E6ED; /* Bio sky */
+  --bio-sky:##DFE2E9; /* Bio sky */
 }
 
 /* ---------- Base ---------- */
@@ -345,6 +345,8 @@ section#bio .bio-grid > figure.bio-photo{
 section#bio .bio-grid > figure.bio-photo > img{
   display:block; width:100%; height:100%; object-fit:cover; object-position:center 100%;
   margin:0; transform:none; -webkit-mask-image:none; mask-image:none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 16%, rgba(0,0,0,1) 86%, rgba(0,0,0,0) 100%);
+mask-image:         linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 16%, rgba(0,0,0,1) 86%, rgba(0,0,0,0) 100%);
 }
 
 /* Mobile BIO */
