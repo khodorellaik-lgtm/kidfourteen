@@ -363,17 +363,19 @@ footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:ce
 
 /* BIO photo — stable, no overlap */
 section#bio .bio-grid > figure.bio-photo{
-  position: relative;
-  margin: 0;                     /* no pull-up */
-  border: 0; border-radius: 0; box-shadow: none; background: none;
-  overflow: hidden;
-  aspect-ratio: 2 / 3;
-  max-height: clamp(520px, 86vh, 980px);  /* caps extremes so it won’t jump */
-  align-self: start;
-  margin-top: 0 !important;      /* kill any previous negative margin */
-  z-index: auto !important;      /* don’t float above/below incorrectly */
+  position:relative;
+  z-index:1;
+  margin:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:none;
+  overflow:hidden;
+  aspect-ratio:2/3;
+  max-height:86vh;
+  align-self:start;
+  margin-top:-160px; /* or -50px depending on your last value */
 }
-
 section#bio .bio-grid > figure.bio-photo > img{
   display: block;
   width: 100%;
