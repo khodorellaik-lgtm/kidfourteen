@@ -452,16 +452,16 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .pill{padding:9px 11px; font-size:14px}
 }
 @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
-/* ---------- Press (light sky version) ---------- */
+/* ---------- Press (light glass version) ---------- */
 #press {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #DFE2E9; /* match Bio background */
-  color: #111; /* switch to dark text */
+  background: #DFE2E9; /* same tone as Bio sky */
+  color: #111; /* darker text */
 }
 
-/* Dragon image — brighter, more visible */
+/* Dragon image — visible but soft */
 #press::before {
   content: "";
   position: absolute;
@@ -469,13 +469,13 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   z-index: 0;
   pointer-events: none;
   background: url('DRAGON.png') center center / clamp(680px, 70vw, 950px) auto no-repeat;
-  opacity: 0.55; /* stronger presence */
-  mix-blend-mode: multiply; /* vivid but natural */
-  filter: brightness(1.2) contrast(1.25) saturate(1.25);
+  opacity: 0.55; /* clear but balanced */
+  mix-blend-mode: multiply;
+  filter: brightness(1.15) contrast(1.2) saturate(1.2);
   animation: k14DragonFloat 18s ease-in-out infinite alternate;
 }
 
-/* Fade gradient moved to end of Press */
+/* Fade gradient now only at bottom of Press */
 #press::after {
   content: "";
   position: absolute;
@@ -486,38 +486,49 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   pointer-events: none;
 }
 
-/* Dragon float animation */
-@keyframes k14DragonFloat {
-  0% { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
-  100% { transform: translate3d(1.5%, 1%, 0) rotate(2deg) scale(1.05); }
+/* Glass-style cards on light background */
+.press-card {
+  position: relative;
+  background: rgba(255,255,255,0.25); /* translucent frosted glass */
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  color: #111;
+}
+.press-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
 }
 
-/* Text elements inside press now use dark palette */
+/* Press badge — subtle but still accent */
+.press-badge {
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #111;
+}
+.press-badge:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* Text inside cards */
 #press h2, 
 #press h3, 
 #press p, 
 #press a, 
-#press .source, 
-#press blockquote {
+#press blockquote, 
+#press .source {
   color: #111 !important;
 }
 
-/* Press badges + cards slightly lighter */
-.press-card {
-  background: rgba(255,255,255,0.5);
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  backdrop-filter: blur(6px) saturate(120%);
-}
-.press-badge {
-  background: rgba(0,0,0,0.05);
-  border: 1px solid rgba(0,0,0,0.1);
-  color: #000;
-}
-.press-badge:hover {
-  background: #000;
-  color: #fff;
-  border-color: #000;
+/* Dragon float motion */
+@keyframes k14DragonFloat {
+  0% { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
+  100% { transform: translate3d(1.5%, 1%, 0) rotate(2deg) scale(1.05); }
 }
 </style>
 </head>
