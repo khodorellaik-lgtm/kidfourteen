@@ -140,6 +140,87 @@ h2{font-size:clamp(26px,3vw,36px)}
     .track{padding:10px 12px; border:1px solid var(--chip-border); border-radius:10px; background:rgba(255,255,255,.03); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
     .track:hover{border-color:var(--accent); color:var(--accent)}
     .track.is-active{background:rgba(127,234,209,.12); border-color:var(--accent)}
+  /* === Playlist: stacked layout + durations === */
+#playlist.playlist{
+  display:block;
+  grid-template-columns:none;
+  gap:0;
+  counter-reset:track;
+  max-height:260px;
+  overflow:auto;
+  padding-right:4px;
+}
+/* slim scrollbar (webkit) */
+#playlist.playlist::-webkit-scrollbar{width:8px}
+#playlist.playlist::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.12);
+  border-radius:8px;
+}
+/* rows with right-aligned durations */
+#playlist .track{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 14px 10px 52px;
+  margin-bottom:6px;
+  border-radius:10px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight:400; font-size:15.5px; letter-spacing:.1px;
+  color:rgba(230,234,239,.95);
+  transition:all .18s ease;
+}
+#playlist .track .duration{
+  font-size:13px; font-weight:400;
+  color:rgba(200,220,230,.7);
+  margin-left:auto; letter-spacing:.3px;
+  pointer-events:none; /* keep row clickable */
+}
+#playlist .track:hover .duration,
+#playlist .track.is-active .duration{ color:var(--accent); opacity:.9 }
+#playlist .track.is-active::after{ right:52px }
+
+/* === Wallpaper player (Ken Burns + vignette) === */
+.k14-player.wallpaper{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate; /* keep layers under UI */
+}
+.k14-player.wallpaper::before{
+  content:"";
+  position:absolute; inset:-6%;
+  z-index:0; pointer-events:none;
+  background-image:var(--player-wallpaper, url('kidfourteen_live_2022.jpg'));
+  background-size:var(--wallpaper-zoom, 120%);
+  background-position:var(--face-x, 55%) var(--face-y, 60%);
+  filter:saturate(108%) contrast(104%) brightness(86%);
+  opacity:var(--player-wallpaper-opacity, .42);
+  animation:k14Ken 18s ease-in-out infinite alternate;
+  will-change:transform, background-position;
+}
+.k14-player.wallpaper::after{
+  content:"";
+  position:absolute; inset:-2px; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(80% 65% at var(--face-x,55%) var(--face-y,60%),
+      rgba(0,0,0,.06), rgba(0,0,0,.28) 60%, rgba(0,0,0,.42) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.35));
+}
+/* keep UI above wallpaper layers */
+.k14-player.wallpaper > *{ position:relative; z-index:1 }
+
+@keyframes k14Ken{
+  0%{   transform:translate3d(-3%, -1.5%, 0) scale(1.03) }
+  100%{ transform:translate3d( 3%,  1.5%, 0) scale(1.05) }
+}
+/* Respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .k14-player.wallpaper::before{ animation:none }
+}
     @media (max-width:640px){.player-shell{grid-template-columns:1fr}.vol{width:100px}}
 /* ---------- Albums Banner ---------- */
 .album-banner{position:relative; text-align:center; margin:12px 0 36px; pointer-events:none}
