@@ -287,115 +287,6 @@ h2{font-size:clamp(26px,3vw,36px)}
 }
 .presskit-glow:hover{transform:scale(1.08); text-shadow:0 0 20px rgba(127,234,209,.6), 0 0 40px rgba(127,234,209,.4), 0 0 80px rgba(127,234,209,.3); color:#9ffff0}
 
-/* ===== PRESS — light “BIO sky” theme (replaces old press block) ===== */
-
-/* same sky as BIO */
-#press{
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg,
-      rgba(15,20,27,.95) 0%,
-      var(--bio-sky) 12%,
-      var(--bio-sky) 88%,
-      rgba(15,20,27,.95) 100%);
-  color:#0b1220; /* dark readable text on light sky */
-}
-
-/* Dragon layer (now works on light background) */
-#press::before{
-  content:"";
-  position:absolute; inset:-2% 0;
-  z-index:-1; pointer-events:none;
-
-  background:
-    url('DRAGON.png') center center /
-    clamp(680px, 70vw, 950px) auto no-repeat;
-
-  opacity:.45;                               /* subtle by default */
-  mix-blend-mode:multiply;                   /* invert behavior for light bg */
-  filter:
-    contrast(1.05)
-    brightness(0.95)
-    saturate(1.1);
-  transform: translate3d(0,0,0) scale(1.03);
-  animation:k14DragonFloat 18s ease-in-out infinite alternate;
-}
-
-/* gentle vignette to keep text/cards legible on light bg */
-#press::after{
-  content:"";
-  position:absolute; inset:0; z-index:-1; pointer-events:none;
-  background:
-    radial-gradient(110% 85% at 20% 30%, rgba(255,255,255,.55), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.15));
-}
-
-/* Cards: light glass on light sky */
-#press .press-card{
-  background: rgba(255,255,255,.78);
-  border:1px solid rgba(0,0,0,.08);
-  color:#10161f;
-  border-radius:16px;
-  padding:28px;
-  box-shadow:
-    0 10px 22px rgba(15,20,27,.10),
-    0 0 0 1px rgba(255,255,255,.3) inset;
-  backdrop-filter: blur(10px) saturate(130%);
-  -webkit-backdrop-filter: blur(10px) saturate(130%);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
-}
-
-#press .press-card:hover{
-  transform: translateY(-4px);
-  box-shadow:
-    0 16px 32px rgba(15,20,27,.18),
-    0 0 0 1px rgba(127,234,209,.35);
-  border-color: rgba(0,0,0,.14);
-  background: rgba(255,255,255,.88);
-}
-
-/* badge + accents tuned for light bg */
-#press .press-badge{
-  display:inline-block;
-  background: rgba(127,234,209,.15);
-  border:1px solid rgba(127,234,209,.35);
-  color: var(--accent);
-  font-size:13px; font-weight:700; letter-spacing:.02em;
-  padding:5px 12px; border-radius:999px; margin-bottom:14px;
-  box-shadow:0 0 0 rgba(0,0,0,0);
-}
-#press .press-badge:hover{
-  background: rgba(127,234,209,.28);
-  border-color: var(--accent);
-  color:#0b1220;
-}
-
-/* quote + source colors for light theme */
-#press .press-card blockquote{ color:#1b2430; font-style:italic; margin:0; line-height:1.6 }
-#press .press-card blockquote::before{ content:"“"; font-size:42px; line-height:0; position:absolute; left:-8px; top:-8px; color:rgba(0,0,0,.2) }
-#press .press-card .source{ text-align:right; font-size:13px; color:#445366; margin-top:16px }
-#press .press-card .source a{ color:#3a516c; text-decoration:underline; text-decoration-color:rgba(58,81,108,.35) }
-#press .press-card .source a:hover{ color:var(--accent); text-decoration-color:var(--accent) }
-
-/* masonry keeps working */
-.press-grid{ display:block; margin-top:16px }
-.press-grid.masonry{ column-count:3; column-gap:24px }
-@media (max-width:900px){ .press-grid.masonry{ column-count:2 } }
-@media (max-width:600px){ .press-grid.masonry{ column-count:1 } }
-.press-grid.masonry .press-card{ display:inline-block; width:100%; break-inside:avoid; margin:0 0 24px }
-
-/* motion */
-@keyframes k14DragonFloat{
-  0%   { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02) }
-  100% { transform: translate3d( 1.5%,  1%, 0) rotate( 2deg) scale(1.05) }
-}
-
-/* accessibility: respect reduced motion */
-@media (prefers-reduced-motion:reduce){
-  #press::before{ animation:none }
-}
 
 /* ---------- Footer ---------- */
 footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:center; color:var(--muted)}
@@ -559,6 +450,74 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .pill{padding:9px 11px; font-size:14px}
 }
 @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
+  /* ===== PRESS — light “BIO sky” theme ===== */
+#press{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      rgba(15,20,27,.95) 0%,
+      var(--bio-sky) 12%,
+      var(--bio-sky) 88%,
+      rgba(15,20,27,.95) 100%);
+  color:#0b1220;
+}
+
+/* Dragon for light background */
+#press::before{
+  content:"";
+  position:absolute; inset:-2% 0;
+  z-index:-1; pointer-events:none;
+  background:url('DRAGON.png') center center / clamp(680px,70vw,950px) auto no-repeat;
+  mix-blend-mode:multiply;
+  opacity:.4;
+  filter:contrast(1.1) brightness(0.95);
+  transform:scale(1.03);
+  animation:k14DragonFloat 18s ease-in-out infinite alternate;
+}
+@keyframes k14DragonFloat{
+  0%{transform:translate3d(-1%,-1%,0) rotate(-2deg) scale(1.02)}
+  100%{transform:translate3d(1.5%,1%,0) rotate(2deg) scale(1.05)}
+}
+
+#press .press-card{
+  background:rgba(255,255,255,.8);
+  border:1px solid rgba(0,0,0,.1);
+  color:#10161f;
+  border-radius:16px;
+  padding:28px;
+  box-shadow:0 10px 22px rgba(15,20,27,.1);
+  backdrop-filter:blur(10px) saturate(120%);
+  -webkit-backdrop-filter:blur(10px) saturate(120%);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+#press .press-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 32px rgba(15,20,27,.18);
+}
+
+#press .press-badge{
+  background:rgba(127,234,209,.18);
+  border:1px solid rgba(127,234,209,.4);
+  color:var(--accent);
+  padding:5px 12px;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+#press .press-badge:hover{
+  background:rgba(127,234,209,.3);
+  color:#0b1220;
+}
+
+#press .press-card blockquote{color:#1b2430;font-style:italic;line-height:1.6}
+#press .press-card .source{color:#445366}
+#press .press-card .source a{color:#3a516c;text-decoration:underline}
+#press .press-card .source a:hover{color:var(--accent)}
+
+#press a{color:var(--link)}
+#press a:hover{opacity:.85}
 </style>
 </head>
 <body>
