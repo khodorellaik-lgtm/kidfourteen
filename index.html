@@ -424,15 +424,22 @@ section#bio .bio-grid > figure.bio-photo{
   overflow:hidden; aspect-ratio:2/3; max-height:86vh; align-self:start; margin-top:-50px;
 }
 section#bio .bio-grid > figure.bio-photo > img{
-  display:block; width:100%; height:100%; object-fit:cover; object-position:center 150%;
-  margin:0; transform:none; -webkit-mask-image:none; mask-image:none;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 60% !important; /* move figure up */
+  margin:0;
+  transform:none;
+  -webkit-mask-image:none !important;    /* kill the fade */
+  mask-image:none !important;            /* kill the fade */
 }
 
 /* Mobile BIO */
 @media (max-width:700px){
   #bio .bio-grid{ display:flex; flex-direction:column; align-items:center; gap:28px; }
   section#bio .bio-grid > figure.bio-photo{ order:-1; aspect-ratio:3/4; max-height:70vh; margin-top:-36px; }
-  section#bio .bio-grid > figure.bio-photo > img{ object-position:center 84%; }
+  section#bio .bio-grid > figure.bio-photo > img{ object-position:center 70% !important; }
   #bio .bio-text{ text-align:left; max-width:92%; margin:0 auto; }
 }
 
