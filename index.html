@@ -655,14 +655,26 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press::after {
   background: none !important;
 }
-  /* --- Remove gradient fade between Bio and Press --- */
-#bio::after,
-#bio + .section::before,
-.section::after {
-  display: none !important;
-  background: none !important;
-  opacity: 0 !important;
-  height: 0 !important;
+/* --- Make Press Chips match Album Chips --- */
+.press-seen .seen-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.25s ease;
+}
+
+.press-seen .seen-badge:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-1px);
 }
 </style>
 </head>
