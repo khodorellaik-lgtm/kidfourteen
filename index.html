@@ -655,6 +655,15 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press::after {
   background: none !important;
 }
+  /* --- Remove gradient fade between Bio and Press --- */
+#bio::after,
+#bio + .section::before,
+.section::after {
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+}
 </style>
 </head>
 <body>
