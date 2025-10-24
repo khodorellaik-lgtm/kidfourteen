@@ -736,6 +736,22 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .press-badge,
 #press .press-seen .seen-badge,
 #press .source a { text-decoration: none !important; }
+  /* === Bottom fade for smooth blend from Press → Albums === */
+#press::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 240px; /* adjust to make the fade longer or shorter */
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,0) 0%,      /* transparent at top */
+    rgba(15,20,27,1) 100%        /* dark site background at bottom */
+  );
+  z-index: 2; /* stays above dragon, below content */
+}
 </style>
 </head>
 <body>
