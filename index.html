@@ -616,6 +616,45 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   0% { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
   100% { transform: translate3d(1.5%, 1%, 0) rotate(2deg) scale(1.05); }
 }
+  /* ===== FIX: restore visible press cards on light background ===== */
+#press {
+  background: #DFE2E9 !important;
+  color: #111 !important;
+}
+
+#press h2,
+#press p,
+#press blockquote,
+#press .source,
+#press .press-badge,
+#press .seen-badge {
+  color: #111 !important;
+}
+
+.press-card {
+  background: rgba(255, 255, 255, 0.45) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  color: #111 !important;
+}
+
+.press-badge,
+.seen-badge {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #111 !important;
+}
+
+#press a {
+  color: #111 !important;
+  text-decoration: underline;
+}
+
+#press::after {
+  background: none !important;
+}
 </style>
 </head>
 <body>
