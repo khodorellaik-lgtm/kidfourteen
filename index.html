@@ -516,39 +516,12 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   color: #e6eaef;
   transition: backdrop-filter 0.3s ease, background 0.3s ease;
 }
-  /* Remove any nested duplicate frame */
-#shows .shows-pane > div {
+ /* Prevent the hidden wrapper from adding a second box */
+#showsPanels {
   background: none !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-/* Optional hover enhancement */
-#shows .shows-pane:is(:not([hidden])):hover {
-  background: rgba(18, 24, 33, 0.68);
-  backdrop-filter: blur(14px) saturate(180%);
-}
-
-/* Keep lists tight & readable */
-#shows .shows-list li {
-  margin: 6px 0;
-  color: #e6eaef;
-}
-
-/* Button styling */
-#shows button#toggleFullHistory {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #e6eaef;
-  border-radius: 6px;
-  padding: 6px 14px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
-}
-#shows button#toggleFullHistory:hover {
-  background: rgba(255,255,255,0.25);
-  color: #fff;
+  padding: 0 !important;
 }
 /* ---------- Press (light frosted restored layout) ---------- */
 #press {
