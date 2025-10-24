@@ -481,25 +481,26 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
 
 
-  /* ---------- SHOWS — with "cover2.jpg" background ---------- */
+/* ---------- SHOWS — clearer, more visible "cover2.jpg" background ---------- */
 #shows {
   position: relative;
   isolation: isolate;
   background:
-    linear-gradient(to bottom, rgba(15,20,27,0.88), rgba(15,20,27,0.96)),
-    url('cover2.jpg') center center / cover no-repeat;
+    linear-gradient(to bottom, rgba(15,20,27,0.55), rgba(15,20,27,0.75)),
+    url('cover2.jpg') center 38% / 120% auto no-repeat;
+  /* ↑ lighter overlay, zoomed-out image for more clarity */
   background-attachment: fixed;
   color: #fff;
   overflow: hidden;
   z-index: 0;
 }
 
-/* Subtle vignette for contrast */
+/* Slight vignette for contrast around edges */
 #shows::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 35%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.9) 100%);
+  background: radial-gradient(circle at 50% 40%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.8) 100%);
   pointer-events: none;
   z-index: -1;
 }
