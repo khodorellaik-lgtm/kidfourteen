@@ -674,8 +674,12 @@ a.pill {
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   transition: all 0.25s ease;
   text-decoration: none;
+  cursor: pointer;               /* restores pointer for clickable chips */
+  position: relative;
+  z-index: 1;
 }
 
+/* Hover + active states */
 .chip:hover,
 .press-seen .seen-badge:hover,
 .press-badge:hover,
@@ -683,7 +687,17 @@ a.pill {
 a.pill:hover {
   background: #000;
   color: #fff;
+  border-color: #000;
   transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* Ensure links stay clickable inside press cards */
+.press-badge a,
+.press-seen .seen-badge a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
   /* --- Remove gradient fade between Bio and Press (definitive fix) --- */
 #bio::after,
