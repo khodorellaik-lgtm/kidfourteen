@@ -803,6 +803,11 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   opacity: 0.8;
   transform: translateY(-1px);
 }
+  .hero-bg {
+  transform: translate3d(0, var(--parallax, 0px), 0) !important;
+  transition: transform 0.08s ease-out;
+  will-change: transform;
+}
 </style>
 </head>
 <body>
@@ -1269,19 +1274,6 @@ const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.l
       });
     })();
 
-    // Shows history toggle
-    (() => {
-      const btn = document.getElementById('toggleFullHistory');
-      const box = document.getElementById('fullShowHistory');
-      if(!btn || !box) return;
-      btn.addEventListener('click', () => {
-        const open = box.hidden;
-        box.hidden = !open;
-        btn.setAttribute('aria-expanded', String(open));
-        btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
-      });
-    })();
-
     // Music Player
     (() => {
       const root = document.getElementById('k14Player');
@@ -1435,6 +1427,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('.album-banner-title');
   if (title) observer.observe(title);
 });
+    // Parallax background (throttled)
+  (() => {
+    const bg = document.querySelector('.hero-bg');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!bg || prefersReduced) return;
+    let ticking = false;
+    const update = () => {
+      bg.style.setProperty('--parallax', (window.scrollY * 1.2) + 'px');
+      ticking = false;
+    };
+    update();
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+
+  // Shows history toggle
+  (() => {
+    const btn = document.getElementById('toggleFullHistory');
+    const box = document.getElementById('fullShowHistory');
+    if (!btn || !box) return;
+    btn.addEventListener('click', () => {
+      const open = box.hidden;
+      box.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+    });
+  })();
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
