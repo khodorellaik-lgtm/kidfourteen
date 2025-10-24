@@ -1244,7 +1244,7 @@ const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.l
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!bg || prefersReduced) return;
       let ticking = false;
-      const update = () => { bg.style.setProperty('--parallax', (window.scrollY * 0.45) + 'px'); ticking = false; };
+      const update = () => { bg.style.setProperty('--parallax', (window.scrollY * 1.2) + 'px');
       update();
       window.addEventListener('scroll', () => {
         if (!ticking){ requestAnimationFrame(update); ticking = true; }
