@@ -713,6 +713,17 @@ a.pill:hover {
 #press a:hover { opacity: .85; }
 #press .press-badge { text-decoration: none !important; display: inline-block; }
 #press .source a { text-decoration: none !important; border: 0 !important; }
+  /* === FINAL FIX: kill slow transitions + hidden blurs on chips === */
+.chip, .press-badge, .press-seen .seen-badge, #bio .bio-chips a, a.pill {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background-clip: border-box !important;
+  transition: background-color 0.05s linear,
+              color 0.05s linear,
+              border-color 0.05s linear,
+              transform 0.1s ease !important;
+  will-change: background-color, color, border-color, transform;
+}
 </style>
 </head>
 <body>
