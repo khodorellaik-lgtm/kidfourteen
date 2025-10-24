@@ -699,22 +699,7 @@ a.pill:hover {
   text-decoration: none;
   cursor: pointer;
 }
-  /* --- Remove gradient fade between Bio and Press (definitive fix) --- */
-#bio::after,
-#bio::before,
-#bio + section::before,
-#bio + section::after,
-.section.reveal::after,
-.reveal::after,
-section[id="press"]::before {
-  background: none !important;
-  box-shadow: none !important;
-  filter: none !important;
-  opacity: 0 !important;
-  display: none !important;
-  height: 0 !important;
-  content: none !important;
-}
+
   /* Press: kill underlines on all links (badges + sources) */
 #press a {
   text-decoration: none !important;
@@ -736,33 +721,6 @@ section[id="press"]::before {
 #press .source a {
   text-decoration: none !important;
   border: 0 !important;
-}
-  /* === Restore the DRAGON background under Press === */
-#press {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background: #DFE2E9; /* same tone as bio */
-}
-
-/* Dragon overlay behind the cards */
-#press::before {
-  content: "";
-  position: absolute;
-  inset: -2% 0;
-  z-index: 0;
-  pointer-events: none;
-  background: url('DRAGON.png') center center / clamp(680px, 70vw, 950px) auto no-repeat;
-  opacity: 0.35; /* visible but subtle */
-  mix-blend-mode: multiply;
-  filter: brightness(1.05) contrast(1.1) saturate(1.2);
-  animation: k14DragonFloat 18s ease-in-out infinite alternate;
-}
-
-/* Dragon floating animation */
-@keyframes k14DragonFloat {
-  0% { transform: translate3d(-1%, -1%, 0) rotate(-2deg) scale(1.02); }
-  100% { transform: translate3d(1.5%, 1%, 0) rotate(2deg) scale(1.05); }
 }
 </style>
 </head>
