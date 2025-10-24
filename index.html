@@ -89,7 +89,6 @@ h2{font-size:clamp(26px,3vw,36px)}
   background:#0c1219 url('hero.jpg') center/cover no-repeat;
   transform:translate3d(0,var(--parallax,0px),0);
   will-change:transform; transition:transform .08s ease-out; z-index:-1;
-  animation:bgDrift 18s ease-in-out infinite alternate;
 }
 @keyframes bgDrift{
   0%{background-position:center}
@@ -102,7 +101,6 @@ h2{font-size:clamp(26px,3vw,36px)}
   font-weight:800; letter-spacing:.1em; text-transform:uppercase;
   font-size:clamp(64px,10vw,140px); text-align:center;
   text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
-  animation:neonPulse 4.2s ease-in-out infinite;
 }
 @keyframes neonPulse{
   0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
