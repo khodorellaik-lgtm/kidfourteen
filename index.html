@@ -715,6 +715,28 @@ section[id="press"]::before {
   height: 0 !important;
   content: none !important;
 }
+  /* Press: kill underlines on all links (badges + sources) */
+#press a {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
+
+/* Optional: a tiny hover cue without adding lines */
+#press a:hover {
+  opacity: .85;
+}
+
+/* Make sure the badge links never get underlines */
+#press .press-badge {
+  text-decoration: none !important;
+  display: inline-block;
+}
+
+/* Make sure the bottom “— Source” links don’t get lines either */
+#press .source a {
+  text-decoration: none !important;
+  border: 0 !important;
+}
 </style>
 </head>
 <body>
