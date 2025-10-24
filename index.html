@@ -486,8 +486,8 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   position: relative;
   isolation: isolate;
   background:
-    linear-gradient(to bottom, rgba(15,20,27,0.55), rgba(15,20,27,0.75)),
-    url('cover2.jpg') center 38% / 120% auto no-repeat;
+  linear-gradient(to bottom, rgba(15,20,27,0.35), rgba(15,20,27,0.55)),  /* was 0.55/0.75 */
+  url('cover2.jpg') center 38% / 115% auto no-repeat;
   /* ↑ lighter overlay, zoomed-out image for more clarity */
   background-attachment: fixed;
   color: #fff;
@@ -504,21 +504,21 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   pointer-events: none;
   z-index: -1;
 }
-  /* ---------- SHOWS pane: frosted glass effect ---------- */
-#shows .shows-pane {
+ /* ---------- SHOWS pane: frosted glass effect (only active pane) ---------- */
+#shows .shows-pane:is(:not([hidden])) {
   background: rgba(18, 24, 33, 0.55); /* transparent dark glass */
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  padding: 28px;
+  padding: 22px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
+ backdrop-filter: blur(16px) saturate(160%);
+-webkit-backdrop-filter: blur(16px) saturate(160%);
   color: #e6eaef;
   transition: backdrop-filter 0.3s ease, background 0.3s ease;
 }
 
-/* Optional: when you hover, a slightly clearer glass */
-#shows .shows-pane:hover {
+/* Optional hover enhancement */
+#shows .shows-pane:is(:not([hidden])):hover {
   background: rgba(18, 24, 33, 0.68);
   backdrop-filter: blur(14px) saturate(180%);
 }
@@ -529,7 +529,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   color: #e6eaef;
 }
 
-/* Button under the list */
+/* Button styling */
 #shows button#toggleFullHistory {
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.15);
@@ -540,7 +540,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   font-weight: 600;
   transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
 }
-
 #shows button#toggleFullHistory:hover {
   background: rgba(255,255,255,0.25);
   color: #fff;
