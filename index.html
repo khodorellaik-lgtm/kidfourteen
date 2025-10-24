@@ -782,6 +782,22 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     rgba(15,20,27,0) 100%     /* fades down to transparent (Albums bg) */
   );
 }
+  /* === Bottom fade for smooth transition from Albums → Shows === */
+#albums::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px; /* adjust between 140–200px for taste */
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(11,16,22,1) 0%,       /* dark from Albums */
+    rgba(15,20,27,0) 100%      /* fades into Shows bg */
+  );
+}
 //* Make "View Full Show History" look bolder + clickable */
 #toggleFullHistory {
   cursor: pointer;
