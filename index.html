@@ -550,27 +550,33 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 /* Masonry layout */
 .press-grid { display: block; margin-top: 16px; }
-.press-grid.masonry { column-count: 3; column-gap: 24px; }
+.press-grid.masonry { column-count: 3; column-gap: 18px; } /* was 24px */
 @media (max-width: 900px){ .press-grid.masonry{ column-count:2; } }
 @media (max-width: 600px){ .press-grid.masonry{ column-count:1; } }
-.press-grid.masonry .press-card { display: inline-block; width: 100%; break-inside: avoid; margin: 0 0 24px; }
+.press-grid.masonry .press-card {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 18px; /* was 24px */
+}
 
-/* Light frosted cards */
+/* Light frosted cards (tighter version) */
 .press-card {
   position: relative;
   background: rgba(255,255,255,0.25);
   border: 1px solid rgba(255,255,255,0.35);
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-radius: 0; /* keep sharp */
+  padding: 20px 22px; /* was 28px */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   color: #222;
 }
+
 .press-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  transform: translateY(-3px); /* slightly softer hover lift */
+  box-shadow: 0 10px 22px rgba(0,0,0,0.2);
   border-color: rgba(0,0,0,0.2);
 }
 
