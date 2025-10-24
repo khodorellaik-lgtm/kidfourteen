@@ -654,7 +654,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press::after {
   background: none !important;
 }
-/* === Universal Chip Style (Albums, Press, Socials, etc.) === */
+/* === Universal Chip Style (Albums, Press, Socials, etc.) — no lag === */
 .chip,
 .press-seen .seen-badge,
 .press-badge,
@@ -663,63 +663,56 @@ a.pill {
   display: inline-block;
   padding: 6px 14px;
   border-radius: 6px;
-  background: #fff;
+
+  /* use background-color (not 'background') to avoid animating images/gradients */
+  background-color: #fff;
   border: 2px solid #000;
   color: #000;
+
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.02em;
   text-transform: none;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  transition: all 0.06s ease;
-  cursor: pointer;               /* restores pointer for clickable chips */
+
+  /* only animate what we actually change */
+  transition:
+    background-color .08s linear,
+    color .08s linear,
+    border-color .08s linear,
+    transform .12s ease;
+
+  will-change: background-color, color, border-color, transform;
+
+  /* ensure no slow blur from older rules */
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+
+  text-decoration: none;
+  cursor: pointer;
   position: relative;
   z-index: 1;
 }
 
-/* Hover + active states */
 .chip:hover,
 .press-seen .seen-badge:hover,
 .press-badge:hover,
 #bio .bio-chips a:hover,
 a.pill:hover {
-  background: #000;
+  background-color: #000;
   color: #fff;
   border-color: #000;
   transform: translateY(-1px);
   text-decoration: none;
 }
 
-/* Ensure links stay clickable inside press cards */
+/* keep links clickable and un-underlined inside press cards */
 .press-badge a,
-.press-seen .seen-badge a {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-  /* Press: kill underlines on all links (badges + sources) */
-#press a {
-  text-decoration: none !important;
-  border-bottom: 0 !important;
-}
-
-/* Optional: a tiny hover cue without adding lines */
-#press a:hover {
-  opacity: .85;
-}
-
-/* Make sure the badge links never get underlines */
-#press .press-badge {
-  text-decoration: none !important;
-  display: inline-block;
-}
-
-/* Make sure the bottom “— Source” links don’t get lines either */
-#press .source a {
-  text-decoration: none !important;
-  border: 0 !important;
-}
+.press-seen .seen-badge a { color: inherit; text-decoration: none; cursor: pointer; }
+#press a { text-decoration: none !important; border-bottom: 0 !important; }
+#press a:hover { opacity: .85; }
+#press .press-badge { text-decoration: none !important; display: inline-block; }
+#press .source a { text-decoration: none !important; border: 0 !important; }
 </style>
 </head>
 <body>
