@@ -744,7 +744,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   /* === Rectangular chips (override the pill styles) === */
 .press-seen .seen-badge,
 .press-badge,
-#home .pill,
 #bio .bio-chips .chip {
   border-radius: 0 !important;
   background: #fff !important;
@@ -760,11 +759,22 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     color .05s linear,
     border-color .05s linear;
 }
+  /* --- Hero Social Pills: black base, white text, invert on hover --- */
+#home .pills .pill {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #000 !important;
+}
+
+#home .pills .pill:hover {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+}
 
 /* Hover (no transforms = snappy, no lag) */
 .press-seen .seen-badge:hover,
 .press-badge:hover,
-#home .pill:hover,
 #bio .bio-chips .chip:hover {
   background: #000 !important;
   color: #fff !important;
