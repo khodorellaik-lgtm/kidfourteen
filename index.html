@@ -1243,19 +1243,6 @@ const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.l
       }
     })();
 
-    // Parallax background (throttled)
-    (() => {
-      const bg = document.querySelector('.hero-bg');
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!bg || prefersReduced) return;
-      let ticking = false;
-      const update = () => { bg.style.setProperty('--parallax', (window.scrollY * 1.2) + 'px');
-      update();
-      window.addEventListener('scroll', () => {
-        if (!ticking){ requestAnimationFrame(update); ticking = true; }
-      }, { passive:true });
-    })();
-
     // Press: masonry + quote expand
     (() => {
       const grid = document.getElementById('pressGrid');
@@ -1427,25 +1414,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('.album-banner-title');
   if (title) observer.observe(title);
 });
-    // Parallax background (throttled)
-  (() => {
-    const bg = document.querySelector('.hero-bg');
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!bg || prefersReduced) return;
-    let ticking = false;
-    const update = () => {
-      bg.style.setProperty('--parallax', (window.scrollY * 1.2) + 'px');
-      ticking = false;
-    };
-    update();
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    }, { passive: true });
-  })();
-
+  
   // Shows history toggle
   (() => {
     const btn = document.getElementById('toggleFullHistory');
@@ -1458,9 +1427,38 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
     });
   })();
+</script> <!-- ✅ properly close the previous script -->
+
+<!-- ✅ New, standalone parallax script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const bg = document.querySelector(".hero-bg");
+  if (!bg) {
+    console.warn("⚠️ No .hero-bg found — parallax disabled");
+    return;
+  }
+
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReduced) return;
+
+  let ticking = false;
+
+  function updateParallax() {
+    const offset = window.scrollY * 0.4; // adjust intensity here
+    bg.style.setProperty("--parallax", offset + "px");
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  });
+
+  updateParallax(); // initial update
+});
 </script>
-</body>
-</html>
-</script>
+
 </body>
 </html>
