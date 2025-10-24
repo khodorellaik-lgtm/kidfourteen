@@ -527,19 +527,20 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 }
 .press-seen .seen-badge {
   display: inline-block;
-  padding: 6px 14px;
-  border-radius: 0;
+  padding: 3px 8px;             /* tighter */
+  border-radius: 0;             /* sharp corners */
   background: #fff;
   border: 2px solid #000;
   color: #000;
-  text-transform: none;
   font-weight: 700;
-  letter-spacing: .02em;
-  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  font-size: 12px;              /* slightly smaller text */
+  letter-spacing: 0.02em;
+  text-transform: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   transition:
-    background-color .05s linear,
-    color .05s linear,
-    border-color .05s linear;
+    background-color 0.05s linear,
+    color 0.05s linear,
+    border-color 0.05s linear;
 }
 .press-seen .seen-badge:hover {
   background: #111;
