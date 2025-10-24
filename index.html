@@ -685,6 +685,22 @@ a.pill:hover {
   color: #fff;
   transform: translateY(-1px);
 }
+  /* --- Remove gradient fade between Bio and Press (definitive fix) --- */
+#bio::after,
+#bio::before,
+#bio + section::before,
+#bio + section::after,
+.section.reveal::after,
+.reveal::after,
+section[id="press"]::before {
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 0 !important;
+  display: none !important;
+  height: 0 !important;
+  content: none !important;
+}
 </style>
 </head>
 <body>
