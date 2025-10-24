@@ -746,7 +746,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     color .05s linear,
     border-color .05s linear;
 }
-
 /* Hover (no transforms = snappy, no lag) */
 .press-seen .seen-badge:hover,
 .press-badge:hover,
@@ -760,20 +759,25 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 /* Make sure badge links don’t underline */
 #press .press-badge,
 #press .press-seen .seen-badge,
-#press .source a { text-decoration: none !important; }
+#press .source a {
+  text-decoration: none !important;
+}
+
+/* ---------- ALBUMS ---------- */
 #albums {
   position: relative;
   background: #0b1016; /* darker to match Shows */
   color: #e6eaef;
 }
-  /* === Top fade for smooth transition from Press → Albums === */
+
+/* === Top fade for smooth transition from Press → Albums === */
 #albums::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 180px; /* you can tweak between 140–200px */
+  height: 180px;
   pointer-events: none;
   z-index: 1;
   background: linear-gradient(
@@ -782,14 +786,15 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     rgba(15,20,27,0) 100%     /* fades down to transparent (Albums bg) */
   );
 }
-  /* === Bottom fade for smooth transition from Albums → Shows === */
+
+/* === Bottom fade for smooth transition from Albums → Shows === */
 #albums::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 160px; /* adjust between 140–200px for taste */
+  height: 160px;
   pointer-events: none;
   z-index: 1;
   background: linear-gradient(
@@ -798,15 +803,16 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     rgba(15,20,27,0) 100%      /* fades into Shows bg */
   );
 }
-//* Make "View Full Show History" look bolder + clickable */
+
+/* Make "View Full Show History" look bolder + clickable */
 #toggleFullHistory {
   cursor: pointer;
   background: none;
   border: none;
   color: #fff; /* white for dark background */
-  font-weight: 800; /* stronger boldness */
+  font-weight: 800;
   font-size: 15px;
-  letter-spacing: 0.04em; /* slight spacing like your pills */
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   transition: opacity 0.2s ease, transform 0.1s ease;
 }
