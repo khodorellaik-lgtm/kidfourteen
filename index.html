@@ -112,11 +112,15 @@ h2{font-size:clamp(26px,3vw,36px)}
   .hero-bg{animation:none}
 }
 .pills{
-  display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-top:22px;
 }
 
 .pill{
-  /* rectangular chip spec (same as universal) */
+  /* rectangular chip */
   display:inline-block;
   padding:6px 14px;
   border-radius:6px;
@@ -128,18 +132,16 @@ h2{font-size:clamp(26px,3vw,36px)}
   letter-spacing:.02em;
   box-shadow:0 1px 3px rgba(0,0,0,.05);
 
-  /* fast, simple transitions only (no heavy ‘all’, no scale) */
-  transition:
-    background-color .05s linear,
-    color .05s linear,
-    border-color .05s linear;
+  /* snap hover: no fades at all */
+  transition:none;
+  backface-visibility:hidden;
+  transform:translateZ(0);
 }
 
 .pill:hover{
   background:#000;
   color:#fff;
   border-color:#000;
-  /* no transform -> no laggy composite */
 }
 
    /* ===== Player ===== */
@@ -679,45 +681,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 #press::after {
   background: none !important;
-}
-  /* === HERO SOCIAL CHIPS — ZERO-LAG HOVER === */
-.hero .pills .pill{
-  /* rectangular look stays the same */
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:6px;
-  background:#fff;
-  border:2px solid #000;
-  color:#000;
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:.02em;
-  box-shadow:0 1px 3px rgba(0,0,0,.05);
-
-  /* only cheap property transitions (no 'all', no opacity, no transform) */
-  transition:
-    background-color .05s linear,
-    color .05s linear,
-    border-color .05s linear;
-
-  /* guard against earlier rules */
-  transform:none;
-  opacity:1;
-}
-
-.hero .pills .pill:hover{
-  background:#000;
-  color:#fff;
-  border-color:#000;
-
-  /* never animate these on hover for the hero chips */
-  transform:none;
-  opacity:1;
-}
-  /* ===== FIX HOVER LAG: pause heavy hero animations when interacting ===== */
-.hero:hover .hero-bg {
-  transition: none !important;
-  animation-play-state: paused !important;
 }
 </style>
 </head>
