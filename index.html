@@ -516,6 +516,12 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   color: #e6eaef;
   transition: backdrop-filter 0.3s ease, background 0.3s ease;
 }
+  /* Remove any nested duplicate frame */
+#shows .shows-pane > div {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 
 /* Optional hover enhancement */
 #shows .shows-pane:is(:not([hidden])):hover {
