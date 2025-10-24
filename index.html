@@ -690,7 +690,40 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   display: none !important;
   content: none !important;
 }
-  
+  /* === Rectangular chips (override the pill styles) === */
+.press-seen .seen-badge,
+.press-badge,
+#home .pill,
+#bio .bio-chips .chip {
+  border-radius: 6px !important;
+  background: #fff !important;
+  border: 2px solid #000 !important;
+  color: #000 !important;
+  text-transform: none !important;
+  letter-spacing: .02em;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  text-decoration: none !important;
+  cursor: pointer;
+  transition:
+    background-color .05s linear,
+    color .05s linear,
+    border-color .05s linear;
+}
+
+/* Hover (no transforms = snappy, no lag) */
+.press-seen .seen-badge:hover,
+.press-badge:hover,
+#home .pill:hover,
+#bio .bio-chips .chip:hover {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+}
+
+/* Make sure badge links don’t underline */
+#press .press-badge,
+#press .press-seen .seen-badge,
+#press .source a { text-decoration: none !important; }
 </style>
 </head>
 <body>
