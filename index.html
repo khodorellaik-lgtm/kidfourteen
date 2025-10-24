@@ -1428,37 +1428,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   })();
 </script> <!-- ✅ properly close the previous script -->
-
-<!-- ✅ New, standalone parallax script -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const bg = document.querySelector(".hero-bg");
-  if (!bg) {
-    console.warn("⚠️ No .hero-bg found — parallax disabled");
-    return;
-  }
-
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReduced) return;
+  if (!bg) return;
 
   let ticking = false;
-
   function updateParallax() {
-    const offset = window.scrollY * 0.4; // adjust intensity here
+    const offset = window.scrollY * 0.5; // adjust intensity if needed
     bg.style.setProperty("--parallax", offset + "px");
     ticking = false;
   }
 
   window.addEventListener("scroll", () => {
     if (!ticking) {
-      window.requestAnimationFrame(updateParallax);
+      requestAnimationFrame(updateParallax);
       ticking = true;
     }
   });
 
-  updateParallax(); // initial update
+  updateParallax();
 });
 </script>
-
 </body>
 </html>
