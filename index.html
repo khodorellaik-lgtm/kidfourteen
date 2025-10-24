@@ -89,14 +89,19 @@ h2{font-size:clamp(26px,3vw,36px)}
   inset: -10vh -10vw;
   background: #0c1219 url('hero.jpg') center/cover no-repeat;
   transform: translate3d(0, var(--parallax, 0px), 0);
-  will-change: transform;
+  will-change: transform, background-position;
+  transition: transform .08s ease-out;
   z-index: -1;
   pointer-events: none;
+
+  /* cinematic drift */
+  animation: bgDrift 18s ease-in-out infinite alternate;
 }
+
 @keyframes bgDrift{
-  0%{background-position:center}
-  50%{background-position:48% 52%}
-  100%{background-position:52% 48%}
+  0%   { background-position: center }
+  50%  { background-position: 48% 52% }
+  100% { background-position: 52% 48% }
 }
 .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9)); z-index:0; pointer-events:none}
 .hero .content{position:relative; z-index:2}
@@ -109,10 +114,20 @@ h2{font-size:clamp(26px,3vw,36px)}
   0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
   50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
 }
-@media (prefers-reduced-motion:reduce){
-  .hero-display{animation:none}
-  .links a{animation:none}
-  .hero-bg{animation:none}
+@media (prefers-reduced-motion: reduce){
+  /* keep hero text static */
+  .hero-display { animation: none; }
+
+  /* turn off link shimmer (if any) */
+  .links a { animation: none; }
+
+  /* stop the hero background motion */
+  .hero-bg {
+    animation: none;              /* kills the CSS Ken Burns (bgDrift) */
+    transform: none;              /* cancels parallax transform */
+    /* optional: ensure it sits centered when static */
+    background-position: center center;
+  }
 }
 .pills{
   display:flex;
@@ -481,8 +496,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .hero-display{font-size:clamp(28px, 9.8vw, 72px)}
   .pill{padding:9px 11px; font-size:14px}
 }
-@media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
-
+@media (pointer:coarse){ .hero-bg{ transition: none } } /* keep animation */
 
 /* ---------- SHOWS — clearer, more visible "cover2.jpg" background ---------- */
 #shows {
