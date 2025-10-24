@@ -137,29 +137,26 @@ h2{font-size:clamp(26px,3vw,36px)}
   margin-top:22px;
 }
 
-.pill{
-  /* rectangular chip */
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:6px;
-  background:#fff;
-  border:2px solid #000;
-  color:#000;
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:.02em;
-  box-shadow:0 1px 3px rgba(0,0,0,.05);
-
-  /* snap hover: no fades at all */
-  transition:none;
-  backface-visibility:hidden;
-  transform:translateZ(0);
+.pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #000;            /* black base */
+  border: 2px solid #000;      /* black border */
+  color: #fff;                 /* white text */
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .02em;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  transition: none;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-.pill:hover{
-  background:#000;
-  color:#fff;
-  border-color:#000;
+.pill:hover {
+  background: #fff;            /* white on hover */
+  color: #000;                 /* black text on hover */
+  border-color: #fff;          /* optional: match hover bg */
 }
 
    /* ===== Player ===== */
