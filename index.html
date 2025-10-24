@@ -479,6 +479,30 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .pill{padding:9px 11px; font-size:14px}
 }
 @media (pointer:coarse){ .hero-bg{transition:none; animation:none} }
+
+
+  /* ---------- SHOWS — with "cover2.jpg" background ---------- */
+#shows {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(to bottom, rgba(15,20,27,0.88), rgba(15,20,27,0.96)),
+    url('cover2.jpg') center center / cover no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Subtle vignette for contrast */
+#shows::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.9) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
 /* ---------- Press (light frosted restored layout) ---------- */
 #press {
   position: relative;
