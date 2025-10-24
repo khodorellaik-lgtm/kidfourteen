@@ -112,9 +112,36 @@ h2{font-size:clamp(26px,3vw,36px)}
   .links a{animation:none}
   .hero-bg{animation:none}
 }
-.pills{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px}
-.pill{background:var(--chip); border:1px solid var(--chip-border); padding:12px 16px; border-radius:18px; font-weight:600; transition:transform .16s ease,background .16s ease}
-.pill:hover{transform:translateY(-2px) scale(1.05); background:#1e293b}
+.pills{
+  display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;
+}
+
+.pill{
+  /* rectangular chip spec (same as universal) */
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:6px;
+  background:#fff;
+  border:2px solid #000;
+  color:#000;
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.02em;
+  box-shadow:0 1px 3px rgba(0,0,0,.05);
+
+  /* fast, simple transitions only (no heavy ‘all’, no scale) */
+  transition:
+    background-color .05s linear,
+    color .05s linear,
+    border-color .05s linear;
+}
+
+.pill:hover{
+  background:#000;
+  color:#fff;
+  border-color:#000;
+  /* no transform -> no laggy composite */
+}
 
    /* ===== Player ===== */
     .music-switch{display:inline-flex; gap:10px; margin:10px 0 18px}
@@ -653,76 +680,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 #press::after {
   background: none !important;
-}
-/* === Universal Chip Style (Albums, Press, Socials, etc.) — no lag === */
-.chip,
-.press-seen .seen-badge,
-.press-badge,
-#bio .bio-chips a,
-a.pill {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 6px;
-
-  /* use background-color (not 'background') to avoid animating images/gradients */
-  background-color: #fff;
-  border: 2px solid #000;
-  color: #000;
-
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-
-  /* only animate what we actually change */
-  transition:
-    background-color .08s linear,
-    color .08s linear,
-    border-color .08s linear,
-    transform .12s ease;
-
-  will-change: background-color, color, border-color, transform;
-
-  /* ensure no slow blur from older rules */
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-}
-
-.chip:hover,
-.press-seen .seen-badge:hover,
-.press-badge:hover,
-#bio .bio-chips a:hover,
-a.pill:hover {
-  background-color: #000;
-  color: #fff;
-  border-color: #000;
-  transform: translateY(-1px);
-  text-decoration: none;
-}
-
-/* keep links clickable and un-underlined inside press cards */
-.press-badge a,
-.press-seen .seen-badge a { color: inherit; text-decoration: none; cursor: pointer; }
-#press a { text-decoration: none !important; border-bottom: 0 !important; }
-#press a:hover { opacity: .85; }
-#press .press-badge { text-decoration: none !important; display: inline-block; }
-#press .source a { text-decoration: none !important; border: 0 !important; }
-  /* === FINAL FIX: kill slow transitions + hidden blurs on chips === */
-.chip, .press-badge, .press-seen .seen-badge, #bio .bio-chips a, a.pill {
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  background-clip: border-box !important;
-  transition: background-color 0.05s linear,
-              color 0.05s linear,
-              border-color 0.05s linear,
-              transform 0.1s ease !important;
-  will-change: background-color, color, border-color, transform;
 }
 </style>
 </head>
