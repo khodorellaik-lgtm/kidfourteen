@@ -655,8 +655,12 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press::after {
   background: none !important;
 }
-/* --- Make Press Chips match Album Chips --- */
-.press-seen .seen-badge {
+/* === Universal Chip Style (Albums, Press, Socials, etc.) === */
+.chip,
+.press-seen .seen-badge,
+.press-badge,
+#bio .bio-chips a,
+a.pill {
   display: inline-block;
   padding: 6px 14px;
   border-radius: 6px;
@@ -669,9 +673,14 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   text-transform: none;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   transition: all 0.25s ease;
+  text-decoration: none;
 }
 
-.press-seen .seen-badge:hover {
+.chip:hover,
+.press-seen .seen-badge:hover,
+.press-badge:hover,
+#bio .bio-chips a:hover,
+a.pill:hover {
   background: #000;
   color: #fff;
   transform: translateY(-1px);
