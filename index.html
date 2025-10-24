@@ -528,17 +528,19 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 }
 .press-seen .seen-badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.5);
-  border: 1px solid rgba(0,0,0,0.15);
-  color: #111;
-  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  text-transform: none;
   font-weight: 700;
   letter-spacing: .02em;
-  backdrop-filter: blur(6px) saturate(160%);
-  -webkit-backdrop-filter: blur(6px) saturate(160%);
-  transition: background .3s ease, color .3s ease, border-color .3s ease, transform .2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  transition:
+    background-color .05s linear,
+    color .05s linear,
+    border-color .05s linear;
 }
 .press-seen .seen-badge:hover {
   background: #111;
@@ -576,19 +578,21 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 /* Badge above each card */
 .press-badge {
   display: inline-block;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid rgba(0,0,0,0.2);
-  color: #111;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  text-transform: none;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: .02em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
   margin-bottom: 14px;
-  backdrop-filter: blur(8px) saturate(160%);
-  -webkit-backdrop-filter: blur(8px) saturate(160%);
-  transition: all .25s ease;
+  transition:
+    background-color .05s linear,
+    color .05s linear,
+    border-color .05s linear;
 }
 .press-badge:hover {
   background: #111;
@@ -651,11 +655,11 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 }
 
 /* keep body text dark, but NOT the chips */
-#press h2,
+##press h2,
 #press p,
 #press blockquote,
 #press .source {
-  color: #111 !important;
+  color: #111;
 }
 
 /* let the chips invert on hover */
