@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -676,8 +677,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 #press a {
   color: #111 !important;
-  text-decoration: none !important;
-  border: 0 !important;
+  text-decoration: underline;
 }
 
 #press::after {
@@ -720,15 +720,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   color: #fff !important;
   border-color: #000 !important;
 }
-/* Ensure press + seen chips are pure white before hover */
-.press-seen .seen-badge,
-.press-badge {
-  background: #fff !important;
-  color: #000 !important;
-  border-color: #000 !important;
-  transition: background-color .05s linear,
-              color .05s linear,
-              border-color .05s linear;
+
 /* Make sure badge links don’t underline */
 #press .press-badge,
 #press .press-seen .seen-badge,
