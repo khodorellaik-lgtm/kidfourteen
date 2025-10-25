@@ -781,65 +781,52 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   border-color: #000 !important;
 }
 
-/* Make sure badge links don’t underline */
-#press .press-badge,
-#press .press-seen .seen-badge,
-#press .source a { text-decoration: none !important; }
-  /* Let Albums' feather overlap into Press (don't clip it) */
-#toggleFullHistory:hover {
-  opacity: 0.8;
-  transform: translateY(-1px);
-}
-  /* --- FINAL, STABLE FIX: smooth Press → Albums transition --- */
+/* === Press → Albums blend (final) === */
 
-/* Allow fade overlap */
+/* Let Albums' fade overlap and keep last card clear */
 #press { overflow: visible !important; }
+#press .wrap { position: relative; z-index: 2; padding-bottom: 64px; }
 
-/* Keep Press content above fade */
-#press .wrap { position: relative; z-index: 2; }
-
-/* Albums takes over underneath with smooth gradient */
+/* Albums layer + base styling */
 #albums {
   position: relative;
   z-index: 1;
   background: #0f141b;
   color: #e6eaef;
-  padding-top: 1px;
+  padding-top: 1px;   /* hairline guard */
   isolation: isolate;
 }
 
-* Feather going upward into Press (adjusted to start lower) */
+/* The visible feather that reaches up into Press */
 #albums::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: -100px; /* was -160px → now lower so it doesn’t drown Press cards */
-  height: 260px; /* was 300px → slightly shorter fade */
+  left: 0; right: 0;
+  top: -80px;
+  height: 260px;
+  pointer-events: none;
+  z-index: 0;
   background: linear-gradient(
     to bottom,
-    #dfe2e9 0%,
-    rgba(223,226,233,0.75) 40%,
-    rgba(223,226,233,0.25) 75%,
+    #DFE2E9 0%,
+    rgba(223,226,233,.85) 35%,
+    rgba(223,226,233,.35) 70%,
     rgba(223,226,233,0) 100%
   );
-  z-index: 0;
-  pointer-events: none;
 }
 
-/* Lip for seam cleanup */
+/* Micro hairline killer at the seam */
 #albums::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   top: -1px;
   height: 3px;
-  background: linear-gradient(to bottom, #dfe2e9, rgba(223,226,233,0));
   z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,0));
 }
 
-/* Keep Albums content on top */
+/* Keep Albums content above the fades */
 #albums .wrap { position: relative; z-index: 2; }
 </style>
 </head>
