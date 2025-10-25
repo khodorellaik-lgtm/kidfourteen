@@ -787,47 +787,54 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .press-seen .seen-badge,
 #press .source a { text-decoration: none !important; }
 
-/* === ALBUMS / PRESS SEAM — definitive fix === */
+/* === ALBUMS / PRESS SEAM — definitive, non-guessy fix === */
 #albums{
   position: relative;
-  z-index: 1;                 /* <- ensures this section paints over #press */
+  z-index: 1;                  /* paint over #press */
   background: #0f141b;
   color: #e6eaef;
-  padding-top: 1px;           /* prevent margin-collapsing edge cases */
-  isolation: isolate;         /* keep its own layers tidy */
+
+  /* kill seam causes */
+  padding-top: 1px;            /* stops margin-collapsing */
+  margin-top: -2px;            /* overlap Press by 2px (robust hairline killer) */
+  border-top: 0 !important;    /* just in case */
+  isolation: isolate;
 }
 
-/* The actual feather that overlaps upward into Press */
+/* Long feather that climbs into Press */
 #albums::before{
   content:"";
   position:absolute;
   left:0; right:0;
-  top:-140px;                                      /* how far it climbs into Press */
-  height:clamp(220px, 22vw, 300px);                /* length of the fade */
+  top:-140px;                                   /* how far into Press */
+  height:clamp(220px, 22vw, 300px);             /* length of fade */
   pointer-events:none;
-  z-index: 1;                                      /* sits above Albums bg */
+  z-index: 1;
   background:linear-gradient(
     to bottom,
-    #DFE2E9 0%,                                    /* start at the Bio/Press sky */
+    var(--bio-sky, #DFE2E9) 0%,
     rgba(223,226,233,.78) 38%,
     rgba(223,226,233,.28) 72%,
-    rgba(223,226,233,0) 100%                       /* fade to transparent */
+    rgba(223,226,233,0)   100%
   );
 }
 
-/* A 2px invisible “lip” that kills stubborn 1px seams on some renderers */
+/* 2–3px SKY-colored lip that sits right on the seam */
 #albums::after{
   content:"";
   position:absolute;
   left:0; right:0; top:-1px;
-  height:2px;
+  height:3px;
   pointer-events:none;
-  z-index: 1;
-  background: linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,0));
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    var(--bio-sky, #DFE2E9), rgba(223,226,233,0)
+  );
 }
 
-/* Keep content above the fades */
-#albums .wrap{ position: relative; z-index: 2; }
+/* Keep content above fades */
+#albums .wrap{ position: relative; z-index: 3; }
 
 /* Make "View Full Show History" look bolder + clickable */
 #toggleFullHistory {
