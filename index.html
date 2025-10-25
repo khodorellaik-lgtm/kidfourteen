@@ -796,17 +796,18 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #albums::before {
   content: "";
   position: absolute;
-  top: -60px;                           /* lift the fade a touch */
+  top: -90px;                           /* start higher for overlap */
   left: 0;
   right: 0;
-  height: clamp(100px, 14vw, 150px);    /* responsive fade height */
+  height: clamp(140px, 18vw, 200px);    /* slightly taller fade */
   pointer-events: none;
   z-index: 0;                           /* behind the content */
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,0.85) 0%,
-    rgba(223,226,233,0.40) 40%,
-    rgba(15,20,27,0) 100%
+    rgba(223,226,233,1) 0%,             /* solid press color */
+    rgba(223,226,233,0.85) 20%,         /* soft transition */
+    rgba(223,226,233,0.3) 55%,          /* midpoint blend */
+    rgba(15,20,27,0) 100%               /* fades into dark section */
   );
 }
 
