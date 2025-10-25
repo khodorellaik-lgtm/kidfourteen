@@ -787,42 +787,42 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .press-seen .seen-badge,
 #press .source a { text-decoration: none !important; }
 
-/* Albums: blend from Press sky → Albums dark, painted in the background */
-#albums {
+/* === ALBUMS / PRESS SEAM (feather like the top) === */
+#albums{
   position: relative;
   color: #e6eaef;
 
-  /* base dark */
+  /* base */
   background-color: #0f141b;
 
-  /* the feathered sky overlay, drawn ABOVE background-color */
+  /* layered blend: long feather + tiny dark lip (kills hairline) */
+  --lift: 140px;                         /* how far up the blend overlaps Press */
+  --feather: clamp(180px, 20vw, 260px);  /* length of the fade */
+  --shadow: 110px;                       /* the soft dark lip at the seam */
+
   background-image:
+    /* long feather from Press sky → transparent → Albums dark */
     linear-gradient(
       to bottom,
-      rgba(223,226,233,1) 0%,
-      rgba(223,226,233,.78) 25%,
-      rgba(223,226,233,.30) 60%,
-      rgba(15,20,27,0) 100%
+      rgba(223,226,233,1)   0%,
+      rgba(223,226,233,.92) 12%,
+      rgba(223,226,233,.70) 28%,
+      rgba(223,226,233,.35) 55%,
+      rgba(223,226,233,.08) 80%,
+      rgba(15,20,27,0)      100%
     ),
-    /* micro softener to kill any hairline */
-    linear-gradient(to bottom, rgba(15,20,27,.25), rgba(15,20,27,0));
+    /* micro lip that mimics the top’s soft shadow edge */
+    linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+
   background-repeat: no-repeat, no-repeat;
+  background-size: 100% var(--feather), 100% var(--shadow);
+  background-position: 0 calc(-1 * var(--lift)), 0 -1px;
 
-  /* size the big blend and the tiny softener */
-  background-size:
-    100% clamp(160px, 18vw, 240px),
-    100% 12px;
-
-  /* lift both layers up so they overlap into Press */
-  background-position:
-    0 -120px,
-    0 -1px;
-
-  isolation: isolate; /* keep effects contained */
+  isolation: isolate; /* keeps effects contained to this section */
 }
 
-/* keep section content above the painted background */
-#albums .wrap { position: relative; z-index: 0; }
+/* keep content above the painted background */
+#albums .wrap{ position: relative; z-index: 0; }
   
 /* Make "View Full Show History" look bolder + clickable */
 #toggleFullHistory {
