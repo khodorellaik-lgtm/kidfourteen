@@ -545,7 +545,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   background: #DFE2E9; /* same tone as Bio */
   color: #222;
 }
-
 /* Dragon background */
 #press::before {
   content: "";
@@ -559,6 +558,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   filter: brightness(1.1) contrast(1.2) saturate(1.2);
   animation: k14DragonFloat 18s ease-in-out infinite alternate;
 }
+  
 
 /* As-seen-in badges row */
 .press-seen {
@@ -786,6 +786,8 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .press-badge,
 #press .press-seen .seen-badge,
 #press .source a { text-decoration: none !important; }
+  /* Let Albums' feather overlap into Press (don't clip it) */
+#press { overflow: visible !important; }
 
 /* === ALBUMS / PRESS SEAM — definitive, non-guessy fix === */
 #albums{
