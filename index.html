@@ -719,7 +719,23 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .press-seen .seen-badge:hover {
   color: #fff !important;
 }
+/* Feather the very bottom of Press so it blends into Albums */
+#press { position: relative; z-index: 0; }
 
+#press::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height: 90px;                           /* feather height */
+  pointer-events:none;
+  z-index: 1;                              /* sits above press bg, under cards */
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,0) 0%,               /* transparent (no change) */
+    rgba(0,0,0,0.12) 55%,                 /* gentle darkening */
+    rgba(0,0,0,0.28) 100%                 /* darkest right at the seam */
+  );
+}
 .press-card {
   background: rgba(255, 255, 255, 0.45) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
