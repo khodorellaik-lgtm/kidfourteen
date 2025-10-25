@@ -793,21 +793,22 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   background: #0f141b;
   color: #e6eaef;
 }
-#albums::before {
-  content: "";
-  position: absolute;
-  top: -120px; /* lift it higher to overlap Press */
-  left: 0;
-  right: 0;
-  height: clamp(160px, 18vw, 220px); /* slightly taller for smooth blend */
-  pointer-events: none;
-  z-index: 0;
+#albums .wrap { position: relative; z-index: 1; }
+
+#albums::before{
+  content:"";
+  position:absolute;
+  top:-120px;                       /* overlap Press more */
+  left:0; right:0;
+  height: clamp(200px, 22vw, 320px);/* longer fade for smoother blend */
+  pointer-events:none;
+  z-index:0;                        /* behind section content */
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,1) 0%,        /* solid press color */
-    rgba(223,226,233,0.8) 25%,     /* gentle soft fade */
-    rgba(15,20,27,0.4) 65%,        /* middle mix */
-    rgba(15,20,27,1) 100%          /* fully into Albums background */
+    rgba(223,226,233,1)   0%,       /* Press color */
+    rgba(223,226,233,.75) 28%,
+    rgba(223,226,233,.20) 65%,
+    rgba(223,226,233,0)   100%      /* transparent → reveals #albums bg */
   );
 }
 
