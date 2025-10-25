@@ -806,12 +806,12 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   height:200px;
   z-index:1;
   pointer-events:none;
-  background:linear-gradient(
+  background: linear-gradient(
     to bottom,
-    #DFE2E9 0%,
-    rgba(223,226,233,.95) 18%,
-    rgba(223,226,233,.65) 50%,
-    rgba(223,226,233,.25) 80%,
+    #F4F6FA 0%,                      /* brighter white-gray start */
+    rgba(244,246,250,0.95) 22%,      /* hold brightness longer */
+    rgba(223,226,233,0.65) 55%,      /* gradual fade starts lower */
+    rgba(223,226,233,0.25) 82%,
     rgba(223,226,233,0) 100%
   );
 }
