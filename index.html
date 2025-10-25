@@ -721,21 +721,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 }
 /* Feather the very bottom of Press so it blends into Albums */
 #press { position: relative; z-index: 0; }
-
-#press::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-1px;
-  height: 90px;                           /* feather height */
-  pointer-events:none;
-  z-index: 1;                              /* sits above press bg, under cards */
-  background: linear-gradient(
-    to bottom,
-    rgba(223,226,233,0) 0%,               /* transparent (no change) */
-    rgba(0,0,0,0.12) 55%,                 /* gentle darkening */
-    rgba(0,0,0,0.28) 100%                 /* darkest right at the seam */
-  );
-}
 .press-card {
   background: rgba(255, 255, 255, 0.45) !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
@@ -808,22 +793,21 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   background: #0f141b;
   color: #e6eaef;
 }
-
 #albums::before {
   content: "";
   position: absolute;
-  top: -90px;                           /* start higher for overlap */
+  top: -120px; /* lift it higher to overlap Press */
   left: 0;
   right: 0;
-  height: clamp(140px, 18vw, 200px);    /* slightly taller fade */
+  height: clamp(160px, 18vw, 220px); /* slightly taller for smooth blend */
   pointer-events: none;
-  z-index: 0;                           /* behind the content */
+  z-index: 0;
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,1) 0%,             /* solid press color */
-    rgba(223,226,233,0.85) 20%,         /* soft transition */
-    rgba(223,226,233,0.3) 55%,          /* midpoint blend */
-    rgba(15,20,27,0) 100%               /* fades into dark section */
+    rgba(223,226,233,1) 0%,        /* solid press color */
+    rgba(223,226,233,0.8) 25%,     /* gentle soft fade */
+    rgba(15,20,27,0.4) 65%,        /* middle mix */
+    rgba(15,20,27,1) 100%          /* fully into Albums background */
   );
 }
 
