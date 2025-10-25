@@ -787,33 +787,42 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .press-seen .seen-badge,
 #press .source a { text-decoration: none !important; }
 
-/* Albums: smooth fade from Press (fade sits behind content) */
+/* Albums: blend from Press sky → Albums dark, painted in the background */
 #albums {
   position: relative;
-  background: #0f141b;
   color: #e6eaef;
-}
-#albums .wrap { position: relative; z-index: 1; }
 
-#albums::before {
-  content: "";
-  position: absolute;
-  top: -140px; /* overlap more of Press */
-  left: 0;
-  right: 0;
-  height: clamp(240px, 26vw, 360px);
-  pointer-events: none;
-  z-index: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(223, 226, 233, 1) 0%,      /* bright sky color (Press) */
-    rgba(180, 190, 205, 0.8) 25%,   /* subtle bluish middle tone */
-    rgba(70, 80, 95, 0.5) 60%,      /* darker mid section */
-    rgba(15, 20, 27, 1) 100%        /* deep black of Albums */
-  );
+  /* base dark */
+  background-color: #0f141b;
+
+  /* the feathered sky overlay, drawn ABOVE background-color */
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(223,226,233,1) 0%,
+      rgba(223,226,233,.78) 25%,
+      rgba(223,226,233,.30) 60%,
+      rgba(15,20,27,0) 100%
+    ),
+    /* micro softener to kill any hairline */
+    linear-gradient(to bottom, rgba(15,20,27,.25), rgba(15,20,27,0));
+  background-repeat: no-repeat, no-repeat;
+
+  /* size the big blend and the tiny softener */
+  background-size:
+    100% clamp(160px, 18vw, 240px),
+    100% 12px;
+
+  /* lift both layers up so they overlap into Press */
+  background-position:
+    0 -120px,
+    0 -1px;
+
+  isolation: isolate; /* keep effects contained */
 }
-/* ensure section content sits above the fade */
-#albums .wrap { position: relative; z-index: 1; }
+
+/* keep section content above the painted background */
+#albums .wrap { position: relative; z-index: 0; }
   
 /* Make "View Full Show History" look bolder + clickable */
 #toggleFullHistory {
