@@ -782,68 +782,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   border-color: #000 !important;
 }
 
-/* Make sure badge links don’t underline */
-#press .press-badge,
-#press .press-seen .seen-badge,
-#press .source a { text-decoration: none !important; }
-
-/* === ALBUMS / PRESS SEAM (feather like the top) === */
-#albums{
-  position: relative;
-  color: #e6eaef;
-
-  /* base */
-  background-color: #0f141b;
-
-  /* layered blend: long feather + tiny dark lip (kills hairline) */
-  --lift: 90px;                         /* how far up the blend overlaps Press */
-  --feather: clamp(180px, 20vw, 260px);  /* length of the fade */
-  --shadow: 110px;                       /* the soft dark lip at the seam */
-
-  background-image:
-    /* long feather from Press sky → transparent → Albums dark */
-    linear-gradient(
-      to bottom,
-      rgba(223,226,233,1)   0%,
-      rgba(223,226,233,.92) 12%,
-      rgba(223,226,233,.70) 28%,
-      rgba(223,226,233,.35) 55%,
-      rgba(223,226,233,.08) 80%,
-      rgba(15,20,27,0)      100%
-    ),
-    /* micro lip that mimics the top’s soft shadow edge */
-    linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
-
-  background-repeat: no-repeat, no-repeat;
-  background-size: 100% var(--feather), 100% var(--shadow);
-  background-position: 0 calc(-1 * var(--lift)), 0 -1px;
-
-  isolation: isolate; /* keeps effects contained to this section */
-}
-
-/* keep content above the painted background */
-#albums .wrap{ position: relative; z-index: 0; }
-  
-/* Make "View Full Show History" look bolder + clickable */
-#toggleFullHistory {
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #fff; /* white for dark background */
-  font-weight: 800; /* stronger boldness */
-  font-size: 15px;
-  letter-spacing: 0.04em; /* slight spacing like your pills */
-  text-transform: uppercase;
-  transition: opacity 0.2s ease, transform 0.1s ease;
-}
-
-#toggleFullHistory:hover {
-  opacity: 0.8;
-  transform: translateY(-1px);
-}
-</style>
-</head>
-<body>
   <!-- Fixed glass nav (single) -->
   <header class="nav" role="banner">
     <div class="wrap inner">
