@@ -860,6 +860,45 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     rgba(223,226,233,0)
   );
 }
+  /* === FINALIZED: Polished Press → Albums transition === */
+
+/* Ensure Press grid floats fully above the fade */
+#press { overflow: visible !important; }
+#press .wrap {
+  position: relative;
+  z-index: 3;
+  padding-bottom: 110px !important; /* lifts last row clear */
+}
+
+/* Raise and soften fade */
+#albums::before {
+  top: -160px;              /* climbs higher into Press */
+  height: 360px;            /* longer = smoother */
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    #DFE2E9 0%,
+    rgba(223,226,233,.95) 18%,
+    rgba(223,226,233,.65) 50%,
+    rgba(223,226,233,.25) 80%,
+    rgba(223,226,233,0) 100%
+  );
+}
+
+/* Subtle light lip to eliminate seam */
+#albums::after {
+  top: -2px;
+  height: 8px;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,.8),
+    rgba(223,226,233,0)
+  );
+}
+
+/* Keep Albums content above all fades */
+#albums .wrap { position: relative; z-index: 4; }
 </style>
 </head>
 <body>
