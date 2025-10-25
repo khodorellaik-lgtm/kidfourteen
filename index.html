@@ -797,13 +797,14 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   top: 0;
   left: 0;
   right: 0;
-  height: 180px; /* you can tweak between 140–200px */
+  height: 140px; /* lower fade zone */
   pointer-events: none;
   z-index: 1;
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,1) 0%,   /* light gray from Press */
-    rgba(15,20,27,0) 100%     /* fades down to transparent (Albums bg) */
+    rgba(223,226,233,0.95) 0%,   /* slightly lighter start */
+    rgba(223,226,233,0.6) 25%,   /* soft middle */
+    rgba(15,20,27,0) 100%        /* fade into dark section */
   );
 }
 /* Make "View Full Show History" look bolder + clickable */
