@@ -828,6 +828,38 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 /* Keep Albums content above the fades */
 #albums .wrap { position: relative; z-index: 2; }
+  /* Keep Albums content above the fades */
+#albums .wrap { position: relative; z-index: 2; }
+
+/* === Fine-tune: Press → Albums transition polish === */
+
+/* Give the last Press card more breathing room */
+#press .wrap{ padding-bottom: 84px; }  /* was 64px */
+
+/* Feather reaches higher and softens sooner */
+#albums::before{
+  top:-120px;             /* was -80px */
+  height:320px;           /* was 260px */
+  background: linear-gradient(
+    to bottom,
+    #DFE2E9 0%,
+    rgba(223,226,233,.90) 25%,
+    rgba(223,226,233,.55) 55%,
+    rgba(223,226,233,.15) 82%,
+    rgba(223,226,233,0) 100%
+  );
+}
+
+/* Replace the dark “hairline killer” with a light one */
+#albums::after{
+  top:-2px;               /* sit right at the seam */
+  height:6px;             /* a bit wider = smoother */
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,.6),
+    rgba(223,226,233,0)
+  );
+}
 </style>
 </head>
 <body>
