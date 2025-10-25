@@ -808,33 +808,33 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   isolation: isolate;
 }
 
-/* Feather going upward into Press */
+* Feather going upward into Press (adjusted to start lower) */
 #albums::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  top: -160px;
-  height: 300px;
+  top: -100px; /* was -160px → now lower so it doesn’t drown Press cards */
+  height: 260px; /* was 300px → slightly shorter fade */
   background: linear-gradient(
     to bottom,
     #dfe2e9 0%,
-    rgba(223,226,233,0.8) 40%,
-    rgba(223,226,233,0.3) 75%,
+    rgba(223,226,233,0.75) 40%,
+    rgba(223,226,233,0.25) 75%,
     rgba(223,226,233,0) 100%
   );
   z-index: 0;
   pointer-events: none;
 }
 
-/* Small lip for hairline removal */
+/* Lip for seam cleanup */
 #albums::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  top: -2px;
-  height: 4px;
+  top: -1px;
+  height: 3px;
   background: linear-gradient(to bottom, #dfe2e9, rgba(223,226,233,0));
   z-index: 1;
 }
