@@ -860,6 +860,39 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   opacity: 0.7;
   transform: translateY(-1px);
 }
+  /* === Fix for uneven YouTube frame sizes (final) === */
+#video .cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+#video .cols iframe {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+/* Center and tighten "Watch more →" */
+#video .more-videos {
+  text-align: center;
+  margin-top: 28px;
+}
+
+#video .more-videos a {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+#video .more-videos a:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
   </style>
 </head>
 <body>
