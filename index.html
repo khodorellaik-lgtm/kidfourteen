@@ -798,39 +798,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   isolation: isolate;
 }
 
-#albums::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  top: -120px;                /* overlap upward slightly */
-  height: 300px;              /* controls depth of horizon fade */
-  pointer-events: none;
-  z-index: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(223,226,233,1) 0%,          /* bright near seam */
-    rgba(223,226,233,0.9) 10%,       /* quick soft roll */
-    rgba(80,85,95,0.3) 40%,          /* mid-gray haze */
-    rgba(15,20,27,0.8) 75%,          /* deep fade into Albums */
-    rgba(15,20,27,1) 100%            /* solid Albums black */
-  );
-}
-
-#albums::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  top:-2px;
-  height:10px;
-  z-index:2;
-  pointer-events:none;
-  background:linear-gradient(
-    to bottom,
-    rgba(223,226,233,.8),
-    rgba(223,226,233,0)
-  );
-}
-
 #albums .wrap {
   position: relative;
   z-index: 4;
@@ -892,6 +859,72 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #video .more-videos a:hover {
   text-decoration: underline;
   opacity: 0.9;
+}
+/* === Press → Albums horizon fade (final, inverted) === */
+
+/* Press sits above Albums and allows overlap */
+#press{
+  position: relative;
+  z-index: 2;                 /* above Albums background */
+  overflow: visible !important;
+}
+
+/* Keep the last Press row clear of the fade */
+#press .wrap{
+  position: relative;
+  z-index: 3;                 /* above the fade */
+  padding-bottom: 100px;      /* breathing room for last card */
+}
+
+/* The feathered horizon: Press sky → Albums black */
+#press::after{
+  content:"";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -160px;             /* how far into Albums it reaches */
+  height: 360px;              /* depth of the fade */
+  pointer-events: none;
+  z-index: 1;                 /* under cards, over Albums bg */
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,1) 0%,       /* bright seam (Press sky) */
+    rgba(223,226,233,.90) 12%,    /* quick soft roll */
+    rgba(80,85,95,.30) 45%,       /* mid-gray haze */
+    rgba(15,20,27,.80) 78%,       /* deep fade */
+    #0f141b 100%                  /* solid Albums black */
+  );
+}
+
+/* Optional: tiny light lip at the seam for pixel-perfect join */
+#press .wrap::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom:-2px;
+  height:8px;
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,.8),
+    rgba(223,226,233,0)
+  );
+}
+
+/* Albums lives under the fade */
+#albums{
+  position: relative;
+  z-index: 0;                 /* below the Press fade */
+  background: #0f141b;
+  color: #e6eaef;
+  padding-top: 1px;           /* seam guard */
+  isolation: isolate;
+}
+
+/* Albums heading in sky tone */
+#albums h2 {
+  color: #dce6f8 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  mix-blend-mode: normal;
 }
   </style>
 </head>
