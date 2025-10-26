@@ -797,18 +797,24 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   padding-top: 0;
   isolation: isolate;
 }
-
 #albums::before{
-  top: -190px;      /* reach higher into Press (was -120) */
-  height: 320px;    /* deeper fade band (was 300) */
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:-140px;         /* higher into Press (was -120) */
+  height:260px;       /* slightly tighter band (was 300) */
+  pointer-events:none;
+  z-index:2;          /* lift above #albums background */
+
+  /* STRONGER horizon: quick bright knee → dark */
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,1.00) 0%,     /* bright seam */
-    rgba(223,226,233,0.96) 6%,     /* tight roll */
-    rgba(223,226,233,0.75) 18%,    /* visible “horizon knee” */
-    rgba(80,85,95,0.45)    38%,    /* mid haze */
-    rgba(30,35,45,0.85)    62%,    /* commit to dark sooner */
-    rgba(15,20,27,1.00)   100%     /* solid Albums black */
+    rgba(223,226,233,1.00) 0%,
+    rgba(223,226,233,0.98) 6%,
+    rgba(223,226,233,0.82) 14%,
+    rgba(120,130,145,0.50) 30%,
+    rgba(40,45,55,0.85)   52%,
+    rgba(15,20,27,1.00)   72%
   );
 }
 
@@ -824,7 +830,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 #albums .wrap {
   position: relative;
-  z-index: 4;
+  z-index: 3;
 }
 
 /* "Albums" heading — sky-toned to blend with the horizon */
