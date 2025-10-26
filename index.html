@@ -786,7 +786,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #press .wrap{
   position: relative;
   z-index: 3;
-  padding-bottom: 110px;
+  padding-bottom: 92px;            /* was 110 — pulls horizon closer */
 }
 
 #albums{
@@ -802,17 +802,17 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   content: "";
   position: absolute;
   left: 0; right: 0;
-  top: -120px;                /* overlap upward slightly */
-  height: 300px;              /* controls depth of horizon fade */
+  top: -150px;                     /* was -120 — reaches higher into Press */
+  height: 240px;                   /* was 300 — narrower fade band */
   pointer-events: none;
   z-index: 0;
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,1) 0%,          /* bright near seam */
-    rgba(223,226,233,0.9) 10%,       /* quick soft roll */
-    rgba(80,85,95,0.3) 40%,          /* mid-gray haze */
-    rgba(15,20,27,0.8) 75%,          /* deep fade into Albums */
-    rgba(15,20,27,1) 100%            /* solid Albums black */
+    rgba(223,226,233,1) 0%,        /* brighter at seam */
+    rgba(223,226,233,.95) 8%,      /* faster roll-off (was 10% @ .90) */
+    rgba(80,85,95,.22) 38%,        /* lighter mid haze (was .30 @ 40%) */
+    rgba(15,20,27,.72) 72%,        /* start darkening a touch sooner */
+    rgba(15,20,27,1) 100%          /* solid Albums black */
   );
 }
 
@@ -820,13 +820,13 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   content:"";
   position:absolute;
   left:0; right:0;
-  top:-2px;
-  height:10px;
+  top:-1px;                        /* was -2 */
+  height:6px;                      /* was 10 */
   z-index:2;
   pointer-events:none;
   background:linear-gradient(
     to bottom,
-    rgba(223,226,233,.8),
+    rgba(223,226,233,.6),          /* was .8 — softer seam lip */
     rgba(223,226,233,0)
   );
 }
@@ -838,8 +838,8 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 /* "Albums" heading — sky-toned to blend with the horizon */
 #albums h2 {
-  color: #dce6f8 !important; /* soft sky hue */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.25); /* gentle depth for readability */
+  color: #dce6f8 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
   mix-blend-mode: normal;
 }
   /* Center and style the "Watch more →" link under the video grid */
