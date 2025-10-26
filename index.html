@@ -890,6 +890,40 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   text-decoration: underline;
   opacity: 0.9;
 }
+  /* OVERRIDE — Press → Albums horizon (force this to win) */
+section#albums::before,
+#albums::before{
+  content:"";
+  position:absolute; left:0; right:0;
+  top:-140px !important;         /* raise into Press */
+  height:260px !important;       /* narrower band */
+  z-index:2 !important;          /* above #albums bg */
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,1.00) 0%,
+    rgba(223,226,233,0.98) 6%,
+    rgba(223,226,233,0.82) 14%,
+    rgba(120,130,145,0.50) 30%,
+    rgba(40,45,55,0.85)   52%,
+    rgba(15,20,27,1.00)   72%
+  ) !important;
+}
+
+section#albums::after,
+#albums::after{
+  content:"";
+  position:absolute; left:0; right:0;
+  top:-2px !important;
+  height:8px !important;
+  z-index:3 !important;          /* above the fade */
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    rgba(223,226,233,.85),
+    rgba(223,226,233,0)
+  ) !important;
+}
   </style>
 </head>
 <body>
