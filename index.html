@@ -893,7 +893,25 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   text-decoration: underline;
   opacity: 0.9;
 }
+/* Press → Albums horizon: punchier + no hairline */
+#albums::before{
+  top:-155px;          /* up a bit more (was -140) */
+  height:300px;        /* deeper band (was 260) */
+  background:linear-gradient(
+    to bottom,
+    rgba(223,226,233,1.00) 0%,
+    rgba(223,226,233,0.98) 6%,
+    rgba(223,226,233,0.80) 14%,
+    rgba(110,120,135,0.55) 32%,
+    rgba(36,41,50,0.90)   54%,
+    rgba(15,20,27,1.00)   74%
+  );
+}
 
+#albums::after{
+  top:-3px;            /* sit right over the seam (was -1) */
+  height:16px;         /* wider lip to kill the hairline (was 12) */
+}
   </style>
 </head>
 <body>
