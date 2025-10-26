@@ -794,39 +794,30 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   z-index: 1;
   background: #0f141b;
   color: #e6eaef;
-  padding-top: 1px;
+  padding-top: 0;
   isolation: isolate;
 }
 
-#albums::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  top: -150px;                     /* was -120 — reaches higher into Press */
-  height: 240px;                   /* was 300 — narrower fade band */
-  pointer-events: none;
-  z-index: 0;
+#albums::before{
+  top: -190px;      /* reach higher into Press (was -120) */
+  height: 320px;    /* deeper fade band (was 300) */
   background: linear-gradient(
     to bottom,
-    rgba(223,226,233,1) 0%,        /* brighter at seam */
-    rgba(223,226,233,.95) 8%,      /* faster roll-off (was 10% @ .90) */
-    rgba(80,85,95,.22) 38%,        /* lighter mid haze (was .30 @ 40%) */
-    rgba(15,20,27,.72) 72%,        /* start darkening a touch sooner */
-    rgba(15,20,27,1) 100%          /* solid Albums black */
+    rgba(223,226,233,1.00) 0%,     /* bright seam */
+    rgba(223,226,233,0.96) 6%,     /* tight roll */
+    rgba(223,226,233,0.75) 18%,    /* visible “horizon knee” */
+    rgba(80,85,95,0.45)    38%,    /* mid haze */
+    rgba(30,35,45,0.85)    62%,    /* commit to dark sooner */
+    rgba(15,20,27,1.00)   100%     /* solid Albums black */
   );
 }
 
 #albums::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  top:-1px;                        /* was -2 */
-  height:6px;                      /* was 10 */
-  z-index:2;
-  pointer-events:none;
-  background:linear-gradient(
+  top: -1px;           /* sit exactly on the seam */
+  height: 12px;        /* a touch wider = smoother */
+  background: linear-gradient(
     to bottom,
-    rgba(223,226,233,.6),          /* was .8 — softer seam lip */
+    rgba(223,226,233,0.95),
     rgba(223,226,233,0)
   );
 }
