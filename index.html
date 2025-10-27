@@ -892,6 +892,31 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 section[id] {
   scroll-margin-top: calc(var(--nav-h) - 2px);
 }
+/* Unify "Watch more →" with "Full Discography →" */
+#video .more-videos {
+  text-align: center;
+  margin-top: 40px;              /* same breathing as albums */
+}
+
+#video .more-videos a {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 8px rgba(127, 234, 209, 0.3);
+}
+
+#video .more-videos a:hover {
+  color: #7fead1;
+  text-shadow:
+    0 0 14px rgba(127, 234, 209, 0.6),
+    0 0 28px rgba(127, 234, 209, 0.4);
+  transform: translateX(4px);
+  opacity: 0.9;
+}
   </style>
 </head>
 <body>
