@@ -881,6 +881,30 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #albums .wrap { 
   padding-bottom: 140px !important;          /* deeper bottom spacing */
 }
+  /* === Full Discography link under Albums === */
+.more-albums {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.more-albums a {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 8px rgba(127, 234, 209, 0.3);
+}
+
+.more-albums a:hover {
+  color: #7fead1;
+  text-shadow: 0 0 14px rgba(127, 234, 209, 0.6),
+               0 0 28px rgba(127, 234, 209, 0.4);
+  transform: translateX(4px); /* 👈 arrow shifts slightly right on hover */
+  opacity: 0.9;
+}
   </style>
 </head>
 <body>
@@ -1103,7 +1127,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   </div>
 </section>
 
-  <!-- ALBUMS -->
+   <!-- ALBUMS -->
   <section id="albums" class="section">
     <div class="wrap">
       <h2>Albums</h2>
@@ -1128,6 +1152,11 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
           <img src="cover3.jpg" alt="Dream Kids Never Sleep"><div class="label">Dream Kids Never Sleep</div>
         </a>
       </div>
+      <div class="more-albums">
+  <a href="https://kidfourteen.bandcamp.com/music" target="_blank" rel="noopener">
+    Full Discography →
+  </a>
+</div>
     </div>
   </section>
 
