@@ -50,7 +50,6 @@ a{color:var(--link); text-decoration:none}
 .links a:hover {
   opacity: .9;
 }::selection{background:rgba(127,234,209,.22)}
-section[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 .wrap{max-width:1200px; margin:0 auto; padding:0 24px}
 .section{padding:64px 0}
 h1,h2,h3{margin:0 0 .6em}
@@ -848,11 +847,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   display: none !important; /* disable the gradient layers */
 }
 
-#albums {
-  padding-top: 80px !important;  /* adds comfortable space above "Albums" */
-  margin-top: 0 !important;
-}
-
 #albums h2 {
   margin-top: 0;
   padding-top: 0;
@@ -907,7 +901,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 }
   /* 1) When jumping to #albums, stop a hair lower so no sliver shows */
 #albums {
-  padding-top: 80px !important;
   margin-top: 0 !important;
   scroll-margin-top: calc(var(--nav-h) - 2px); /* 👈 add this */
 }
