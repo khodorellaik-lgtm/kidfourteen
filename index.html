@@ -765,22 +765,24 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   color: #fff !important;
   border-color: #000 !important;
 }
-  /* Center and style the "Watch more →" link under the video grid */
-.more-videos {
+ /* Unify "Watch more →" style with "Full Discography →" */
+#video .more-videos {
   text-align: center;
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
-.more-videos a {
-  font-size: 15px;
-  color: #8bc6ff;
+#video .more-videos a {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--accent);
   text-decoration: none;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.more-videos a:hover {
-  opacity: 0.7;
+#video .more-videos a:hover {
+  text-decoration: underline;
+  opacity: 0.9;
   transform: translateY(-1px);
 }
   /* === Fix for uneven YouTube frame sizes (final) === */
