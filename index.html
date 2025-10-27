@@ -936,6 +936,21 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     background: rgba(255,255,255,0.14) !important;       /* simple translucent */
   }
 }
+  /* Remove gradient between Press → Albums and fix Albums spacing */
+#albums::before,
+#albums::after {
+  display: none !important; /* disable the gradient layers */
+}
+
+#albums {
+  padding-top: 80px !important;  /* adds comfortable space above "Albums" */
+  margin-top: 0 !important;
+}
+
+#albums h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
   </style>
 </head>
 <body>
