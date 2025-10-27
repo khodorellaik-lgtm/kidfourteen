@@ -757,18 +757,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
     color .05s linear,
     border-color .05s linear;
 }
-  /* --- Hero Social Pills: black base, white text, invert on hover --- */
-#home .pills .pill {
-  background: #000 !important;
-  color: #fff !important;
-  border: 2px solid #000 !important;
-}
-
-#home .pills .pill:hover {
-  background: #fff !important;
-  color: #000 !important;
-  border-color: #fff !important;
-}
 
 /* Hover (no transforms = snappy, no lag) */
 .press-seen .seen-badge:hover,
@@ -777,70 +765,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   background: #000 !important;
   color: #fff !important;
   border-color: #000 !important;
-}
-
-/* === FINAL: Press → Albums blend — single source of truth (consolidated) === */
-#press { overflow: visible !important; }
-#press .wrap{
-  position: relative;
-  z-index: 3;
-  padding-bottom: 92px;          /* room for the fade */
-}
-
-/* Albums base layer (sits beneath the fade) */
-#albums{
-  position: relative;
-  z-index: 1;
-  background: #0f141b;
-  color: #e6eaef;
-  padding-top: 0;
-  isolation: isolate;
-}
-
-/* The visible “horizon” fade coming down from Press into Albums */
-#albums::before{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  top:-140px;                   /* raise into Press */
-  height:260px;                 /* controls band depth */
-  z-index:2;                    /* above Albums bg */
-  pointer-events:none;
-  background: linear-gradient(
-    to bottom,
-    rgba(223,226,233,1.00) 0%,
-    rgba(223,226,233,0.98) 6%,
-    rgba(223,226,233,0.82) 14%,
-    rgba(120,130,145,0.50) 30%,
-    rgba(40,45,55,0.85)   52%,
-    rgba(15,20,27,1.00)   72%
-  );
-}
-
-/* tiny light lip right on the seam to kill the hairline */
-#albums::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  top:-1px;                    /* sit at the seam */
-  height:12px;                 /* slightly wider = smoother */
-  z-index:3;                   /* above the fade */
-  pointer-events:none;
-  background: linear-gradient(
-    to bottom,
-    rgba(223,226,233,0.95),
-    rgba(223,226,233,0)
-  );
-}
-
-/* Keep Albums content above the fades */
-#albums .wrap { position: relative; z-index: 4; }
-
-/* Heading tint to match the sky */
-#albums h2 {
-  color: #dce6f8 !important;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
-  mix-blend-mode: normal;
 }
   /* Center and style the "Watch more →" link under the video grid */
 .more-videos {
@@ -893,25 +817,7 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   text-decoration: underline;
   opacity: 0.9;
 }
-/* Press → Albums horizon: punchier + no hairline */
-#albums::before{
-  top:-155px;          /* up a bit more (was -140) */
-  height:300px;        /* deeper band (was 260) */
-  background:linear-gradient(
-    to bottom,
-    rgba(223,226,233,1.00) 0%,
-    rgba(223,226,233,0.98) 6%,
-    rgba(223,226,233,0.80) 14%,
-    rgba(110,120,135,0.55) 32%,
-    rgba(36,41,50,0.90)   54%,
-    rgba(15,20,27,1.00)   74%
-  );
-}
 
-#albums::after{
-  top:-3px;            /* sit right over the seam (was -1) */
-  height:16px;         /* wider lip to kill the hairline (was 12) */
-}
   /* HERO social pills → frosted glass */
 #home .pills .pill{
   background: rgba(255,255,255,0.10) !important;         /* translucent */
@@ -950,6 +856,30 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 #albums h2 {
   margin-top: 0;
   padding-top: 0;
+}
+/* Albums breathing + rhythm */
+#albums { 
+  padding-top: 96px !important;              /* adds more space above "Albums" */
+}
+
+#albums .album-banner { 
+  margin: 24px 0 36px !important;            /* more air under H2 */
+}
+
+.album-grid { 
+  gap: 28px !important;                      /* wider gaps between covers */
+}
+
+.album-card { 
+  margin-bottom: 10px;                       /* extra space under each card */
+}
+
+.album-card .label { 
+  padding: 14px !important;                  /* taller label area */
+}
+
+#albums .wrap { 
+  padding-bottom: 140px !important;          /* deeper bottom spacing */
 }
   </style>
 </head>
