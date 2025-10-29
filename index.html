@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -120,27 +121,9 @@ h2{font-size:clamp(26px,3vw,36px)}
   opacity:1;
   text-shadow:0 0 10px rgba(127,234,209,.35), 0 0 22px rgba(127,234,209,.40);
 }
-    
 
-/* ========== HERO (single source of truth) ========== */
-.hero{
-  position: relative;
-  min-height: 100vh;                  /* fullscreen */
-  display: grid;
-  place-items: center;
-  text-align: center;
-  overflow: hidden;
-  background:#0c1219;
-  isolation:isolate;
-}
-.hero .content{
-  padding: 0;                         /* don't reveal next section */
-  max-width: 1400px;                  /* nice on ultrawide */
-  position: relative;
-  z-index: 2;
-}
-
-/* Background (parallax + gentle drift) */
+/* ---------- Hero ---------- */
+.hero{position:relative; min-height:100vh; display:grid; place-items:center; text-align:center; overflow:hidden; background:#0c1219; isolation:isolate}
 .hero-bg{
   position: absolute;
   inset: -10vh -10vw;
@@ -150,43 +133,39 @@ h2{font-size:clamp(26px,3vw,36px)}
   transition: transform .08s ease-out;
   z-index: -1;
   pointer-events: none;
+
+  /* cinematic drift */
   animation: bgDrift 18s ease-in-out infinite alternate;
 }
+
 @keyframes bgDrift{
   0%   { background-position: center }
   50%  { background-position: 48% 52% }
   100% { background-position: 52% 48% }
 }
-
-/* Overlay for contrast */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9));
-  z-index:0;
-  pointer-events:none;
-}
-
-/* Headline */
+.hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9)); z-index:0; pointer-events:none}
+.hero .content{position:relative; z-index:2}
 .hero-display{
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  line-height:.9;
-  font-size: clamp(64px, 12vw, 160px);   /* <-- big like before */
-  text-shadow:
-    0 0 12px rgba(127,234,209,.35),
-    0 0 36px rgba(127,234,209,.25),
-    0 0 64px rgba(127,234,209,.12);
+  font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+  font-size:clamp(64px,10vw,140px); text-align:center;
+  text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
 }
-
-/* Motion reductions */
+@keyframes neonPulse{
+  0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
+  50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
+}
 @media (prefers-reduced-motion: reduce){
+  /* keep hero text static */
   .hero-display { animation: none; }
-  .hero-bg{
-    animation: none;
-    transform: none;
+
+  /* turn off link shimmer (if any) */
+  .links a { animation: none; }
+
+  /* stop the hero background motion */
+  .hero-bg {
+    animation: none;              /* kills the CSS Ken Burns (bgDrift) */
+    transform: none;              /* cancels parallax transform */
+    /* optional: ensure it sits centered when static */
     background-position: center center;
   }
 }
@@ -219,20 +198,7 @@ h2{font-size:clamp(26px,3vw,36px)}
   color: #000;                 /* black text on hover */
   border-color: #fff;          /* optional: match hover bg */
 }
-/* Force hero pills to stay in one line on wide screens */
-.hero .pills {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  justify-content: center;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.hero .pills::-webkit-scrollbar { display: none; }
 
-/* Ensure each pill stays at natural size and doesn't shrink */
-.hero .pill {
-  flex: 0 0 auto;
-}
    /* ===== Player ===== */
     .music-switch{display:inline-flex; gap:10px; margin:10px 0 18px}
     .music-tab{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:var(--text); padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer}
