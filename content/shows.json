@@ -1,0 +1,26 @@
+{
+  "upcoming": [
+    {
+      "date": "2025-12-10",
+      "venue": "Institut des Cultures d’Islam",
+      "city": "Paris, France"
+    }
+  ],
+  "past": [
+    {
+      "date": "2025-08-20",
+      "venue": "Noorderzon Festival",
+      "city": "Groningen, Netherlands"
+    },
+    {
+      "date": "2025-05-05",
+      "venue": "Beirut Art Center",
+      "city": "Beirut, Lebanon"
+    },
+    {
+      "date": "2024-10-03",
+      "venue": "Read The Room Festival (KIAA Theatre)",
+      "city": "Brussels, Belgium"
+    }
+  ]
+}
