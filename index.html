@@ -2134,32 +2134,30 @@ let html = `
     .catch(() => {});
 })();
 </script>
- </script>
 
-  <!-- ✅ Add this button just before the JS -->
-  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+<!-- ✅ Add this button just before the JS -->
+<button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
-  <script>
-  (() => {
-    const btn = document.getElementById('backToTop');
-    if (!btn) return;
+<script>
+(() => {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
 
-    // show/hide after scrolling a bit
-    const THRESHOLD = 900;
-    const onScroll = () => {
-      const y = window.scrollY || document.documentElement.scrollTop;
-      btn.classList.toggle('show', y > THRESHOLD);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+  // show/hide after scrolling a bit
+  const THRESHOLD = 900;
+  const onScroll = () => {
+    const y = window.scrollY || document.documentElement.scrollTop;
+    btn.classList.toggle('show', y > THRESHOLD);
+  };
 
-    // smooth scroll to top
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  })();
-  </script>
-</body>
-</html>
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // smooth scroll to top
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>
