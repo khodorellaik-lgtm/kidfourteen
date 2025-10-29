@@ -1399,7 +1399,46 @@ const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.l
         });
       });
     })();
+/* K14 — Preload playlist & wallpaper from /content/music.json BEFORE player boots */
+    (function k14PreloadMusic(){
+      try{
+        const list = document.getElementById('playlist');
+        const root = document.getElementById('k14Player');
+        if (!list || !root) return;
 
+        fetch('content/music.json', { cache: 'no-cache' })
+          .then(r => r.json())
+          .then(data => {
+            if (data.wallpaper) {
+              const w = data.wallpaper;
+              if (w.src)   root.style.setProperty('--player-wallpaper', `url('${w.src}')`);
+              if (w.opacity != null) root.style.setProperty('--player-wallpaper-opacity', String(w.opacity));
+              if (w.zoom)  root.style.setProperty('--wallpaper-zoom', w.zoom);
+              if (w.faceX) root.style.setProperty('--face-x', w.faceX);
+              if (w.faceY) root.style.setProperty('--face-y', w.faceY);
+            }
+
+            if (Array.isArray(data.tracks) && data.tracks.length){
+              list.innerHTML = '';
+              data.tracks.forEach((t, i) => {
+                const li = document.createElement('li');
+                li.className = 'track' + (i===0 ? ' is-active' : '');
+                if (t.src)   li.dataset.src   = t.src;
+                if (t.title) li.dataset.title = t.title;
+                if (t.cover) li.dataset.cover = t.cover;
+                li.innerHTML = `${t.title || 'Untitled'}${t.duration ? `<span class="duration">${t.duration}</span>` : ''}`;
+                list.appendChild(li);
+              });
+            }
+
+            if (data.spotifyEmbed){
+              const iframe = document.querySelector('#spotifyEmbed iframe');
+              if (iframe) iframe.src = data.spotifyEmbed;
+            }
+          })
+          .catch(()=>{/* fallback if fetch fails */});
+      }catch(e){/* no-op */ }
+    })();
     // Music Player
     (() => {
       const root = document.getElementById('k14Player');
