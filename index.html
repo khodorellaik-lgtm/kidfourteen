@@ -1699,20 +1699,65 @@ document.addEventListener('DOMContentLoaded', () => {
         upPane.innerHTML = '<p class="muted">No upcoming shows announced.</p>';
       }
 
-      // Past (newest first)
-      if (Array.isArray(data.past) && data.past.length) {
-        const sorted = data.past.slice().sort((a,b)=> new Date(b.date) - new Date(a.date));
-        pastPane.innerHTML =
-          '<ul class="shows-list">' +
-          sorted.map(s =>
-            `<li>${new Date(s.date).toLocaleDateString('en-US',{month:'short',year:'numeric'})} — ${s.venue} — ${s.city}, ${s.country}</li>`
-          ).join('') +
-          '</ul>';
-      } else {
-        pastPane.innerHTML = '<p class="muted">No past shows listed.</p>';
-      }
-    })
-    .catch(()=>{ /* keep fallback if JSON fails */ });
+     // Past (group by year, show latest year + toggle for the rest)
+if (Array.isArray(data.past) && data.past.length){
+  // sort newest → oldest
+  const sorted = data.past.slice().sort((a,b)=> new Date(b.date) - new Date(a.date));
+
+  // group by year
+  const groups = sorted.reduce((acc, s) => {
+    const y = new Date(s.date).getFullYear();
+    (acc[y] ||= []).push(s);
+    return acc;
+  }, {});
+
+  const years = Object.keys(groups).map(Number).sort((a,b)=> b-a);
+  const latestYear = years[0];
+
+  // helper to render one year's UL
+  const renderYear = (year) => `
+    <h4>${year}</h4>
+    <ul class="shows-list">
+      ${groups[year].map(s => {
+        const d = new Date(s.date).toLocaleDateString('en-US',{ month:'short', year:'numeric' });
+        return `<li>${d} — ${s.venue} — ${s.city}, ${s.country}</li>`;
+      }).join('')}
+    </ul>
+  `;
+
+  // visible = latest year only
+  let html = renderYear(latestYear);
+
+  // rest of years go into a hidden box with a toggle
+  if (years.length > 1){
+    html += `
+      <button class="press-toggle" id="k14ToggleHistory" type="button" aria-expanded="false" style="margin-top:14px">
+        View Full Show History
+      </button>
+      <div id="k14FullHistory" hidden>
+        ${years.slice(1).map(renderYear).join('')}
+      </div>
+    `;
+  }
+
+  pastPane.innerHTML = html;
+
+  // wire the toggle if present
+  const btn = pastPane.querySelector('#k14ToggleHistory');
+  const box = pastPane.querySelector('#k14FullHistory');
+  if (btn && box){
+    btn.addEventListener('click', ()=>{
+      const open = box.hidden;
+      box.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Hide Full Show History' : 'View Full Show History';
+    });
+  }
+} else {
+  pastPane.innerHTML = '<p class="muted">No past shows listed.</p>';
+}
+})
+.catch(()=>{ /* keep fallback if JSON fails */ });
 })();
 </script>
   <script>
