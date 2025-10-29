@@ -186,6 +186,66 @@ h2{font-size:clamp(26px,3vw,36px)}
     .track{padding:10px 12px; border:1px solid var(--chip-border); border-radius:10px; background:rgba(255,255,255,.03); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
     .track:hover{border-color:var(--accent); color:var(--accent)}
     .track.is-active{background:rgba(127,234,209,.12); border-color:var(--accent)}
+  /* ===== Now Playing mini bar (sticky) ===== */
+#k14NowPlaying{
+  position: fixed;
+  left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0));
+  z-index: 1200;
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  background: rgba(18,24,33,.88);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+}
+
+#k14NowPlaying[hidden]{ display:none !important; }
+
+#k14NowPlaying .np-cover{
+  background:none; border:0; padding:0; margin:0; cursor:pointer;
+  width:42px; height:42px; border-radius:8px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+}
+#k14NowPlaying .np-cover img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
+#k14NowPlaying .np-meta{ min-width:0; cursor:pointer; }
+#k14NowPlaying .np-title{
+  font-weight:700; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#k14NowPlaying .np-time{
+  font-size:12px; color:var(--muted); margin-top:1px;
+}
+#k14NowPlaying .np-line{
+  position:relative; height:3px; background:rgba(255,255,255,.12);
+  border-radius:999px; margin-top:6px; overflow:hidden;
+}
+#k14NowPlaying .np-progress{
+  position:absolute; inset:0 auto 0 0; width:0%;
+  background: var(--accent); display:block;
+}
+
+#k14NowPlaying .np-ctrls{ display:flex; gap:8px; align-items:center; }
+#k14NowPlaying .np-btn{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  color:var(--text);
+  padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:800;
+}
+#k14NowPlaying .np-btn:hover{
+  border-color:var(--accent); color:var(--accent);
+}
+
+/* Avoid overlap with iOS bottom bars on very small screens */
+@media (max-width:380px){
+  #k14NowPlaying{ left:8px; right:8px; }
+}
   /* === Playlist: stacked layout + durations === */
 #playlist.playlist{
   display:block;
@@ -1888,6 +1948,80 @@ let html = `
   }, { rootMargin: '-30% 0px -60% 0px', threshold: [0, .25, .5, .75, 1] });
 
   sections.forEach(s => io.observe(s));
+})();
+</script>
+  <!-- Now Playing mini bar -->
+<div id="k14NowPlaying" hidden>
+  <button class="np-cover" type="button" aria-label="Open Music">
+    <img src="cover.png" alt="" />
+  </button>
+  <div class="np-meta" role="button" aria-label="Open Music">
+    <div class="np-title">—</div>
+    <div class="np-time"><span class="np-cur">0:00</span> · <span class="np-dur">0:00</span></div>
+    <div class="np-line"><span class="np-progress"></span></div>
+  </div>
+  <div class="np-ctrls">
+    <button class="np-btn np-play" type="button" aria-label="Pause/Play">⏸</button>
+    <button class="np-btn np-next" type="button" aria-label="Next">⟲</button>
+  </div>
+</div>
+  <script>
+(() => {
+  const bar   = document.getElementById('k14NowPlaying');
+  const audio = document.getElementById('audio');
+  const title = document.getElementById('playerTitle');
+  const art   = document.querySelector('#k14Player .art img');
+  const cur   = bar?.querySelector('.np-cur');
+  const dur   = bar?.querySelector('.np-dur');
+  const prog  = bar?.querySelector('.np-progress');
+  const play  = bar?.querySelector('.np-play');
+  const next  = bar?.querySelector('.np-next');
+  const coverBtn = bar?.querySelector('.np-cover img');
+  const metaBtn  = bar?.querySelector('.np-meta');
+
+  if (!bar || !audio) return;
+
+  const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
+
+  function refreshMeta(){
+    if (coverBtn && art?.src) coverBtn.src = art.src;
+    const t = (title?.textContent || '').trim() || 'Playing…';
+    bar.querySelector('.np-title').textContent = t;
+    if (dur) dur.textContent = fmt(audio.duration || 0);
+  }
+
+  function updateProgress(){
+    if (!audio.duration) { if(prog) prog.style.width = '0%'; return; }
+    if (prog) prog.style.width = ((audio.currentTime / audio.duration) * 100).toFixed(2) + '%';
+    if (cur) cur.textContent = fmt(audio.currentTime);
+  }
+
+  // show/hide depending on playback
+  audio.addEventListener('play',  () => { refreshMeta(); bar.hidden = false; play.textContent = '⏸'; });
+  audio.addEventListener('pause', () => { play.textContent = '▶'; /* keep bar visible; hide if you prefer: bar.hidden = true; */ });
+  audio.addEventListener('ended', () => { /* bar stays, next handler in main player will update */ });
+  audio.addEventListener('loadedmetadata', refreshMeta);
+  audio.addEventListener('timeupdate', updateProgress);
+
+  // controls
+  play?.addEventListener('click', () => { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); });
+  // reuse your existing "next" button if present; otherwise advance index via k14 player API
+  const mainNext = document.getElementById('next');
+  next?.addEventListener('click', () => { 
+    if (mainNext) { mainNext.click(); } 
+  });
+
+  // tap artwork or text to jump to Music section
+  function scrollToMusic(){
+    const sec = document.getElementById('music');
+    if (!sec) return;
+    sec.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+  metaBtn?.addEventListener('click', scrollToMusic);
+  bar.querySelector('.np-cover')?.addEventListener('click', scrollToMusic);
+
+  // initialize (if a track is already loaded)
+  if (!audio.paused && audio.src) { refreshMeta(); bar.hidden = false; }
 })();
 </script>
 </body>
