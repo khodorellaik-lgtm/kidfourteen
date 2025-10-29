@@ -1,4 +1,10 @@
 [
-  { "title": "Video 1", "youtubeId": "oMM0ygCcLv8" },
-  { "title": "Video 2", "youtubeId": "aNbx0a1-PlI" }
+  {
+    "title": "The Mind",
+    "youtubeId": "oMM0ygCcLv8"
+  },
+  {
+    "title": "Nobody came nobody wants to",
+    "youtubeId": "FH5UgPvEcKw"
+  }
 ]
