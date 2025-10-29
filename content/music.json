@@ -1,0 +1,42 @@
+{
+  "wallpaper": {
+    "src": "kidfourteen_live_2022.jpg",
+    "faceX": "58%",
+    "faceY": "65%",
+    "opacity": 0.44,
+    "zoom": "120%"
+  },
+  "spotifyEmbed": "https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG",
+  "tracks": [
+    {
+      "title": "Whirlwind Blues",
+      "src": "audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3",
+      "cover": "cover3.jpg",
+      "duration": "3:47"
+    },
+    {
+      "title": "Learning How to Die",
+      "src": "audio/Kid Fourteen - A Brief Emotional Dragon - 05 Learning How to Die.mp3",
+      "cover": "cover.png",
+      "duration": "4:08"
+    },
+    {
+      "title": "Latifa",
+      "src": "audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3",
+      "cover": "cover2.jpg",
+      "duration": "3:17"
+    },
+    {
+      "title": "Between Light and Fragrance",
+      "src": "audio/Kid Fourteen - Between Light and Fragrance.mp3",
+      "cover": "cover4.jpg",
+      "duration": "2:47"
+    },
+    {
+      "title": "Love and the City Pt. 3",
+      "src": "audio/Kid Fourteen - Love (B Side) - 04 Love and the City Pt. 3.mp3",
+      "cover": "cover5.png",
+      "duration": "1:55"
+    }
+  ]
+}
