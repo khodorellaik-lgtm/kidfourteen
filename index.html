@@ -69,6 +69,10 @@ h2{font-size:clamp(26px,3vw,36px)}
 .nav .inner{
   display:flex; align-items:center; justify-content:space-between; height:100%; padding:0 24px;
 }
+  .nav .links a[aria-current="true"] {
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(127,234,209,.35);
+}
 .brand{font-weight:800; letter-spacing:.12em; color:inherit; text-decoration:none}
 .links{display:flex; gap:22px; align-items:center; white-space:nowrap}
 .links a{
@@ -1862,6 +1866,28 @@ let html = `
 (() => {
   const bar = document.querySelector('.nav .links');
   if (bar) bar.scrollLeft = 0;
+})();
+</script>
+  <script>
+// === Highlight current nav link while scrolling ===
+(() => {
+  const links = [...document.querySelectorAll('.nav .links a[href^="#"]')];
+  const sections = links
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const io = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const id = '#' + visible.target.id;
+    links.forEach(a => a.removeAttribute('aria-current'));
+    const active = links.find(a => a.getAttribute('href') === id);
+    if (active) active.setAttribute('aria-current','true');
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: [0, .25, .5, .75, 1] });
+
+  sections.forEach(s => io.observe(s));
 })();
 </script>
 </body>
