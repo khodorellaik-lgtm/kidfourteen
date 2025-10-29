@@ -569,34 +569,16 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
 /* ---------- Back to top button ---------- */
 #k14Top{
-  position:fixed;
-  right:14px;
-  bottom:14px;
-  z-index:1200;
-  padding:10px 12px;
-  border-radius:12px;
-  font-weight:800;
-  cursor:pointer;
-  background:rgba(18,24,33,.88);
-  color:var(--text);
+  position:fixed; right:14px; bottom:14px; z-index:1200;
+  padding:10px 12px; border-radius:12px; font-weight:800; cursor:pointer;
+  background:rgba(18,24,33,.88); color:var(--text);
   border:1px solid rgba(255,255,255,.18);
   box-shadow:0 10px 24px rgba(0,0,0,.35);
   backdrop-filter:blur(10px) saturate(150%);
   -webkit-backdrop-filter:blur(10px) saturate(150%);
-  opacity:0;                                 /* start hidden */
-  transition:opacity .35s ease;               /* smooth fade */
 }
-
-#k14Top.show{
-  opacity:1;                                 /* fade in */
-}
-
 #k14Top[hidden]{ display:none !important; }
-
-#k14Top:hover{
-  border-color:var(--accent);
-  color:var(--accent);
-}
+#k14Top:hover{ border-color:var(--accent); color:var(--accent); }
 
 
 /* a bit more breathing room between brand and links */
@@ -2120,7 +2102,7 @@ let html = `
         .filter(s => s.date && s.venue && s.city && s.country)
         .map(s => ({
           "@context": "https://schema.org",
-          "@type": "MusicEvent",
+          "@type": "Event",
           "name": `Kid Fourteen at ${s.venue}`,
           "startDate": s.date,                 // ISO date from your JSON
           "eventStatus": "https://schema.org/EventScheduled",
@@ -2152,34 +2134,16 @@ let html = `
 })();
 </script>
   <button id="k14Top" type="button" aria-label="Back to top" hidden>↑ Top</button>
- <script>
+  <script>
 (() => {
   const btn = document.getElementById('k14Top');
   if(!btn) return;
 
-  let hideTimer = null;
+  const onScroll = () => { btn.hidden = window.scrollY < 800; };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
 
-  const showBtn = () => {
-    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-    if (btn.hidden) btn.hidden = false;     // make it measurable
-    btn.classList.add('show');               // fade in (CSS handles opacity)
-  };
-
-  const hideBtn = () => {
-    btn.classList.remove('show');            // start fade out
-    // after CSS transition (0.35s), actually hide it for a11y/tab order
-    hideTimer = setTimeout(() => { btn.hidden = true; }, 360);
-  };
-
-  const onScroll = () => {
-    if (window.scrollY >= 800) showBtn();
-    else hideBtn();
-  };
-
-  onScroll(); // initial
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 })();
 </script>
 </body>
