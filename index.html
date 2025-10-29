@@ -1725,8 +1725,11 @@ if (Array.isArray(data.past) && data.past.length){
     </ul>
   `;
 
-  // visible = latest year only
-  let html = renderYear(latestYear);
+  // visible = latest year only, with a header
+let html = `
+  <h3 style="margin:0 0 8px">Memorable Shows</h3>
+  ${renderYear(latestYear)}
+`;
 
   // rest of years go into a hidden box with a toggle
   if (years.length > 1){
