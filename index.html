@@ -1429,6 +1429,7 @@ const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.l
                 li.innerHTML = `${t.title || 'Untitled'}${t.duration ? `<span class="duration">${t.duration}</span>` : ''}`;
                 list.appendChild(li);
               });
+               document.dispatchEvent(new CustomEvent('k14PlaylistUpdated'));
             }
 
             if (data.spotifyEmbed){
@@ -1456,7 +1457,14 @@ const els = Array.from(document.querySelectorAll('.bio-quote'));      if (!els.l
       const art = root.querySelector('.art img');
 
       let index = 0;
-      const items = Array.from(playlist.querySelectorAll('.track'));
+let items = [];
+function bindItems(){
+  items = Array.from(playlist.querySelectorAll('.track'));
+  items.forEach((li, i) => li.addEventListener('click', () => {
+    load(i);
+    audio.play().catch(()=>{});
+  }));
+}
       const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
 
       function encodeSrc(src){
