@@ -551,15 +551,34 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 @media (max-width:520px){
   .wrap{ padding:0 14px }
   .nav .inner{ padding:0 10px }
-  .nav .links{ overflow-x:auto; white-space:nowrap; gap:16px; -webkit-overflow-scrolling:touch; scrollbar-width:none }
+  .nav .links{
+    overflow-x:auto; white-space:nowrap; gap:16px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
   .nav .links::-webkit-scrollbar{ display:none }
+
   /* keep brand on one line and give it space */
-.brand{
-  white-space: nowrap;
-  font-size: 15px;
-  letter-spacing: .18em;
-  line-height: 1;
+  .brand{
+    white-space: nowrap;
+    font-size: 15px;
+    letter-spacing: .18em;
+    line-height: 1;
+  }
 }
+
+/* ---------- Back to top button ---------- */
+#k14Top{
+  position:fixed; right:14px; bottom:14px; z-index:1200;
+  padding:10px 12px; border-radius:12px; font-weight:800; cursor:pointer;
+  background:rgba(18,24,33,.88); color:var(--text);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 24px rgba(0,0,0,.35);
+  backdrop-filter:blur(10px) saturate(150%);
+  -webkit-backdrop-filter:blur(10px) saturate(150%);
+}
+#k14Top[hidden]{ display:none !important; }
+#k14Top:hover{ border-color:var(--accent); color:var(--accent); }
+
 
 /* a bit more breathing room between brand and links */
 .nav .inner{ gap: 10px; }
@@ -1111,6 +1130,16 @@ section[id] {
   .brand{ letter-spacing:.08em; }
   .nav .links a{ font-size:12.5px; }
 }
+    html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+}
+
+/* Keep sections from hiding under the fixed nav */
+section, [id^="music"], [id^="shows"]{
+  scroll-margin-top: var(--nav-h, 64px);
+}
+    
   </style>
 </head>
 <body>
@@ -2101,6 +2130,19 @@ let html = `
       document.head.appendChild(node);
     })
     .catch(() => {});
+})();
+</script>
+  <button id="k14Top" type="button" aria-label="Back to top" hidden>↑ Top</button>
+  <script>
+(() => {
+  const btn = document.getElementById('k14Top');
+  if(!btn) return;
+
+  const onScroll = () => { btn.hidden = window.scrollY < 800; };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 })();
 </script>
 </body>
