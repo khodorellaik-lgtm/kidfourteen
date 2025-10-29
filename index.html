@@ -2145,7 +2145,7 @@ let html = `
     if (!btn) return;
 
     // show/hide after scrolling a bit
-    const THRESHOLD = 600;
+    const THRESHOLD = 900;
     const onScroll = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       btn.classList.toggle('show', y > THRESHOLD);
