@@ -1,26 +1,62 @@
 {
   "upcoming": [
     {
-      "date": "2025-12-10",
-      "venue": "Institut des Cultures d’Islam",
-      "city": "Paris, France"
+      "date": "2025-12-04",
+      "city": "Paris",
+      "country": "France",
+      "venue": "Le Consulat"
     }
   ],
   "past": [
-    {
-      "date": "2025-08-20",
-      "venue": "Noorderzon Festival",
-      "city": "Groningen, Netherlands"
-    },
-    {
-      "date": "2025-05-05",
-      "venue": "Beirut Art Center",
-      "city": "Beirut, Lebanon"
-    },
-    {
-      "date": "2024-10-03",
-      "venue": "Read The Room Festival (KIAA Theatre)",
-      "city": "Brussels, Belgium"
-    }
+    { "date": "2025-10-01", "city": "Paris",      "country": "France",        "venue": "Institut des Cultures d’Islam" },
+    { "date": "2025-08-01", "city": "Groningen",  "country": "Netherlands",   "venue": "Noorderzon Festival" },
+    { "date": "2025-05-01", "city": "Beirut",     "country": "Lebanon",       "venue": "Beirut Art Center" },
+
+    { "date": "2024-10-18", "city": "Gent",       "country": "Belgium",       "venue": "De Centrale" },
+    { "date": "2024-10-22", "city": "Brussels",   "country": "Belgium",       "venue": "Read The Room Festival (KIAA Theatre)" },
+    { "date": "2024-10-01", "city": "Gothenburg", "country": "Sweden",        "venue": "Stigberget Live Festival" },
+    { "date": "2024-08-01", "city": "Gent",       "country": "Belgium",       "venue": "S.M.A.K. Museum" },
+    { "date": "2024-06-21", "city": "Paris",      "country": "France",        "venue": "Institut Suédois" },
+    { "date": "2024-06-04", "city": "Paris",      "country": "France",        "venue": "DOC!" },
+    { "date": "2024-06-01", "city": "Marseille",  "country": "France",        "venue": "Live in Marseille" },
+    { "date": "2024-02-01", "city": "Nantes",     "country": "France",        "venue": "Platon Party Paradis" },
+
+    { "date": "2023-07-01", "city": "Paris",      "country": "France",        "venue": "Le Tony" },
+    { "date": "2023-06-01", "city": "Paris",      "country": "France",        "venue": "Petit Bain" },
+    { "date": "2023-03-01", "city": "Paris",      "country": "France",        "venue": "Le Consulat" },
+    { "date": "2023-02-01", "city": "Gent",       "country": "Belgium",       "venue": "Kiosk" },
+    { "date": "2023-01-01", "city": "Oslo",       "country": "Norway",        "venue": "Haerverk" },
+    { "date": "2023-01-02", "city": "Gothenburg", "country": "Sweden",        "venue": "Yaki-Da" },
+
+    { "date": "2022-11-01", "city": "Oslo",       "country": "Norway",        "venue": "Osloworld" },
+    { "date": "2022-10-01", "city": "Geneva",     "country": "Switzerland",   "venue": "La Makhno" },
+    { "date": "2022-09-01", "city": "Fribourg",   "country": "Switzerland",   "venue": "Fri-Son" },
+    { "date": "2022-08-01", "city": "Paris",      "country": "France",        "venue": "Petit Bain" },
+    { "date": "2022-06-01", "city": "Paris",      "country": "France",        "venue": "Supersonic" },
+    { "date": "2022-04-01", "city": "Paris",      "country": "France",        "venue": "La Station" },
+    { "date": "2022-04-02", "city": "Paris",      "country": "France",        "venue": "Beirut Electro Parade" },
+
+    { "date": "2020-01-01", "city": "Cairo",      "country": "Egypt",         "venue": "Cairo Jazz Club" },
+
+    { "date": "2019-05-01", "city": "Yerevan",    "country": "Armenia",       "venue": "Radio Poligraf (Live electronics w/ Kid Fourteen, LSD & Bohemnots)" },
+    { "date": "2019-05-02", "city": "Berlin",     "country": "Germany",       "venue": "Barkett" },
+    { "date": "2019-04-01", "city": "Łódź",       "country": "Poland",        "venue": "Klub Dom" },
+    { "date": "2019-04-02", "city": "Stockholm",  "country": "Sweden",        "venue": "Klubb DÖD: Landet" },
+    { "date": "2019-04-03", "city": "Gothenburg", "country": "Sweden",        "venue": "Truckstop Alaska" },
+    { "date": "2019-04-04", "city": "Malmö",      "country": "Sweden",        "venue": "Molchat Doma & Kid Fourteen at Inkonst" },
+    { "date": "2019-04-05", "city": "Biel",       "country": "Switzerland",   "venue": "Le Salopard" },
+    { "date": "2019-04-06", "city": "Fribourg",   "country": "Switzerland",   "venue": "Le Mouton Noir" },
+    { "date": "2019-04-07", "city": "Paris",      "country": "France",        "venue": "Beirut Electro Parade, La Bellevilloise" },
+
+    { "date": "2018-11-01", "city": "Praha",      "country": "Czech Republic","venue": "Mourn (ES) + Joyfultalk (CA) + Kid Fourteen" },
+    { "date": "2018-10-01", "city": "Berlin",     "country": "Germany",       "venue": "Greenhouse Kantine" },
+    { "date": "2018-10-02", "city": "Gothenburg", "country": "Sweden",        "venue": "Studio HPKSM" },
+    { "date": "2018-03-01", "city": "Istanbul",   "country": "Turkey",        "venue": "IndieCity Festival, Salon İstiklal" },
+
+    { "date": "2017-11-01", "city": "Berlin",     "country": "Germany",       "venue": "Loophole" },
+    { "date": "2017-10-01", "city": "Brussels",   "country": "Belgium",       "venue": "Café Central" },
+    { "date": "2017-10-02", "city": "Paris",      "country": "France",        "venue": "La Station" },
+    { "date": "2017-10-03", "city": "Paris",      "country": "France",        "venue": "Alimentation Générale" },
+    { "date": "2017-10-04", "city": "Brussels",   "country": "Belgium",       "venue": "Barlok (w/ Skinpin, KDG, Helmutmut, Emorr)" }
   ]
 }
