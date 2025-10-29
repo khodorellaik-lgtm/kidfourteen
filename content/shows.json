@@ -1,9 +1,4 @@
-{
-  "upcoming": [
-    {
-     
-    }
-  ],
+"upcoming": []
   "past": [
     { "date": "2025-10-01", "city": "Paris",      "country": "France",        "venue": "Institut des Cultures d’Islam" },
     { "date": "2025-08-01", "city": "Groningen",  "country": "Netherlands",   "venue": "Noorderzon Festival" },
