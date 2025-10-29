@@ -1111,11 +1111,11 @@ section[id] {
   .brand{ letter-spacing:.08em; }
   .nav .links a{ font-size:12.5px; }
 }
-    /* Back to top */
+   /* ---------- Back to top ---------- */
 #backToTop{
   position: fixed;
   right: 20px;
-  bottom: calc(76px + env(safe-area-inset-bottom, 0)); /* clears Now Playing bar */
+  bottom: calc(110px + env(safe-area-inset-bottom, 0)); /* higher to clear Now Playing bar */
   z-index: 3000;
   background: rgba(24,30,42,.85);
   border: 1px solid rgba(255,255,255,.18);
@@ -1132,15 +1132,24 @@ section[id] {
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   box-shadow: 0 8px 20px rgba(0,0,0,.35);
 }
+
 #backToTop:hover{
   background: rgba(127,234,209,.15);
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(0);
 }
+
 #backToTop.show{
   opacity: 1;
   transform: translateY(0);
+}
+
+/* extra lift on small screens (Now Playing bar taller on mobile) */
+@media (max-width: 700px){
+  #backToTop{
+    bottom: calc(128px + env(safe-area-inset-bottom, 0));
+  }
 }
   </style>
 </head>
