@@ -983,6 +983,38 @@ section[id] {
   color: var(--accent) !important;
   transform: translateY(-1px);
 }
+  /* --- Mobile nav spacing + sizing fixes --- */
+@media (max-width:520px){
+  .nav .inner{ gap:8px; padding:0 10px; }
+  .brand{
+    flex:0 0 auto;
+    font-size:14px;
+    letter-spacing:.10em;     /* tighter than desktop */
+    margin-right:6px;         /* a little breathing room before links */
+  }
+  .nav .links{
+    flex:1 1 auto;            /* let links take remaining width */
+    min-width:0;              /* allow shrink */
+    justify-content:flex-end;
+    overflow-x:auto;          /* horizontal scroll if still too tight */
+    -webkit-overflow-scrolling:touch;
+    gap:14px;
+  }
+  .nav .links::-webkit-scrollbar{ display:none; }
+  .nav .links a{ font-size:13px; }
+}
+
+@media (max-width:380px){
+  .hero-display{ font-size:clamp(28px, 9.8vw, 72px); }
+  .pill{ padding:9px 11px; font-size:14px; }
+
+  /* tighten brand even more on extra-small screens */
+  .brand{
+    font-size:13.5px;
+    letter-spacing:.08em;     /* was .20em – that was making it too wide */
+  }
+  .nav .links a{ font-size:12.5px; }
+}
   </style>
 </head>
 <body>
