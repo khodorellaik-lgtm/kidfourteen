@@ -1490,7 +1490,7 @@ function bindItems(){
         title.textContent = t; art.src = cover; seek.value = 0; cur.textContent = '0:00'; dur.textContent = '0:00';
         audio.load();
       }
-
+bindItems();
       if(items.length){
         const first = items.findIndex(el=>el.classList.contains('is-active'));
         load(first>-1?first:0);
@@ -1502,7 +1502,6 @@ function bindItems(){
       vol.addEventListener('input', ()=> audio.volume = +vol.value);
       seek.addEventListener('input', ()=>{ if(audio.duration) audio.currentTime = (seek.value/100)*audio.duration; });
 
-      items.forEach((li, i)=> li.addEventListener('click', ()=>{ load(i); audio.play().catch(()=>{}); }));
 
       audio.addEventListener('timeupdate', ()=>{
         if(!audio.duration) return;
@@ -1513,8 +1512,14 @@ function bindItems(){
       audio.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
       audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
       audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
-      audio.addEventListener('loadedmetadata', () => {
-  dur.textContent = fmt(audio.duration || 0);  // show the correct length immediately
+     audio.addEventListener('loadedmetadata', () => {
+  dur.textContent = fmt(audio.duration || 0); // show the correct length immediately
+});
+
+document.addEventListener('k14PlaylistUpdated', () => {
+  bindItems();
+  const first = items.findIndex(el => el.classList.contains('is-active'));
+  load(first > -1 ? first : 0);
 });
 
 
