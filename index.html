@@ -983,36 +983,32 @@ section[id] {
   color: var(--accent) !important;
   transform: translateY(-1px);
 }
-  /* --- Mobile nav spacing + sizing fixes --- */
+/* Mobile nav: single row, brand + horizontally scrollable links */
 @media (max-width:520px){
-  .nav .inner{ gap:8px; padding:0 10px; }
+  .nav .inner{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
   .brand{
-    flex:0 0 auto;
-    font-size:14px;
-    letter-spacing:.10em;     /* tighter than desktop */
-    margin-right:6px;         /* a little breathing room before links */
+    flex:0 0 auto;                 /* brand keeps its natural width */
+    letter-spacing:.10em;           /* keep it a bit tighter */
   }
   .nav .links{
-    flex:1 1 auto;            /* let links take remaining width */
-    min-width:0;              /* allow shrink */
-    justify-content:flex-end;
-    overflow-x:auto;          /* horizontal scroll if still too tight */
+    flex:1 1 auto;                  /* take the remaining row width */
+    min-width:0;                    /* allow shrinking so it can scroll */
+    overflow-x:auto;                /* enable horizontal scroll */
+    white-space:nowrap;
+    gap:16px;
+    justify-content:flex-start;     /* start at the left (Music first) */
     -webkit-overflow-scrolling:touch;
-    gap:14px;
+    scrollbar-width:none;
   }
   .nav .links::-webkit-scrollbar{ display:none; }
-  .nav .links a{ font-size:13px; }
+  .nav .links a{ font-size:13px; }  /* small, readable */
 }
-
 @media (max-width:380px){
-  .hero-display{ font-size:clamp(28px, 9.8vw, 72px); }
-  .pill{ padding:9px 11px; font-size:14px; }
-
-  /* tighten brand even more on extra-small screens */
-  .brand{
-    font-size:13.5px;
-    letter-spacing:.08em;     /* was .20em – that was making it too wide */
-  }
+  .brand{ letter-spacing:.08em; }
   .nav .links a{ font-size:12.5px; }
 }
   </style>
@@ -1860,6 +1856,12 @@ let html = `
       })
       .catch(() => {/* keep fallback if fetch fails */});
   } catch(e) { /* keep fallback */ }
+})();
+</script>
+  <script>
+(() => {
+  const bar = document.querySelector('.nav .links');
+  if (bar) bar.scrollLeft = 0;
 })();
 </script>
 </body>
