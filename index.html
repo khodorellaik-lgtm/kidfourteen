@@ -1112,6 +1112,39 @@ section[id] {
   .brand{ letter-spacing:.08em; }
   .nav .links a{ font-size:12.5px; }
 }
+    /* ---------- Back to Top button ---------- */
+#backToTop {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1300;
+  background: rgba(18,24,33,0.8);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 8px 14px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+#backToTop:hover {
+  background: rgba(127,234,209,0.15);
+  border-color: var(--accent);
+  color: #9ffff0;
+  transform: translateY(0);
+}
+
+#backToTop.show {
+  opacity: 1;
+  transform: translateY(0);
+}
   </style>
 </head>
 <body>
@@ -2103,6 +2136,25 @@ let html = `
     })
     .catch(() => {});
 })();
+    <!-- Back to Top button -->
+<button id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+(() => {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+
+  // Smooth scroll to top
+  btn.addEventListener('click', () =>
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  );
+
+  // Show button only after scrolling down
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 500);
+  });
+})();
+</script>
 </script>
 </body>
 </html>
