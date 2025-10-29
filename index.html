@@ -1622,5 +1622,31 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('orientationchange', () => { readMeta(); update(); });
 })();
 </script>
+  <script>
+/* K14 — Load Videos from /content/videos.json */
+(function k14LoadVideos(){
+  try {
+    const container = document.querySelector('#video .cols');
+    if (!container) return;
+
+    fetch('content/videos.json', { cache: 'no-cache' })
+      .then(r => r.json())
+      .then(vids => {
+        if (!Array.isArray(vids) || vids.length === 0) return; // keep fallback
+        container.innerHTML = ''; // replace hardcoded iframes
+        vids.forEach(v => {
+          const f = document.createElement('iframe');
+          f.loading = 'lazy';
+          f.width = '100%';
+          f.setAttribute('allowfullscreen', '');
+          f.title = v.title || 'Video';
+          f.src = `https://www.youtube.com/embed/${v.youtubeId}`;
+          container.appendChild(f);
+        });
+      })
+      .catch(() => {/* keep fallback if fetch fails */});
+  } catch(e) { /* keep fallback */ }
+})();
+</script>
 </body>
 </html>
