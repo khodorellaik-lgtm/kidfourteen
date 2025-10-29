@@ -1675,6 +1675,47 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
   <script>
+/* K14 — Load Shows dynamically from /content/shows.json */
+(function k14LoadShows(){
+  const wrap = document.querySelector('#showsPanels');
+  if (!wrap) return;
+
+  fetch('content/shows.json', { cache: 'no-cache' })
+    .then(r => r.json())
+    .then(data => {
+      const upPane  = wrap.querySelector('[data-pane="upcoming"]');
+      const pastPane = wrap.querySelector('[data-pane="past"]');
+      if (!upPane || !pastPane) return;
+
+      // Upcoming
+      if (Array.isArray(data.upcoming) && data.upcoming.length) {
+        upPane.innerHTML =
+          '<ul class="shows-list">' +
+          data.upcoming.map(s =>
+            `<li>${new Date(s.date).toLocaleDateString('en-US',{month:'short',year:'numeric'})} — ${s.venue} — ${s.city}, ${s.country}</li>`
+          ).join('') +
+          '</ul>';
+      } else {
+        upPane.innerHTML = '<p class="muted">No upcoming shows announced.</p>';
+      }
+
+      // Past (newest first)
+      if (Array.isArray(data.past) && data.past.length) {
+        const sorted = data.past.slice().sort((a,b)=> new Date(b.date) - new Date(a.date));
+        pastPane.innerHTML =
+          '<ul class="shows-list">' +
+          sorted.map(s =>
+            `<li>${new Date(s.date).toLocaleDateString('en-US',{month:'short',year:'numeric'})} — ${s.venue} — ${s.city}, ${s.country}</li>`
+          ).join('') +
+          '</ul>';
+      } else {
+        pastPane.innerHTML = '<p class="muted">No past shows listed.</p>';
+      }
+    })
+    .catch(()=>{ /* keep fallback if JSON fails */ });
+})();
+</script>
+  <script>
 /* K14 — Load Videos from /content/videos.json */
 (function k14LoadVideos(){
   try {
