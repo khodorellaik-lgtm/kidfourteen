@@ -197,7 +197,20 @@ h2{font-size:clamp(26px,3vw,36px)}
   color: #000;                 /* black text on hover */
   border-color: #fff;          /* optional: match hover bg */
 }
+/* Force hero pills to stay in one line on wide screens */
+.hero .pills {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  justify-content: center;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.hero .pills::-webkit-scrollbar { display: none; }
 
+/* Ensure each pill stays at natural size and doesn't shrink */
+.hero .pill {
+  flex: 0 0 auto;
+}
    /* ===== Player ===== */
     .music-switch{display:inline-flex; gap:10px; margin:10px 0 18px}
     .music-tab{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:var(--text); padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer}
