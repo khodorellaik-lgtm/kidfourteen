@@ -2134,26 +2134,32 @@ let html = `
     .catch(() => {});
 })();
 </script>
-  <script>
-(() => {
-  const btn = document.getElementById('backToTop');
-  if (!btn) return;
+ </script>
 
-  // show/hide after scrolling a bit (tweak 500 → 700 if you want later)
-  const THRESHOLD = 600;
-  const onScroll = () => {
-    const y = window.scrollY || document.documentElement.scrollTop;
-    btn.classList.toggle('show', y > THRESHOLD);
-  };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // smooth jump to the top
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-})();
-</script>
+  <!-- ✅ Add this button just before the JS -->
   <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+  <script>
+  (() => {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    // show/hide after scrolling a bit
+    const THRESHOLD = 600;
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      btn.classList.toggle('show', y > THRESHOLD);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // smooth scroll to top
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+</body>
+</html>
 </body>
 </html>
