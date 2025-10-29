@@ -25,6 +25,25 @@
   <meta name="twitter:title" content="Kid Fourteen — Experimental Pop / Noise Pop / Song">
   <meta name="twitter:description" content="New work, live shows, and records.">
   <meta name="twitter:image" content="/og.jpg">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Kid Fourteen",
+  "alternateName": "Khodor Ellaik",
+  "url": "https://kidfourteen.com/",
+  "image": "https://kidfourteen.com/og.jpg",
+  "genre": ["Experimental Pop","Noise Pop"],
+  "sameAs": [
+    "https://kidfourteen.bandcamp.com",
+    "https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG",
+    "https://www.youtube.com/@kidfourteen",
+    "https://soundcloud.com/kidfourteen",
+    "https://instagram.com/kidfourteen",
+    "https://facebook.com/kidfourteen"
+  ]
+}
+</script>
 
 <style>
 /* =========================
@@ -2022,6 +2041,49 @@ let html = `
 
   // initialize (if a track is already loaded)
   if (!audio.paused && audio.src) { refreshMeta(); bar.hidden = false; }
+})();
+</script>
+  <script>
+(() => {
+  fetch('content/shows.json', { cache: 'no-cache' })
+    .then(r => r.json())
+    .then(data => {
+      const list = Array.isArray(data.upcoming) ? data.upcoming : [];
+      if (!list.length) return;
+
+      const events = list
+        .filter(s => s.date && s.venue && s.city && s.country)
+        .map(s => ({
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": `Kid Fourteen at ${s.venue}`,
+          "startDate": s.date,                 // ISO date from your JSON
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {
+            "@type": "Place",
+            "name": s.venue,
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": s.city,
+              "addressCountry": s.country
+            }
+          },
+          "performer": {
+            "@type": "MusicGroup",
+            "name": "Kid Fourteen",
+            "url": "https://kidfourteen.com/"
+          }
+        }));
+
+      if (!events.length) return;
+
+      const node = document.createElement('script');
+      node.type = 'application/ld+json';
+      node.textContent = JSON.stringify({ "@graph": events });
+      document.head.appendChild(node);
+    })
+    .catch(() => {});
 })();
 </script>
 </body>
