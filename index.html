@@ -1111,11 +1111,11 @@ section[id] {
   .brand{ letter-spacing:.08em; }
   .nav .links a{ font-size:12.5px; }
 }
-   /* ---------- Back to top ---------- */
+  /* ---------- Back to top ---------- */
 #backToTop{
   position: fixed;
   right: 20px;
-  bottom: calc(110px + env(safe-area-inset-bottom, 0)); /* higher to clear Now Playing bar */
+  bottom: calc(110px + env(safe-area-inset-bottom, 0));
   z-index: 3000;
   background: rgba(24,30,42,.85);
   border: 1px solid rgba(255,255,255,.18);
@@ -1132,24 +1132,11 @@ section[id] {
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   box-shadow: 0 8px 20px rgba(0,0,0,.35);
 }
+#backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
+#backToTop.show{ opacity: 1; transform: translateY(0); }
 
-#backToTop:hover{
-  background: rgba(127,234,209,.15);
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(0);
-}
-
-#backToTop.show{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* extra lift on small screens (Now Playing bar taller on mobile) */
 @media (max-width: 700px){
-  #backToTop{
-    bottom: calc(128px + env(safe-area-inset-bottom, 0));
-  }
+  #backToTop{ bottom: calc(128px + env(safe-area-inset-bottom, 0)); }
 }
   </style>
 </head>
@@ -2144,7 +2131,7 @@ let html = `
 })();
 </script>
 
-<!-- ✅ Add this button just before the JS -->
+<!-- ✅ Back to top button -->
 <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
 <script>
@@ -2152,20 +2139,41 @@ let html = `
   const btn = document.getElementById('backToTop');
   if (!btn) return;
 
-  // show/hide after scrolling a bit
-  const THRESHOLD = 900;
-  const onScroll = () => {
+  // Pick the section AFTER which the button should appear
+  const triggerEl =
+    document.getElementById('bio') ||
+    document.getElementById('press') ||
+    document.getElementById('albums');
+
+  // Fallback if sections aren’t found
+  function fallbackTriggerY(){ return 1600; }
+
+  // Compute trigger point (recomputed on resize/orientation)
+  function computeTriggerY(){
+    if (!triggerEl) return fallbackTriggerY();
+    const rect = triggerEl.getBoundingClientRect();
+    const y = rect.top + window.scrollY;
+    // show only after we’re clearly into the section
+    return Math.max(0, y - (window.innerHeight * 0.25));
+  }
+
+  let TRIGGER_Y = computeTriggerY();
+
+  function onScroll(){
     const y = window.scrollY || document.documentElement.scrollTop;
-    btn.classList.toggle('show', y > THRESHOLD);
-  };
+    btn.classList.toggle('show', y > TRIGGER_Y);
+  }
 
-  onScroll();
+  // events
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { TRIGGER_Y = computeTriggerY(); onScroll(); });
+  window.addEventListener('orientationchange', () => { TRIGGER_Y = computeTriggerY(); onScroll(); });
 
-  // smooth scroll to top
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  // smooth scroll
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // first run
+  onScroll();
 })();
 </script>
 </body>
