@@ -274,20 +274,6 @@ h2{font-size:clamp(26px,3vw,36px)}
   color:var(--text);
   padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:800;
 }
-    /* Close (hide) button in the Now Playing bar */
-#k14NowPlaying .np-close{
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  line-height: 1;
-  opacity: .9;
-}
-#k14NowPlaying .np-close:hover{
-  opacity: 1;
-}
 #k14NowPlaying .np-btn:hover{
   border-color:var(--accent); color:var(--accent);
 }
@@ -1719,29 +1705,10 @@ bindItems();
         cur.textContent = fmt(audio.currentTime);
         dur.textContent = fmt(audio.duration);
       });
-    audio.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
-audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
-audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
-audio.addEventListener('loadedmetadata', () => {
-  dur.textContent = fmt(audio.duration || 0); // show the correct length immediately
-});
-
-// Hide Now Playing when ✕ is clicked
-const closeBtn = document.querySelector('#k14NowPlaying .np-close');
-closeBtn?.addEventListener('click', () => {
-  const bar = document.getElementById('k14NowPlaying');
-  bar.dataset.dismissed = '1';
-  bar.hidden = true;
-});
-
-// Optional helper to reopen via console
-window.k14ShowNowPlaying = () => {
-  const bar = document.getElementById('k14NowPlaying');
-  delete bar.dataset.dismissed;
-  bar.hidden = false;
-};
-
-})();
+      audio.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
+      audio.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
+      audio.addEventListener('ended', ()=>{ load(index+1); audio.play().catch(()=>{}); });
+     audio.addEventListener('loadedmetadata', () => {
   dur.textContent = fmt(audio.duration || 0); // show the correct length immediately
 });
 
@@ -2059,7 +2026,6 @@ let html = `
   <div class="np-ctrls">
     <button class="np-btn np-play" type="button" aria-label="Pause/Play">⏸</button>
     <button class="np-btn np-next" type="button" aria-label="Next">⟲</button>
-    <button class="np-btn np-close" type="button" aria-label="Hide">✕</button>
   </div>
 </div>
   <script>
@@ -2075,7 +2041,6 @@ let html = `
   const next  = bar?.querySelector('.np-next');
   const coverBtn = bar?.querySelector('.np-cover img');
   const metaBtn  = bar?.querySelector('.np-meta');
-  const closeBtn = bar?.querySelector('.np-close');
 
   if (!bar || !audio) return;
 
@@ -2095,7 +2060,7 @@ let html = `
   }
 
   // show/hide depending on playback
-  audio.addEventListener('play',  () => {   refreshMeta();   if (!bar.dataset.dismissed) bar.hidden = false;   // ← respect dismissal   play.textContent = '⏸'; });
+  audio.addEventListener('play',  () => { refreshMeta(); bar.hidden = false; play.textContent = '⏸'; });
   audio.addEventListener('pause', () => { play.textContent = '▶'; /* keep bar visible; hide if you prefer: bar.hidden = true; */ });
   audio.addEventListener('ended', () => { /* bar stays, next handler in main player will update */ });
   audio.addEventListener('loadedmetadata', refreshMeta);
