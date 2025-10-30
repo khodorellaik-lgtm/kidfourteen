@@ -2188,19 +2188,16 @@ let html = `
   const close = bar?.querySelector('.np-close');
   if (!bar || !audio || !close) return;
 
-  // Hide on ✕
   close.addEventListener('click', () => {
+    audio.pause();              // ← stop playback
+    // audio.currentTime = 0;   // ← optional: also reset to start
     bar.dataset.dismissed = '1';
     bar.hidden = true;
   });
 
-  // Show on play (unless user dismissed)
   audio.addEventListener('play', () => {
     if (!bar.dataset.dismissed) bar.hidden = false;
   });
-
-  // Optional: reopen via console if you need it
-  window.k14ShowNowPlaying = () => { delete bar.dataset.dismissed; bar.hidden = false; };
 })();
 </script>
 </body>
