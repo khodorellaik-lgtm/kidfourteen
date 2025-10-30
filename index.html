@@ -1740,15 +1740,14 @@ window.k14ShowNowPlaying = () => {
   delete bar.dataset.dismissed;
   bar.hidden = false;
 };
-
-})();
-});
-
 document.addEventListener('k14PlaylistUpdated', () => {
   bindItems();
   const first = items.findIndex(el => el.classList.contains('is-active'));
   load(first > -1 ? first : 0);
 });
+
+})();
+
 
 
       // Tabs: Player <-> Spotify  (scoped to #music only)
@@ -2162,6 +2161,30 @@ let html = `
       document.head.appendChild(node);
     })
     .catch(() => {});
+})();
+</script>
+<!-- 🎵 Player ⇄ Spotify Tabs Switch -->
+<script>
+(() => {
+  const root   = document.getElementById('k14Player');
+  const audio  = document.getElementById('audio');
+  const tabWrap = document.querySelector('#music [aria-label="Music player mode"]');
+  const tabs    = Array.from(tabWrap?.querySelectorAll('.music-tab') || []);
+  const embed   = document.getElementById('spotifyEmbed');
+  if (!tabWrap || !root || !embed) return;
+
+  const setMode = (mode) => {
+    const isPlayer = mode === 'player';
+    root.hidden  = !isPlayer;
+    embed.hidden =  isPlayer;
+    tabWrap.querySelector('.music-tab.is-active')?.classList.remove('is-active');
+    tabs.find(t => t.dataset.mode === mode)?.classList.add('is-active');
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === mode)));
+    if (!isPlayer && audio && !audio.paused) audio.pause();
+  };
+
+  tabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+  setMode('player');
 })();
 </script>
 
