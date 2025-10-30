@@ -21,14 +21,44 @@
       "duration": "3:35"
     },
     {
+      "title": "(Alien Alien) مهاجر",
+      "src": "audio/Kid Fourteen - Heart is a Malady-(Alien Alien).mp3",
+      "cover": "cover4.png",
+      "duration": "1:20"
+    },
+    {
+      "title": "The Dancer",
+      "src": "audio/Kid Fourteen - Dream Kids Never Sleep - 01 The Dancer.mp3",
+      "cover": "cover3.png",
+      "duration": "3:26"
+    },
+    {
       "title": "Latifa",
       "src": "audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3",
       "cover": "cover2.jpg",
       "duration": "3:17"
     },
     {
-      "title": "Between Light and Fragrance",
-      "src": "audio/Kid Fourteen - Between Light and Fragrance.mp3",
+      "title": "Arab Prince",
+      "src": "audio/Kid Fourteen - Love - 08 Arab Prince.mp3",
+      "cover": "cover5.jpg",
+      "duration": "3:36"
+    },
+    {
+      "title": "Fear Takes A Man",
+      "src": "audio/Kid Fourteen - Love - 01 Fear Takes a Man.mp3",
+      "cover": "cover5.jpg",
+      "duration": "7:21"
+    },
+    {
+      "title": "Time won't tell you shit",
+      "src": "audio/Kid Fourteen - Blood-Thick Silence - 08 Time won't tell you shit.mp3",
+      "cover": "cover2.jpg",
+      "duration": "4:03"
+    },
+    {
+      "title": "Of in Love",
+      "src": "audio/Kid Fourteen - Heart is a Malady - 06 (Of in Love).mp3",
       "cover": "cover4.jpg",
       "duration": "2:47"
     },
