@@ -2141,9 +2141,9 @@ let html = `
 
   // Pick the section AFTER which the button should appear
   const triggerEl =
-    document.getElementById('bio') ||
     document.getElementById('press') ||
-    document.getElementById('albums');
+    document.getElementById('albums') ||
+    document.getElementById('shows');
 
   // Fallback if sections aren’t found
   function fallbackTriggerY(){ return 1600; }
