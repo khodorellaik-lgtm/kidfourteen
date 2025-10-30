@@ -277,6 +277,10 @@ h2{font-size:clamp(26px,3vw,36px)}
 #k14NowPlaying .np-btn:hover{
   border-color:var(--accent); color:var(--accent);
 }
+    #k14NowPlaying .np-close{
+  width:32px;height:32px;display:grid;place-items:center;font-weight:900;opacity:.9;padding:0
+}
+#k14NowPlaying .np-close:hover{opacity:1}
 
 /* Avoid overlap with iOS bottom bars on very small screens */
 @media (max-width:380px){
@@ -2026,6 +2030,7 @@ let html = `
   <div class="np-ctrls">
     <button class="np-btn np-play" type="button" aria-label="Pause/Play">⏸</button>
     <button class="np-btn np-next" type="button" aria-label="Next">⟲</button>
+    <button class="np-btn np-close" type="button" aria-label="Hide">✕</button>
   </div>
 </div>
   <script>
@@ -2174,6 +2179,28 @@ let html = `
 
   // first run
   onScroll();
+})();
+</script>
+  <script>
+(() => {
+  const bar   = document.getElementById('k14NowPlaying');
+  const audio = document.getElementById('audio');
+  const close = bar?.querySelector('.np-close');
+  if (!bar || !audio || !close) return;
+
+  // Hide on ✕
+  close.addEventListener('click', () => {
+    bar.dataset.dismissed = '1';
+    bar.hidden = true;
+  });
+
+  // Show on play (unless user dismissed)
+  audio.addEventListener('play', () => {
+    if (!bar.dataset.dismissed) bar.hidden = false;
+  });
+
+  // Optional: reopen via console if you need it
+  window.k14ShowNowPlaying = () => { delete bar.dataset.dismissed; bar.hidden = false; };
 })();
 </script>
 </body>
