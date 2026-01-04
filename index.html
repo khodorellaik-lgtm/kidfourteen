@@ -1165,45 +1165,49 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
 
-/* MOBILE HERO FIX — replacement (no “next section” peek) */
+/* MOBILE HERO FIX — final (accounts for fixed nav + optional zoom-out) */
 @media (max-width: 768px) {
 
-  /* Make hero exactly one screen tall on mobile */
+  /* Adjust this to your real fixed header height */
+  :root { --navH: 64px; } /* try 60–76px if needed */
+
   .hero{
-    height: 100svh !important;
-    min-height: 100svh !important;
+    height: calc(100svh - var(--navH)) !important;
+    min-height: calc(100svh - var(--navH)) !important;
     overflow: hidden !important;
+    padding-top: var(--navH) !important; /* keeps content clear of the nav */
   }
 
-  /* Lock background crop + stop any drift/parallax on mobile */
-  .hero-bg{
-    inset: 0 !important;                /* remove overscan */
-    animation: none !important;         /* stop bgDrift only on mobile */
-    transition: none !important;
-    transform: none !important;
-    will-change: auto !important;
-
-    background-position: 55% 4% !important;  /* tweak 2–8% if needed */
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-  }
-
-  /* Spacer causes layout weirdness on mobile — remove it */
+  /* Kill the spacer on mobile */
   .hero-spacer{
     display: none !important;
     height: 0 !important;
   }
 
-  /* Push caption + buttons to the bottom in a stable way */
+  .hero-bg{
+    /* stop all motion on mobile */
+    animation: none !important;
+    transition: none !important;
+    will-change: auto !important;
+
+    /* --- “zoom out” trick --- */
+    inset: -10svh -10vw !important;     /* makes the layer bigger than screen */
+    transform: scale(0.90) !important;  /* 0.88–0.94 = more/less zoom-out */
+
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: 55% 8% !important; /* tweak Y (8%) to taste */
+  }
+
+  /* Bottom-align caption + pills reliably */
   .hero .content{
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding-bottom: 10svh !important;   /* tweak 8–12svh */
+    padding-bottom: 6svh !important; /* tweak 4–10svh */
   }
 
-  /* Caption spacing */
   .hero .hero-caption{
     padding-left: 6vw !important;
     padding-right: 6vw !important;
@@ -1211,6 +1215,7 @@ section[id] {
     line-height: 1.35 !important;
   }
 }
+
 
   </style>
 </head>
