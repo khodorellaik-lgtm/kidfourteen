@@ -1165,9 +1165,15 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
 
-@media (max-width: 700px){
-  #backToTop{ bottom: calc(128px + env(safe-area-inset-bottom, 0)); }
-}
+@media (max-width: 768px) {
+  .hero,
+  .hero-section,
+  .landing-hero,
+  header.hero {
+    background-position: 55% 12% !important;
+    min-height: 100svh;
+  }
+}  
   </style>
 </head>
 <body>
