@@ -1164,24 +1164,19 @@ section[id] {
 }
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
-
-/* MOBILE HERO FIX — clean + stable (no zoom tricks) */
+/* MOBILE HERO — FINAL, DONE */
 @media (max-width: 768px) {
 
-  /* Full screen hero, no peeking next section */
   .hero{
     height: 100svh !important;
     min-height: 100svh !important;
     overflow: hidden !important;
   }
 
-  /* Kill the spacer on mobile (this is what was pushing stuff weirdly) */
   .hero-spacer{
     display: none !important;
-    height: 0 !important;
   }
 
-  /* Background: stop drift/parallax and lock crop */
   .hero-bg{
     inset: 0 !important;
     animation: none !important;
@@ -1191,19 +1186,16 @@ section[id] {
 
     background-size: cover !important;
     background-repeat: no-repeat !important;
-
-    /* TUNE THIS: X then Y */
-    background-position: 60% 14% !important;
+    background-position: 58% 18% !important;
   }
 
-  /* Put caption + pills at the bottom neatly */
   .hero .content{
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    gap: 18px !important;
     padding: 0 6vw 6svh !important;
+    gap: 18px !important;
   }
 
   .hero .hero-caption{
