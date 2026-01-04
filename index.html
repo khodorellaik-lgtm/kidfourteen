@@ -1204,21 +1204,31 @@ section[id] {
     padding: 0 6vw 8svh;
   }
 }
-    @media (max-width: 768px) {
+/* MOBILE: fix social buttons layout (clean 2-column grid) */
+@media (max-width: 768px) {
 
-  .pills {
-    gap: 10px;                 /* more vertical air */
-    padding: 0 5vw;            /* side breathing room */
+  .pills{
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    padding: 0 6vw !important;
+    width: 100% !important;
+    max-width: 520px;          /* keeps it elegant on big phones */
+    margin: 18px auto 0 !important;
+    justify-items: stretch !important;
   }
 
-  .pills .pill {
-    flex: 1 1 calc(50% - 10px); /* 2 per row */
-    text-align: center;
-    padding: 14px 0;            /* taller buttons */
-    font-size: 15px;
+  .pills .pill{
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;   /* prevents weird squeezing */
+    padding: 14px 12px !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important; /* keep label on one line */
   }
 }
-
 
   </style>
 </head>
