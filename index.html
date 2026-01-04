@@ -1165,17 +1165,17 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
     
-/* MOBILE HERO FIX — final (copy/paste) */
+/* MOBILE HERO — final, stable, zoomed-out */
 @media (max-width: 768px){
 
-  /* 1) Force hero to be exactly one screen tall */
+  /* Lock hero to exactly one screen */
   .hero{
     height: 100svh !important;
     min-height: 100svh !important;
     overflow: hidden !important;
   }
 
-  /* 2) Lock the background (no drift/parallax) */
+  /* Background image control */
   .hero-bg{
     inset: 0 !important;
     animation: none !important;
@@ -1183,26 +1183,24 @@ section[id] {
     transform: none !important;
     will-change: auto !important;
 
-    background-size: cover !important;
+    /* THIS is the important part */
+    background-size: 115% !important;   /* zoom OUT */
     background-repeat: no-repeat !important;
-
-    /* Only tweak these two numbers */
-    background-position: 55% 6% !important;
+    background-position: 55% 8% !important;
   }
 
-  /* 3) REMOVE the spacer that pushes everything down */
+  /* Remove spacer entirely */
   .hero-spacer{
     display: none !important;
-    height: 0 !important;
   }
 
-  /* 4) Put caption + buttons at the bottom nicely */
+  /* Bottom-align text & buttons */
   .hero .content{
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    padding: 0 6vw 10svh !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 6vw 8svh;
   }
 }
 
