@@ -1165,36 +1165,37 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
     
-/* MOBILE HERO — final, stable, zoomed-out */
+/* MOBILE HERO — square crop, no side borders */
 @media (max-width: 768px){
 
-  /* Lock hero to exactly one screen */
+  /* One clean screen */
   .hero{
     height: 100svh !important;
     min-height: 100svh !important;
     overflow: hidden !important;
   }
 
-  /* Background image control */
+  /* Background image: zoom IN to kill side borders */
   .hero-bg{
     inset: 0 !important;
+
     animation: none !important;
     transition: none !important;
     transform: none !important;
     will-change: auto !important;
 
-    /* THIS is the important part */
-    background-size: 115% !important;   /* zoom OUT */
+    /* THIS is the fix */
+    background-size: 160% auto !important;
     background-repeat: no-repeat !important;
-    background-position: 55% 8% !important;
+    background-position: 50% 8% !important;
   }
 
-  /* Remove spacer entirely */
+  /* No spacer — causes layout breakage */
   .hero-spacer{
     display: none !important;
   }
 
-  /* Bottom-align text & buttons */
+  /* Content anchored to bottom */
   .hero .content{
     height: 100%;
     display: flex;
