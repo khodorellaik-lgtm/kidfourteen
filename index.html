@@ -1204,33 +1204,26 @@ section[id] {
     padding: 0 6vw 8svh;
   }
 }
-    /* MOBILE: social buttons — inline, breathable, max 2 rows */
-@media (max-width: 768px){
+  /* MOBILE — pills: same layout, more air */
+@media (max-width: 768px) {
 
   .pills{
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
 
-    gap: 14px 12px !important;   /* vertical | horizontal spacing */
+    gap: 14px 16px !important;   /* 👈 THIS is the key */
+    margin-top: 18px !important;
     padding: 0 4vw !important;
-
-    max-width: 100% !important;
-    margin: 14px auto 0 !important;
   }
 
   .pills .pill{
-    flex: 0 1 auto !important;   /* natural width */
-    padding: 12px 18px !important;
-
-    font-size: 15px !important;
+    padding: 14px 18px !important; /* slightly wider buttons */
+    font-size: 15.5px !important;
     line-height: 1.1 !important;
     white-space: nowrap !important;
-
-    min-width: auto !important;
   }
 }
-
 
   </style>
 </head>
