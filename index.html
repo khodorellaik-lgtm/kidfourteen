@@ -1165,39 +1165,53 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
 
-/* MOBILE HERO FIX — final */
+/* MOBILE HERO FIX — replacement (no “next section” peek) */
 @media (max-width: 768px) {
 
-  /* Keep hero stable on mobile */
-  .hero {
-    min-height: 92svh;
+  /* Make hero exactly one screen tall on mobile */
+  .hero{
+    height: 100svh !important;
+    min-height: 100svh !important;
+    overflow: hidden !important;
   }
 
-  /* Lock background crop on mobile */
-  .hero-bg {
-    inset: 0;                         /* remove overscan */
-    animation: none !important;       /* stop bgDrift ONLY on mobile */
+  /* Lock background crop + stop any drift/parallax on mobile */
+  .hero-bg{
+    inset: 0 !important;                /* remove overscan */
+    animation: none !important;         /* stop bgDrift only on mobile */
     transition: none !important;
     transform: none !important;
     will-change: auto !important;
 
-    background-position: 55% 4% !important;
+    background-position: 55% 4% !important;  /* tweak 2–8% if needed */
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
   }
 
-  /* Reduce spacer so text doesn't drop too low */
-  .hero-spacer {
-    height: 55svh;
+  /* Spacer causes layout weirdness on mobile — remove it */
+  .hero-spacer{
+    display: none !important;
+    height: 0 !important;
+  }
+
+  /* Push caption + buttons to the bottom in a stable way */
+  .hero .content{
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    padding-bottom: 10svh !important;   /* tweak 8–12svh */
   }
 
   /* Caption spacing */
-  .hero .hero-caption {
-    padding-left: 6vw;
-    padding-right: 6vw;
-    padding-bottom: 10svh;
-    max-width: 92vw;
-    line-height: 1.35;
+  .hero .hero-caption{
+    padding-left: 6vw !important;
+    padding-right: 6vw !important;
+    max-width: 92vw !important;
+    line-height: 1.35 !important;
   }
 }
+
   </style>
 </head>
 <body>
