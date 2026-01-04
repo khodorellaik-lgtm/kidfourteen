@@ -1204,34 +1204,33 @@ section[id] {
     padding: 0 6vw 8svh;
   }
 }
-/* MOBILE — pills: 3-per-row, same look, not cramped */
-@media (max-width: 768px) {
+/* MOBILE — pills: 3 per row (2 rows), with breathing room */
+@media (max-width: 768px){
 
   .pills{
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 12px 14px !important;
-    padding: 0 4vw !important;
-    margin-top: 18px !important;
+
+    gap: 14px 16px !important;     /* MORE SPACE between buttons */
+    margin-top: 22px !important;
+    padding: 0 5vw !important;
   }
 
   .pills .pill{
-    /* give each pill a bit more width than the strict 3-col calc */
-    flex: 0 1 calc((100% - 2 * 14px) / 3 + 8px) !important;
+    flex: 0 0 calc((100% - 2 * 16px) / 3) !important; /* FORCE 3 columns */
     max-width: 190px !important;
 
-    /* keep padding reasonable so labels fit */
-    padding: 12px 12px !important;
-
-    font-size: 14px !important;        /* slightly smaller = fixes SoundCloud */
+    padding: 14px 12px !important; /* taller button = less “crammed” */
+    font-size: 13px !important;
     line-height: 1.1 !important;
     text-align: center !important;
+
     white-space: nowrap !important;
     min-width: 0 !important;
-    box-sizing: border-box !important;
   }
 }
+
 
   </style>
 </head>
