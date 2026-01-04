@@ -129,7 +129,7 @@ h2{font-size:clamp(26px,3vw,36px)}
   inset:-10vh -10vw;
 
   /* ✅ DEFAULT MODE */
-  background:#0c1219 url('hero.jpg') center / cover no-repeat;
+  background: url('hero.jpg') center / cover no-repeat;
 
   transform: translate3d(0, var(--parallax, 0px), 0);
   will-change: transform, background-position;
@@ -140,18 +140,23 @@ h2{font-size:clamp(26px,3vw,36px)}
   /* cinematic drift (Ken Burns) */
   animation:bgDrift 18s ease-in-out infinite alternate;
 }
+.hero-spacer{
+  height: 90vh;
+}
 @keyframes bgDrift{
   0%   { background-position: center }
   50%  { background-position: 48% 52% }
   100% { background-position: 52% 48% }
 }
-.hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9)); z-index:0; pointer-events:none}
+/*.hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9)); z-index:0; pointer-events:none}
 .hero .content{position:relative; z-index:2}
 .hero-display{
   font-weight:800; letter-spacing:.1em; text-transform:uppercase;
   font-size:clamp(64px,10vw,140px); text-align:center;
   text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
+}/*
 }
+
 @keyframes neonPulse{
   0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
   50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
@@ -199,6 +204,24 @@ h2{font-size:clamp(26px,3vw,36px)}
   background: #fff;            /* white on hover */
   color: #000;                 /* black text on hover */
   border-color: #fff;          /* optional: match hover bg */
+}
+.hero-caption{
+  margin-bottom: 4vh;
+  max-width: 720px;
+  text-align: center;
+  font-size: 16px;
+margin-bottom: 5vh;
+letter-spacing: .05em;
+color: rgba(255,255,255,.9);}
+
+.hero-caption strong{
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.hero-caption em{
+  font-style: italic;
+  opacity: .9;
 }
 
    /* ===== Player ===== */
@@ -1169,21 +1192,24 @@ section[id] {
   <section id="home" class="hero">
     <div class="hero-bg" aria-hidden="true" data-parallax data-speed="0.25"></div>
     <div class="content wrap">
-      <h1 class="sr-only">Kid Fourteen</h1>
-      <div aria-hidden="true" class="hero-display">
-        KID FOURTEEN<br>
-        EXPERIMENTAL POP — NOISE POP — SONG
-      </div>
-      <div class="pills">
-        <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
-        <a class="pill" href="https://open.spotify.com/artist/74O3mUv3eGsAu1ROpgAwFG" target="_blank" rel="noopener">Spotify</a>
-        <a class="pill" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
-        <a class="pill" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
-        <a class="pill" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
-        <a class="pill" href="https://facebook.com/kidfourteen14" target="_blank" rel="noopener">Facebook</a>
-      </div>
-    </div>
-  </section>
+  <h1 class="sr-only">Kid Fourteen</h1>
+
+  <div class="hero-spacer" aria-hidden="true"></div>
+
+  <div class="hero-caption">
+    <strong>KID FOURTEEN — “HERE’S POP”</strong><br>
+    The first single from <em>Far Away and Well Adjusted</em>, out February 2026.
+  </div>
+
+  <div class="pills">
+    <a class="pill" href="https://kidfourteen.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+    <a class="pill" href="https://open.spotify.com/artist/7403mUv3eGsAu1R0pgAwFG" target="_blank" rel="noopener">Spotify</a>
+    <a class="pill" href="https://www.youtube.com/@kidfourteen" target="_blank" rel="noopener">YouTube</a>
+    <a class="pill" href="https://soundcloud.com/kidfourteen" target="_blank" rel="noopener">SoundCloud</a>
+    <a class="pill" href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+    <a class="pill" href="https://facebook.com/kidfourteen14" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</div>  </section>
 
    <!-- MUSIC -->
   <section id="music" class="section">
