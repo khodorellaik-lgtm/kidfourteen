@@ -1204,6 +1204,31 @@ section[id] {
     padding: 0 6vw 8svh;
   }
 }
+/* MOBILE — pills: keep the same look, force 3-per-row (2 rows max) */
+@media (max-width: 768px) {
+
+  .pills{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px 14px !important;      /* vertical / horizontal spacing */
+    padding: 0 4vw !important;
+    margin-top: 18px !important;
+  }
+
+  .pills .pill{
+    /* 3 per row */
+    flex: 0 1 calc((100% - 2 * 14px) / 3) !important;
+    max-width: 180px !important;
+
+    /* keep your pill feel but fit 3 across */
+    padding: 12px 10px !important;
+    font-size: 14.5px !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    min-width: 0 !important;
+  }
+}
 
   </style>
 </head>
