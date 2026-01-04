@@ -1164,20 +1164,18 @@ section[id] {
 }
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
+    
+/* MOBILE HERO FIX — final (copy/paste) */
+@media (max-width: 768px){
 
-    /* MOBILE HERO — FINAL, DONE */
-@media (max-width: 768px) {
-
+  /* 1) Force hero to be exactly one screen tall */
   .hero{
     height: 100svh !important;
     min-height: 100svh !important;
     overflow: hidden !important;
   }
 
-  .hero-spacer{
-    display: none !important;
-  }
-
+  /* 2) Lock the background (no drift/parallax) */
   .hero-bg{
     inset: 0 !important;
     animation: none !important;
@@ -1187,21 +1185,24 @@ section[id] {
 
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    background-position: 58% 20% !important;
+
+    /* Only tweak these two numbers */
+    background-position: 55% 6% !important;
   }
 
+  /* 3) REMOVE the spacer that pushes everything down */
+  .hero-spacer{
+    display: none !important;
+    height: 0 !important;
+  }
+
+  /* 4) Put caption + buttons at the bottom nicely */
   .hero .content{
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding: 0 6vw 6svh !important;
-    gap: 18px !important;
-  }
-
-  .hero .hero-caption{
-    max-width: 92vw !important;
-    line-height: 1.35 !important;
+    padding: 0 6vw 10svh !important;
   }
 }
 
