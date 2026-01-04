@@ -1204,31 +1204,33 @@ section[id] {
     padding: 0 6vw 8svh;
   }
 }
-/* MOBILE: fix social buttons layout (clean 2-column grid) */
-@media (max-width: 768px) {
+    /* MOBILE: social buttons — inline, breathable, max 2 rows */
+@media (max-width: 768px){
 
   .pills{
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 12px !important;
-    padding: 0 6vw !important;
-    width: 100% !important;
-    max-width: 520px;          /* keeps it elegant on big phones */
-    margin: 18px auto 0 !important;
-    justify-items: stretch !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+
+    gap: 14px 12px !important;   /* vertical | horizontal spacing */
+    padding: 0 4vw !important;
+
+    max-width: 100% !important;
+    margin: 14px auto 0 !important;
   }
 
   .pills .pill{
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;   /* prevents weird squeezing */
-    padding: 14px 12px !important;
-    text-align: center !important;
-    font-size: 16px !important;
+    flex: 0 1 auto !important;   /* natural width */
+    padding: 12px 18px !important;
+
+    font-size: 15px !important;
     line-height: 1.1 !important;
-    white-space: nowrap !important; /* keep label on one line */
+    white-space: nowrap !important;
+
+    min-width: auto !important;
   }
 }
+
 
   </style>
 </head>
