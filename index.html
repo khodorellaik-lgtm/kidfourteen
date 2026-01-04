@@ -1165,15 +1165,39 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
 
+/* MOBILE HERO FIX — targets the actual background layer */
 @media (max-width: 768px) {
-  .hero,
-  .hero-section,
-  .landing-hero,
-  header.hero {
-    background-position: 55% 12% !important;
+
+  /* Keep hero stable on mobile browsers */
+  section.hero {
     min-height: 100svh;
   }
-}  
+
+  /* This is the layer that holds the background image */
+  .hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    /* Move the crop so the eye is visible */
+    background-position: 55% 12% !important;
+
+    /* Parallax can mess up cropping on mobile—turn it off */
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Give the caption breathing room above mobile browser UI */
+  .hero .hero-caption {
+    padding-left: 6vw;
+    padding-right: 6vw;
+    padding-bottom: 10svh;
+    max-width: 92vw;
+    line-height: 1.35;
+  }
+}
+
   </style>
 </head>
 <body>
