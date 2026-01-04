@@ -1165,57 +1165,52 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
 
-/* MOBILE HERO FIX — final (accounts for fixed nav + optional zoom-out) */
+/* MOBILE HERO FIX — clean + stable (no zoom tricks) */
 @media (max-width: 768px) {
 
-  /* Adjust this to your real fixed header height */
-  :root { --navH: 64px; } /* try 60–76px if needed */
-
+  /* Full screen hero, no peeking next section */
   .hero{
-    height: calc(100svh - var(--navH)) !important;
-    min-height: calc(100svh - var(--navH)) !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
     overflow: hidden !important;
-    padding-top: var(--navH) !important; /* keeps content clear of the nav */
   }
 
-  /* Kill the spacer on mobile */
+  /* Kill the spacer on mobile (this is what was pushing stuff weirdly) */
   .hero-spacer{
     display: none !important;
     height: 0 !important;
   }
 
+  /* Background: stop drift/parallax and lock crop */
   .hero-bg{
-    /* stop all motion on mobile */
+    inset: 0 !important;
     animation: none !important;
     transition: none !important;
+    transform: none !important;
     will-change: auto !important;
-
-    /* --- “zoom out” trick --- */
-    inset: -10svh -10vw !important;     /* makes the layer bigger than screen */
-    transform: scale(0.90) !important;  /* 0.88–0.94 = more/less zoom-out */
 
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    background-position: 55% 8% !important; /* tweak Y (8%) to taste */
+
+    /* TUNE THIS: X then Y */
+    background-position: 60% 14% !important;
   }
 
-  /* Bottom-align caption + pills reliably */
+  /* Put caption + pills at the bottom neatly */
   .hero .content{
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding-bottom: 6svh !important; /* tweak 4–10svh */
+    gap: 18px !important;
+    padding: 0 6vw 6svh !important;
   }
 
   .hero .hero-caption{
-    padding-left: 6vw !important;
-    padding-right: 6vw !important;
     max-width: 92vw !important;
     line-height: 1.35 !important;
   }
 }
-
 
   </style>
 </head>
