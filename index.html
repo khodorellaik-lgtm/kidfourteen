@@ -1204,6 +1204,21 @@ section[id] {
     padding: 0 6vw 8svh;
   }
 }
+    @media (max-width: 768px) {
+
+  .pills {
+    gap: 10px;                 /* more vertical air */
+    padding: 0 5vw;            /* side breathing room */
+  }
+
+  .pills .pill {
+    flex: 1 1 calc(50% - 10px); /* 2 per row */
+    text-align: center;
+    padding: 14px 0;            /* taller buttons */
+    font-size: 15px;
+  }
+}
+
 
   </style>
 </head>
