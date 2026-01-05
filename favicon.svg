@@ -1,14 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-
-  <!-- background -->
-  <rect width="100" height="100" rx="18" fill="#05080b"/>
-
-  <!-- 1 -->
-  <rect x="28" y="18" width="14" height="64" rx="6" fill="#9be9ff"/>
-
-  <!-- 4 : diagonal + vertical (NO CROSSBAR) -->
-  <polygon points="52,18 64,18 78,48 66,48" fill="#9be9ff"/>
-  <rect x="66" y="18" width="12" height="64" rx="6" fill="#9be9ff"/>
-
+  <rect x="0" y="0" width="100" height="100" rx="20" ry="20" fill="#0b0f14"/>
+  <rect x="42" y="18" width="16" height="64" rx="8" ry="8" fill="#9fe9ff"/>
 </svg>
