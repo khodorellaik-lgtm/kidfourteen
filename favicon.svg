@@ -16,16 +16,15 @@
     fill="#05080b"/>
 
   <!-- K -->
-  <rect x="18" y="22" width="10" height="56" rx="3" fill="#9be9ff"/>
-  <polygon points="28,50 52,22 64,22 38,50" fill="#9be9ff"/>
-  <polygon points="38,50 64,78 52,78 28,50" fill="#9be9ff"/>
+  <rect x="16" y="22" width="10" height="56" rx="3" fill="#9be9ff"/>
+  <polygon points="26,50 46,22 58,22 34,50" fill="#9be9ff"/>
+  <polygon points="34,50 58,78 46,78 26,50" fill="#9be9ff"/>
 
   <!-- 1 -->
   <rect x="60" y="22" width="8" height="56" rx="3" fill="#9be9ff"/>
 
-  <!-- 4 -->
-  <polygon points="74,22 82,22 82,78 74,78" fill="#9be9ff"/>
-  <polygon points="66,50 92,50 92,58 66,58" fill="#9be9ff"/>
-  <polygon points="66,50 82,22 90,22 74,50" fill="#9be9ff"/>
+  <!-- 4 (favicon-safe, no diagonals touching K) -->
+  <rect x="72" y="22" width="8" height="56" rx="3" fill="#9be9ff"/>
+  <rect x="66" y="48" width="20" height="8" rx="3" fill="#9be9ff"/>
 
 </svg>
