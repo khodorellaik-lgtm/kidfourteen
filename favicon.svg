@@ -6,25 +6,18 @@
   height="100">
 
   <!-- Background -->
-  <rect
-    x="0"
-    y="0"
-    width="100"
-    height="100"
-    rx="18"
-    ry="18"
-    fill="#05080b"/>
+  <rect x="0" y="0" width="100" height="100" rx="18" fill="#05080b"/>
 
   <!-- K -->
   <rect x="16" y="22" width="10" height="56" rx="3" fill="#9be9ff"/>
-  <polygon points="26,50 46,22 58,22 34,50" fill="#9be9ff"/>
-  <polygon points="34,50 58,78 46,78 26,50" fill="#9be9ff"/>
+  <polygon points="26,50 48,22 60,22 34,50" fill="#9be9ff"/>
+  <polygon points="34,50 60,78 48,78 26,50" fill="#9be9ff"/>
 
   <!-- 1 -->
-  <rect x="60" y="22" width="8" height="56" rx="3" fill="#9be9ff"/>
+  <rect x="62" y="22" width="7" height="56" rx="3" fill="#9be9ff"/>
 
-  <!-- 4 (favicon-safe, no diagonals touching K) -->
-  <rect x="72" y="22" width="8" height="56" rx="3" fill="#9be9ff"/>
-  <rect x="66" y="48" width="20" height="8" rx="3" fill="#9be9ff"/>
+  <!-- 4 (DETACHED, favicon-safe) -->
+  <rect x="74" y="22" width="7" height="56" rx="3" fill="#9be9ff"/>
+  <rect x="68" y="50" width="18" height="7" rx="3" fill="#9be9ff"/>
 
 </svg>
