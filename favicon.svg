@@ -1,4 +1,31 @@
-<!-- stylized 14 -->
-<polygon points="36,18 42,18 42,46 36,46"/>
-<polygon points="42,32 54,32 54,38 42,38"/>
-<polygon points="48,18 54,18 42,46 36,46"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  width="100"
+  height="100">
+
+  <!-- Background -->
+  <rect
+    x="0"
+    y="0"
+    width="100"
+    height="100"
+    rx="18"
+    ry="18"
+    fill="#05080b"/>
+
+  <!-- K -->
+  <rect x="18" y="22" width="10" height="56" rx="3" fill="#9be9ff"/>
+  <polygon points="28,50 52,22 64,22 38,50" fill="#9be9ff"/>
+  <polygon points="38,50 64,78 52,78 28,50" fill="#9be9ff"/>
+
+  <!-- 1 -->
+  <rect x="60" y="22" width="8" height="56" rx="3" fill="#9be9ff"/>
+
+  <!-- 4 -->
+  <polygon points="74,22 82,22 82,78 74,78" fill="#9be9ff"/>
+  <polygon points="66,50 92,50 92,58 66,58" fill="#9be9ff"/>
+  <polygon points="66,50 82,22 90,22 74,50" fill="#9be9ff"/>
+
+</svg>
