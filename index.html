@@ -618,6 +618,17 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .art{ max-width:68%; margin:0 auto }
   .vol{ width:100% }
   #playlist.playlist{ max-height:220px; padding-right:4px }
+
+  /* Press readability */
+  .press-grid.masonry{ column-count:1 }
+  .press-card{ padding:18px }
+  .press-badge{ font-size:12px }
+  .press-card blockquote{ font-size:14px }
+
+  /* Albums */
+  .album-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; justify-items:stretch }
+  .album-card{ max-width:100% }
+  .album-card .label{ font-size:13px; padding:10px }
 }
 
 @media (max-width:380px){
@@ -630,17 +641,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .brand{ font-size: 14px; letter-spacing: .20em; }
   .nav .links a{ font-size: 12.5px; }
 }
-
-  /* Press readability */
-  .press-grid.masonry{ column-count:1 }
-  .press-card{ padding:18px }
-  .press-badge{ font-size:12px }
-  .press-card blockquote{ font-size:14px }
-
-  /* Albums */
-  .album-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; justify-items:stretch }
-  .album-card{ max-width:100% }
-  .album-card .label{ font-size:13px; padding:10px }
 
   /* Performance: avoid heavy blur on mobile */
   .press-card, .bio-card, .k14-player{
