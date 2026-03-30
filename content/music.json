@@ -9,6 +9,12 @@
   "spotifyEmbed": "https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG",
   "tracks": [
     {
+      "title": "Here's Pop",
+      "src": "audio/Heres-Pop-Master.mp3",
+      "cover": "cover6.jpg",
+      "duration": "3:09"
+    },
+    {
       "title": "Whirlwind Blues",
       "src": "audio/Kid Fourteen - Dream Kids Never Sleep - 04 Whirlwind Blues.mp3",
       "cover": "cover3.jpg",
