@@ -5,6 +5,7 @@
   ],
   "past": [
     { "date": "2026-03-24", "city": "Paris",      "country": "France",        "venue": "The Wrong Side" },
+    { "date": "2026-02-27", "city": "Beirut",      "country": "Lebanon",        "venue": "Zoukak Theater" },
     { "date": "2025-10-01", "city": "Paris",      "country": "France",        "venue": "Institut des Cultures d’Islam" },
     { "date": "2025-08-01", "city": "Groningen",  "country": "Netherlands",   "venue": "Noorderzon Festival" },
     { "date": "2025-05-01", "city": "Beirut",     "country": "Lebanon",       "venue": "Beirut Art Center" },
