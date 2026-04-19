@@ -1,5 +1,7 @@
-"upcoming": []
+"upcoming": [ { "date": "2026-05-08", "city": "Tunis",      "country": "Tunis",        "venue": "32bis" },
+    { "date": "2026-05-28", "city": "Oslo",  "country": "Norway",   "venue": "Hæeverk" },]
   "past": [
+    { "date": "2026-04-24", "city": "Paris",      "country": "France",        "venue": "The Wrong Side" },
     { "date": "2025-10-01", "city": "Paris",      "country": "France",        "venue": "Institut des Cultures d’Islam" },
     { "date": "2025-08-01", "city": "Groningen",  "country": "Netherlands",   "venue": "Noorderzon Festival" },
     { "date": "2025-05-01", "city": "Beirut",     "country": "Lebanon",       "venue": "Beirut Art Center" },
