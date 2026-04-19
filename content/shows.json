@@ -1,5 +1,8 @@
-"upcoming": [ { "date": "2026-05-08", "city": "Tunis",      "country": "Tunis",        "venue": "32bis" },
-    { "date": "2026-05-28", "city": "Oslo",  "country": "Norway",   "venue": "Hæeverk" },]
+{
+  "upcoming": [
+    { "date": "2026-05-08", "city": "Tunis", "country": "Tunisia", "venue": "32bis" },
+    { "date": "2026-05-28", "city": "Oslo", "country": "Norway", "venue": "Hæverk" }
+  ],
   "past": [
     { "date": "2026-04-24", "city": "Paris",      "country": "France",        "venue": "The Wrong Side" },
     { "date": "2025-10-01", "city": "Paris",      "country": "France",        "venue": "Institut des Cultures d’Islam" },
