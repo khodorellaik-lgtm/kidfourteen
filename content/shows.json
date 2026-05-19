@@ -1,8 +1,17 @@
 {
   "upcoming": [
-    
-    { "date": "2026-05-28", "city": "Oslo", "country": "Norway", "venue": "Kafé Hærverk" }
-    { "date": "2026-07-18", "city": "Paris", "country": "France", "venue": "POPUP! PARIS" }
+    {
+      "date": "2026-05-28",
+      "city": "Oslo",
+      "country": "Norway",
+      "venue": "Kafé Hærverk"
+    },
+    {
+      "date": "2026-07-18",
+      "city": "Paris",
+      "country": "France",
+      "venue": "POPUP! PARIS"
+    }
   ],
   "past": [
     { "date": "2026-05-08", "city": "Tunis", "country": "Tunisia", "venue": "Le 32bis" },
