@@ -14,7 +14,6 @@
   <link rel="preconnect" href="https://bandcamp.com">
   <!-- Optional dns-prefetch fallbacks -->
   <link rel="dns-prefetch" href="https://i.scdn.co">
-  <link rel="dns-prefetch" href="https://open.spotify.com">
   <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
   <link rel="dns-prefetch" href="https://img.youtube.com">
   <link rel="dns-prefetch" href="https://bandcamp.com">
@@ -1989,10 +1988,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetch('content/shows.json', { cache: 'no-cache' })
     .then(r => r.json())
-    .then(data => {
-      const upPane  = wrap.querySelector('[data-pane="upcoming"]');
-      const pastPane = wrap.querySelector('[data-pane="past"]');
-      if (!upPane || !pastPane) return;
+   .then(data => {
+  const parseShowDate = dateString => {
+    const [year, month, day] = String(dateString).split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const allShows = [
+    ...(Array.isArray(data.upcoming) ? data.upcoming : []),
+    ...(Array.isArray(data.past) ? data.past : [])
+  ];
+
+  data.upcoming = allShows
+    .filter(show => parseShowDate(show.date) >= today)
+    .sort((a, b) => parseShowDate(a.date) - parseShowDate(b.date));
+
+  data.past = allShows
+    .filter(show => parseShowDate(show.date) < today)
+    .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
+
+  const upPane  = wrap.querySelector('[data-pane="upcoming"]');
+  const pastPane = wrap.querySelector('[data-pane="past"]');
+  if (!upPane || !pastPane) return;
 
       // Upcoming
       if (Array.isArray(data.upcoming) && data.upcoming.length) {
