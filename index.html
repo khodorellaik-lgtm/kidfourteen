@@ -31,7 +31,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kid Fourteen">
   <meta property="og:title" content="Kid Fourteen - Experimental Pop / Noise Pop / Song">
-  <meta property="og:description" content="New work, live shows, and records.">
+  <meta property="og:description" content="music, updates, and shows.">
   <meta property="og:url" content="https://kidfourteen.com/">
   <meta property="og:image" content="https://kidfourteen.com/og.jpg">
   <meta property="og:image:width" content="1200">
@@ -2204,8 +2204,34 @@ let html = `
   fetch('content/shows.json', { cache: 'no-cache' })
     .then(r => r.json())
     .then(data => {
-      const list = Array.isArray(data.upcoming) ? data.upcoming : [];
-      if (!list.length) return;
+  // Convert YYYY-MM-DD into a local date
+  const parseShowDate = dateString => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  // Today at midnight
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Collect shows from both sections
+  const allShows = [
+    ...(Array.isArray(data.upcoming) ? data.upcoming : []),
+    ...(Array.isArray(data.past) ? data.past : [])
+  ];
+
+  // Automatically separate upcoming and past shows
+  data.upcoming = allShows
+    .filter(show => parseShowDate(show.date) >= today)
+    .sort((a, b) => parseShowDate(a.date) - parseShowDate(b.date));
+
+  data.past = allShows
+    .filter(show => parseShowDate(show.date) < today)
+    .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
+
+  const upPane  = wrap.querySelector('[data-pane="upcoming"]');
+  const pastPane = wrap.querySelector('[data-pane="past"]');
+  if (!upPane || !pastPane) return;
 
       const events = list
         .filter(s => s.date && s.venue && s.city && s.country)
