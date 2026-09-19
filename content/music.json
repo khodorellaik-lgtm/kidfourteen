@@ -8,11 +8,29 @@
   },
   "spotifyEmbed": "https://open.spotify.com/embed/artist/74O3mUv3eGsAu1ROpgAwFG",
   "tracks": [
+      {
+      "title": "Nobody Came, Nobody Wants To",
+      "src": "audio/Kid Fourteen - Love - 05 Nobody Came, Nobody Wants To.mp3",
+      "cover": "cover5.png",
+      "duration": "3:20"
+    },
+      {
+      "title": "Alien Alien",
+      "src": "audio/Kid Fourteen - Heart is a Malady 05 - Alien Alien.mp3",
+      "cover": "cover4.jpg",
+      "duration": "1:20"
+    },
     {
       "title": "Here's Pop",
       "src": "audio/Heres-Pop-Master.mp3",
       "cover": "cover6.jpg",
       "duration": "3:09"
+    },
+       {
+      "title": "Latifa",
+      "src": "audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3",
+      "cover": "cover2.jpg",
+      "duration": "3:17"
     },
     {
       "title": "Whirlwind Blues",
@@ -20,43 +38,14 @@
       "cover": "cover3.jpg",
       "duration": "3:47"
     },
-     {
-      "title": "Nobody Came, Nobody Wants To",
-      "src": "audio/Kid Fourteen - Love - 05 Nobody Came, Nobody Wants To.mp3",
-      "cover": "cover5.png",
-      "duration": "3:20"
-    },
-    
-    {
-      "title": "Alien Alien",
-      "src": "audio/Kid Fourteen - Heart is a Malady 05 - Alien Alien.mp3",
-      "cover": "cover4.jpg",
-      "duration": "1:20"
-    },
+  
     {
       "title": "The Dancer",
       "src": "audio/Kid Fourteen - Dream Kids Never Sleep - 01 The Dancer.mp3",
       "cover": "cover3.jpg",
       "duration": "3:26"
     },
-    {
-      "title": "Latifa",
-      "src": "audio/Kid Fourteen - Blood-Thick Silence - 04 Latifa.mp3",
-      "cover": "cover2.jpg",
-      "duration": "3:17"
-    },
-    {
-      "title": "Arab Prince",
-      "src": "audio/Kid Fourteen - Love - 08 Arab Prince.mp3",
-      "cover": "cover5.png",
-      "duration": "3:36"
-    },
-    {
-      "title": "Fear Takes A Man",
-      "src": "audio/Kid Fourteen - Love - 01 Fear Takes a Man.mp3",
-      "cover": "cover5.png",
-      "duration": "7:21"
-    },
+ 
     {
       "title": "Time won't tell you shit",
       "src": "audio/Kid Fourteen - Blood-Thick Silence - 08 Time won't tell you shit.mp3",
