@@ -1039,8 +1039,9 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   margin: 24px 0 36px !important;            /* more air under H2 */
 }
 
-.album-grid { 
-  gap: 28px !important;                      /* wider gaps between covers */
+.album-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px !important;
 }
 
 .album-card { 
@@ -1493,7 +1494,7 @@ Kid Fourteen has released 5 studio albums capturing his experiments in Pop, Elec
       <h2>Albums</h2>
      <div class="album-banner">
   <div class="album-banner-title">FAR AWAY AND WELL ADJUSTED</div>
-  <div class="album-banner-sub">FRIDAY OCTOBER 2ND</div>
+  <div class="album-banner-sub">OUT NOW</div>
 </div>
      <div class="album-grid">
        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/far-away-and-well-adjusted-2" target="_blank" rel="noopener">
