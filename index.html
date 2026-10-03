@@ -543,11 +543,19 @@ footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:ce
   max-width:700px;
   margin:16px 0 0;
 }
-}
 #bio .bio-text .bio-chips .chip{
-  display:block;
-text-align:center; padding:6px 12px; border-radius:4px; background:#fff; border:2px solid #000; color:#000;
-  font:700 12px/1.25 system-ui,--system,Segoe UI,Roboto,Inter,Arial,sans-serif; letter-spacing:.02em; text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  padding:6px 12px;
+  border-radius:4px;
+  background:#fff;
+  border:2px solid #000;
+  color:#000;
+  font:700 12px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  letter-spacing:.02em;
+  text-decoration:none;
   transition:transform .18s ease, background .2s ease, color .2s ease, border-color .2s ease;
 }
 #bio .bio-text .bio-chips .chip:hover{ transform:translateY(-1px); background:#000; color:#fff; border-color:#000 }
