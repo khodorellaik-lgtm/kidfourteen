@@ -1143,30 +1143,34 @@ section[id] {
   opacity: 0.9;
 }
 /* Contact pills - same frosted-glass as hero */
-#contact .pills{
-  justify-content: center;
-  gap: 12px;
-  margin-top: 8px;
+#contact .contact-email {
+  margin: 20px 0 12px;
 }
 
-#contact .pills .pill{
-  background: rgba(255,255,255,0.10) !important;
-  border: 1px solid rgba(255,255,255,0.22) !important;
-  color: var(--text) !important;
-  backdrop-filter: blur(12px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-  text-shadow: 0 0 8px rgba(0,0,0,0.25);
-  transition: transform .2s ease, color .2s ease, border-color .2s ease;
-  padding: 6px 12px;
-  font-size: 13px;
+#contact .contact-email a {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: text-shadow .25s ease, color .25s ease;
 }
-/* Hover tint to match hero */
-#contact .pills .pill:hover{
-  background: rgba(127,234,209,0.18) !important;
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
-  transform: translateY(-1px);
+
+#contact .contact-email a:hover {
+  color: #9ffff0;
+  text-shadow: 0 0 12px rgba(127,234,209,.45);
+}
+
+#contact .contact-instagram {
+  margin: 0;
+}
+
+#contact .contact-instagram a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+#contact .contact-instagram a:hover {
+  text-decoration: underline;
 }
 /* Mobile nav: single row, brand + horizontally scrollable links */
 @media (max-width:520px){
