@@ -596,6 +596,12 @@ section#bio .bio-grid > figure.bio-photo > img{
 /* Mobile stability */
 @media (max-width:700px){
   section#bio .bio-grid{ display:flex; flex-direction:column; align-items:center; gap:28px; }
+
+  section#bio .bio-text{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
   section#bio .bio-grid > figure.bio-photo{
     order: -1;
     aspect-ratio: 3 / 4;
