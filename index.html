@@ -1142,35 +1142,27 @@ section[id] {
   transform: translateX(4px);
   opacity: 0.9;
 }
-/* Contact pills - same frosted-glass as hero */
-#contact .contact-email {
-  margin: 20px 0 12px;
+/* Contact links */
+    #contact .contact-links {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-#contact .contact-email a {
-  font-size: clamp(22px, 2.2vw, 28px);
-  font-weight: 600;
+#contact .contact-links a {
   color: var(--accent);
-  text-decoration: none;
-  transition: text-shadow .25s ease, color .25s ease;
-}
-
-#contact .contact-email a:hover {
-  color: #9ffff0;
-  text-shadow: 0 0 12px rgba(127,234,209,.45);
-}
-
-#contact .contact-instagram {
-  margin: 0;
-}
-
-#contact .contact-instagram a {
-  color: var(--accent);
+  font-weight: 500;
   text-decoration: none;
 }
 
-#contact .contact-instagram a:hover {
+#contact .contact-links a:hover {
   text-decoration: underline;
+}
+
+#contact .contact-links span {
+  opacity: .45;
+}
 }
 /* Mobile nav: single row, brand + horizontally scrollable links */
 @media (max-width:520px){
@@ -1718,9 +1710,11 @@ section[id] {
     <h2>Contact</h2>
     <p>For booking, press, and general inquiries:</p>
 
-    <p class="contact-email">
-      <a href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
-    </p>
+   <p class="contact-links">
+  <a href="mailto:kidfourteen14@gmail.com">kidfourteen14@gmail.com</a>
+  <span>·</span>
+  <a href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
+</p>
 
     <p class="contact-instagram">
       <a href="https://instagram.com/kidfourteen" target="_blank" rel="noopener">Instagram</a>
