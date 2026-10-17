@@ -1,6 +1,12 @@
 {
   "upcoming": [
     {
+      "date": "2026-10-23",
+      "city": "Gothenburg",
+      "country": "Sweden",
+      "venue": "Kinesiska Muren"
+    },
+    {
       "date": "2026-11-20",
       "city": "Brussels",
       "country": "Belgium",
