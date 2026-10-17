@@ -511,12 +511,12 @@ footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:ce
   margin:0 0 12px; font-size:clamp(20px,2.2vw,26px); line-height:1.7; max-width:60ch;
   position:relative; display:inline-block;
 }
+
 #bio .bio-quote::before,
-#bio .bio-quote::after{
-  position:absolute; font-family:Georgia,"Times New Roman",serif; font-size:1.8em; line-height:1; color:rgba(0,0,0,.35); pointer-events:none;
+#bio .bio-quote::after {
+  content: none;
 }
-#bio .bio-quote::before{content:"“"; left:-0.2em; top:-0.05em}
-#bio .bio-quote::after{content:"”"; right:-0.2em; bottom:-0.1em}
+
 #bio .bio-source{display:block; margin-top:10px; font-style:normal; font-size:.9em; color:rgba(0,0,0,.6)}
 
 /* Text */
