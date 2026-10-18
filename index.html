@@ -2220,7 +2220,7 @@ let html = `
   if (!bar || !inner) return;
 
   const updateNavHint = () => {
-    const moreRight = bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2;
+    const lastLink = bar.querySelector('a:last-child'); const moreRight = lastLink &&   lastLink.getBoundingClientRect().right >   bar.getBoundingClientRect().right + 2;
     inner.classList.toggle(
       'has-more-right',
       window.innerWidth <= 520 && moreRight
