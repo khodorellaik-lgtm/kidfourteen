@@ -560,11 +560,20 @@ footer{padding:48px 0; border-top:1px solid rgba(255,255,255,.06); text-align:ce
 }
 #bio .bio-text .bio-chips .chip:hover{ transform:translateY(-1px); background:#000; color:#fff; border-color:#000 }
 
-    @media (max-width: 700px) {
+  
+@media (max-width: 700px) {
   #bio .bio-text .bio-chips {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #bio .bio-text .bio-chips .chip {
+    min-width: 0;
+    font-size: 10px;
+    padding: 6px 2px;
+    letter-spacing: 0;
   }
 }
+
 
 /* BIO photo - stable, no overlap */
 section#bio .bio-grid > figure.bio-photo{
