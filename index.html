@@ -1177,6 +1177,9 @@ section[id] {
 }
 }
 
+.nav-scroll-hint {
+  display: none;
+}
 /* Mobile nav: scrollable links with subtle arrow indicator */
 @media (max-width:520px){
   .nav .inner{
@@ -1206,17 +1209,18 @@ section[id] {
     -webkit-mask-image:linear-gradient(to right, black calc(100% - 32px), transparent);
     mask-image:linear-gradient(to right, black calc(100% - 32px), transparent);
   }
-  .nav .inner::after{
-    content:"›";
-    position:absolute;
-    right:8px;
-    top:50%;
-    transform:translateY(-50%);
-    color:var(--accent);
-    font-size:24px;
-    line-height:1;
-    pointer-events:none;
-  }
+ .nav .inner .nav-scroll-hint {
+  display:block;
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent);
+  font-size:24px;
+  line-height:1;
+  pointer-events:none;
+  z-index:5;
+}
 }
 
 }
@@ -1329,6 +1333,7 @@ section[id] {
         <a href="#downloads">Downloads</a>
         <a href="#contact">Contact</a>
       </nav>
+<span class="nav-scroll-hint" aria-hidden="true">›</span>
     </div>
   </header>
 
