@@ -1176,29 +1176,49 @@ section[id] {
   opacity: .45;
 }
 }
-/* Mobile nav: single row, brand + horizontally scrollable links */
+
+/* Mobile nav: scrollable links with subtle arrow indicator */
 @media (max-width:520px){
   .nav .inner{
     display:flex;
     align-items:center;
     gap:10px;
+    position:relative;
   }
   .brand{
-    flex:0 0 auto;                 /* brand keeps its natural width */
-    letter-spacing:.10em;           /* keep it a bit tighter */
+    flex:0 0 auto;
+    letter-spacing:.10em;
   }
   .nav .links{
-    flex:1 1 auto;                  /* take the remaining row width */
-    min-width:0;                    /* allow shrinking so it can scroll */
-    overflow-x:auto;                /* enable horizontal scroll */
+    flex:1 1 auto;
+    min-width:0;
+    overflow-x:auto;
     white-space:nowrap;
     gap:16px;
-    justify-content:flex-start;     /* start at the left (Music first) */
+    justify-content:flex-start;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
   }
   .nav .links::-webkit-scrollbar{ display:none; }
-  .nav .links a{ font-size:13px; }  /* small, readable */
+  .nav .links a{ font-size:13px; }
+
+  .nav .inner.has-more-right .links{
+    -webkit-mask-image:linear-gradient(to right, black calc(100% - 32px), transparent);
+    mask-image:linear-gradient(to right, black calc(100% - 32px), transparent);
+  }
+  .nav .inner.has-more-right::after{
+    content:"›";
+    position:absolute;
+    right:8px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--accent);
+    font-size:24px;
+    line-height:1;
+    pointer-events:none;
+  }
+}
+
 }
 @media (max-width:380px){
   .brand{ letter-spacing:.08em; }
@@ -2192,10 +2212,25 @@ let html = `
   } catch(e) { /* keep fallback */ }
 })();
 </script>
-  <script>
+ 
+<script>
 (() => {
   const bar = document.querySelector('.nav .links');
-  if (bar) bar.scrollLeft = 0;
+  const inner = document.querySelector('.nav .inner');
+  if (!bar || !inner) return;
+
+  const updateNavHint = () => {
+    const moreRight = bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2;
+    inner.classList.toggle(
+      'has-more-right',
+      window.innerWidth <= 520 && moreRight
+    );
+  };
+
+  bar.scrollLeft = 0;
+  bar.addEventListener('scroll', updateNavHint, {passive:true});
+  window.addEventListener('resize', updateNavHint);
+  updateNavHint();
 })();
 </script>
   <script>
