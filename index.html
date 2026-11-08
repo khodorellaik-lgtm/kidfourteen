@@ -228,9 +228,9 @@ color: rgba(255,255,255,.9);}
     .music-tab{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:var(--text); padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer}
     .music-tab.is-active{background:rgba(127,234,209,.18); border-color:var(--accent); color:var(--accent)}
     .k14-player{background:var(--bg-soft); border:1px solid var(--chip-border); border-radius:16px; padding:14px 14px 6px; box-shadow:0 10px 24px rgba(0,0,0,.35)}
-    .player-shell{display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:center}
-    .art{border-radius:12px; overflow:hidden; border:1px solid var(--chip-border); box-shadow:0 6px 18px rgba(0,0,0,.35)}
-    .art img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:1/1}
+    #k14Player .player-shell{display:grid; grid-template-columns:180px minmax(0,1fr); gap:20px; align-items:center}
+    #k14Player .art{width:180px; max-width:100%; justify-self:center; border-radius:12px; overflow:hidden; border:1px solid var(--chip-border); box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    #k14Player .art img{display:block; width:100%; height:auto; object-fit:cover; aspect-ratio:1/1}
     .meta{min-width:0}
     .title{font-weight:800; letter-spacing:.01em}
     .subtitle{color:var(--muted); font-size:.95rem; margin-top:2px}
@@ -392,7 +392,7 @@ color: rgba(255,255,255,.9);}
 @media (prefers-reduced-motion:reduce){
   .k14-player.wallpaper::before{ animation:none }
 }
-    @media (max-width:640px){.player-shell{grid-template-columns:1fr}.vol{width:100px}}
+    @media (max-width:640px){#k14Player .player-shell{grid-template-columns:minmax(0,1fr); gap:14px}#k14Player .art{width:160px; margin:0 auto}.vol{width:100px}}
 /* ---------- Albums Banner ---------- */
 .album-banner{position:relative; text-align:center; margin:12px 0 36px; pointer-events:none}
 .album-banner-title{
@@ -666,8 +666,8 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 
   .section{ padding:44px 0 }
 
-  .player-shell{ display:grid; grid-template-columns:1fr; gap:12px; align-items:center }
-  .art{ max-width:68%; margin:0 auto }
+  #k14Player .player-shell{ gap:12px; }
+  #k14Player .art{ max-width:160px; margin:0 auto }
   .vol{ width:100% }
   #playlist.playlist{ max-height:220px; padding-right:4px }
 
