@@ -1228,6 +1228,10 @@ section[id] {
 .nav-scroll-hint {
   display: none;
 }
+/* Keep the navigation scroll hint exclusively on phones. */
+@media (min-width:521px) {
+  .nav .inner .nav-scroll-hint { display:none !important; }
+}
 /* Mobile nav: scrollable links with subtle arrow indicator */
 @media (max-width:520px){
   .nav .inner{
