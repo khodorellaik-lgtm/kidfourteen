@@ -414,6 +414,27 @@ color: rgba(255,255,255,.9);}
   50%{transform:perspective(1100px) translateY(0) translateX(0) rotateX(0) rotateY(1deg) scale(1.13); opacity:.44; filter:blur(.3px) brightness(1.06)}
   100%{transform:perspective(1100px) translateY(-2px) translateX(3px) rotateX(-1deg) rotateY(0) scale(1.10); opacity:.38; filter:blur(.6px) brightness(.98)}
 }
+/* Mobile album heading: two strong lines, retaining the desktop treatment. */
+@media (max-width: 600px) {
+  #albums .album-banner-title {
+    font-size: clamp(26px, 7.5vw, 34px);
+    font-weight: 900;
+    line-height: 1.13;
+    letter-spacing: .025em;
+    max-width: 100%;
+    text-shadow: 0 0 10px rgba(255,105,82,.55), 0 0 24px rgba(255,78,105,.28);
+    animation: k14MobileTitle 13s ease-in-out infinite alternate;
+  }
+  #albums .album-banner-title span { display: block; white-space: nowrap; }
+  #albums .album-banner-sub { margin-top: 12px; letter-spacing: .35em; }
+}
+@keyframes k14MobileTitle {
+  0% { opacity: .78; transform: scale(1.01); filter: brightness(1); }
+  100% { opacity: .9; transform: scale(1.025); filter: brightness(1.06); }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+  #albums .album-banner-title { animation: none; opacity: 1; transform: none; }
+}
 .album-banner-sub{
   display:block;
   margin-top:6px;
@@ -1623,7 +1644,7 @@ section[id] {
     <div class="wrap">
       <h2>Albums</h2>
      <div class="album-banner">
-  <div class="album-banner-title">FAR AWAY AND WELL ADJUSTED</div>
+  <div class="album-banner-title"><span>FAR AWAY AND</span> <span>WELL ADJUSTED</span></div>
   <div class="album-banner-sub">OUT NOW</div>
 </div>
      <div class="album-grid">
