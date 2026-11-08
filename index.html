@@ -1347,20 +1347,6 @@ section[id] {
     background-position: 48% 20% !important;
   }
 
-  /* Fade out the lower edge of the image instead of ending abruptly. */
-  #home.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: linear-gradient(to bottom,
-      transparent 45%,
-      rgba(12,18,25,.20) 50%,
-      rgba(12,18,25,.82) 58%,
-      #0c1219 65%);
-  }
-
   #home .hero-spacer { display: none !important; }
 
   #home .content {
