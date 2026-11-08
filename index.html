@@ -343,6 +343,24 @@ color: rgba(255,255,255,.9);}
 }
 #playlist .track:hover .duration,
 #playlist .track.is-active .duration{ color:var(--accent); opacity:.9 }
+#playlist .track.is-active{
+  background:rgba(127,234,209,.19);
+  border-color:rgba(127,234,209,.8);
+  box-shadow:inset 4px 0 0 var(--accent), 0 2px 10px rgba(0,0,0,.3);
+  color:#fff;
+  font-weight:650;
+}
+#playlist .track.is-active::before{
+  content:"▶";
+  position:absolute;
+  left:20px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--accent);
+  font-size:15px;
+  line-height:1;
+}
+#playlist .track.is-active .duration{font-weight:700}
 #playlist .track.is-active::after{ right:52px }
 
 /* === Wallpaper player (Ken Burns + vignette) === */
