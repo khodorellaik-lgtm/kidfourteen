@@ -1328,55 +1328,80 @@ section[id] {
 #backToTop:hover{ background: rgba(127,234,209,.15); border-color: var(--accent); color: var(--accent); transform: translateY(0); }
 #backToTop.show{ opacity: 1; transform: translateY(0); }
     
-/* MOBILE HERO - square crop, no side borders */
-@media (max-width: 768px){
-
-  /* One clean screen */
-  .hero{
-    height: 100svh !important;
+/* Mobile hero: preserve the portrait and keep release information together. */
+@media (max-width: 768px) {
+  #home.hero {
+    height: auto !important;
     min-height: 100svh !important;
     overflow: hidden !important;
   }
 
-  /* Background image: zoom IN to kill side borders */
-  .hero-bg{
+  #home .hero-bg {
     inset: 0 !important;
-
     animation: none !important;
     transition: none !important;
     transform: none !important;
     will-change: auto !important;
-
-    /* THIS is the fix */
     background-size: 176% auto !important;
     background-repeat: no-repeat !important;
     background-position: 48% 20% !important;
   }
 
-  /* No spacer - causes layout breakage */
-  .hero-spacer{
-    display: none !important;
+  /* Fade out the lower edge of the image instead of ending abruptly. */
+  #home.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom,
+      transparent 45%,
+      rgba(12,18,25,.20) 50%,
+      rgba(12,18,25,.82) 58%,
+      #0c1219 65%);
   }
 
-  /* Content anchored to bottom */
-  .hero .content{
-    height: 100%;
+  #home .hero-spacer { display: none !important; }
+
+  #home .content {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 460px;
+    min-height: 100svh;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 6vw 0svh !important;
+    padding: 0 18px 26px !important;
+  }
+
+  #home .hero-caption {
+    max-width: 340px;
+    margin: 0 auto 12px !important;
+    font-size: 12.5px;
+    line-height: 1.55;
+    letter-spacing: .035em;
+    color: rgba(255,255,255,.90);
+    text-shadow: 0 1px 8px rgba(0,0,0,.3);
+  }
+  #home .hero-caption strong {
+    font-size: 13px;
+    letter-spacing: .085em;
   }
 }
 /* MOBILE - pills: keep the same look, force 3-per-row (2 rows max) */
 @media (max-width: 768px) {
 
-  .pills{
+  #home .pills{
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 12px 8px !important;      /* vertical / horizontal spacing */
-    padding: 0 4vw !important;
-    margin-top: 18px !important;
+    gap: 9px 8px !important;
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   .pills .pill{
@@ -1391,14 +1416,16 @@ section[id] {
   }
 }
 @media (max-width:520px) {
-  /* Two readable columns on phones, now that buttons include logos. */
   #home .pills .pill {
     flex: 0 1 calc((100% - 8px) / 2) !important;
     max-width: 180px !important;
-    gap:6px;
-    padding:10px 8px !important;
+    min-height: 42px;
+    box-sizing: border-box;
+    gap: 7px;
+    padding: 9px 8px !important;
+    font-size: 12px !important;
   }
-  #home .pills .pill-icon { width:15px; height:15px; flex-basis:15px; }
+  #home .pills .pill-icon { width:16px; height:16px; flex-basis:16px; }
 }
      /* ===== KID FOURTEEN: PRESS REDESIGN ===== */
 #press { background:#dfe2e9 !important; color:#1b1d23 !important; padding:80px 0 100px; }
