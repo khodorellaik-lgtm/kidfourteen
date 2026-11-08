@@ -18,26 +18,26 @@
   <link rel="dns-prefetch" href="https://img.youtube.com">
   <link rel="dns-prefetch" href="https://bandcamp.com">
 
-  <title>Kid Fourteen</title>
+  <title>Kid Fourteen | Far Away and Well Adjusted</title>
   <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png?v=1" sizes="32x32" type="image/png">
   <link rel="icon" href="/favicon-16.png?v=1" sizes="16x16" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1" sizes="180x180">
 
   <!-- SEO + Social -->
-  <meta name="description" content="Kid Fourteen - Experimental Pop / Noise Pop / Song.">
+  <meta name="description" content="Official website of Kid Fourteen, the moniker of Lebanese musician Khodor Ellaik. Listen to Far Away and Well Adjusted, explore albums, shows and press.">
   <link rel="canonical" href="https://kidfourteen.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Kid Fourteen">
-  <meta property="og:title" content="Kid Fourteen - Experimental Pop / Noise Pop / Song">
-  <meta property="og:description" content="music, updates, and shows.">
+  <meta property="og:title" content="Kid Fourteen | Far Away and Well Adjusted">
+  <meta property="og:description" content="Music, albums, live performances and press from Kid Fourteen, including the 2026 album Far Away and Well Adjusted.">
   <meta property="og:url" content="https://kidfourteen.com/">
   <meta property="og:image" content="https://kidfourteen.com/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kid Fourteen - Experimental Pop / Noise Pop / Song">
-  <meta name="twitter:description" content="New work, live shows, and records.">
+  <meta name="twitter:title" content="Kid Fourteen | Far Away and Well Adjusted">
+  <meta name="twitter:description" content="Explore the music, albums, shows and press of Kid Fourteen, including Far Away and Well Adjusted.">
   <meta name="twitter:image" content="https://kidfourteen.com/og.jpg">
 
   <!-- Structured data -->
@@ -147,19 +147,7 @@ h2{font-size:clamp(26px,3vw,36px)}
   50%  { background-position: 48% 52% }
   100% { background-position: 52% 48% }
 }
-/*.hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(12,18,25,.5),rgba(12,18,25,.9)); z-index:0; pointer-events:none}
-.hero .content{position:relative; z-index:2}
-.hero-display{
-  font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-  font-size:clamp(64px,10vw,140px); text-align:center;
-  text-shadow:0 0 12px rgba(127,234,209,.35),0 0 36px rgba(127,234,209,.25),0 0 64px rgba(127,234,209,.12);
-}/*
-}
-
-@keyframes neonPulse{
-  0%,100%{text-shadow:0 0 14px rgba(127,234,209,.35),0 0 40px rgba(127,234,209,.25),0 0 80px rgba(127,234,209,.12);opacity:1}
-  50%{text-shadow:0 0 26px rgba(127,234,209,.7),0 0 80px rgba(127,234,209,.45),0 0 120px rgba(127,234,209,.22);opacity:1}
-}
+/* Retired hero overlay and unused neon effect removed. */
 @media (prefers-reduced-motion: reduce){
   /* keep hero text static */
   .hero-display { animation: none; }
@@ -638,8 +626,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   flex: 1 1 auto;
 }
 
-  }
-
   .nav .links a{ font-size: 14px; }
 
   .hero{ min-height:64vh }
@@ -667,10 +653,6 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .press-badge{ font-size:12px }
   .press-card blockquote{ font-size:14px }
 
-  /* Albums */
-  .album-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; justify-items:stretch }
-  .album-card{ max-width:100% }
-  .album-card .label{ font-size:13px; padding:10px }
 }
 
 @media (max-width:380px){
@@ -684,11 +666,10 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
   .nav .links a{ font-size: 12.5px; }
 }
 
-  /* Performance: avoid heavy blur on mobile */
+  /* Existing global low-blur style preserved */
   .press-card, .bio-card, .k14-player{
     backdrop-filter:none; -webkit-backdrop-filter:none; background:rgba(18,24,33,.88);
   }
-}
 
 @media (max-width:380px){
   .hero-display{font-size:clamp(28px, 9.8vw, 72px)}
@@ -1068,11 +1049,20 @@ body.js .reveal.is-visible{opacity:1 !important; transform:none !important; tran
 }
 
 .album-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px !important;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+}
+@media (max-width: 768px) {
+  .album-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px !important;
+    justify-items: stretch;
+  }
+  .album-card { max-width: 100%; }
+  .album-card .label { font-size: 13px; padding: 10px !important; }
 }
 
 .album-card { 
@@ -1165,7 +1155,6 @@ section[id] {
 #contact .contact-links span {
   opacity: .45;
 }
-}
 
 .nav-scroll-hint {
   display: none;
@@ -1213,7 +1202,6 @@ section[id] {
 }
 }
 
-}
 @media (max-width:380px){
   .brand{ letter-spacing:.08em; }
   .nav .links a{ font-size:12.5px; }
@@ -1447,9 +1435,9 @@ section[id] {
             </div>
             <div class="time"><span id="cur">0:00</span><span id="dur">0:00</span></div>
             <div class="controls">
-              <button class="btn small" id="prev" aria-label="Previous" type="button">⟲</button>
+              <button class="btn small" id="prev" aria-label="Previous track" type="button">⏮</button>
               <button class="btn" id="play" aria-label="Play/Pause" type="button">▶</button>
-              <button class="btn small" id="next" aria-label="Next" type="button">⟳</button>
+              <button class="btn small" id="next" aria-label="Next track" type="button">⏭</button>
               <div class="vol-wrap" title="Volume">
                 <span>🔊</span>
                 <input id="vol" class="vol" type="range" min="0" max="1" step="0.01" value="0.9" aria-label="Volume" />
@@ -1559,7 +1547,7 @@ section[id] {
 
 </div>
         <figure class="bio-photo reveal" style="--d:.18s;">
-          <img src="bio.jpg" alt="Kid Fourteen - press portrait" loading="lazy" width="900" height="1125">
+          <img src="bio.jpg" alt="Kid Fourteen - press portrait" loading="lazy" decoding="async" width="900" height="1125">
         </figure>
       </div>
     </div>
@@ -1628,22 +1616,22 @@ section[id] {
 </div>
      <div class="album-grid">
        <a class="album-card" href="https://kidfourteen.bandcamp.com/album/far-away-and-well-adjusted-2" target="_blank" rel="noopener">
-  <img src="fawa_cover_small.jpg" alt="Far Away and Well Adjusted"><div class="label">Far Away and Well Adjusted</div>
+  <img src="fawa_cover_small.jpg" loading="lazy" decoding="async" width="500" height="500" alt="Far Away and Well Adjusted"><div class="label">Far Away and Well Adjusted</div>
 </a>
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/heart-is-a-malady" target="_blank" rel="noopener">
-          <img src="cover4.jpg" alt="Heart Is a Malady"><div class="label">Heart is a Malady</div>
+          <img src="cover4.jpg" loading="lazy" decoding="async" width="500" height="500" alt="Heart Is a Malady"><div class="label">Heart is a Malady</div>
         </a>
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/a-brief-emotional-dragon" target="_blank" rel="noopener">
-          <img src="cover.png" alt="A Brief Emotional Dragon"><div class="label">A Brief Emotional Dragon</div>
+          <img src="cover.png" loading="lazy" decoding="async" width="500" height="500" alt="A Brief Emotional Dragon"><div class="label">A Brief Emotional Dragon</div>
         </a>
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/love" target="_blank" rel="noopener">
-          <img src="cover5.png" alt="Love"><div class="label">Love</div>
+          <img src="cover5.png" loading="lazy" decoding="async" width="500" height="500" alt="Love"><div class="label">Love</div>
         </a>
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/blood-thick-silence" target="_blank" rel="noopener">
-          <img src="cover2.jpg" alt="Blood Thick Silence"><div class="label">Blood Thick Silence</div>
+          <img src="cover2.jpg" loading="lazy" decoding="async" width="500" height="500" alt="Blood Thick Silence"><div class="label">Blood Thick Silence</div>
         </a>
         <a class="album-card" href="https://kidfourteen.bandcamp.com/album/dream-kids-never-sleep" target="_blank" rel="noopener">
-          <img src="cover3.jpg" alt="Dream Kids Never Sleep"><div class="label">Dream Kids Never Sleep</div>
+          <img src="cover3.jpg" loading="lazy" decoding="async" width="500" height="500" alt="Dream Kids Never Sleep"><div class="label">Dream Kids Never Sleep</div>
         </a>
       </div>
       <div class="more-albums">
