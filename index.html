@@ -1316,6 +1316,164 @@ section[id] {
     min-width: 0 !important;
   }
 }
+     */
+#press {
+  background: #dfe2e9 !important;
+  color: #1b1d23 !important;
+  padding: 80px 0 100px;
+}
+#press::before {
+  opacity: 0.16;
+}
+#press > .wrap {
+  position: relative;
+  z-index: 1;
+}
+#press .press-head {
+  max-width: 740px;
+  margin-bottom: 30px;
+}
+#press .press-kicker {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #57616e;
+}
+#press .press-head h2 {
+  font-size: clamp(38px, 4.8vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+}
+#press .press-head p {
+  margin: 0;
+  color: #5a6370;
+  font-size: 15px;
+}
+#press .press-grid.masonry {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  column-count: auto !important;
+  gap: 18px;
+  margin-top: 0;
+}
+#press .press-grid.masonry .press-card {
+  grid-column: span 2;
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 25px 27px !important;
+  background: rgba(255,255,255,0.82) !important;
+  border: 1px solid rgba(22,27,35,0.10) !important;
+  border-radius: 0 !important;
+  box-shadow: 0 4px 18px rgba(18,26,36,.05);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: background-color .2s, border-color .2s;
+}
+#press .press-grid.masonry .press-card:hover {
+  transform: none;
+  box-shadow: 0 4px 18px rgba(18,26,36,.06);
+  border-color: rgba(22,27,35,.24) !important;
+}
+#press .press-grid.masonry .press-card:nth-child(2),
+#press .press-grid.masonry .press-card:nth-child(3) {
+  grid-column: span 3;
+}
+#press .press-grid.masonry .press-card.press-card-featured {
+  grid-column: 1 / -1;
+  padding: 38px 42px !important;
+  background: rgba(255,250,235,.92) !important;
+  border-left: 4px solid #d0a65e !important;
+}
+#press .press-card-top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+#press .press-grid .press-badge {
+  padding: 0 !important;
+  margin: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #2c333b !important;
+  font-size: 12px;
+  letter-spacing: .09em;
+  text-transform: uppercase !important;
+  font-weight: 800;
+  line-height: 1.4;
+}
+#press .press-grid .press-badge:hover {
+  background: transparent !important;
+  border: 0 !important;
+  color: #0c7970 !important;
+}
+#press .press-meta {
+  white-space: nowrap;
+  color: #77746e;
+  font-size: 12px;
+}
+#press .press-card blockquote {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.72;
+  font-style: italic;
+  color: #232830 !important;
+  margin: 0 0 24px;
+}
+#press .press-card blockquote::before { display: none; }
+#press .press-card-featured blockquote {
+  max-width: 900px;
+  font-size: clamp(19px, 2.45vw, 27px);
+  line-height: 1.54;
+  font-weight: 450;
+  margin: 0 0 24px;
+}
+#press .press-card .press-read {
+  margin-top: auto;
+  color: #454c56 !important;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .025em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(40,45,55,.35);
+  padding-bottom: 2px;
+}
+#press .press-card .press-read:hover {
+  color: #0b6d65 !important;
+  border-color: #0b6d65;
+}
+@media (max-width: 900px) {
+  #press .press-grid.masonry { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  #press .press-grid.masonry .press-card,
+  #press .press-grid.masonry .press-card:nth-child(2),
+  #press .press-grid.masonry .press-card:nth-child(3) { grid-column: span 1; }
+  #press .press-grid.masonry .press-card.press-card-featured { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  #press { padding: 56px 0 72px; }
+  #press::before { opacity: .11; }
+  #press .press-grid.masonry { grid-template-columns: minmax(0,1fr); gap: 14px; }
+  #press .press-grid.masonry .press-card,
+  #press .press-grid.masonry .press-card:nth-child(2),
+  #press .press-grid.masonry .press-card:nth-child(3),
+  #press .press-grid.masonry .press-card.press-card-featured {
+    grid-column: 1 / -1;
+    padding: 23px 22px !important;
+  }
+  #press .press-card-featured blockquote { font-size: 20px; }
+  #press .press-meta { font-size: 11px; }
+}
   </style>
 </head>
 <body>
@@ -1504,65 +1662,58 @@ section[id] {
     </div>
   </section>
 
-  <!-- PRESS -->
- <section id="press" class="section">
+  <!-- PRESS REDESIGN -->
+<section id="press" class="section">
   <div class="wrap">
-    <h2>Press</h2>
-    <p>As seen in:</p>
-  <div class="press-seen">
-  <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener" class="seen-badge">Bandcamp Daily</a>
-  <a href="https://www.tinymixtapes.com/writer/ross-devlin" target="_blank" rel="noopener" class="seen-badge">Tiny Mix Tapes</a>
-  <a href="https://www.arabnews.com/node/1661096/Lifestyle" target="_blank" rel="noopener" class="seen-badge">Arab News</a>
-  <a href="https://scenenow.com/Noise/Kid-Fourteen-is-Finally-Far-Away-and-Well-Adjusted" target="_blank" rel="noopener" class="seen-badge">Scene Noise</a>
-  <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener" class="seen-badge">Rock Cult</a>
-  <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener" class="seen-badge">Obscure Sound</a>
-</div>
+    <header class="press-head">
+      <span class="press-kicker">SELECTED WRITING</span>
+      <h2>Press</h2>
+      <p>Features, reviews and critical writing.</p>
+    </header>
 
-   <div class="press-grid masonry" id="pressGrid">
-  <div class="press-card">
-    <a href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" 
-       target="_blank" rel="noopener" class="press-badge">Bandcamp Daily</a>
-    <blockquote>“Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats, pulsing synth arpeggiators, and metallic guitar squall.”</blockquote>
-    <p class="source">- <a href="https://daily.bandcamp.com">Bandcamp Daily</a></p>
-  </div>
+    <div class="press-grid masonry" id="pressGrid">
+      <article class="press-card press-card-featured">
+        <div class="press-card-top">
+          <a class="press-badge" href="https://scenenow.com/Noise/Kid-Fourteen-is-Finally-Far-Away-and-Well-Adjusted" target="_blank" rel="noopener noreferrer">Scene Noise</a>
+          <span class="press-meta">October 2026 · Feature</span>
+        </div>
+        <blockquote>“In stepping out from behind the noise and deliberately pursuing pop irrespective of the general negative consensus surrounding it, he proves that simplicity is not a compromise or a lack of sophistication, but an earned mastery, the shortest, bravest path toward genuine feeling.”</blockquote>
+        <a class="press-read" href="https://scenenow.com/Noise/Kid-Fourteen-is-Finally-Far-Away-and-Well-Adjusted" target="_blank" rel="noopener noreferrer">Read the feature <span aria-hidden="true">↗</span></a>
+      </article>
 
-  <div class="press-card">
-    <a href="https://www.tinymixtapes.com/writer/ross-devlin" 
-       target="_blank" rel="noopener" class="press-badge">Tiny Mix Tapes</a>
-    <blockquote>“It’s obvious that, at the end of a long night - the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor - Kid Fourteen is the last man dancing to an illusory tune in his head.”</blockquote>
-    <p class="source">- <a href="https://tinymixtapes.com">Tiny Mix Tapes</a></p>
-  </div>
+      <article class="press-card">
+        <div class="press-card-top"><a class="press-badge" href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener noreferrer">Bandcamp Daily</a></div>
+        <blockquote>“Khodor Ellaik got his start as the snarling frontman of a Cramps-style boogie-punk band … but he broke out on his own and took the plunge into industrial, post-punk, and noise-pop … Kid Fourteen’s music is a midnight ritual of drum machine beats, pulsing synth arpeggiators, and metallic guitar squall.”</blockquote>
+        <a class="press-read" href="https://daily.bandcamp.com/scene-report/middle-east-rock-pop-artists-guide" target="_blank" rel="noopener noreferrer">Read the article <span aria-hidden="true">↗</span></a>
+      </article>
 
-  <div class="press-card">
-    <a href="https://www.arabnews.com/node/1661096/Lifestyle"
-       target="_blank" rel="noopener" class="press-badge">Arab News</a>
-    <blockquote>“The Lebanese singer and producer is arguably one of the region’s most forward-thinking musicians at the moment.”</blockquote>
-    <p class="source">- <a href="https://www.arabnews.com">Arab News</a></p>
-  </div>
+      <article class="press-card">
+        <div class="press-card-top"><a class="press-badge" href="https://www.tinymixtapes.com/writer/ross-devlin" target="_blank" rel="noopener noreferrer">Tiny Mix Tapes</a></div>
+        <blockquote>“It’s obvious that, at the end of a long night - the corpses of burnt-out revelers lying on mats, pillows, and blankets on the floor - Kid Fourteen is the last man dancing to an illusory tune in his head.”</blockquote>
+        <a class="press-read" href="https://www.tinymixtapes.com/writer/ross-devlin" target="_blank" rel="noopener noreferrer">Visit publication <span aria-hidden="true">↗</span></a>
+      </article>
 
-  <div class="press-card">
-    <a href="https://scenenow.com/Noise/Kid-Fourteen-is-Finally-Far-Away-and-Well-Adjusted"
-       target="_blank" rel="noopener" class="press-badge">Scene Noise</a>
-    <blockquote>“In stepping out from behind the noise and deliberately pursuing pop irrespective of the general negative consensus surrounding it, he proves that simplicity is not a compromise or a lack of sophistication, but an earned mastery, the shortest, bravest path toward genuine feeling.”</blockquote>
-    <p class="source">- <a href="https://scenenow.com/Noise/Kid-Fourteen-is-Finally-Far-Away-and-Well-Adjusted">Scene Noise</a></p>
-  </div>
+      <article class="press-card">
+        <div class="press-card-top"><a class="press-badge" href="https://www.arabnews.com/art-culture/kid-fourteens-new-album-explores-real-life-love-1661096" target="_blank" rel="noopener noreferrer">Arab News</a></div>
+        <blockquote>“the road less traveled by most of his rock-oriented peers … near-universal disregard for convention.”</blockquote>
+        <a class="press-read" href="https://www.arabnews.com/art-culture/kid-fourteens-new-album-explores-real-life-love-1661096" target="_blank" rel="noopener noreferrer">Read the article <span aria-hidden="true">↗</span></a>
+      </article>
 
-  <div class="press-card">
-    <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/"
-       target="_blank" rel="noopener" class="press-badge">Rock Cult</a>
-    <blockquote>“Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together become many times stronger.”</blockquote>
-    <p class="source">- <a href="https://rockcult.ru/interview/kid-fourteen-2018-eng/">Rock Cult</a></p>
-  </div>
+      <article class="press-card">
+        <div class="press-card-top"><a class="press-badge" href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener noreferrer">Rock Cult</a></div>
+        <blockquote>“Now this is one of the most curious artists of the genre, who makes it so that simple, individual pieces together become many times stronger.”</blockquote>
+        <a class="press-read" href="https://rockcult.ru/interview/kid-fourteen-2018-eng/" target="_blank" rel="noopener noreferrer">Read the interview <span aria-hidden="true">↗</span></a>
+      </article>
 
-  <div class="press-card">
-    <a href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/"
-       target="_blank" rel="noopener" class="press-badge">Obscure Sound</a>
-    <blockquote>“The eerily enveloping *Learning How to Die* comes via Paris-based artist Kid Fourteen … The brooding soundscape finds compelling accompaniment in lyrics reflecting the un-realness in society.”</blockquote>
-    <p class="source">- <a href="https://www.obscuresound.com">Obscure Sound</a></p>
-  </div>
-</div>
+      <article class="press-card">
+        <div class="press-card-top"><a class="press-badge" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener noreferrer">Obscure Sound</a></div>
+        <blockquote>“The eerily enveloping <em>Learning How to Die</em> comes via Paris-based artist Kid Fourteen … The brooding soundscape finds compelling accompaniment in lyrics reflecting the un-realness in society.”</blockquote>
+        <a class="press-read" href="https://www.obscuresound.com/2023/04/kid-fourteen-learning-how-to-die/" target="_blank" rel="noopener noreferrer">Read the article <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
   </div>
 </section>
+
 
    <!-- ALBUMS -->
   <section id="albums" class="section">
