@@ -2151,6 +2151,42 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter(show => parseShowDate(show.date) < today)
     .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
 
+  // Publish structured metadata for confirmed upcoming performances.
+  const upcomingEvents = data.upcoming
+    .filter(event => event.date && event.venue && event.city && event.country)
+    .map(event => ({
+      "@type": "MusicEvent",
+      "name": "Kid Fourteen at " + event.venue,
+      "startDate": event.date,
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": event.venue,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": event.city,
+          "addressCountry": event.country
+        }
+      },
+      "performer": {
+        "@type": "MusicGroup",
+        "name": "Kid Fourteen",
+        "url": "https://kidfourteen.com/"
+      }
+    }));
+  document.getElementById('k14ShowsStructuredData')?.remove();
+  if (upcomingEvents.length) {
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.id = 'k14ShowsStructuredData';
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": upcomingEvents
+    });
+    document.head.appendChild(schema);
+  }
+
   const upPane  = wrap.querySelector('[data-pane="upcoming"]');
   const pastPane = wrap.querySelector('[data-pane="past"]');
   if (!upPane || !pastPane) return;
@@ -2160,7 +2196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         upPane.innerHTML =
           '<ul class="shows-list">' +
           data.upcoming.map(s =>
-            `<li>${new Date(s.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })} -
+            `<li>${parseShowDate(s.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })} -
 ${s.url ? `<a href="${s.url}" target="_blank" rel="noopener noreferrer" style="color:#7fead1; text-decoration:underline;">${s.venue}</a>` : s.venue}
  - ${s.city}, ${s.country}</li>`
           ).join('') +
@@ -2189,7 +2225,7 @@ if (Array.isArray(data.past) && data.past.length){
     <h4>${year}</h4>
     <ul class="shows-list">
       ${groups[year].map(s => {
-        const d = new Date(s.date).toLocaleDateString('en-US',{ month:'short', year:'numeric' });
+        const d = parseShowDate(s.date).toLocaleDateString('en-US',{ month:'short', year:'numeric' });
         return `<li>${d} - ${s.venue} - ${s.city}, ${s.country}</li>`;
       }).join('')}
     </ul>
@@ -2376,75 +2412,7 @@ let html = `
   updateMeta();updateProgress();updatePlayback();updateVisibility();
 })();
 </script>
-    <script>
-(() => {
-  fetch('content/shows.json', { cache: 'no-cache' })
-    .then(r => r.json())
-    .then(data => {
-  // Convert YYYY-MM-DD into a local date
-  const parseShowDate = dateString => {
-    const [year, month, day] = dateString.split('-').map(Number);
-    return new Date(year, month - 1, day);
-  };
 
-  // Today at midnight
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  // Collect shows from both sections
-  const allShows = [
-    ...(Array.isArray(data.upcoming) ? data.upcoming : []),
-    ...(Array.isArray(data.past) ? data.past : [])
-  ];
-
-  // Automatically separate upcoming and past shows
-  data.upcoming = allShows
-    .filter(show => parseShowDate(show.date) >= today)
-    .sort((a, b) => parseShowDate(a.date) - parseShowDate(b.date));
-
-  data.past = allShows
-    .filter(show => parseShowDate(show.date) < today)
-    .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
-
-  const upPane  = wrap.querySelector('[data-pane="upcoming"]');
-  const pastPane = wrap.querySelector('[data-pane="past"]');
-  if (!upPane || !pastPane) return;
-
-      const events = list
-        .filter(s => s.date && s.venue && s.city && s.country)
-        .map(s => ({
-          "@context": "https://schema.org",
-          "@type": "Event",
-          "name": `Kid Fourteen at ${s.venue}`,
-          "startDate": s.date,                 // ISO date from your JSON
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "location": {
-            "@type": "Place",
-            "name": s.venue,
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": s.city,
-              "addressCountry": s.country
-            }
-          },
-          "performer": {
-            "@type": "MusicGroup",
-            "name": "Kid Fourteen",
-            "url": "https://kidfourteen.com/"
-          }
-        }));
-
-      if (!events.length) return;
-
-      const node = document.createElement('script');
-      node.type = 'application/ld+json';
-      node.textContent = JSON.stringify({ "@graph": events });
-      document.head.appendChild(node);
-    })
-    .catch(() => {});
-})();
-</script>
 
 <!-- ✅ Back to top button -->
 <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
