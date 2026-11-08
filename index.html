@@ -247,71 +247,61 @@ color: rgba(255,255,255,.9);}
     .track{padding:10px 12px; border:1px solid var(--chip-border); border-radius:10px; background:rgba(255,255,255,.03); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
     .track:hover{border-color:var(--accent); color:var(--accent)}
     .track.is-active{background:rgba(127,234,209,.12); border-color:var(--accent)}
-  /* ===== Now Playing mini bar (sticky) ===== */
-#k14NowPlaying{
-  position: fixed;
-  left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0));
-  z-index: 1200;
-  display: grid;
-  grid-template-columns: 42px 1fr auto;
-  gap: 10px;
-  align-items: center;
-  padding: 8px 10px;
-  background: rgba(18,24,33,.88);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.35);
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  /* ===== Compact Now Playing mini-player ===== */
+#k14NowPlaying {
+  position:fixed; right:16px; left:auto; width:min(510px,calc(100vw - 24px));
+  bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:1200;
+  display:grid; grid-template-columns:42px minmax(0,1fr) auto; gap:10px; align-items:center;
+  padding:9px 11px; color:var(--text); background:rgba(18,24,33,.94);
+  border:1px solid rgba(255,255,255,.16); border-radius:12px;
+  box-shadow:0 10px 26px rgba(0,0,0,.36);
+  backdrop-filter:blur(12px) saturate(150%); -webkit-backdrop-filter:blur(12px) saturate(150%);
+}
+#k14NowPlaying[hidden] { display:none !important; }
+#k14NowPlaying .np-cover {
+  display:block; width:42px; height:42px; padding:0; margin:0; cursor:pointer;
+  border:1px solid rgba(255,255,255,.14); border-radius:8px; overflow:hidden; background:transparent;
+}
+#k14NowPlaying .np-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+#k14NowPlaying .np-meta {
+  display:block; width:100%; min-width:0; padding:0; margin:0;
+  border:0; background:transparent; color:inherit; text-align:left; cursor:pointer; font:inherit;
+}
+#k14NowPlaying .np-title {
+  display:block; font-size:13px; font-weight:700; line-height:1.35;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#k14NowPlaying .np-time { display:block; font-size:11px; color:var(--muted); margin-top:1px; }
+#k14NowPlaying .np-line {
+  position:relative; display:block; height:3px; margin-top:6px;
+  border-radius:999px; background:rgba(255,255,255,.13); overflow:hidden;
+}
+#k14NowPlaying .np-progress { position:absolute; inset:0 auto 0 0; width:0; background:var(--accent); display:block; height:100%; }
+#k14NowPlaying .np-ctrls { display:flex; gap:4px; align-items:center; }
+#k14NowPlaying .np-btn {
+  display:grid; place-items:center; width:34px; height:34px; padding:0; cursor:pointer;
+  color:var(--text); background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14); border-radius:9px;
+}
+#k14NowPlaying .np-btn svg { display:block; width:18px; height:18px; }
+#k14NowPlaying .np-btn:hover,#k14NowPlaying .np-btn:focus-visible { color:var(--accent); border-color:var(--accent); }
+#k14NowPlaying .np-play { background:rgba(255,255,255,.12); }
+#k14NowPlaying .np-icon-pause { display:none !important; }
+#k14NowPlaying[data-playing="true"] .np-icon-play { display:none !important; }
+#k14NowPlaying[data-playing="true"] .np-icon-pause { display:block !important; }
+#k14NowPlaying .np-close { font-size:18px; font-weight:600; color:rgba(230,234,239,.70); }
+@media (max-width:600px) {
+  #k14NowPlaying {
+    left:8px; right:8px; width:auto; bottom:calc(8px + env(safe-area-inset-bottom,0px));
+    grid-template-columns:40px minmax(0,1fr) auto; gap:8px; padding:7px 8px;
+  }
+  #k14NowPlaying .np-cover { width:40px; height:40px; }
+  #k14NowPlaying .np-ctrls { gap:3px; }
+  #k14NowPlaying .np-btn { width:32px; height:34px; }
+  #k14NowPlaying .np-title { font-size:12px; }
 }
 
-#k14NowPlaying[hidden]{ display:none !important; }
-
-#k14NowPlaying .np-cover{
-  background:none; border:0; padding:0; margin:0; cursor:pointer;
-  width:42px; height:42px; border-radius:8px; overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);
-}
-#k14NowPlaying .np-cover img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-
-#k14NowPlaying .np-meta{ min-width:0; cursor:pointer; }
-#k14NowPlaying .np-title{
-  font-weight:700; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-#k14NowPlaying .np-time{
-  font-size:12px; color:var(--muted); margin-top:1px;
-}
-#k14NowPlaying .np-line{
-  position:relative; height:3px; background:rgba(255,255,255,.12);
-  border-radius:999px; margin-top:6px; overflow:hidden;
-}
-#k14NowPlaying .np-progress{
-  position:absolute; inset:0 auto 0 0; width:0%;
-  background: var(--accent); display:block;
-}
-
-#k14NowPlaying .np-ctrls{ display:flex; gap:8px; align-items:center; }
-#k14NowPlaying .np-btn{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.16);
-  color:var(--text);
-  padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:800;
-}
-#k14NowPlaying .np-btn:hover{
-  border-color:var(--accent); color:var(--accent);
-}
-    #k14NowPlaying .np-close{
-  width:32px;height:32px;display:grid;place-items:center;font-weight:900;opacity:.9;padding:0
-}
-#k14NowPlaying .np-close:hover{opacity:1}
-
-/* Avoid overlap with iOS bottom bars on very small screens */
-@media (max-width:380px){
-  #k14NowPlaying{ left:8px; right:8px; }
-}
-  /* === Playlist: stacked layout + durations === */
+/* === Playlist: stacked layout + durations === */
 #playlist.playlist{
   display:block;
   grid-template-columns:none;
@@ -2325,81 +2315,80 @@ let html = `
 })();
 </script>
   <!-- Now Playing mini bar -->
-<div id="k14NowPlaying" hidden>
-  <button class="np-cover" type="button" aria-label="Open Music">
-    <img src="cover.png" alt="" />
+<div id="k14NowPlaying" data-playing="false" hidden>
+  <button class="np-cover" type="button" aria-label="Go to Music section"><img src="cover.png" alt="" /></button>
+  <button class="np-meta" type="button" aria-label="Go to Music section">
+    <span class="np-title">-</span>
+    <span class="np-time"><span class="np-cur">0:00</span> · <span class="np-dur">0:00</span></span>
+    <span class="np-line"><span class="np-progress"></span></span>
   </button>
-  <div class="np-meta" role="button" aria-label="Open Music">
-    <div class="np-title">-</div>
-    <div class="np-time"><span class="np-cur">0:00</span> · <span class="np-dur">0:00</span></div>
-    <div class="np-line"><span class="np-progress"></span></div>
-  </div>
   <div class="np-ctrls">
-    <button class="np-btn np-play" type="button" aria-label="Pause/Play">⏸</button>
-    <button class="np-btn np-next" type="button" aria-label="Next">⟲</button>
-    <button class="np-btn np-close" type="button" aria-label="Hide">✕</button>
+    <button class="np-btn np-prev" type="button" aria-label="Previous track" title="Previous"><svg  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5v14"/><path d="m19 19-10-7 10-7v14Z"/></svg></button>
+    <button class="np-btn np-play" type="button" aria-label="Play" title="Play"><svg class="np-icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg><svg class="np-icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></button>
+    <button class="np-btn np-next" type="button" aria-label="Next track" title="Next"><svg  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v14"/><path d="m5 5 10 7-10 7V5Z"/></svg></button>
+    <button class="np-btn np-close" type="button" aria-label="Stop playback and close" title="Stop and close">×</button>
   </div>
 </div>
   <script>
 (() => {
-  const bar   = document.getElementById('k14NowPlaying');
+  const bar = document.getElementById('k14NowPlaying');
   const audio = document.getElementById('audio');
+  const mainPlayer = document.getElementById('k14Player');
+  if (!bar || !audio || !mainPlayer) return;
+
   const title = document.getElementById('playerTitle');
-  const art   = document.querySelector('#k14Player .art img');
-  const cur   = bar?.querySelector('.np-cur');
-  const dur   = bar?.querySelector('.np-dur');
-  const prog  = bar?.querySelector('.np-progress');
-  const play  = bar?.querySelector('.np-play');
-  const next  = bar?.querySelector('.np-next');
-  const coverBtn = bar?.querySelector('.np-cover img');
-  const metaBtn  = bar?.querySelector('.np-meta');
+  const artwork = mainPlayer.querySelector('.art img');
+  const miniCover = bar.querySelector('.np-cover img');
+  const miniTitle = bar.querySelector('.np-title');
+  const miniCur = bar.querySelector('.np-cur');
+  const miniDur = bar.querySelector('.np-dur');
+  const miniProgress = bar.querySelector('.np-progress');
+  const miniPlay = bar.querySelector('.np-play');
+  let hasPlayed = !audio.paused && !!audio.src;
+  let dismissed = false;
 
-  if (!bar || !audio) return;
-
-  const fmt = (s)=>{ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), ss=Math.floor(s%60); return `${m}:${String(ss).padStart(2,'0')}` };
-
-  function refreshMeta(){
-    if (coverBtn && art?.src) coverBtn.src = art.src;
-    const t = (title?.textContent || '').trim() || 'Playing…';
-    bar.querySelector('.np-title').textContent = t;
-    if (dur) dur.textContent = fmt(audio.duration || 0);
+  const fmt = s => Number.isFinite(s) ? Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0') : '0:00';
+  function mainVisible() {
+    if (mainPlayer.hidden) return false;
+    const r = mainPlayer.getBoundingClientRect();
+    if (r.height <= 0) return false;
+    const visible = Math.max(0, Math.min(r.bottom,innerHeight)-Math.max(r.top,0));
+    return visible > Math.min(r.height,innerHeight)*.2;
   }
-
-  function updateProgress(){
-    if (!audio.duration) { if(prog) prog.style.width = '0%'; return; }
-    if (prog) prog.style.width = ((audio.currentTime / audio.duration) * 100).toFixed(2) + '%';
-    if (cur) cur.textContent = fmt(audio.currentTime);
+  function updateVisibility() { bar.hidden = !hasPlayed || dismissed || mainVisible(); }
+  function updateMeta() {
+    if (artwork?.src && miniCover && miniCover.src !== artwork.src) miniCover.src=artwork.src;
+    if (miniTitle) miniTitle.textContent=(title?.textContent||'').trim() || 'Playing…';
+    if (miniDur) miniDur.textContent=fmt(audio.duration||0);
   }
-
-  // show/hide depending on playback
-  audio.addEventListener('play',  () => { refreshMeta(); bar.hidden = false; play.textContent = '⏸'; });
-  audio.addEventListener('pause', () => { play.textContent = '▶'; /* keep bar visible; hide if you prefer: bar.hidden = true; */ });
-  audio.addEventListener('ended', () => { /* bar stays, next handler in main player will update */ });
-  audio.addEventListener('loadedmetadata', refreshMeta);
-  audio.addEventListener('timeupdate', updateProgress);
-
-  // controls
-  play?.addEventListener('click', () => { audio.paused ? audio.play().catch(()=>{}) : audio.pause(); });
-  // reuse your existing "next" button if present; otherwise advance index via k14 player API
-  const mainNext = document.getElementById('next');
-  next?.addEventListener('click', () => { 
-    if (mainNext) { mainNext.click(); } 
-  });
-
-  // tap artwork or text to jump to Music section
-  function scrollToMusic(){
-    const sec = document.getElementById('music');
-    if (!sec) return;
-    sec.scrollIntoView({ behavior:'smooth', block:'start' });
+  function updateProgress() {
+    if (miniProgress) miniProgress.style.width=audio.duration ? ((audio.currentTime/audio.duration)*100).toFixed(2)+'%' : '0%';
+    if (miniCur) miniCur.textContent=fmt(audio.currentTime);
   }
-  metaBtn?.addEventListener('click', scrollToMusic);
-  bar.querySelector('.np-cover')?.addEventListener('click', scrollToMusic);
-
-  // initialize (if a track is already loaded)
-  if (!audio.paused && audio.src) { refreshMeta(); bar.hidden = false; }
+  function updatePlayback() {
+    const playing=!audio.paused;
+    bar.dataset.playing=String(playing);
+    if (miniPlay) { miniPlay.setAttribute('aria-label',playing?'Pause':'Play'); miniPlay.title=playing?'Pause':'Play'; }
+  }
+  audio.addEventListener('play',()=>{hasPlayed=true;dismissed=false;updateMeta();updateProgress();updatePlayback();updateVisibility();});
+  audio.addEventListener('pause',()=>{updatePlayback();updateVisibility();});
+  audio.addEventListener('loadedmetadata',()=>{updateMeta();updateProgress();});
+  audio.addEventListener('timeupdate',updateProgress);
+  audio.addEventListener('ended',updatePlayback);
+  bar.querySelector('.np-play')?.addEventListener('click',()=>audio.paused?audio.play().catch(()=>{}):audio.pause());
+  bar.querySelector('.np-prev')?.addEventListener('click',()=>document.getElementById('prev')?.click());
+  bar.querySelector('.np-next')?.addEventListener('click',()=>document.getElementById('next')?.click());
+  bar.querySelector('.np-close')?.addEventListener('click',()=>{dismissed=true;audio.pause();updateVisibility();});
+  const toMusic=()=>document.getElementById('music')?.scrollIntoView({behavior:'smooth',block:'start'});
+  bar.querySelector('.np-cover')?.addEventListener('click',toMusic);
+  bar.querySelector('.np-meta')?.addEventListener('click',toMusic);
+  window.addEventListener('scroll',updateVisibility,{passive:true});
+  window.addEventListener('resize',updateVisibility);
+  window.addEventListener('orientationchange',updateVisibility);
+  updateMeta();updateProgress();updatePlayback();updateVisibility();
 })();
 </script>
-  <script>
+    <script>
 (() => {
   fetch('content/shows.json', { cache: 'no-cache' })
     .then(r => r.json())
@@ -2514,24 +2503,6 @@ let html = `
   onScroll();
 })();
 </script>
-  <script>
-(() => {
-  const bar   = document.getElementById('k14NowPlaying');
-  const audio = document.getElementById('audio');
-  const close = bar?.querySelector('.np-close');
-  if (!bar || !audio || !close) return;
 
-  close.addEventListener('click', () => {
-    audio.pause();              // ← stop playback
-    // audio.currentTime = 0;   // ← optional: also reset to start
-    bar.dataset.dismissed = '1';
-    bar.hidden = true;
-  });
-
-  audio.addEventListener('play', () => {
-    if (!bar.dataset.dismissed) bar.hidden = false;
-  });
-})();
-</script>
 </body>
 </html>
