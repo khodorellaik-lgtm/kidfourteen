@@ -1316,7 +1316,8 @@ section[id] {
     min-width: 0 !important;
   }
 }
-     */
+     /* ===== KID FOURTEEN: PRESS REDESIGN ===== */
+/* Consolidated replacement for the previous press redesign styles. */
 #press {
   background: #dfe2e9 !important;
   color: #1b1d23 !important;
@@ -1387,9 +1388,9 @@ section[id] {
 }
 #press .press-grid.masonry .press-card.press-card-featured {
   grid-column: 1 / -1;
-  padding: 38px 42px !important;
-  background: rgba(255,250,235,.92) !important;
-  border-left: 4px solid #d0a65e !important;
+  padding: 27px 30px !important;
+  background: rgba(255,255,255,0.82) !important;
+  border: 1px solid rgba(22,27,35,0.10) !important;
 }
 #press .press-card-top {
   display: flex;
@@ -1411,69 +1412,7 @@ section[id] {
   letter-spacing: .09em;
   text-transform: uppercase !important;
   font-weight: 800;
-  line-height: 1.4;
-}
-#press .press-grid .press-badge:hover {
-  background: transparent !important;
-  border: 0 !important;
-  color: #0c7970 !important;
-}
-#press .press-meta {
-  white-space: nowrap;
-  color: #77746e;
-  font-size: 12px;
-}
-#press .press-card blockquote {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.72;
-  font-style: italic;
-  color: #232830 !important;
-  margin: 0 0 24px;
-}
-#press .press-card blockquote::before { display: none; }
-#press .press-card-featured blockquote {
-  max-width: 900px;
-  font-size: clamp(19px, 2.45vw, 27px);
-  line-height: 1.54;
-  font-weight: 450;
-  margin: 0 0 24px;
-}
-#press .press-card .press-read {
-  margin-top: auto;
-  color: #454c56 !important;
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: .025em;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(40,45,55,.35);
-  padding-bottom: 2px;
-}
-#press .press-card .press-read:hover {
-  color: #0b6d65 !important;
-  border-color: #0b6d65;
-}
-@media (max-width: 900px) {
-  #press .press-grid.masonry { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  #press .press-grid.masonry .press-card,
-  #press .press-grid.masonry .press-card:nth-child(2),
-  #press .press-grid.masonry .press-card:nth-child(3) { grid-column: span 1; }
-  #press .press-grid.masonry .press-card.press-card-featured { grid-column: 1 / -1; }
-}
-@media (max-width: 600px) {
-  #press { padding: 56px 0 72px; }
-  #press::before { opacity: .11; }
-  #press .press-grid.masonry { grid-template-columns: minmax(0,1fr); gap: 14px; }
-  #press .press-grid.masonry .press-card,
-  #press .press-grid.masonry .press-card:nth-child(2),
-  #press .press-grid.masonry .press-card:nth-child(3),
-  #press .press-grid.masonry .press-card.press-card-featured {
-    grid-column: 1 / -1;
-    padding: 23px 22px !important;
-  }
-  #press .press-card-featured blockquote { font-size: 20px; }
-  #press .press-meta { font-size: 11px; }
-}
+
   </style>
 </head>
 <body>
