@@ -423,14 +423,24 @@ color: rgba(255,255,255,.9);}
     letter-spacing: .025em;
     max-width: 100%;
     text-shadow: 0 0 10px rgba(255,105,82,.55), 0 0 24px rgba(255,78,105,.28);
-    animation: k14MobileTitle 13s ease-in-out infinite alternate;
+    animation: k14MobileTitle 7.5s ease-in-out infinite alternate;
   }
   #albums .album-banner-title span { display: block; white-space: nowrap; }
   #albums .album-banner-sub { margin-top: 12px; letter-spacing: .35em; }
 }
 @keyframes k14MobileTitle {
-  0% { opacity: .78; transform: scale(1.01); filter: brightness(1); }
-  100% { opacity: .9; transform: scale(1.025); filter: brightness(1.06); }
+  0% {
+    opacity: .75;
+    transform: perspective(1100px) translate3d(-3px, 3px, 0) rotate(-.5deg) scale(1.005);
+    filter: brightness(.95);
+    text-shadow: 0 0 9px rgba(255,105,82,.4), 0 0 20px rgba(255,78,105,.22);
+  }
+  100% {
+    opacity: .96;
+    transform: perspective(1100px) translate3d(3px, -3px, 0) rotate(.5deg) scale(1.025);
+    filter: brightness(1.12);
+    text-shadow: 0 0 15px rgba(255,105,82,.7), 0 0 38px rgba(255,78,105,.45);
+  }
 }
 @media (max-width: 600px) and (prefers-reduced-motion: reduce) {
   #albums .album-banner-title { animation: none; opacity: 1; transform: none; }
