@@ -1,3 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-<text x="-3" y="70" font-size="50" fill="#50c9ff" font-family="Arial Black">K14</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="94 113 1055 1058" width="512" height="512">
+<rect x="95" y="114" width="1053" height="1056" rx="173" fill="#91F5D4"/>
+<path d="M808,290 L637,292 L383,542 L449,295 L313,322 L210,693 L141,988 L306,807 L341,684 L514,899 L472,1031 L730,866 L841,790 L536,864 L562,750 L452,617 L729,366Z M1068,307 L740,648 L710,768 L888,747 L824,994 L954,890 L987,739 L1040,730 L1094,629 L997,638Z M785,398 L550,592 L643,578 L574,825 L676,804Z M934,544 L912,648 L831,656Z" fill="#071521" fill-rule="evenodd"/>
 </svg>
