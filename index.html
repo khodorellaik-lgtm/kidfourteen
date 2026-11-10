@@ -2343,7 +2343,7 @@ document.addEventListener('DOMContentLoaded', () => {
         upPane.innerHTML =
           '<ul class="shows-list">' +
           data.upcoming.map(s =>
-            `<li>${new Date(s.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })} -
+            `<li>${new Date(s.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })} - ${s.title ? `<strong>${s.title}</strong> · ` : ''}
 ${s.url ? `<a href="${s.url}" target="_blank" rel="noopener noreferrer" style="color:#7fead1; text-decoration:underline;">${s.venue}</a>` : s.venue}
  - ${s.city}, ${s.country}</li>`
           ).join('') +
@@ -2373,7 +2373,7 @@ if (Array.isArray(data.past) && data.past.length){
     <ul class="shows-list">
       ${groups[year].map(s => {
         const d = new Date(s.date).toLocaleDateString('en-US',{ month:'short', year:'numeric' });
-        return `<li>${d} - ${s.venue} - ${s.city}, ${s.country}</li>`;
+        return `<li>${d} - ${s.title ? `<strong>${s.title}</strong> · ` : ''}${s.venue} - ${s.city}, ${s.country}</li>`;
       }).join('')}
     </ul>
   `;
