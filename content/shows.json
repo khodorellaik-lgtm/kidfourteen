@@ -29,6 +29,13 @@
       "venue": "Le Zéralda",
       "title": "Paris Album Release Concert",
       "url": "https://shotgun.live/en/venues/le-zeralda"
+    },
+    {
+      "date": "2027-02",
+      "city": "Beirut",
+      "country": "Lebanon",
+      "venue": "Venue TBA",
+      "title": "Beirut Album Release Concert"
     }
   ],
   "past": [
